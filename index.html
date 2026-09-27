@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌿 Nhật Ký Công Việc & Chi Tiêu 🌿</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #4a4a4a;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.65);
+            padding: 20px 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(76, 175, 80, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-left h2 { margin: 0; font-weight: 700; font-size: 26px; color: #2e7d32; }
+        
+        .btn {
+            padding: 10px 20px; border: 2px solid #c8e6c9; background-color: white;
+            border-radius: 25px; cursor: pointer; font-size: 14px; font-weight: 600;
+            font-family: inherit; color: #2e7d32; transition: all 0.3s;
+            display: flex; align-items: center; gap: 8px; justify-content: center;
+        }
+        .btn:hover { background-color: #f1f8e9; transform: translateY(-3px); border-color: #a5d6a7; }
+        
+        .btn-primary { background: linear-gradient(135deg, #81c784 0%, #4caf50 100%); color: white; border: none; }
+        .btn-primary:hover { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; }
+        
+        .btn-small { padding: 6px 12px; font-size: 12px; border-radius: 15px; }
+        .btn-danger { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; padding: 6px 10px; border-radius: 10px;}
+        .btn-danger:hover { background-color: #ffcdd2; transform: translateY(-2px); }
+
+        .controls { display: flex; gap: 12px; align-items: center; }
+        
+        .calendar {
+            display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px;
+            border-radius: 12px; margin-bottom: 25px;
+        }
+        .weekday { text-align: center; padding: 10px 0; font-weight: 700; color: #388e3c; font-size: 14px; text-transform: uppercase; }
+        
+        .day {
+            background-color: white; min-height: 120px; padding: 8px; cursor: pointer; position: relative;
+            border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;
+            display: flex; flex-direction: column; border: 2px solid transparent;
+        }
+        .day:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(76, 175, 80, 0.25); border-color: #c8e6c9; z-index: 2; }
+        
+        .day-number {
+            font-size: 14px; font-weight: 700; text-align: center; width: 30px; height: 30px;
+            line-height: 30px; border-radius: 50%; margin: 0 auto 8px auto; color: #555;
+        }
+        .today .day-number { background: linear-gradient(135deg, #81c784 0%, #4caf50 100%); color: white; box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); }
+        .other-month { opacity: 0.5; background-color: #fcfcfc; }
+
+        .work-status-container {
+            flex-grow: 1; border-radius: 12px; position: relative; overflow: hidden; font-size: 12px;
+            display: flex; flex-direction: column; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        .slot-full { background-color: #a5d6a7; color: #1b5e20; }
+        .slot-full.overtime { background-color: #4caf50; color: white; }
+        .slot-half-am { background: linear-gradient(to bottom, #a5d6a7 50%, #f9fbf9 50%); border: 2px solid #a5d6a7; color: #1b5e20; }
+        .slot-half-am.overtime { background: linear-gradient(to bottom, #4caf50 50%, #f9fbf9 50%); border: 2px solid #4caf50; }
+        .slot-half-pm { background: linear-gradient(to top, #a5d6a7 50%, #f9fbf9 50%); border: 2px solid #a5d6a7; color: #1b5e20; }
+        .slot-half-pm.overtime { background: linear-gradient(to top, #4caf50 50%, #f9fbf9 50%); border: 2px solid #4caf50; }
+        .slot-off { background-color: #f5f5f5; border: 2px dashed #bdbdbd; color: #757575; }
+        .slot-expense-only { background-color: #fff; border: 2px solid #ffcdd2; }
+
+        .status-text { padding: 4px; font-weight: 700; text-align: center; }
+        
+        .job-content-preview {
+            padding: 4px 6px; font-size: 11px; font-weight: 500; overflow: hidden; text-overflow: ellipsis;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.3;
+            margin-top: auto; background: rgba(255,255,255,0.45); border-radius: 0 0 10px 10px;
+        }
+
+        .expense-badge {
+            background-color: #ffebee; color: #c62828; font-size: 11px; font-weight: 700;
+            text-align: center; padding: 4px 0; border-bottom: 1px dashed #ffcdd2;
+        }
+
+        /* Thống kê */
+        .stats-panel {
+            background: rgba(255, 255, 255, 0.8); border-radius: 20px; padding: 20px 25px;
+            margin-top: 20px; border: 2px solid #e8f5e9;
+        }
+        .stats-panel h3 {
+            margin-top: 0; color: #2e7d32; display: flex; align-items: center; gap: 10px;
+            border-bottom: 2px dashed #c8e6c9; padding-bottom: 10px;
+        }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        .stat-item {
+            background: white; padding: 15px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid #f1f8e9;
+        }
+        .stat-title { font-weight: 700; color: #388e3c; margin-bottom: 5px; font-size: 15px;}
+        .stat-val { font-size: 18px; font-weight: 700; color: #1b5e20; margin-bottom: 10px;}
+        .stat-list { font-size: 13px; color: #555; line-height: 1.6; }
+        .stat-list li { margin-left: -20px; list-style-type: none; border-bottom: 1px dashed #eee; padding: 3px 0; display: flex; justify-content: space-between;}
+        .stat-list li:last-child { border-bottom: none; }
+        
+        .stat-dates { font-size: 12px; color: #757575; font-style: italic; line-height: 1.4; }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(165, 214, 167, 0.4); backdrop-filter: blur(5px);
+            align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal-content {
+            background-color: white; padding: 30px; border-radius: 30px; width: 450px;
+            max-height: 90vh; overflow-y: auto; border: 3px solid #e8f5e9;
+        }
+        .modal-content h3 { margin-top: 0; margin-bottom: 20px; color: #2e7d32; text-align: center; font-size: 22px; }
+        
+        .radio-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        .radio-group label { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 8px 12px; border-radius: 12px; transition: 0.2s; font-weight: 500;}
+        .radio-group label:hover { background-color: #f1f8e9; color: #2e7d32; }
+        input[type="radio"], input[type="checkbox"] { accent-color: #4caf50; width: 18px; height: 18px; }
+
+        .overtime-section { border-top: 2px dashed #c8e6c9; padding-top: 15px; margin-bottom: 20px; }
+        .overtime-section label.main-ot { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; color: #388e3c; padding: 5px 12px; border-radius: 12px;}
+        .time-range-inputs { display: none; margin-top: 10px; margin-left: 24px; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; }
+        .time-range-inputs input[type="time"] { padding: 6px 10px; border: 2px solid #c8e6c9; border-radius: 12px; font-family: inherit; font-weight: 600; color: #555; outline: none;}
+
+        /* Mục Chi Tiêu Động */
+        .expense-section { border-top: 2px dashed #ffcdd2; padding-top: 15px; margin-bottom: 20px; }
+        .expense-section h4 { margin: 0 0 10px 0; color: #c62828; font-size: 15px; display: flex; justify-content: space-between; align-items: center;}
+        
+        .expense-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
+        .expense-row input[type="text"] { flex: 3; padding: 8px 12px; border: 2px solid #ffcdd2; border-radius: 12px; font-family: inherit; font-size: 14px; outline: none; color: #c62828;}
+        .expense-row input[type="number"] { flex: 2; padding: 8px 12px; border: 2px solid #ffcdd2; border-radius: 12px; font-family: inherit; font-size: 14px; font-weight: 600; outline: none; color: #c62828;}
+        .expense-row input:focus { border-color: #ef5350; }
+
+        .content-section { border-top: 2px dashed #c8e6c9; padding-top: 15px; margin-bottom: 25px; }
+        .content-section label { display: block; font-weight: 700; margin-bottom: 8px; color: #555;}
+        .content-section textarea { width: 100%; height: 70px; padding: 12px; border: 2px solid #c8e6c9; border-radius: 16px; resize: vertical; box-sizing: border-box; font-family: inherit; font-size: 14px; outline: none;}
+
+        .modal-actions { display: flex; justify-content: center; gap: 15px; }
+        .modal-actions .btn { width: 120px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="header-left">
+            <button class="btn" id="btn-prev">❮</button>
+            <button class="btn" id="btn-next">❯</button>
+            <h2 id="month-year">Tháng 9, 2026</h2>
+        </div>
+        <div class="controls">
+            <button class="btn" onclick="document.getElementById('import-file').click()">📂 Tải file lên</button>
+            <input type="file" id="import-file" style="display: none;" accept=".json">
+            <button class="btn btn-primary" id="btn-export">💾 Tải về máy</button>
+        </div>
+    </div>
+
+    <div class="calendar" id="calendar"></div>
+
+    <div class="stats-panel">
+        <h3>📊 Tổng kết Công việc & Chi tiêu</h3>
+        <div class="stat-grid" id="stats-grid">
+            <!-- Dữ liệu tự động render -->
+        </div>
+    </div>
+</div>
+
+<!-- Hộp thoại Modal -->
+<div class="modal" id="work-modal">
+    <div class="modal-content">
+        <h3 id="modal-date-title">🌱 Chi tiết Ngày 🌱</h3>
+        
+        <div class="radio-group">
+            <label><input type="radio" name="work_type" value="full"> 🌳 Làm cả ngày</label>
+            <label><input type="radio" name="work_type" value="half-am"> 🌅 Nửa ngày (Sáng)</label>
+            <label><input type="radio" name="work_type" value="half-pm"> 🌇 Nửa ngày (Chiều)</label>
+            <label><input type="radio" name="work_type" value="off"> 🏖️ Không đi làm</label>
+            <label style="color:#aaa;"><input type="radio" name="work_type" value="none"> 🗑️ Chỉ ghi chú / Xóa ca làm</label>
+        </div>
+
+        <div class="overtime-section" id="ot-section">
+            <label class="main-ot"><input type="checkbox" id="check-overtime"> ⏰ Có làm tăng ca</label>
+            <div class="time-range-inputs" id="time-range-div">
+                <span>Từ</span><input type="time" id="ot-start" value="17:00">
+                <span>đến</span><input type="time" id="ot-end" value="19:00">
+            </div>
+        </div>
+
+        <!-- MỤC CHI TIÊU NHIỀU HÀNG -->
+        <div class="expense-section">
+            <h4>
+                💸 Chi tiêu trong ngày
+                <button type="button" class="btn btn-small" id="btn-add-expense" style="border-color:#ffcdd2; color:#c62828;">+ Thêm mục</button>
+            </h4>
+            <div id="expense-list-container">
+                <!-- Các dòng chi tiêu sẽ được thêm bằng JS -->
+            </div>
+        </div>
+
+        <div class="content-section">
+            <label for="job-content">📝 Ghi chú chung:</label>
+            <textarea id="job-content" placeholder="Hôm nay bạn đã làm gì thế? 🍃"></textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn" id="btn-cancel">Hủy bỏ</button>
+            <button class="btn btn-primary" id="btn-save">Lưu lại ✔️</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentDate = new Date();
+    let workData = {}; 
+    let selectedDateStr = '';
+
+    const calendarEl = document.getElementById('calendar');
+    const monthYearEl = document.getElementById('month-year');
+    const modal = document.getElementById('work-modal');
+    
+    const radioInputs = document.querySelectorAll('input[name="work_type"]');
+    const checkOvertime = document.getElementById('check-overtime');
+    const otSection = document.getElementById('ot-section');
+    const timeRangeDiv = document.getElementById('time-range-div');
+    const otStartInput = document.getElementById('ot-start');
+    const otEndInput = document.getElementById('ot-end');
+    const jobContentInput = document.getElementById('job-content');
+    
+    const expenseListContainer = document.getElementById('expense-list-container');
+    const btnAddExpense = document.getElementById('btn-add-expense');
+    const statsGrid = document.getElementById('stats-grid');
+
+    const formatCurrency = (val) => new Intl.NumberFormat('vi-VN').format(val) + 'đ';
+
+    // Logic Ẩn/Hiện Tăng ca
+    radioInputs.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (e.target.value === 'off' || e.target.value === 'none') {
+                otSection.style.opacity = '0.5'; otSection.style.pointerEvents = 'none';
+                checkOvertime.checked = false; timeRangeDiv.style.display = 'none';
+            } else {
+                otSection.style.opacity = '1'; otSection.style.pointerEvents = 'auto';
+            }
+        });
+    });
+
+    checkOvertime.addEventListener('change', (e) => {
+        timeRangeDiv.style.display = e.target.checked ? 'flex' : 'none';
+    });
+
+    // Quản lý các dòng chi tiêu động
+    function createExpenseRow(name = '', amount = '') {
+        const row = document.createElement('div');
+        row.className = 'expense-row';
+        row.innerHTML = `
+            <input type="text" class="exp-name" placeholder="Tên mục (VD: Ăn sáng)" value="${name}">
+            <input type="number" class="exp-amount" placeholder="Số tiền" min="0" value="${amount}">
+            <button type="button" class="btn btn-danger btn-remove-exp" title="Xóa">✖</button>
+        `;
+        row.querySelector('.btn-remove-exp').onclick = () => row.remove();
+        expenseListContainer.appendChild(row);
+    }
+    
+    btnAddExpense.onclick = () => createExpenseRow();
+
+    // VẼ LỊCH
+    function renderCalendar() {
+        calendarEl.innerHTML = '';
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        monthYearEl.innerHTML = `Tháng ${month + 1} <span>🌿</span> ${year}`;
+
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+        const weekdays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+        weekdays.forEach(day => {
+            const div = document.createElement('div'); div.className = 'weekday'; div.textContent = day; calendarEl.appendChild(div);
+        });
+
+        for (let i = 0; i < firstDayOfMonth; i++) createDayCell(year, month - 1, daysInPrevMonth - firstDayOfMonth + i + 1, true);
+        
+        const today = new Date();
+        for (let i = 1; i <= daysInMonth; i++) {
+            const isToday = i === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+            createDayCell(year, month, i, false, isToday);
+        }
+
+        const remainder = (firstDayOfMonth + daysInMonth) % 7;
+        const nextMonthDays = remainder === 0 ? 0 : 7 - remainder; 
+        for (let i = 1; i <= nextMonthDays; i++) createDayCell(year, month + 1, i, true);
+
+        updateStatistics(year, month, daysInMonth, firstDayOfMonth);
+    }
+
+    function createDayCell(year, month, day, isOtherMonth, isToday = false) {
+        const actualDate = new Date(year, month, day);
+        const y = actualDate.getFullYear();
+        const m = String(actualDate.getMonth() + 1).padStart(2, '0');
+        const d = String(actualDate.getDate()).padStart(2, '0');
+        const dateString = `${y}-${m}-${d}`;
+
+        const div = document.createElement('div');
+        div.className = `day ${isOtherMonth ? 'other-month' : ''} ${isToday ? 'today' : ''}`;
+        
+        const dayNum = document.createElement('div');
+        dayNum.className = 'day-number'; dayNum.textContent = actualDate.getDate();
+        div.appendChild(dayNum);
+
+        const data = workData[dateString];
+        if (data) {
+            // Tính tổng chi tiêu ngày
+            let dailyExpenseTotal = 0;
+            if (data.expenses && Array.isArray(data.expenses)) {
+                dailyExpenseTotal = data.expenses.reduce((sum, item) => sum + Number(item.amount), 0);
+            } else if (data.expenseAmount) {
+                dailyExpenseTotal = Number(data.expenseAmount); // Khả năng tương thích dữ liệu cũ
+            }
+
+            const slotClass = (data.type && data.type !== 'none') ? `slot-${data.type}` : (dailyExpenseTotal > 0 ? 'slot-expense-only' : '');
+            const slotDiv = document.createElement('div');
+            slotDiv.className = `work-status-container ${slotClass} ${data.isOvertime ? 'overtime' : ''}`;
+            
+            let html = '';
+            
+            if (dailyExpenseTotal > 0) {
+                html += `<div class="expense-badge">💸 -${formatCurrency(dailyExpenseTotal)}</div>`;
+            }
+
+            if (data.type && data.type !== 'none') {
+                let labelText = '';
+                if (data.type === 'full') labelText = data.isOvertime ? 'Cả ngày (+OT)' : 'Cả ngày';
+                else if (data.type === 'half-am') labelText = data.isOvertime ? 'Sáng (+OT)' : 'Sáng';
+                else if (data.type === 'half-pm') labelText = data.isOvertime ? 'Chiều (+OT)' : 'Chiều';
+                else if (data.type === 'off') labelText = 'Nghỉ';
+                html += `<div class="status-text">${labelText}</div>`;
+                
+                if (data.isOvertime && data.startTime && data.endTime && data.type !== 'off') {
+                    html += `<div style="font-size:10px; font-weight:600; text-align:center; opacity:0.95;">${data.startTime} - ${data.endTime}</div>`;
+                }
+            }
+
+            if (data.content && data.content.trim() !== '') html += `<div class="job-content-preview">${escapeHtml(data.content)}</div>`;
+
+            slotDiv.innerHTML = html;
+            div.appendChild(slotDiv);
+        }
+
+        div.onclick = () => openModal(dateString);
+        calendarEl.appendChild(div);
+    }
+
+    function escapeHtml(text) { return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+    function calculateHours(start, end) {
+        if (!start || !end) return 0;
+        const [h1, m1] = start.split(':').map(Number);
+        const [h2, m2] = end.split(':').map(Number);
+        let diff = (h2 + m2 / 60) - (h1 + m1 / 60);
+        if (diff < 0) diff += 24; 
+        return diff;
+    }
+
+    // THỐNG KÊ CHI TIẾT
+    function updateStatistics(year, month, daysInMonth, firstDayOfMonth) {
+        let stats = { full: [], halfAm: [], halfPm: [], off: [], totalOtHours: 0 };
+        let monthlyExpense = 0;
+        let weeklyExpenses = {};
+        let categoryExpenses = {}; // Nhóm theo tên mục
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const m = String(month + 1).padStart(2, '0');
+            const d = String(i).padStart(2, '0');
+            const dateStr = `${year}-${m}-${d}`;
+            
+            const weekNum = Math.floor((firstDayOfMonth + i - 1) / 7) + 1;
+            if (!weeklyExpenses[`Tuần ${weekNum}`]) weeklyExpenses[`Tuần ${weekNum}`] = 0;
+
+            const data = workData[dateStr];
+            if (data) {
+                if (data.type === 'full') stats.full.push(i);
+                else if (data.type === 'half-am') stats.halfAm.push(i);
+                else if (data.type === 'half-pm') stats.halfPm.push(i);
+                else if (data.type === 'off') stats.off.push(i);
+
+                if (data.isOvertime && data.type !== 'off' && data.type !== 'none') {
+                    stats.totalOtHours += calculateHours(data.startTime, data.endTime);
+                }
+
+                // Tính toán chi tiêu chi tiết
+                let dayExpenses = [];
+                if (data.expenses && Array.isArray(data.expenses)) dayExpenses = data.expenses;
+                else if (data.expenseAmount) dayExpenses = [{ name: 'Mục khác', amount: data.expenseAmount }];
+
+                dayExpenses.forEach(exp => {
+                    const amount = Number(exp.amount) || 0;
+                    if(amount > 0) {
+                        const name = exp.name.trim() || 'Chưa đặt tên';
+                        monthlyExpense += amount;
+                        weeklyExpenses[`Tuần ${weekNum}`] += amount;
+                        categoryExpenses[name] = (categoryExpenses[name] || 0) + amount;
+                    }
+                });
+            }
+        }
+
+        const createStatHTML = (icon, title, count, suffix) => `
+            <div class="stat-item">
+                <div class="stat-title">${icon} ${title}</div>
+                <div class="stat-val">${count} ${suffix}</div>
+            </div>
+        `;
+
+        let htmlContent = `
+            ${createStatHTML('🌳', 'Làm cả ngày', stats.full.length, 'ngày')}
+            ${createStatHTML('🌅', 'Làm nửa ngày', stats.halfAm.length + stats.halfPm.length, 'ngày')}
+            ${createStatHTML('🏖️', 'Không đi làm', stats.off.length, 'ngày')}
+            ${createStatHTML('⏰', 'Tổng Tăng ca', parseFloat(stats.totalOtHours.toFixed(2)), 'giờ')}
+        `;
+
+        // Thống kê Tuần
+        let weekHTML = `<ul class="stat-list">`;
+        let hasWeek = false;
+        for (let week in weeklyExpenses) {
+            if (weeklyExpenses[week] > 0) {
+                weekHTML += `<li><span>${week}</span> <strong>${formatCurrency(weeklyExpenses[week])}</strong></li>`;
+                hasWeek = true;
+            }
+        }
+        if(!hasWeek) weekHTML += `<span style="color:#999; font-style:italic;">Chưa có</span>`;
+        weekHTML += `</ul>`;
+
+        // Thống kê Mục
+        let catHTML = `<ul class="stat-list">`;
+        let hasCat = false;
+        // Sắp xếp các mục chi tiêu từ cao xuống thấp
+        const sortedCats = Object.entries(categoryExpenses).sort((a, b) => b[1] - a[1]);
+        for (let [cat, amount] of sortedCats) {
+            catHTML += `<li><span>🏷️ ${cat}</span> <strong>${formatCurrency(amount)}</strong></li>`;
+            hasCat = true;
+        }
+        if(!hasCat) catHTML += `<span style="color:#999; font-style:italic;">Chưa có</span>`;
+        catHTML += `</ul>`;
+
+        let expenseHTML = `
+            <div class="stat-item" style="border-color:#ffcdd2; background:#fff5f5; grid-column: 1 / -1;">
+                <div class="stat-title" style="color:#c62828;">💰 TỔNG CHI TIÊU THÁNG: <span style="font-size:22px;">${formatCurrency(monthlyExpense)}</span></div>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top:15px;">
+                    <div style="flex: 1; min-width:200px;">
+                        <strong style="color:#d32f2f; display:block; margin-bottom:8px;">📅 Theo Tuần:</strong>
+                        ${weekHTML}
+                    </div>
+                    <div style="flex: 1; min-width:200px; border-left: 2px dashed #ffcdd2; padding-left: 20px;">
+                        <strong style="color:#d32f2f; display:block; margin-bottom:8px;">🛒 Phân loại Hạng mục:</strong>
+                        ${catHTML}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        statsGrid.innerHTML = htmlContent + expenseHTML;
+    }
+
+    // MỞ MODAL
+    function openModal(dateStr) {
+        selectedDateStr = dateStr;
+        const [y, m, d] = dateStr.split('-');
+        document.getElementById('modal-date-title').innerHTML = `Ngày ${d}/${m}/${y} 🌿`;
+        
+        document.querySelectorAll('input[name="work_type"]').forEach(r => r.checked = false);
+        checkOvertime.checked = false; timeRangeDiv.style.display = 'none';
+        otStartInput.value = '17:00'; otEndInput.value = '19:00';
+        jobContentInput.value = '';
+        expenseListContainer.innerHTML = ''; // Clear danh sách chi tiêu
+        otSection.style.opacity = '1'; otSection.style.pointerEvents = 'auto';
+
+        const data = workData[dateStr];
+        if (data) {
+            if(data.type) document.querySelector(`input[value="${data.type}"]`).checked = true;
+            else document.querySelector('input[value="none"]').checked = true;
+
+            if (data.type === 'off' || data.type === 'none') {
+                otSection.style.opacity = '0.5'; otSection.style.pointerEvents = 'none';
+            }
+            if (data.isOvertime) {
+                checkOvertime.checked = true; timeRangeDiv.style.display = 'flex';
+                if (data.startTime) otStartInput.value = data.startTime;
+                if (data.endTime) otEndInput.value = data.endTime;
+            }
+            if (data.content) jobContentInput.value = data.content;
+            
+            // Load danh sách chi tiêu
+            if (data.expenses && Array.isArray(data.expenses)) {
+                data.expenses.forEach(exp => createExpenseRow(exp.name, exp.amount));
+            } else if (data.expenseAmount) {
+                createExpenseRow('Mục khác', data.expenseAmount);
+            }
+        } else {
+            document.querySelector('input[value="full"]').checked = true;
+            createExpenseRow(); // Mặc định mở 1 ô trống cho sẵn
+        }
+        
+        modal.style.display = 'flex';
+    }
+
+    document.getElementById('btn-cancel').onclick = () => { modal.style.display = 'none'; };
+    
+    // LƯU DATA
+    document.getElementById('btn-save').onclick = () => {
+        const typeRadio = document.querySelector('input[name="work_type"]:checked');
+        const selectedType = typeRadio ? typeRadio.value : 'none';
+        const contentValue = jobContentInput.value.trim();
+        
+        // Thu thập toàn bộ chi tiêu từ các input
+        const expenses = [];
+        document.querySelectorAll('.expense-row').forEach(row => {
+            const name = row.querySelector('.exp-name').value.trim();
+            const amount = row.querySelector('.exp-amount').value.trim();
+            if (amount && Number(amount) > 0) {
+                expenses.push({ name: name || 'Không tên', amount: Number(amount) });
+            }
+        });
+
+        if (selectedType === 'none' && expenses.length === 0 && !contentValue) {
+            delete workData[selectedDateStr];
+        } else {
+            const isOff = (selectedType === 'off' || selectedType === 'none');
+            workData[selectedDateStr] = { 
+                type: selectedType,
+                isOvertime: isOff ? false : checkOvertime.checked,
+                startTime: (checkOvertime.checked && !isOff) ? otStartInput.value : '',
+                endTime: (checkOvertime.checked && !isOff) ? otEndInput.value : '',
+                expenses: expenses,
+                content: contentValue
+            };
+        }
+        
+        modal.style.display = 'none';
+        renderCalendar();
+    };
+
+    document.getElementById('btn-prev').onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
+    document.getElementById('btn-next').onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+
+    document.getElementById('btn-export').onclick = () => {
+        if (Object.keys(workData).length === 0) { alert("Lịch đang trống!"); return; }
+        const dataStr = JSON.stringify(workData, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url;
+        a.download = `nhatky_congviec_${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    };
+
+    document.getElementById('import-file').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const importedData = JSON.parse(event.target.result);
+                workData = { ...workData, ...importedData }; 
+                renderCalendar();
+                alert("Tải dữ liệu thành công rồi nha! 🎉");
+            } catch (error) { alert("Lỗi! File không hợp lệ."); }
+        };
+        reader.readAsText(file); e.target.value = '';
+    });
+
+    renderCalendar();
+</script>
+</body>
+</html>
