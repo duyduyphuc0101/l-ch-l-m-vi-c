@@ -692,9 +692,9 @@
         </div>
         <div class="controls">
             <div class="save-badge" id="auto-save-status">
-                ✔️ Đã lưu trên máy
+                ✔️ Đã tự động lưu
             </div>
-            <button class="btn btn-cloud" id="btn-cloud-config" title="Kết nối tự động lưu lên Google Drive">☁️ Google Drive</button>
+            <button class="btn btn-cloud" id="btn-cloud-config" title="Cài đặt đồng bộ Google Drive">☁️ Google Drive</button>
             <button class="btn" onclick="document.getElementById('import-file').click()">📂 Tải file</button>
             <input type="file" id="import-file" style="display: none;" accept=".json">
             <button class="btn btn-primary" id="btn-export" title="Tải file dự phòng về máy">💾 Sao lưu</button>
@@ -766,7 +766,7 @@
     <div class="modal-content" style="max-width: 480px;">
         <h3 style="color:#1565c0; border-color:#e3f2fd;">☁️ Tự động lưu trên Google Drive</h3>
         <p style="font-size:13.5px; color:#475569; margin:0 0 8px 0;">
-            Dán đường dẫn <strong>Web App URL</strong> từ Google Apps Script của bạn vào bên dưới. Ứng dụng sẽ tự động lưu và đồng bộ dữ liệu lên Google Drive mỗi khi bạn bấm Lưu:
+            Dán đường dẫn <strong>Web App URL</strong> (có đuôi <code>/exec</code>) từ Google Apps Script vào bên dưới:
         </p>
         <input type="url" id="gas-url-input" class="cloud-input" placeholder="https://script.google.com/macros/s/.../exec">
         
@@ -782,12 +782,20 @@
     </div>
 </div>
 
+<!-- Form ẩn dự phòng khi chạy từ file trên ổ cứng -->
+<iframe name="drive_hidden_iframe" id="drive_hidden_iframe" style="display:none;"></iframe>
+<form id="drive_post_form" method="POST" target="drive_hidden_iframe" style="display:none;">
+    <input type="hidden" name="payload" id="drive_post_payload">
+</form>
+
 <script>
+    // MẸO: Bạn có thể dán thẳng link Web App URL (.../exec) vào giữa cặp dấu nháy dưới đây trước khi up lên GitHub:
+    const DEFAULT_GAS_URL = "";
+
     let currentDate = new Date();
-    
     let savedData = localStorage.getItem('nhatky_congviec_data');
     let workData = savedData ? JSON.parse(savedData) : {}; 
-    let gasUrl = localStorage.getItem('nhatky_gas_url') || '';
+    let gasUrl = localStorage.getItem('nhatky_gas_url') || DEFAULT_GAS_URL;
     let selectedDateStr = '';
 
     const calendarEl = document.getElementById('calendar');
@@ -821,9 +829,10 @@
         autoSaveStatus.style.backgroundColor = bg;
     }
 
-    // Tự động lưu vào máy + tự động đẩy lên Google Drive (nếu đã cài URL)
-    async function autoSaveData() {
-        localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
+    // Tự động lưu vào máy + đẩy lên Google Drive
+    async function autoSaveData(showPushAlert = false) {
+        const jsonStr = JSON.stringify(workData);
+        localStorage.setItem('nhatky_congviec_data', jsonStr);
         
         if (!gasUrl) {
             setStatusBadge('✔️ Đã tự động lưu trên máy');
@@ -832,25 +841,52 @@
 
         setStatusBadge('⏳ Đang lưu lên Google Drive...', '#1565c0', '#e3f2fd');
         try {
-            await fetch(gasUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify(workData)
-            });
+            // Nếu mở từ ổ cứng (file://), dùng Form Submit ẩn để vượt rào cản trình duyệt
+            if (window.location.protocol === 'file:') {
+                const form = document.getElementById('drive_post_form');
+                const payloadInput = document.getElementById('drive_post_payload');
+                form.action = gasUrl;
+                payloadInput.value = jsonStr;
+                form.submit();
+            } else {
+                // Nếu chạy trên GitHub Pages (https://), dùng fetch chuẩn
+                await fetch(gasUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: jsonStr
+                });
+            }
             setStatusBadge('☁️ Đã tự động lưu Google Drive', '#2e7d32', '#e8f5e9');
+            if (showPushAlert) alert('Đã đẩy toàn bộ dữ liệu hiện tại lên Google Drive thành công! ☁️');
         } catch (err) {
             setStatusBadge('⚠️ Lỗi lưu Drive (Đã lưu trên máy)', '#c62828', '#ffebee');
         }
     }
 
-    // Tự động tải dữ liệu từ Google Drive khi mở trang
+    // Tải dữ liệu từ Google Drive (Chuẩn cho GitHub Pages)
     async function loadFromGoogleDrive(showNotify = false) {
         if (!gasUrl) return;
+
+        if (window.location.protocol === 'file:' && showNotify) {
+            alert('Lưu ý: Khi mở trực tiếp từ ổ cứng (file://), tính năng "Đẩy dữ liệu lên Drive" (Lưu tự động) vẫn hoạt động bình thường!\n\nRiêng tính năng "Tải dữ liệu từ Drive về" sẽ hoạt động ngay sau khi bạn đưa file này lên GitHub Pages (https://).');
+            return;
+        }
+
+        if (window.location.protocol === 'file:') return;
+
         setStatusBadge('🔄 Đang đồng bộ từ Google Drive...', '#1565c0', '#e3f2fd');
         try {
-            const res = await fetch(gasUrl);
+            const sep = gasUrl.includes('?') ? '&' : '?';
+            const res = await fetch(`${gasUrl}${sep}t=${Date.now()}`, { redirect: 'follow' });
             const cloudData = await res.json();
+
+            if (cloudData && cloudData.__error) {
+                setStatusBadge('⚠️ Chưa cấp quyền Drive trên Script', '#c62828', '#ffebee');
+                if (showNotify) alert('Lỗi từ Google Apps Script:\n' + cloudData.__error + '\n\nHãy bấm Chạy (Run) hàm capQuyenDrive trên Google Apps Script để cấp quyền nhé!');
+                return;
+            }
+
             if (cloudData && typeof cloudData === 'object' && Object.keys(cloudData).length > 0) {
                 workData = { ...workData, ...cloudData };
                 localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
@@ -858,11 +894,12 @@
                 setStatusBadge('☁️ Đã đồng bộ Google Drive', '#2e7d32', '#e8f5e9');
                 if (showNotify) alert('Đã tải dữ liệu mới nhất từ Google Drive thành công! 🎉');
             } else {
-                setStatusBadge('☁️ Drive đã kết nối (Chưa có dữ liệu cũ)', '#1565c0', '#e3f2fd');
+                setStatusBadge('☁️ Drive đã kết nối', '#2e7d32', '#e8f5e9');
+                if (showNotify) alert('Kết nối thành công! Trên Drive hiện chưa có dữ liệu, hãy bấm "📤 Đẩy dữ liệu hiện tại lên Drive" nhé.');
             }
         } catch (err) {
-            setStatusBadge('⚠️ Không thể kết nối Google Drive', '#c62828', '#ffebee');
-            if (showNotify) alert('Không thể tải từ Google Drive. Hãy kiểm tra lại đường dẫn Web App URL!');
+            setStatusBadge('⚠️ Chưa đồng bộ được Drive', '#c62828', '#ffebee');
+            if (showNotify) alert('Không thể tải từ Google Drive. Hãy kiểm tra lại Web App URL hoặc quyền truy cập "Anyone" (Bất kỳ ai) trên Google Apps Script!');
         }
     }
 
@@ -879,7 +916,7 @@
         localStorage.setItem('nhatky_gas_url', gasUrl);
         cloudModal.style.display = 'none';
         if (gasUrl) {
-            autoSaveData();
+            autoSaveData(false);
         } else {
             setStatusBadge('✔️ Đã lưu trên máy');
         }
@@ -890,12 +927,11 @@
         localStorage.setItem('nhatky_gas_url', gasUrl);
         loadFromGoogleDrive(true);
     };
-    document.getElementById('btn-push-drive').onclick = async () => {
+    document.getElementById('btn-push-drive').onclick = () => {
         gasUrl = gasUrlInput.value.trim();
         if (!gasUrl) { alert('Vui lòng dán Web App URL trước!'); return; }
         localStorage.setItem('nhatky_gas_url', gasUrl);
-        await autoSaveData();
-        alert('Đã đẩy toàn bộ dữ liệu hiện tại lên Google Drive!');
+        autoSaveData(true);
     };
 
     // Logic Ẩn/Hiện Tăng ca
@@ -1436,7 +1472,7 @@
             };
         }
         
-        autoSaveData();
+        autoSaveData(false);
         modal.style.display = 'none';
         renderCalendar();
     };
@@ -1463,9 +1499,9 @@
                 const importedData = JSON.parse(event.target.result);
                 workData = { ...workData, ...importedData }; 
                 
-                autoSaveData();
+                autoSaveData(false);
                 renderCalendar();
-                alert("Tải dữ liệu thành công rồi nha! 🎉");
+                alert("Tải dữ liệu thành công! 🎉");
             } catch (error) { alert("Lỗi! File không hợp lệ."); }
         };
         reader.readAsText(file); e.target.value = '';
