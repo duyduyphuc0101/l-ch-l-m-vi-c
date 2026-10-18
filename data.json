@@ -364,6 +364,14 @@
         "2026-08": {
           "amount": 400000,
           "isPaid": false
+        },
+        "2026-09": {
+          "amount": 400000,
+          "isPaid": false
+        },
+        "2026-10": {
+          "amount": 800000,
+          "isPaid": false
         }
       }
     }
