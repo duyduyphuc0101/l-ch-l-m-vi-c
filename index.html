@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🌿 Nhật Ký Công Việc, Thu Chi & Quản Lý Nợ Lãi Theo Từng Tháng 🌿</title>
+    <title>🌿 Nhật Ký Công Việc, Thu Chi & Quản Lý Nợ Lãi 🌿</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -472,7 +471,7 @@
         /* GIAO DIỆN QUẢN LÝ NỢ (DEBT VIEW) */
         .debt-dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-bottom: 24px;
         }
@@ -777,8 +776,8 @@
                         <tr>
                             <th>Chủ nợ / Mục đích</th>
                             <th>Tổng gốc ban đầu</th>
+                            <th>Tiền đã trả (Gốc)</th>
                             <th>Dư nợ gốc còn lại</th>
-                            <th>Gốc trả tháng</th>
                             <th>Tiền lãi tháng (Có thể chỉnh sửa & Cộng dồn)</th>
                             <th>Trạng thái lãi</th>
                             <th>Thao tác</th>
@@ -858,8 +857,8 @@
             <input type="number" id="debt-total" class="gh-input" placeholder="VD: 20000000" min="0">
         </div>
         <div class="gh-field">
-            <label>💸 Tiền gốc trả góp mặc định hằng tháng:</label>
-            <input type="number" id="debt-monthly" class="gh-input" placeholder="VD: 1000000" min="0">
+            <label>💸 Tiền đã trả (Gốc):</label>
+            <input type="number" id="debt-paid" class="gh-input" placeholder="VD: 2000000" min="0" value="0">
         </div>
         <div class="gh-field">
             <label>📈 Mức tiền lãi ban đầu mỗi tháng:</label>
@@ -1063,24 +1062,23 @@
         } catch (err) { setStatusBadge('⚠️ Lỗi kết nối', '#c62828', '#ffebee'); }
     }
 
-    // Xử lý Quản lý Nợ & Lãi theo từng tháng (Sắp xếp tăng dần theo thời gian)
+    // Xử lý Quản lý Nợ & Lãi theo từng tháng (Sắp xếp thời gian tăng dần chuẩn xác)
     function renderDebtView() {
         const cardsEl = document.getElementById('debt-summary-cards');
         const tableBody = document.getElementById('debt-table-body');
         
-        let totalOriginal = 0, totalRemaining = 0, totalMonthlyDue = 0, totalAccumulatedInterest = 0;
+        let totalOriginal = 0, totalPaidPrincipalAll = 0, totalRemaining = 0, totalAccumulatedInterest = 0;
         const currentMonthKey = currentDate.toISOString().slice(0, 7); // YYYY-MM
 
         let tableHtml = '';
         if (workData.debts && workData.debts.length > 0) {
             workData.debts.forEach((debt, index) => {
                 const original = Number(debt.total) || 0;
-                const monthlyPrincipal = Number(debt.monthly) || 0;
                 const fixedInterest = Number(debt.interest) || 0;
                 
                 if (!debt.interestRecords) debt.interestRecords = {};
 
-                // Tự động khởi tạo tháng hiện tại nếu chưa có (có cộng dồn lãi tháng trước nếu chưa trả)
+                // Tự động khởi tạo tháng hiện tại nếu chưa có
                 if (debt.interestRecords[currentMonthKey] === undefined) {
                     let prevInterest = 0;
                     const prevMonths = Object.keys(debt.interestRecords).sort((a, b) => {
@@ -1104,10 +1102,10 @@
                 const remaining = Math.max(0, original - totalPaidPrincipal);
 
                 totalOriginal += original;
+                totalPaidPrincipalAll += totalPaidPrincipal;
                 totalRemaining += remaining;
-                totalMonthlyDue += monthlyPrincipal;
 
-                // Render danh sách các tháng (Sắp xếp tăng dần chuẩn thời gian)
+                // Render danh sách các tháng
                 let monthsHtml = '';
                 const sortedMonths = Object.keys(debt.interestRecords).sort((a, b) => {
                     const [y1, m1] = a.split('-').map(Number);
@@ -1135,8 +1133,8 @@
                     <tr>
                         <td><strong>${escapeHtml(debt.name)}</strong></td>
                         <td style="color:var(--expense); font-weight:700;">${formatCurrency(original)}</td>
+                        <td style="color:var(--primary); font-weight:700;">${formatCurrency(totalPaidPrincipal)}</td>
                         <td style="color:var(--debt); font-weight:700;">${formatCurrency(remaining)}</td>
-                        <td style="font-weight:700;">${formatCurrency(monthlyPrincipal)}</td>
                         <td colspan="2" style="background:#fffaf0; padding:8px;">
                             <div style="max-height:140px; overflow-y:auto; padding-right:4px; margin-bottom:6px;">
                                 ${monthsHtml}
@@ -1158,25 +1156,24 @@
 
         cardsEl.innerHTML = `
             <div class="debt-card">
-                <div class="stat-title">📉 Tổng Gốc Ban Đầu</div>
+                <div class="stat-title">📉 Tổng Gốc Ban Đầu[cite: 1]</div>
                 <div class="stat-val" style="color:var(--expense);">${formatCurrency(totalOriginal)}</div>
             </div>
             <div class="debt-card">
-                <div class="stat-title">⚠️ Dư Nợ Gốc Còn Lại</div>
+                <div class="stat-title">✅ Tổng Tiền Đã Trả (Gốc)</div>
+                <div class="stat-val" style="color:var(--primary);">${formatCurrency(totalPaidPrincipalAll)}</div>
+            </div>
+            <div class="debt-card">
+                <div class="stat-title">⚠️ Dư Nợ Gốc Còn Lại[cite: 1]</div>
                 <div class="stat-val" style="color:var(--debt);">${formatCurrency(totalRemaining)}</div>
             </div>
             <div class="debt-card">
-                <div class="stat-title">📅 Gốc Phải Trả Tháng</div>
-                <div class="stat-val" style="color:var(--income);">${formatCurrency(totalMonthlyDue)}</div>
-            </div>
-            <div class="debt-card">
-                <div class="stat-title">💸 Tổng Lãi Chưa Trả (Cộng Dồn)</div>
+                <div class="stat-title">💸 Tổng Lãi Chưa Trả (Cộng Dồn)[cite: 1]</div>
                 <div class="stat-val" style="color:#c62828;">${formatCurrency(totalAccumulatedInterest)}</div>
             </div>
         `;
     }
 
-    // Hàm cập nhật chỉnh sửa số tiền lãi của riêng tháng đó
     window.updateMonthInterest = function(index, monthKey, val) {
         const debt = workData.debts[index];
         const newAmount = Number(val) || 0;
@@ -1229,7 +1226,7 @@
         document.getElementById('debt-edit-id').value = '';
         document.getElementById('debt-name').value = '';
         document.getElementById('debt-total').value = '';
-        document.getElementById('debt-monthly').value = '';
+        document.getElementById('debt-paid').value = '0';
         document.getElementById('debt-interest').value = '';
         debtModal.style.display = 'flex';
     };
@@ -1239,7 +1236,7 @@
         const id = document.getElementById('debt-edit-id').value;
         const name = document.getElementById('debt-name').value.trim();
         const total = Number(document.getElementById('debt-total').value) || 0;
-        const monthly = Number(document.getElementById('debt-monthly').value) || 0;
+        const paid = Number(document.getElementById('debt-paid').value) || 0;
         const interest = Number(document.getElementById('debt-interest').value) || 0;
 
         if (!name || total <= 0) { alert('Vui lòng nhập tên khoản nợ và tổng số tiền gốc!'); return; }
@@ -1249,12 +1246,12 @@
             const initialRecords = {};
             initialRecords[currentMonthKey] = { amount: interest, isPaid: false };
 
-            workData.debts.push({ name, total, monthly, interest, paidPrincipal: 0, interestRecords: initialRecords });
+            workData.debts.push({ name, total, paidPrincipal: paid, interest, interestRecords: initialRecords });
         } else {
             const debt = workData.debts[Number(id)];
             debt.name = name;
             debt.total = total;
-            debt.monthly = monthly;
+            debt.paidPrincipal = paid;
             debt.interest = interest;
         }
 
@@ -1268,7 +1265,7 @@
         document.getElementById('debt-edit-id').value = index;
         document.getElementById('debt-name').value = debt.name;
         document.getElementById('debt-total').value = debt.total;
-        document.getElementById('debt-monthly').value = debt.monthly;
+        document.getElementById('debt-paid').value = debt.paidPrincipal || 0;
         document.getElementById('debt-interest').value = debt.interest || 0;
         debtModal.style.display = 'flex';
     };
@@ -1283,8 +1280,13 @@
 
     window.payMonthlyDebtAndInterest = function(index) {
         const debt = workData.debts[index];
-        const monthlyPrincipal = Number(debt.monthly) || 0;
         
+        // Hộp thoại hỏi số tiền gốc muốn trả trong tháng này
+        const defaultMonthlyPay = Math.max(0, Number(debt.total) - Number(debt.paidPrincipal));
+        const payPrincipalInput = prompt(`Nhập số tiền GỐC muốn trả cho "${debt.name}" trong tháng này:`, defaultMonthlyPay);
+        if (payPrincipalInput === null) return;
+        const monthlyPrincipal = Number(payPrincipalInput) || 0;
+
         const currentMonthKey = currentDate.toISOString().slice(0, 7);
         let currentInterest = 0;
         if (debt.interestRecords && debt.interestRecords[currentMonthKey] && !debt.interestRecords[currentMonthKey].isPaid) {
@@ -1292,7 +1294,7 @@
         }
 
         const totalPay = monthlyPrincipal + currentInterest;
-        if (totalPay <= 0) { alert('Tháng này không có tiền gốc hoặc tiền lãi phát sinh để trả!'); return; }
+        if (totalPay <= 0) { alert('Số tiền thanh toán phải lớn hơn 0!'); return; }
 
         const today = new Date();
         const y = today.getFullYear();
@@ -1312,6 +1314,7 @@
         }
 
         autoSaveData(false);
+        renderDebtView();
         alert(`Đã ghi nhận thanh toán tổng cộng ${formatCurrency(totalPay)} (Gốc: ${formatCurrency(monthlyPrincipal)} | Lãi: ${formatCurrency(currentInterest)}) vào ngày hôm nay (${d}/${m}/${y}) và tự động cộng vào bảng Chi tiêu! 🎉`);
     };
 
