@@ -1,0 +1,342 @@
+{
+  "2026-09-27": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Ăn hủ tiếu",
+        "amount": 55000
+      }
+    ],
+    "content": "- kéo dây điện nhà chú bá tước"
+  },
+  "2026-09-28": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Cơm trưa",
+        "amount": 25000
+      },
+      {
+        "name": "Cơm thêm",
+        "amount": 3000
+      }
+    ],
+    "content": "- trèo cột lắp camera\n- Cấu hình đầu ghi\n- Cấu hình camera"
+  },
+  "2026-09-29": {
+    "type": "full",
+    "isOvertime": true,
+    "startTime": "23:00",
+    "endTime": "00:00",
+    "expenses": [
+      {
+        "name": "Mua nước ngọt",
+        "amount": 20000
+      }
+    ],
+    "content": "- Lắp camera trung an\n- Hàn cáp quang buổi đêm"
+  },
+  "2026-09-30": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [],
+    "content": "- Kéo pin mặt trời nhà chú 9\n- Khảo sát pc11B\n- Kiểm tra an toàn thông tin\n- Thay POE cổng chính\n- Đưa thùng điện thoại cho anh Thắng"
+  },
+  "2026-10-01": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [],
+    "content": "- gắn cam. Đầu ghi cho xã vĩnh kim, châu thành, cái bè, của cơ yêu"
+  },
+  "2026-10-02": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [],
+    "content": "- gắn camera tân hồng, phường cao lãnh"
+  },
+  "2026-10-04": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Ăn cơm trưa",
+        "amount": 30000
+      }
+    ],
+    "content": "- chỉnh camera chạo gạo, cấu hình cam"
+  },
+  "2026-10-03": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Nhớt",
+        "amount": 125000
+      },
+      {
+        "name": "Xăng",
+        "amount": 70000
+      },
+      {
+        "name": "Đảng phí",
+        "amount": 11000
+      }
+    ],
+    "content": "Họp chi bộ"
+  },
+  "2026-10-05": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Xăng",
+        "amount": 80000
+      },
+      {
+        "name": "Ăn trưa",
+        "amount": 25000
+      },
+      {
+        "name": "Nước",
+        "amount": 50000
+      }
+    ],
+    "content": "- cấu hình cam chợ gạo"
+  },
+  "2026-10-06": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Bánh mì",
+        "amount": 15000
+      },
+      {
+        "name": "Phở",
+        "amount": 25000
+      },
+      {
+        "name": "C2",
+        "amount": 15000
+      },
+      {
+        "name": "Sâm",
+        "amount": 10000
+      },
+      {
+        "name": "7 up",
+        "amount": 8000
+      },
+      {
+        "name": "Nước",
+        "amount": 27000
+      }
+    ],
+    "content": "- chỉnh camera chợ gạo\n- khảo sát hội trường pc1qb"
+  },
+  "2026-10-07": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Phở",
+        "amount": 25000
+      },
+      {
+        "name": "Nước",
+        "amount": 15000
+      },
+      {
+        "name": "Hủ tiếu",
+        "amount": 22000
+      }
+    ],
+    "content": "- chỉnh góc cam chợ gạo"
+  },
+  "2026-10-08": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Nước",
+        "amount": 15000
+      },
+      {
+        "name": "Nước mía",
+        "amount": 12000
+      },
+      {
+        "name": "Hủ tiếu",
+        "amount": 70000
+      }
+    ],
+    "content": "- chỉnh cam chợ gạo"
+  },
+  "2026-10-09": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [],
+    "content": ""
+  },
+  "2026-10-10": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [],
+    "content": ""
+  },
+  "2026-10-11": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [],
+    "content": ""
+  },
+  "2026-10-12": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Ăn, xăng",
+        "amount": 300000
+      },
+      {
+        "name": "Cho phúc em",
+        "amount": 500000
+      },
+      {
+        "name": "Cho mẹ",
+        "amount": 1000000
+      }
+    ],
+    "content": "Cam chợ gạo\nCam trung an"
+  },
+  "2026-10-13": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Cơm",
+        "amount": 100000
+      }
+    ],
+    "content": "- camera trung an"
+  },
+  "2026-10-14": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Ăn + đi thi tốt nghiệp lái xe",
+        "amount": 500000
+      },
+      {
+        "name": "Cho thầy",
+        "amount": 500000
+      },
+      {
+        "name": "Trả đạt",
+        "amount": 1000000
+      }
+    ],
+    "content": "Đi thi tốt nghiệp lái xe"
+  },
+  "2026-10-15": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Trọ",
+        "amount": 200000
+      },
+      {
+        "name": "Ăn",
+        "amount": 500000
+      },
+      {
+        "name": "Xăng",
+        "amount": 70000
+      }
+    ],
+    "content": "Đi thi tốt nghiệp lái xe"
+  },
+  "2026-10-16": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "expenses": [
+      {
+        "name": "Cafe",
+        "amount": 50000
+      },
+      {
+        "name": "Xăng",
+        "amount": 100000
+      }
+    ],
+    "content": "Lắp điện + mạng camera trung an"
+  },
+  "2026-10-17": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [
+      {
+        "name": "Lắp máy tính cho anh Công pv01",
+        "amount": 100000
+      }
+    ],
+    "expenses": [
+      {
+        "name": "Cơm",
+        "amount": 65000
+      },
+      {
+        "name": "Cơm",
+        "amount": 140000
+      }
+    ],
+    "tasks": [
+      "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
+    ],
+    "content": "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
+  }
+}
