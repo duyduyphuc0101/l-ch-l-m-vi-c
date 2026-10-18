@@ -349,19 +349,5 @@
     "tasks": [],
     "content": ""
   },
-  "debts": [
-    {
-      "name": "Mua xe Future 125fi",
-      "total": 2222,
-      "monthly": 0,
-      "interest": 2,
-      "paidPrincipal": 0,
-      "interestRecords": {
-        "2026-10": {
-          "amount": 2,
-          "isPaid": false
-        }
-      }
-    }
-  ]
+  "debts": []
 }
