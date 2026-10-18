@@ -17,6 +17,9 @@
             --expense: #c62828;
             --expense-bg: #ffebee;
             --expense-border: #ffcdd2;
+            --github: #24292f;
+            --github-bg: #f6f8fa;
+            --github-border: #d0d7de;
             --text-main: #2c3e50;
             --text-muted: #64748b;
             --radius-lg: 24px;
@@ -110,14 +113,15 @@
             background: linear-gradient(135deg, #4caf50 0%, #1b5e20 100%);
             color: white;
         }
-        .btn-cloud {
-            background-color: var(--income-bg);
-            color: var(--income);
-            border-color: var(--income-border);
+        .btn-github {
+            background-color: var(--github-bg);
+            color: var(--github);
+            border-color: var(--github-border);
         }
-        .btn-cloud:hover {
-            background-color: #bbdefb;
-            border-color: #64b5f6;
+        .btn-github:hover {
+            background-color: #eaeef2;
+            border-color: #afb8c1;
+            color: #000;
         }
         .btn-small {
             height: 32px;
@@ -624,19 +628,29 @@
             font-size: 15px;
         }
 
-        .cloud-input {
+        /* Form Cài đặt GitHub */
+        .gh-field {
+            margin-bottom: 12px;
+        }
+        .gh-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .gh-input {
             width: 100%;
-            height: 42px;
-            padding: 0 14px;
-            border: 1.5px solid var(--income-border);
-            border-radius: 12px;
+            height: 40px;
+            padding: 0 12px;
+            border: 1.5px solid var(--github-border);
+            border-radius: 10px;
             font-family: inherit;
             font-size: 13.5px;
             outline: none;
-            margin: 10px 0 16px 0;
             color: var(--text-main);
         }
-        .cloud-input:focus { border-color: var(--income); }
+        .gh-input:focus { border-color: var(--github); }
 
         /* RESPONSIVE */
         @media (max-width: 992px) {
@@ -694,7 +708,7 @@
             <div class="save-badge" id="auto-save-status">
                 ✔️ Đã tự động lưu
             </div>
-            <button class="btn btn-cloud" id="btn-cloud-config" title="Cài đặt đồng bộ Google Drive">☁️ Google Drive</button>
+            <button class="btn btn-github" id="btn-gh-config" title="Cài đặt tự động lưu vào file trên GitHub">🐙 Cài đặt GitHub</button>
             <button class="btn" onclick="document.getElementById('import-file').click()">📂 Tải file</button>
             <input type="file" id="import-file" style="display: none;" accept=".json">
             <button class="btn btn-primary" id="btn-export" title="Tải file dự phòng về máy">💾 Sao lưu</button>
@@ -761,48 +775,84 @@
     </div>
 </div>
 
-<!-- Hộp thoại Cài đặt Google Drive -->
-<div class="modal" id="cloud-modal">
+<!-- Hộp thoại Cài đặt Tự động lưu trên GitHub -->
+<div class="modal" id="gh-modal">
     <div class="modal-content" style="max-width: 480px;">
-        <h3 style="color:#1565c0; border-color:#e3f2fd;">☁️ Tự động lưu trên Google Drive</h3>
-        <p style="font-size:13.5px; color:#475569; margin:0 0 8px 0;">
-            Dán đường dẫn <strong>Web App URL</strong> (có đuôi <code>/exec</code>) từ Google Apps Script vào bên dưới:
+        <h3 style="color:#24292f; border-color:#eaeef2;">🐙 Tự động lưu vào file trên GitHub</h3>
+        <p style="font-size:13px; color:#475569; margin:0 0 14px 0;">
+            Dữ liệu sẽ tự động lưu trực tiếp vào file <code>data.json</code> ngay trong kho chứa (Repository) GitHub của bạn mỗi khi bấm Lưu:
         </p>
-        <input type="url" id="gas-url-input" class="cloud-input" placeholder="https://script.google.com/macros/s/.../exec">
+
+        <div class="gh-field">
+            <label>👤 Tên tài khoản GitHub (Username):</label>
+            <input type="text" id="gh-owner" class="gh-input" placeholder="VD: duyduyphuc0101">
+        </div>
+
+        <div class="gh-field">
+            <label>📁 Tên kho chứa (Repository Name):</label>
+            <input type="text" id="gh-repo" class="gh-input" placeholder="VD: duyduyphuc0101.github.io">
+        </div>
+
+        <div class="gh-field">
+            <label>📄 Tên file lưu dữ liệu trên GitHub:</label>
+            <input type="text" id="gh-path" class="gh-input" value="data.json" placeholder="data.json">
+        </div>
+
+        <div class="gh-field">
+            <label>🔑 Mã GitHub Personal Access Token (quyền <code>repo</code>):</label>
+            <input type="password" id="gh-token" class="gh-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+            <div style="font-size:11.5px; margin-top:4px;">
+                <a href="https://github.com/settings/tokens/new?scopes=repo&description=NhatKyThuChi" target="_blank" style="color:#1565c0; font-weight:600; text-decoration:none;">
+                    👉 Bấm vào đây để lấy mã Token nhanh trên GitHub
+                </a>
+            </div>
+        </div>
         
-        <div style="display:flex; gap:8px; margin-bottom:16px;">
-            <button type="button" class="btn btn-small btn-cloud" id="btn-pull-drive" style="flex:1; height:36px;">📥 Tải dữ liệu từ Drive về</button>
-            <button type="button" class="btn btn-small btn-cloud" id="btn-push-drive" style="flex:1; height:36px;">📤 Đẩy dữ liệu hiện tại lên Drive</button>
+        <div style="display:flex; gap:8px; margin:16px 0;">
+            <button type="button" class="btn btn-small btn-github" id="btn-pull-gh" style="flex:1; height:36px;">📥 Tải từ GitHub về</button>
+            <button type="button" class="btn btn-small btn-github" id="btn-push-gh" style="flex:1; height:36px;">📤 Lưu lên GitHub ngay</button>
         </div>
 
         <div class="modal-actions">
-            <button class="btn" id="btn-cloud-cancel">Đóng</button>
-            <button class="btn btn-primary" id="btn-cloud-save" style="background:linear-gradient(135deg, #42a5f5 0%, #1565c0 100%);">Lưu kết nối ☁️</button>
+            <button class="btn" id="btn-gh-cancel">Đóng</button>
+            <button class="btn btn-primary" id="btn-gh-save" style="background:#24292f;">Lưu cài đặt 🐙</button>
         </div>
     </div>
 </div>
 
-<!-- Form ẩn dự phòng khi chạy từ file trên ổ cứng -->
-<iframe name="drive_hidden_iframe" id="drive_hidden_iframe" style="display:none;"></iframe>
-<form id="drive_post_form" method="POST" target="drive_hidden_iframe" style="display:none;">
-    <input type="hidden" name="payload" id="drive_post_payload">
-</form>
-
 <script>
-    // MẸO: Bạn có thể dán thẳng link Web App URL (.../exec) vào giữa cặp dấu nháy dưới đây trước khi up lên GitHub:
-    const DEFAULT_GAS_URL = "";
-
     let currentDate = new Date();
     let savedData = localStorage.getItem('nhatky_congviec_data');
     let workData = savedData ? JSON.parse(savedData) : {}; 
-    let gasUrl = localStorage.getItem('nhatky_gas_url') || DEFAULT_GAS_URL;
     let selectedDateStr = '';
+
+    // Tự động nhận diện tên tài khoản & tên kho chứa nếu đang mở trên *.github.io
+    function getDefaultGitHubConfig() {
+        let defaultOwner = 'duyduyphuc0101';
+        let defaultRepo = '';
+        if (window.location.hostname.endsWith('.github.io')) {
+            defaultOwner = window.location.hostname.split('.')[0];
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+            if (pathParts.length > 0 && !pathParts[0].endsWith('.html')) {
+                defaultRepo = pathParts[0];
+            } else {
+                defaultRepo = window.location.hostname;
+            }
+        }
+        return {
+            owner: localStorage.getItem('nhatky_gh_owner') || defaultOwner,
+            repo: localStorage.getItem('nhatky_gh_repo') || defaultRepo,
+            path: localStorage.getItem('nhatky_gh_path') || 'data.json',
+            token: localStorage.getItem('nhatky_gh_token') || ''
+        };
+    }
+
+    let ghConfig = getDefaultGitHubConfig();
 
     const calendarEl = document.getElementById('calendar');
     const monthYearEl = document.getElementById('month-year');
     const modal = document.getElementById('work-modal');
-    const cloudModal = document.getElementById('cloud-modal');
-    const gasUrlInput = document.getElementById('gas-url-input');
+    const ghModal = document.getElementById('gh-modal');
     
     const radioInputs = document.querySelectorAll('input[name="work_type"]');
     const checkOvertime = document.getElementById('check-overtime');
@@ -829,108 +879,172 @@
         autoSaveStatus.style.backgroundColor = bg;
     }
 
-    // Tự động lưu vào máy + đẩy lên Google Drive
-    async function autoSaveData(showPushAlert = false) {
-        const jsonStr = JSON.stringify(workData);
+    // Mã hóa & giải mã UTF-8 chuẩn cho GitHub API (Hỗ trợ tiếng Việt có dấu)
+    function utf8ToBase64(str) {
+        const bytes = new TextEncoder().encode(str);
+        let binary = '';
+        for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    }
+
+    function base64ToUtf8(b64) {
+        const binary = window.atob(b64.replace(/\s/g, ''));
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return new TextDecoder().decode(bytes);
+    }
+
+    // TỰ ĐỘNG LƯU VÀO FILE TRÊN GITHUB
+    async function autoSaveData(showNotify = false) {
+        const jsonStr = JSON.stringify(workData, null, 2);
         localStorage.setItem('nhatky_congviec_data', jsonStr);
-        
-        if (!gasUrl) {
-            setStatusBadge('✔️ Đã tự động lưu trên máy');
+
+        if (!ghConfig.token || !ghConfig.owner || !ghConfig.repo) {
+            setStatusBadge('✔️ Đã lưu trên trình duyệt');
             return;
         }
 
-        setStatusBadge('⏳ Đang lưu lên Google Drive...', '#1565c0', '#e3f2fd');
+        setStatusBadge('⏳ Đang lưu lên GitHub...', '#1565c0', '#e3f2fd');
+        const apiUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}`;
+        const headers = {
+            'Authorization': `token ${ghConfig.token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        };
+
         try {
-            // Nếu mở từ ổ cứng (file://), dùng Form Submit ẩn để vượt rào cản trình duyệt
-            if (window.location.protocol === 'file:') {
-                const form = document.getElementById('drive_post_form');
-                const payloadInput = document.getElementById('drive_post_payload');
-                form.action = gasUrl;
-                payloadInput.value = jsonStr;
-                form.submit();
-            } else {
-                // Nếu chạy trên GitHub Pages (https://), dùng fetch chuẩn
-                await fetch(gasUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: jsonStr
-                });
+            // 1. Kiểm tra xem file data.json đã tồn tại trên GitHub chưa để lấy mã SHA
+            let sha = null;
+            const getRes = await fetch(`${apiUrl}?t=${Date.now()}`, { headers });
+            if (getRes.ok) {
+                const fileInfo = await getRes.json();
+                sha = fileInfo.sha;
             }
-            setStatusBadge('☁️ Đã tự động lưu Google Drive', '#2e7d32', '#e8f5e9');
-            if (showPushAlert) alert('Đã đẩy toàn bộ dữ liệu hiện tại lên Google Drive thành công! ☁️');
+
+            // 2. Ghi đè hoặc tạo mới file data.json trên GitHub
+            const bodyData = {
+                message: `Cập nhật nhật ký công việc & thu chi (${new Date().toLocaleString('vi-VN')})`,
+                content: utf8ToBase64(jsonStr)
+            };
+            if (sha) bodyData.sha = sha;
+
+            const putRes = await fetch(apiUrl, {
+                method: 'PUT',
+                headers: headers,
+                body: JSON.stringify(bodyData)
+            });
+
+            if (putRes.ok) {
+                setStatusBadge('🐙 Đã tự động lưu trên GitHub', '#2e7d32', '#e8f5e9');
+                if (showNotify) alert(`Đã lưu thành công vào file "${ghConfig.path}" trên kho GitHub ${ghConfig.owner}/${ghConfig.repo}! 🎉`);
+            } else {
+                const errData = await putRes.json();
+                setStatusBadge('⚠️ Lỗi lưu GitHub', '#c62828', '#ffebee');
+                if (showNotify) alert(`Lỗi từ GitHub: ${errData.message}\n\nHãy kiểm tra lại Tên kho chứa (Repo) hoặc quyền "repo" của mã Token!`);
+            }
         } catch (err) {
-            setStatusBadge('⚠️ Lỗi lưu Drive (Đã lưu trên máy)', '#c62828', '#ffebee');
+            setStatusBadge('⚠️ Lỗi kết nối GitHub', '#c62828', '#ffebee');
+            if (showNotify) alert('Không thể kết nối tới GitHub API. Vui lòng kiểm tra kết nối mạng!');
         }
     }
 
-    // Tải dữ liệu từ Google Drive (Chuẩn cho GitHub Pages)
-    async function loadFromGoogleDrive(showNotify = false) {
-        if (!gasUrl) return;
-
-        if (window.location.protocol === 'file:' && showNotify) {
-            alert('Lưu ý: Khi mở trực tiếp từ ổ cứng (file://), tính năng "Đẩy dữ liệu lên Drive" (Lưu tự động) vẫn hoạt động bình thường!\n\nRiêng tính năng "Tải dữ liệu từ Drive về" sẽ hoạt động ngay sau khi bạn đưa file này lên GitHub Pages (https://).');
+    // TỰ ĐỘNG TẢI DỮ LIỆU TỪ FILE TRÊN GITHUB KHI MỞ TRANG
+    async function loadFromGitHub(showNotify = false) {
+        // Nếu chưa cài Token nhưng đang mở trên GitHub Pages, thử đọc trực tiếp file data.json cùng thư mục
+        if (!ghConfig.token || !ghConfig.owner || !ghConfig.repo) {
+            if (window.location.protocol.startsWith('http')) {
+                try {
+                    const res = await fetch(`./${ghConfig.path}?t=${Date.now()}`);
+                    if (res.ok) {
+                        const cloudData = await res.json();
+                        if (cloudData && Object.keys(cloudData).length > 0) {
+                            workData = { ...workData, ...cloudData };
+                            localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
+                            renderCalendar();
+                            setStatusBadge('🐙 Đã tải từ GitHub', '#2e7d32', '#e8f5e9');
+                        }
+                    }
+                } catch (e) {}
+            }
+            if (showNotify) alert('Vui lòng nhập đầy đủ Tên Repo và Mã Token để đồng bộ 2 chiều với GitHub!');
             return;
         }
 
-        if (window.location.protocol === 'file:') return;
-
-        setStatusBadge('🔄 Đang đồng bộ từ Google Drive...', '#1565c0', '#e3f2fd');
+        setStatusBadge('🔄 Đang tải từ GitHub...', '#1565c0', '#e3f2fd');
+        const apiUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}?t=${Date.now()}`;
         try {
-            const sep = gasUrl.includes('?') ? '&' : '?';
-            const res = await fetch(`${gasUrl}${sep}t=${Date.now()}`, { redirect: 'follow' });
-            const cloudData = await res.json();
+            const res = await fetch(apiUrl, {
+                headers: {
+                    'Authorization': `token ${ghConfig.token}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
 
-            if (cloudData && cloudData.__error) {
-                setStatusBadge('⚠️ Chưa cấp quyền Drive trên Script', '#c62828', '#ffebee');
-                if (showNotify) alert('Lỗi từ Google Apps Script:\n' + cloudData.__error + '\n\nHãy bấm Chạy (Run) hàm capQuyenDrive trên Google Apps Script để cấp quyền nhé!');
-                return;
-            }
-
-            if (cloudData && typeof cloudData === 'object' && Object.keys(cloudData).length > 0) {
-                workData = { ...workData, ...cloudData };
-                localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
-                renderCalendar();
-                setStatusBadge('☁️ Đã đồng bộ Google Drive', '#2e7d32', '#e8f5e9');
-                if (showNotify) alert('Đã tải dữ liệu mới nhất từ Google Drive thành công! 🎉');
+            if (res.ok) {
+                const fileInfo = await res.json();
+                const contentStr = base64ToUtf8(fileInfo.content);
+                const cloudData = JSON.parse(contentStr || '{}');
+                if (cloudData && Object.keys(cloudData).length > 0) {
+                    workData = { ...workData, ...cloudData };
+                    localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
+                    renderCalendar();
+                    setStatusBadge('🐙 Đã đồng bộ GitHub', '#2e7d32', '#e8f5e9');
+                    if (showNotify) alert('Đã tải dữ liệu mới nhất từ GitHub thành công! 🎉');
+                } else {
+                    setStatusBadge('🐙 Đã kết nối GitHub', '#2e7d32', '#e8f5e9');
+                }
+            } else if (res.status === 404) {
+                // Nếu trên GitHub chưa có file data.json thì tự động tạo luôn
+                await autoSaveData(false);
+                if (showNotify) alert(`Chưa có file "${ghConfig.path}" trên GitHub, ứng dụng đã tự động tạo mới file này cho bạn!`);
             } else {
-                setStatusBadge('☁️ Drive đã kết nối', '#2e7d32', '#e8f5e9');
-                if (showNotify) alert('Kết nối thành công! Trên Drive hiện chưa có dữ liệu, hãy bấm "📤 Đẩy dữ liệu hiện tại lên Drive" nhé.');
+                setStatusBadge('⚠️ Lỗi đọc GitHub', '#c62828', '#ffebee');
+                if (showNotify) alert('Không thể đọc file từ GitHub. Hãy kiểm tra lại Tên Repo và Mã Token!');
             }
         } catch (err) {
-            setStatusBadge('⚠️ Chưa đồng bộ được Drive', '#c62828', '#ffebee');
-            if (showNotify) alert('Không thể tải từ Google Drive. Hãy kiểm tra lại Web App URL hoặc quyền truy cập "Anyone" (Bất kỳ ai) trên Google Apps Script!');
+            setStatusBadge('⚠️ Lỗi kết nối GitHub', '#c62828', '#ffebee');
         }
     }
 
-    // Sự kiện nút cài đặt Google Drive
-    document.getElementById('btn-cloud-config').onclick = () => {
-        gasUrlInput.value = gasUrl;
-        cloudModal.style.display = 'flex';
+    // Sự kiện hộp thoại Cài đặt GitHub
+    function saveGhConfigFromInputs() {
+        ghConfig = {
+            owner: document.getElementById('gh-owner').value.trim(),
+            repo: document.getElementById('gh-repo').value.trim(),
+            path: document.getElementById('gh-path').value.trim() || 'data.json',
+            token: document.getElementById('gh-token').value.trim()
+        };
+        localStorage.setItem('nhatky_gh_owner', ghConfig.owner);
+        localStorage.setItem('nhatky_gh_repo', ghConfig.repo);
+        localStorage.setItem('nhatky_gh_path', ghConfig.path);
+        localStorage.setItem('nhatky_gh_token', ghConfig.token);
+    }
+
+    document.getElementById('btn-gh-config').onclick = () => {
+        document.getElementById('gh-owner').value = ghConfig.owner;
+        document.getElementById('gh-repo').value = ghConfig.repo;
+        document.getElementById('gh-path').value = ghConfig.path;
+        document.getElementById('gh-token').value = ghConfig.token;
+        ghModal.style.display = 'flex';
     };
-    document.getElementById('btn-cloud-cancel').onclick = () => {
-        cloudModal.style.display = 'none';
+    document.getElementById('btn-gh-cancel').onclick = () => {
+        ghModal.style.display = 'none';
     };
-    document.getElementById('btn-cloud-save').onclick = () => {
-        gasUrl = gasUrlInput.value.trim();
-        localStorage.setItem('nhatky_gas_url', gasUrl);
-        cloudModal.style.display = 'none';
-        if (gasUrl) {
-            autoSaveData(false);
-        } else {
-            setStatusBadge('✔️ Đã lưu trên máy');
-        }
+    document.getElementById('btn-gh-save').onclick = () => {
+        saveGhConfigFromInputs();
+        ghModal.style.display = 'none';
+        if (ghConfig.token) autoSaveData(false);
     };
-    document.getElementById('btn-pull-drive').onclick = () => {
-        gasUrl = gasUrlInput.value.trim();
-        if (!gasUrl) { alert('Vui lòng dán Web App URL trước!'); return; }
-        localStorage.setItem('nhatky_gas_url', gasUrl);
-        loadFromGoogleDrive(true);
+    document.getElementById('btn-pull-gh').onclick = () => {
+        saveGhConfigFromInputs();
+        loadFromGitHub(true);
     };
-    document.getElementById('btn-push-drive').onclick = () => {
-        gasUrl = gasUrlInput.value.trim();
-        if (!gasUrl) { alert('Vui lòng dán Web App URL trước!'); return; }
-        localStorage.setItem('nhatky_gas_url', gasUrl);
+    document.getElementById('btn-push-gh').onclick = () => {
+        saveGhConfigFromInputs();
         autoSaveData(true);
     };
 
@@ -1510,12 +1624,12 @@
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
-    cloudModal.addEventListener('click', (e) => {
-        if (e.target === cloudModal) cloudModal.style.display = 'none';
+    ghModal.addEventListener('click', (e) => {
+        if (e.target === ghModal) ghModal.style.display = 'none';
     });
 
     renderCalendar();
-    if (gasUrl) loadFromGoogleDrive(false);
+    loadFromGitHub(false);
 </script>
 </body>
 </html>
