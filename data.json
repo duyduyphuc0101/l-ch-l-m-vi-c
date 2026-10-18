@@ -348,5 +348,6 @@
     "expenses": [],
     "tasks": [],
     "content": ""
-  }
+  },
+  "debts": []
 }
