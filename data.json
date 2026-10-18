@@ -359,7 +359,7 @@
       "interestRecords": {
         "2026-07": {
           "amount": 400000,
-          "isPaid": false
+          "isPaid": true
         },
         "2026-08": {
           "amount": 400000,
