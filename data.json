@@ -363,7 +363,7 @@
         },
         "2026-08": {
           "amount": 800000,
-          "isPaid": false
+          "isPaid": true
         }
       }
     }
