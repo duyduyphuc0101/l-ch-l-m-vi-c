@@ -375,5 +375,26 @@
         }
       }
     }
-  ]
+  ],
+  "2026-10-19": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Nước",
+        "amount": 30000
+      },
+      {
+        "name": "Cơm",
+        "amount": 30000
+      }
+    ],
+    "tasks": [
+      "- cấu hình cam trung an"
+    ],
+    "content": "- cấu hình cam trung an"
+  }
 }
