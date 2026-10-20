@@ -407,6 +407,10 @@
       {
         "name": "Ăn",
         "amount": 78000
+      },
+      {
+        "name": "Nước",
+        "amount": 50000
       }
     ],
     "tasks": [
