@@ -396,5 +396,24 @@
       "- cấu hình cam trung an"
     ],
     "content": "- cấu hình cam trung an"
+  },
+  "2026-10-20": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Ăn",
+        "amount": 78000
+      }
+    ],
+    "tasks": [
+      "- kiểm tra an toàn thông tin",
+      "Khảo sát cap trung an",
+      "Khảo sát pc01"
+    ],
+    "content": "- kiểm tra an toàn thông tin\nKhảo sát cap trung an\nKhảo sát pc01"
   }
 }
