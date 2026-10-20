@@ -419,5 +419,15 @@
       "Khảo sát pc01"
     ],
     "content": "- kiểm tra an toàn thông tin\nKhảo sát cap trung an\nKhảo sát pc01"
+  },
+  "2026-10-21": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
   }
 }
