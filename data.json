@@ -426,8 +426,23 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
+    "expenses": [
+      {
+        "name": "Phở",
+        "amount": 45000
+      },
+      {
+        "name": "Chanh muối",
+        "amount": 10000
+      },
+      {
+        "name": "Xăng",
+        "amount": 75000
+      }
+    ],
+    "tasks": [
+      "Lắp cam chợ gạo"
+    ],
+    "content": "Lắp cam chợ gạo"
   }
 }
