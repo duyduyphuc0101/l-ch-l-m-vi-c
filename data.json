@@ -444,5 +444,23 @@
       "Lắp cam chợ gạo"
     ],
     "content": "Lắp cam chợ gạo"
+  },
+  "2026-10-22": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Ăn",
+        "amount": 138000
+      }
+    ],
+    "tasks": [
+      "Thay cam chợ gạo",
+      "Đi dây mạng pc06"
+    ],
+    "content": "Thay cam chợ gạo\nĐi dây mạng pc06"
   }
 }
