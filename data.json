@@ -387,7 +387,16 @@
       "notes": "",
       "color": "emerald",
       "expanded": true,
-      "children": []
+      "children": [
+        {
+          "id": "mn-1792770037386",
+          "text": "Máy bắn đinh",
+          "notes": "",
+          "color": "emerald",
+          "expanded": true,
+          "children": []
+        }
+      ]
     }
   ],
   "materialsRoots": [
