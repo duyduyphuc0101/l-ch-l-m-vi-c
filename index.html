@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🌿 Nhật Ký Công Việc, Thu Chi & Quản Lý Nợ Lãi 🌿</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>🌿 Nhật Ký Công Việc, Thu Chi, Nợ Lãi & Sơ Đồ Vật Tư 🌿</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            prefix: 'tw-',
+            corePlugins: { preflight: false },
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } }
+        }
+    </script>
     <style>
         :root {
             --primary: #2e7d32;
@@ -41,9 +50,9 @@
         }
         
         .container {
-            max-width: 1220px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             padding: 28px 32px;
             border-radius: var(--radius-lg);
             box-shadow: 0 12px 40px rgba(46, 125, 50, 0.12);
@@ -70,9 +79,9 @@
         .header-left h2 {
             margin: 0;
             font-weight: 700;
-            font-size: 24px;
+            font-size: 22px;
             color: var(--primary);
-            min-width: 210px;
+            min-width: 190px;
             text-align: center;
         }
         
@@ -94,6 +103,7 @@
             justify-content: center;
             gap: 6px;
             white-space: nowrap;
+            text-decoration: none;
         }
         .btn:hover {
             background-color: var(--primary-bg);
@@ -134,6 +144,15 @@
         .btn-debt:hover {
             background-color: #ffe0b2;
             border-color: #fb8c00;
+        }
+        .btn-materials {
+            background-color: #f1f8e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        .btn-materials:hover {
+            background-color: #dcedc8;
+            border-color: #81c784;
         }
         .btn-small {
             height: 32px;
@@ -177,9 +196,9 @@
             gap: 6px;
         }
 
-        /* VIEW SWITCHER */
-        .view-section { display: none; }
-        .view-section.active { display: block; }
+        /* VIEW SECTIONS */
+        .app-view { display: none; }
+        .app-view.active { display: block; }
 
         /* CALENDAR GRID */
         .calendar {
@@ -252,7 +271,6 @@
             background-color: #f8fafc;
         }
 
-        /* NỘI DUNG Ô NGÀY */
         .work-status-container {
             flex-grow: 1;
             border-radius: 10px;
@@ -338,7 +356,7 @@
             text-overflow: ellipsis;
         }
 
-        /* THỐNG KÊ (DASHBOARD) */
+        /* STATS PANEL */
         .stats-panel {
             background: #ffffff;
             border-radius: 20px;
@@ -468,7 +486,7 @@
         }
         .stat-list li:last-child { border-bottom: none; }
 
-        /* GIAO DIỆN QUẢN LÝ NỢ (DEBT VIEW) */
+        /* DEBT VIEW */
         .debt-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -685,13 +703,30 @@
             font-size: 15px;
         }
 
-        /* Form Cài đặt GitHub */
+        /* GITHUB MODAL */
         .gh-field { margin-bottom: 12px; }
         .gh-field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
         .gh-input { width: 100%; height: 40px; padding: 0 12px; border: 1.5px solid var(--github-border); border-radius: 10px; font-family: inherit; font-size: 13.5px; outline: none; color: var(--text-main); }
         .gh-input:focus { border-color: var(--github); }
 
-        /* RESPONSIVE */
+        /* MINDMAP STYLES */
+        .mindmap-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 1.3px, transparent 1.3px);
+            background-size: 24px 24px;
+        }
+        .tree-children-guide { position: relative; }
+        .tree-children-guide::before {
+            content: ''; position: absolute; left: 14px; top: 0; bottom: 12px; width: 2px; background-color: #a7f3d0; border-radius: 2px;
+        }
+        .connector-path { fill: none; stroke-linecap: round; transition: d 0.25s ease, stroke 0.25s ease; }
+
+        @keyframes slideInUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .toast-enter { animation: slideInUp 0.25s ease-out forwards; }
+
         @media (max-width: 992px) {
             .work-stat-cards { grid-template-columns: repeat(2, 1fr); }
             .finance-details-grid { grid-template-columns: 1fr; }
@@ -716,19 +751,6 @@
             }
             .modal-content { padding: 20px 16px; }
         }
-
-        @media (max-width: 480px) {
-            .header-left h2 { font-size: 19px; min-width: auto; }
-            .calendar { gap: 4px; }
-            .day { min-height: 82px; padding: 4px; border-radius: 10px; }
-            .work-status-container { padding: 3px; gap: 2px; }
-            .status-text { font-size: 9.5px; padding: 1px 2px; }
-            .income-badge, .expense-badge { font-size: 9px; padding: 1px 3px; }
-            .job-content-preview { font-size: 9.5px; padding: 2px 4px; }
-            .radio-group { grid-template-columns: 1fr; }
-            .work-stat-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .stat-val { font-size: 18px; }
-        }
     </style>
 </head>
 <body>
@@ -742,7 +764,8 @@
         </div>
         <div class="controls">
             <div class="save-badge" id="auto-save-status">✔️ Đã tự động lưu</div>
-            <button class="btn btn-debt" id="btn-switch-view" title="Chuyển qua màn hình quản lý tiền nợ">💳 Quản lý Tiền Nợ</button>
+            <button class="btn btn-materials" id="btn-switch-materials" title="Xem danh sách vật tư của mỗi công việc">🌿 Danh sách vật tư của mỗi công việc</button>
+            <button class="btn btn-debt" id="btn-switch-debt" title="Chuyển qua màn hình quản lý tiền nợ">💳 Quản lý Tiền Nợ</button>
             <button class="btn btn-github" id="btn-gh-config" title="Cài đặt tự động lưu trên GitHub">🐙 GitHub</button>
             <button class="btn" onclick="document.getElementById('import-file').click()">📂 Tải file</button>
             <input type="file" id="import-file" style="display: none;" accept=".json">
@@ -751,7 +774,7 @@
     </div>
 
     <!-- MÀN HÌNH 1: LỊCH, CÔNG VIỆC, THU NHẬP & CHI TIÊU -->
-    <div id="view-calendar" class="view-section active">
+    <div id="view-calendar" class="app-view active">
         <div class="calendar" id="calendar"></div>
         <div class="stats-panel">
             <h3>📊 Tổng kết Công việc & Tài chính (Thu - Chi)</h3>
@@ -760,7 +783,7 @@
     </div>
 
     <!-- MÀN HÌNH 2: QUẢN LÝ TIỀN NỢ & LÃI THEO THÁNG -->
-    <div id="view-debt" class="view-section">
+    <div id="view-debt" class="app-view">
         <div class="stats-panel">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
                 <h3 style="margin:0; border:none; padding:0;">💳 Kiểm Soát Tiền Nợ & Lãi Chi Tiết Từng Tháng</h3>
@@ -785,6 +808,56 @@
                     </thead>
                     <tbody id="debt-table-body"></tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 3: DANH SÁCH VẬT TƯ & SƠ ĐỒ TƯ DUY -->
+    <div id="view-materials" class="app-view">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-5 tw-border tw-border-emerald-200">
+            <div class="tw-bg-emerald-900 tw-text-white tw-p-4 tw-rounded-xl tw-mb-4 tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-3">
+                <div>
+                    <h3 class="tw-text-base tw-font-bold tw-flex tw-items-center tw-gap-2">
+                        <i class="fa-solid fa-sitemap text-amber-400"></i> Danh Sách Vật Tư Của Mỗi Công Việc (Đa Chủ Đề Gốc & Đa Cấp)
+                    </h3>
+                    <p class="tw-text-xs tw-text-emerald-200 tw-mt-0.5">Quản lý trực quan vật tư từng công trình/hạng mục • Nhấp trực tiếp vào chữ để sửa</p>
+                </div>
+                <div class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
+                    <button onclick="expandAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-emerald-500 hover:tw-bg-emerald-400 tw-text-white tw-text-xs tw-font-bold tw-rounded-lg transition">Mở tất cả</button>
+                    <button onclick="collapseAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-emerald-800 hover:tw-bg-emerald-700 tw-text-emerald-200 tw-text-xs tw-font-bold tw-rounded-lg transition">Thu gọn</button>
+                    <button onclick="openMaterialRootModal()" class="tw-px-3.5 tw-py-1.5 tw-bg-amber-500 hover:tw-bg-amber-400 tw-text-slate-950 tw-text-xs tw-font-extrabold tw-rounded-lg transition flex tw-items-center tw-gap-1.5">
+                        <i class="fa-solid fa-plus"></i> Thêm Chủ Đề Gốc Mới
+                    </button>
+                </div>
+            </div>
+
+            <div class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-6">
+                <!-- Outline Tree View -->
+                <div class="tw-flex-1 tw-bg-slate-50 tw-rounded-2xl tw-border tw-border-slate-200 tw-p-4 tw-max-h-[720px] tw-overflow-y-auto">
+                    <h4 class="tw-text-xs tw-font-bold tw-text-slate-700 tw-uppercase tw-tracking-wider tw-mb-3 flex items-center gap-1.5">
+                        <i class="fa-solid fa-list-tree text-emerald-600"></i> Phân cấp Vật tư công việc
+                    </h4>
+                    <div id="material-outline-root" class="tw-space-y-3"></div>
+                </div>
+
+                <!-- Mind Map View -->
+                <div class="tw-flex-[1.3] tw-bg-slate-50 tw-rounded-2xl tw-border tw-border-slate-200 tw-overflow-hidden tw-flex tw-flex-col tw-h-[720px] tw-relative">
+                    <div class="tw-bg-white tw-px-4 tw-py-2.5 tw-border-b tw-border-slate-200 tw-flex tw-items-center tw-justify-between tw-z-10">
+                        <span class="tw-text-xs tw-font-bold tw-text-slate-700"><i class="fa-solid fa-diagram-project text-emerald-600 mr-1"></i> Sơ đồ tương tác</span>
+                        <div class="tw-flex tw-items-center tw-gap-1">
+                            <button onclick="zoomMindMap(-0.1)" class="tw-w-7 tw-h-7 tw-rounded tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs">-</button>
+                            <span id="zoom-level-indicator" class="tw-text-xs tw-font-bold tw-text-emerald-800 tw-px-2">100%</span>
+                            <button onclick="zoomMindMap(0.1)" class="tw-w-7 tw-h-7 tw-rounded tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs">+</button>
+                            <button onclick="resetMindMapZoom()" class="tw-px-2 tw-py-1 tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs tw-font-bold tw-rounded tw-ml-1">Reset</button>
+                        </div>
+                    </div>
+                    <div id="mindmap-viewport" class="mindmap-bg tw-flex-1 tw-relative tw-overflow-auto tw-cursor-grab tw-p-6">
+                        <div id="mindmap-canvas" class="tw-relative tw-transition-transform tw-duration-150 tw-origin-top-left tw-min-w-max">
+                            <svg id="mindmap-svg" class="tw-absolute tw-inset-0 tw-pointer-events-none tw-w-full tw-h-full tw-z-0"></svg>
+                            <div id="mindmap-nodes-layer" class="tw-relative tw-z-10 tw-flex tw-flex-col tw-gap-10"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -872,6 +945,29 @@
     </div>
 </div>
 
+<!-- Hộp thoại Thêm / Sửa Nhánh Vật Tư -->
+<div class="modal" id="material-modal">
+    <div class="modal-content" style="max-width: 480px;">
+        <h3 id="material-modal-title" style="color:var(--primary); border-color:var(--primary-border);">🌿 Quản Lý Vật Tư Công Việc</h3>
+        <input type="hidden" id="mat-modal-target-id">
+        <input type="hidden" id="mat-modal-mode">
+
+        <div class="gh-field">
+            <label>📝 Tên công việc / Tên vật tư:</label>
+            <input type="text" id="mat-node-text" class="gh-input" placeholder="VD: Sắt phi 16, Xi măng Nghi Sơn...">
+        </div>
+        <div class="gh-field">
+            <label>📌 Ghi chú chi tiết (Số lượng, Đơn giá...):</label>
+            <textarea id="mat-node-notes" class="gh-input" rows="3" placeholder="VD: 50 cây, giao ngày mai..."></textarea>
+        </div>
+
+        <div class="modal-actions" style="margin-top:16px;">
+            <button class="btn" id="btn-mat-cancel">Hủy</button>
+            <button class="btn btn-primary" id="btn-mat-save">Lưu lại ✔️</button>
+        </div>
+    </div>
+</div>
+
 <!-- Hộp thoại Cài đặt GitHub -->
 <div class="modal" id="gh-modal">
     <div class="modal-content" style="max-width: 480px;">
@@ -892,15 +988,50 @@
     </div>
 </div>
 
+<!-- Toast Container -->
+<div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
 <script>
     let currentDate = new Date();
     let savedData = localStorage.getItem('nhatky_congviec_data');
     let workData = savedData ? JSON.parse(savedData) : {}; 
     
     if (!workData.debts) workData.debts = [];
+    if (!workData.materialRoots) {
+        workData.materialRoots = [
+            {
+                id: 'mroot-1',
+                text: 'Công trình Nhà ở - Hạng mục Phần Thô',
+                notes: 'Danh sách vật tư chính',
+                color: 'emerald',
+                expanded: true,
+                children: [
+                    {
+                        id: 'mn-1',
+                        text: 'Vật tư Sắt Thép',
+                        notes: 'Thép Pomina',
+                        color: 'emerald',
+                        expanded: true,
+                        children: [
+                            { id: 'mn-1-1', text: 'Sắt phi 16 (50 cây)', notes: 'Dùng cho dầm cột', color: 'emerald', expanded: true, children: [] },
+                            { id: 'mn-1-2', text: 'Sắt phi 10 (100 cây)', notes: 'Dùng làm đai', color: 'emerald', expanded: true, children: [] }
+                        ]
+                    }
+                ]
+            }
+        ];
+    }
 
     let selectedDateStr = '';
-    let currentView = 'calendar';
+    let currentView = 'calendar'; // 'calendar', 'debt', 'materials'
+    let materialZoomScale = 1;
+
+    const COLOR_THEMES = [
+        { id: 'emerald', name: 'Xanh Ngọc', bg: 'bg-emerald-50', border: 'border-emerald-500', text: 'text-emerald-950', badge: 'bg-emerald-600', stroke: '#10b981' },
+        { id: 'sky', name: 'Xanh Dương', bg: 'bg-sky-50', border: 'border-sky-500', text: 'text-sky-950', badge: 'bg-sky-600', stroke: '#0ea5e9' },
+        { id: 'amber', name: 'Vàng Cam', bg: 'bg-amber-50', border: 'border-amber-500', text: 'text-amber-950', badge: 'bg-amber-500', stroke: '#f59e0b' },
+        { id: 'violet', name: 'Tím', bg: 'bg-violet-50', border: 'border-violet-500', text: 'text-violet-950', badge: 'bg-violet-600', stroke: '#8b5cf6' }
+    ];
 
     function getDefaultGitHubConfig() {
         let defaultOwner = 'duyduyphuc0101';
@@ -929,8 +1060,8 @@
     const modal = document.getElementById('work-modal');
     const ghModal = document.getElementById('gh-modal');
     const debtModal = document.getElementById('debt-modal');
+    const materialModal = document.getElementById('material-modal');
     
-    const radioInputs = document.querySelectorAll('input[name="work_type"]');
     const checkOvertime = document.getElementById('check-overtime');
     const otSection = document.getElementById('ot-section');
     const timeRangeDiv = document.getElementById('time-range-div');
@@ -955,27 +1086,38 @@
         autoSaveStatus.style.backgroundColor = bg;
     }
 
-    const btnSwitchView = document.getElementById('btn-switch-view');
+    // VIEW SWITCHERS
+    const btnSwitchMaterials = document.getElementById('btn-switch-materials');
+    const btnSwitchDebt = document.getElementById('btn-switch-debt');
     const viewCalendar = document.getElementById('view-calendar');
     const viewDebt = document.getElementById('view-debt');
+    const viewMaterials = document.getElementById('view-materials');
 
-    btnSwitchView.onclick = () => {
-        if (currentView === 'calendar') {
-            currentView = 'debt';
-            viewCalendar.classList.remove('active');
-            viewDebt.classList.add('active');
-            btnSwitchView.innerHTML = '📅 Xem Lịch Thu Chi';
-            btnSwitchView.className = 'btn btn-primary';
-            renderDebtView();
-        } else {
-            currentView = 'calendar';
-            viewDebt.classList.remove('active');
+    function switchView(target) {
+        currentView = target;
+        viewCalendar.classList.remove('active');
+        viewDebt.classList.remove('active');
+        viewMaterials.classList.remove('active');
+
+        btnSwitchMaterials.className = 'btn btn-materials';
+        btnSwitchDebt.className = 'btn btn-debt';
+
+        if (target === 'calendar') {
             viewCalendar.classList.add('active');
-            btnSwitchView.innerHTML = '💳 Quản lý Tiền Nợ';
-            btnSwitchView.className = 'btn btn-debt';
             renderCalendar();
+        } else if (target === 'debt') {
+            viewDebt.classList.add('active');
+            btnSwitchDebt.className = 'btn btn-primary';
+            renderDebtView();
+        } else if (target === 'materials') {
+            viewMaterials.classList.add('active');
+            btnSwitchMaterials.className = 'btn btn-primary';
+            renderMaterialView();
         }
-    };
+    }
+
+    btnSwitchMaterials.onclick = () => switchView(currentView === 'materials' ? 'calendar' : 'materials');
+    btnSwitchDebt.onclick = () => switchView(currentView === 'debt' ? 'calendar' : 'debt');
 
     function utf8ToBase64(str) {
         const bytes = new TextEncoder().encode(str);
@@ -1032,6 +1174,7 @@
                         if (cloudData && Object.keys(cloudData).length > 0) {
                             workData = { ...workData, ...cloudData };
                             if (!workData.debts) workData.debts = [];
+                            if (!workData.materialRoots) workData.materialRoots = [];
                             localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
                             renderCalendar();
                             setStatusBadge('🐙 Đã tải từ GitHub', '#2e7d32', '#e8f5e9');
@@ -1053,8 +1196,11 @@
                 if (cloudData && Object.keys(cloudData).length > 0) {
                     workData = { ...workData, ...cloudData };
                     if (!workData.debts) workData.debts = [];
+                    if (!workData.materialRoots) workData.materialRoots = [];
                     localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
-                    if (currentView === 'calendar') renderCalendar(); else renderDebtView();
+                    if (currentView === 'calendar') renderCalendar();
+                    else if (currentView === 'debt') renderDebtView();
+                    else if (currentView === 'materials') renderMaterialView();
                     setStatusBadge('🐙 Đã đồng bộ GitHub', '#2e7d32', '#e8f5e9');
                     if (showNotify) alert('Đã đồng bộ từ GitHub thành công! 🎉');
                 }
@@ -1062,13 +1208,13 @@
         } catch (err) { setStatusBadge('⚠️ Lỗi kết nối', '#c62828', '#ffebee'); }
     }
 
-    // Xử lý Quản lý Nợ & Lãi theo từng tháng (Sắp xếp thời gian tăng dần chuẩn xác)
+    // DEBT VIEW LOGIC
     function renderDebtView() {
         const cardsEl = document.getElementById('debt-summary-cards');
         const tableBody = document.getElementById('debt-table-body');
         
         let totalOriginal = 0, totalPaidPrincipalAll = 0, totalRemaining = 0, totalAccumulatedInterest = 0;
-        const currentMonthKey = currentDate.toISOString().slice(0, 7); // YYYY-MM
+        const currentMonthKey = currentDate.toISOString().slice(0, 7);
 
         let tableHtml = '';
         if (workData.debts && workData.debts.length > 0) {
@@ -1078,14 +1224,9 @@
                 
                 if (!debt.interestRecords) debt.interestRecords = {};
 
-                // Tự động khởi tạo tháng hiện tại nếu chưa có
                 if (debt.interestRecords[currentMonthKey] === undefined) {
                     let prevInterest = 0;
-                    const prevMonths = Object.keys(debt.interestRecords).sort((a, b) => {
-                        const [y1, m1] = a.split('-').map(Number);
-                        const [y2, m2] = b.split('-').map(Number);
-                        return y1 !== y2 ? y1 - y2 : m1 - m2;
-                    });
+                    const prevMonths = Object.keys(debt.interestRecords).sort();
                     if (prevMonths.length > 0) {
                         const lastMonthKey = prevMonths[prevMonths.length - 1];
                         if (!debt.interestRecords[lastMonthKey].isPaid) {
@@ -1105,13 +1246,8 @@
                 totalPaidPrincipalAll += totalPaidPrincipal;
                 totalRemaining += remaining;
 
-                // Render danh sách các tháng
                 let monthsHtml = '';
-                const sortedMonths = Object.keys(debt.interestRecords).sort((a, b) => {
-                    const [y1, m1] = a.split('-').map(Number);
-                    const [y2, m2] = b.split('-').map(Number);
-                    return y1 !== y2 ? y1 - y2 : m1 - m2;
-                });
+                const sortedMonths = Object.keys(debt.interestRecords).sort();
 
                 sortedMonths.forEach(mKey => {
                     const record = debt.interestRecords[mKey];
@@ -1120,7 +1256,7 @@
                     monthsHtml += `
                         <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:6px 10px; border-radius:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
                             <span style="font-weight:700; color:#0f172a; white-space:nowrap;">Tháng ${mKey}:</span>
-                            <input type="number" value="${record.amount}" min="0" onchange="updateMonthInterest(${index}, '${mKey}', this.value)" style="width:90px; height:28px; padding:2px 6px; border:1.5px solid #cbd5e1; border-radius:6px; font-weight:700; color:#d32f2f; text-align:right;" title="Nhập lại số tiền lãi tháng này">
+                            <input type="number" value="${record.amount}" min="0" onchange="updateMonthInterest(${index}, '${mKey}', this.value)" style="width:90px; height:28px; padding:2px 6px; border:1.5px solid #cbd5e1; border-radius:6px; font-weight:700; color:#d32f2f; text-align:right;">
                             <label style="cursor:pointer; display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600; white-space:nowrap;">
                                 <input type="checkbox" ${record.isPaid ? 'checked' : ''} onchange="toggleMonthInterest(${index}, '${mKey}')">
                                 ${record.isPaid ? '✅ Đã trả' : '❌ Chưa trả'}
@@ -1136,89 +1272,51 @@
                         <td style="color:var(--primary); font-weight:700;">${formatCurrency(totalPaidPrincipal)}</td>
                         <td style="color:var(--debt); font-weight:700;">${formatCurrency(remaining)}</td>
                         <td colspan="2" style="background:#fffaf0; padding:8px;">
-                            <div style="max-height:140px; overflow-y:auto; padding-right:4px; margin-bottom:6px;">
-                                ${monthsHtml}
-                            </div>
-                            <button class="btn btn-small btn-debt" onclick="addNewMonthForDebt(${index})" style="width:100%; font-size:11.5px; height:28px;">➕ Tạo tháng mới cho khoản này</button>
+                            <div style="max-height:140px; overflow-y:auto; padding-right:4px; margin-bottom:6px;">${monthsHtml}</div>
+                            <button class="btn btn-small btn-debt" onclick="addNewMonthForDebt(${index})" style="width:100%; font-size:11.5px; height:28px;">➕ Tạo tháng mới</button>
                         </td>
                         <td>
-                            <button class="btn btn-small btn-primary" onclick="payMonthlyDebtAndInterest(${index})" title="Thanh toán gốc và lãi tháng này vào chi tiêu">💸 Trả tháng này</button>
-                            <button class="btn btn-small" onclick="editDebt(${index})" style="border-color:#cbd5e1;">Sửa</button>
+                            <button class="btn btn-small btn-primary" onclick="payMonthlyDebtAndInterest(${index})">💸 Trả tháng này</button>
+                            <button class="btn btn-small" onclick="editDebt(${index})">Sửa</button>
                             <button class="btn btn-danger btn-small" onclick="deleteDebt(${index})">✖</button>
                         </td>
                     </tr>
                 `;
             });
         } else {
-            tableHtml = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; font-style:italic; padding:20px;">Chưa có khoản nợ nào được ghi nhận.</td></tr>`;
+            tableHtml = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; font-style:italic; padding:20px;">Chưa có khoản nợ nào.</td></tr>`;
         }
         tableBody.innerHTML = tableHtml;
 
         cardsEl.innerHTML = `
-            <div class="debt-card">
-                <div class="stat-title">📉 Tổng Gốc Ban Đầu[cite: 1]</div>
-                <div class="stat-val" style="color:var(--expense);">${formatCurrency(totalOriginal)}</div>
-            </div>
-            <div class="debt-card">
-                <div class="stat-title">✅ Tổng Tiền Đã Trả (Gốc)</div>
-                <div class="stat-val" style="color:var(--primary);">${formatCurrency(totalPaidPrincipalAll)}</div>
-            </div>
-            <div class="debt-card">
-                <div class="stat-title">⚠️ Dư Nợ Gốc Còn Lại[cite: 1]</div>
-                <div class="stat-val" style="color:var(--debt);">${formatCurrency(totalRemaining)}</div>
-            </div>
-            <div class="debt-card">
-                <div class="stat-title">💸 Tổng Lãi Chưa Trả (Cộng Dồn)[cite: 1]</div>
-                <div class="stat-val" style="color:#c62828;">${formatCurrency(totalAccumulatedInterest)}</div>
-            </div>
+            <div class="debt-card"><div class="stat-title">📉 Tổng Gốc Ban Đầu</div><div class="stat-val" style="color:var(--expense);">${formatCurrency(totalOriginal)}</div></div>
+            <div class="debt-card"><div class="stat-title">✅ Đã Trả (Gốc)</div><div class="stat-val" style="color:var(--primary);">${formatCurrency(totalPaidPrincipalAll)}</div></div>
+            <div class="debt-card"><div class="stat-title">⚠️ Dư Nợ Gốc Còn Lại</div><div class="stat-val" style="color:var(--debt);">${formatCurrency(totalRemaining)}</div></div>
+            <div class="debt-card"><div class="stat-title">💸 Lãi Chưa Trả (Cộng Dồn)</div><div class="stat-val" style="color:#c62828;">${formatCurrency(totalAccumulatedInterest)}</div></div>
         `;
     }
 
     window.updateMonthInterest = function(index, monthKey, val) {
-        const debt = workData.debts[index];
-        const newAmount = Number(val) || 0;
-        if (debt.interestRecords[monthKey]) {
-            debt.interestRecords[monthKey].amount = newAmount;
-            autoSaveData(false);
-            renderDebtView();
-        }
+        workData.debts[index].interestRecords[monthKey].amount = Number(val) || 0;
+        autoSaveData(false);
+        renderDebtView();
     };
 
     window.toggleMonthInterest = function(index, monthKey) {
-        const debt = workData.debts[index];
-        debt.interestRecords[monthKey].isPaid = !debt.interestRecords[monthKey].isPaid;
+        const rec = workData.debts[index].interestRecords[monthKey];
+        rec.isPaid = !rec.isPaid;
         autoSaveData(false);
         renderDebtView();
     };
 
     window.addNewMonthForDebt = function(index) {
         const debt = workData.debts[index];
-        const nextMonthInput = prompt(`Nhập tháng mới muốn tạo cho "${debt.name}" (Định dạng YYYY-MM, VD: 2026-11):`, new Date().toISOString().slice(0, 7));
-        if (!nextMonthInput) return;
-
-        if (!debt.interestRecords) debt.interestRecords = {};
-        if (!debt.interestRecords[nextMonthInput]) {
-            let prevInterest = Number(debt.interest) || 0;
-            const keys = Object.keys(debt.interestRecords).sort((a, b) => {
-                const [y1, m1] = a.split('-').map(Number);
-                const [y2, m2] = b.split('-').map(Number);
-                return y1 !== y2 ? y1 - y2 : m1 - m2;
-            });
-            if (keys.length > 0) {
-                const lastKey = keys[keys.length - 1];
-                if (!debt.interestRecords[lastKey].isPaid) {
-                    prevInterest += debt.interestRecords[lastKey].amount;
-                }
-            }
-            debt.interestRecords[nextMonthInput] = {
-                amount: prevInterest,
-                isPaid: false
-            };
+        const nextMonth = prompt(`Nhập tháng mới cho "${debt.name}" (YYYY-MM):`, new Date().toISOString().slice(0, 7));
+        if (!nextMonth) return;
+        if (!debt.interestRecords[nextMonth]) {
+            debt.interestRecords[nextMonth] = { amount: Number(debt.interest) || 0, isPaid: false };
             autoSaveData(false);
             renderDebtView();
-            alert(`Đã tạo thành công kỳ hạn tháng ${nextMonthInput} cho "${debt.name}"! 🎉`);
-        } else {
-            alert(`Tháng ${nextMonthInput} đã tồn tại cho khoản nợ này rồi!`);
         }
     };
 
@@ -1239,22 +1337,17 @@
         const paid = Number(document.getElementById('debt-paid').value) || 0;
         const interest = Number(document.getElementById('debt-interest').value) || 0;
 
-        if (!name || total <= 0) { alert('Vui lòng nhập tên khoản nợ và tổng số tiền gốc!'); return; }
+        if (!name || total <= 0) { alert('Vui lòng nhập tên và tổng tiền nợ gốc!'); return; }
 
         if (id === '') {
             const currentMonthKey = currentDate.toISOString().slice(0, 7);
             const initialRecords = {};
             initialRecords[currentMonthKey] = { amount: interest, isPaid: false };
-
             workData.debts.push({ name, total, paidPrincipal: paid, interest, interestRecords: initialRecords });
         } else {
             const debt = workData.debts[Number(id)];
-            debt.name = name;
-            debt.total = total;
-            debt.paidPrincipal = paid;
-            debt.interest = interest;
+            debt.name = name; debt.total = total; debt.paidPrincipal = paid; debt.interest = interest;
         }
-
         autoSaveData(false);
         debtModal.style.display = 'none';
         renderDebtView();
@@ -1271,7 +1364,7 @@
     };
 
     window.deleteDebt = function(index) {
-        if (confirm('Bạn có chắc muốn xóa khoản nợ này?')) {
+        if (confirm('Xóa khoản nợ này?')) {
             workData.debts.splice(index, 1);
             autoSaveData(false);
             renderDebtView();
@@ -1280,50 +1373,339 @@
 
     window.payMonthlyDebtAndInterest = function(index) {
         const debt = workData.debts[index];
-        
-        // Hộp thoại hỏi số tiền gốc muốn trả trong tháng này
-        const defaultMonthlyPay = Math.max(0, Number(debt.total) - Number(debt.paidPrincipal));
-        const payPrincipalInput = prompt(`Nhập số tiền GỐC muốn trả cho "${debt.name}" trong tháng này:`, defaultMonthlyPay);
-        if (payPrincipalInput === null) return;
-        const monthlyPrincipal = Number(payPrincipalInput) || 0;
-
+        const defaultPay = Math.max(0, Number(debt.total) - Number(debt.paidPrincipal));
+        const payPrincipal = Number(prompt(`Nhập số GỐC trả tháng này:`, defaultPay)) || 0;
         const currentMonthKey = currentDate.toISOString().slice(0, 7);
         let currentInterest = 0;
         if (debt.interestRecords && debt.interestRecords[currentMonthKey] && !debt.interestRecords[currentMonthKey].isPaid) {
             currentInterest = debt.interestRecords[currentMonthKey].amount;
         }
 
-        const totalPay = monthlyPrincipal + currentInterest;
-        if (totalPay <= 0) { alert('Số tiền thanh toán phải lớn hơn 0!'); return; }
-
         const today = new Date();
-        const y = today.getFullYear();
-        const m = String(today.getMonth() + 1).padStart(2, '0');
-        const d = String(today.getDate()).padStart(2, '0');
-        const dateStr = `${y}-${m}-${d}`;
-
+        const dateStr = today.toISOString().slice(0, 10);
         if (!workData[dateStr]) workData[dateStr] = { type: 'full', incomes: [], expenses: [], tasks: [] };
         if (!workData[dateStr].expenses) workData[dateStr].expenses = [];
 
-        if (monthlyPrincipal > 0) workData[dateStr].expenses.push({ name: `Gốc nợ: ${debt.name}`, amount: monthlyPrincipal });
+        if (payPrincipal > 0) workData[dateStr].expenses.push({ name: `Gốc nợ: ${debt.name}`, amount: payPrincipal });
         if (currentInterest > 0) workData[dateStr].expenses.push({ name: `Tiền lãi: ${debt.name}`, amount: currentInterest });
 
-        debt.paidPrincipal = (Number(debt.paidPrincipal) || 0) + monthlyPrincipal;
-        if (currentInterest > 0) {
-            debt.interestRecords[currentMonthKey].isPaid = true;
-        }
+        debt.paidPrincipal = (Number(debt.paidPrincipal) || 0) + payPrincipal;
+        if (currentInterest > 0) debt.interestRecords[currentMonthKey].isPaid = true;
 
         autoSaveData(false);
         renderDebtView();
-        alert(`Đã ghi nhận thanh toán tổng cộng ${formatCurrency(totalPay)} (Gốc: ${formatCurrency(monthlyPrincipal)} | Lãi: ${formatCurrency(currentInterest)}) vào ngày hôm nay (${d}/${m}/${y}) và tự động cộng vào bảng Chi tiêu! 🎉`);
+        alert(`Đã ghi nhận thanh toán vào chi tiêu hôm nay! 🎉`);
     };
 
-    // VẼ LỊCH
+    // MATERIALS MINDMAP LOGIC
+    function renderMaterialView() {
+        renderMaterialOutline();
+        renderMaterialMindMap();
+    }
+
+    function renderMaterialOutline() {
+        const container = document.getElementById('material-outline-root');
+        if (!workData.materialRoots || workData.materialRoots.length === 0) {
+            container.innerHTML = `<p class="tw-text-xs tw-text-slate-400 tw-italic tw-text-center tw-py-4">Chưa có chủ đề vật tư nào.</p>`;
+            return;
+        }
+
+        container.innerHTML = workData.materialRoots.map((root, idx) => {
+            return renderMaterialOutlineItem(root, `${idx + 1}`, root.id);
+        }).join('');
+    }
+
+    function renderMaterialOutlineItem(node, numbering, rootId) {
+        const children = node.children || [];
+        const hasChildren = children.length > 0;
+        const isExpanded = node.expanded;
+
+        let childrenHtml = '';
+        if (isExpanded && hasChildren) {
+            childrenHtml = `
+                <div class="tw-pl-5 tw-pt-2 tw-space-y-2 tree-children-guide">
+                    ${children.map((c, cIdx) => renderMaterialOutlineItem(c, `${numbering}.${cIdx + 1}`, rootId)).join('')}
+                </div>
+            `;
+        }
+
+        return `
+            <div class="tw-bg-white tw-border tw-border-slate-200 tw-rounded-xl tw-p-3">
+                <div class="tw-flex tw-items-center tw-justify-between tw-gap-2">
+                    <div class="tw-flex tw-items-center tw-gap-2 tw-min-w-0">
+                        ${hasChildren ? `
+                            <button onclick="toggleMaterialExpand('${node.id}')" class="tw-w-5 tw-h-5 tw-rounded tw-bg-emerald-100 text-emerald-800 tw-flex tw-items-center tw-justify-center tw-text-[10px] font-bold">
+                                <i class="fa-solid fa-chevron-right transition-transform ${isExpanded ? 'rotate-90' : ''}"></i>
+                            </button>
+                        ` : ''}
+                        <span class="tw-text-xs tw-font-bold tw-text-slate-900">${escapeHtml(node.text)}</span>
+                    </div>
+                    <div class="tw-flex tw-items-center tw-gap-1">
+                        <button onclick="openMaterialChildModal('${node.id}')" class="tw-px-2 tw-py-1 tw-bg-emerald-600 hover:tw-bg-emerald-700 tw-text-white tw-rounded tw-text-[11px]" title="Thêm ý con">+</button>
+                        <button onclick="openMaterialEditModal('${node.id}')" class="tw-px-2 tw-py-1 tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-slate-700 tw-rounded tw-text-[11px]">Sửa</button>
+                        <button onclick="deleteMaterialNode('${node.id}')" class="tw-px-2 tw-py-1 tw-bg-rose-50 hover:tw-bg-rose-100 tw-text-rose-600 tw-rounded tw-text-[11px]">✖</button>
+                    </div>
+                </div>
+                ${node.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-italic tw-mt-1">${escapeHtml(node.notes)}</div>` : ''}
+                ${childrenHtml}
+            </div>
+        `;
+    }
+
+    function renderMaterialMindMap() {
+        const nodesLayer = document.getElementById('mindmap-nodes-layer');
+        if (!workData.materialRoots || workData.materialRoots.length === 0) {
+            nodesLayer.innerHTML = `<div class="tw-text-xs tw-text-slate-400">Chưa có dữ liệu sơ đồ vật tư.</div>`;
+            return;
+        }
+
+        nodesLayer.innerHTML = workData.materialRoots.map((root, index) => {
+            return renderMindMapRootHtml(root, index + 1);
+        }).join('');
+
+        requestAnimationFrame(() => drawMindMapConnections());
+    }
+
+    function renderMindMapRootHtml(root, rootNum) {
+        const children = root.children || [];
+        const hasChildren = children.length > 0;
+        const isExpanded = root.expanded;
+        const domId = `mm-root-${root.id}`;
+
+        let childrenHtml = '';
+        if (isExpanded && hasChildren) {
+            childrenHtml = `
+                <div class="tw-flex tw-flex-col tw-justify-center tw-gap-3">
+                    ${children.map((child, cIdx) => renderMindMapNodeHtml(child, domId, `${rootNum}.${cIdx + 1}`)).join('')}
+                </div>
+            `;
+        }
+
+        return `
+            <div class="tw-flex tw-items-center tw-gap-12 tw-py-4 tw-border-b tw-border-emerald-200/50 last:border-none">
+                <div id="${domId}" data-stroke="#10b981" class="tw-bg-emerald-50 tw-border-2 tw-border-emerald-500 tw-shadow-md tw-w-[260px] tw-p-3.5 tw-rounded-2xl tw-relative">
+                    <div class="tw-flex tw-items-center tw-justify-between tw-mb-1">
+                        <span class="tw-text-[10px] tw-font-extrabold tw-bg-emerald-600 tw-text-white tw-px-2 tw-py-0.5 tw-rounded">GỐC #${rootNum}</span>
+                        <div class="tw-flex tw-gap-1">
+                            <button onclick="openMaterialChildModal('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-emerald-600 tw-text-white tw-rounded tw-text-[10px]">+</button>
+                            <button onclick="openMaterialEditModal('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-slate-700 tw-border tw-rounded tw-text-[10px]">✎</button>
+                            <button onclick="deleteMaterialNode('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-rose-600 tw-border tw-rounded tw-text-[10px]">✖</button>
+                        </div>
+                    </div>
+                    <div class="tw-font-extrabold tw-text-sm tw-text-emerald-950">${escapeHtml(root.text)}</div>
+                    ${root.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-italic">${escapeHtml(root.notes)}</div>` : ''}
+                    ${hasChildren ? `
+                        <button onclick="toggleMaterialExpand('${root.id}')" class="tw-absolute -tw-right-3.5 tw-top-1/2 -tw-translate-y-1/2 tw-w-6 tw-h-6 tw-rounded-full ${isExpanded ? 'tw-bg-emerald-600 text-white' : 'tw-bg-amber-500 text-slate-950'} tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-shadow">
+                            ${isExpanded ? '-' : children.length}
+                        </button>
+                    ` : ''}
+                </div>
+                ${childrenHtml}
+            </div>
+        `;
+    }
+
+    function renderMindMapNodeHtml(node, parentDomId, numbering) {
+        const children = node.children || [];
+        const hasChildren = children.length > 0;
+        const isExpanded = node.expanded;
+        const domId = `mm-node-${node.id}`;
+
+        let childrenHtml = '';
+        if (isExpanded && hasChildren) {
+            childrenHtml = `
+                <div class="tw-flex tw-flex-col tw-justify-center tw-gap-3">
+                    ${children.map((child, cIdx) => renderMindMapNodeHtml(child, domId, `${numbering}.${cIdx + 1}`)).join('')}
+                </div>
+            `;
+        }
+
+        return `
+            <div class="tw-flex tw-items-center tw-gap-12 tw-py-1">
+                <div id="${domId}" data-parent="${parentDomId}" data-stroke="#10b981" class="tw-bg-white tw-border-l-4 tw-border-emerald-500 tw-border tw-border-slate-200 tw-shadow-xs tw-w-[220px] tw-p-3 tw-rounded-xl tw-relative">
+                    <div class="tw-flex tw-items-center tw-justify-between tw-mb-1">
+                        <span class="tw-text-[10px] tw-font-bold tw-bg-emerald-600 tw-text-white tw-px-1.5 tw-rounded">${numbering}</span>
+                        <div class="tw-flex tw-gap-1">
+                            <button onclick="openMaterialChildModal('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-emerald-600 tw-text-white tw-rounded tw-text-[10px]">+</button>
+                            <button onclick="openMaterialEditModal('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-slate-700 tw-border tw-rounded tw-text-[10px]">✎</button>
+                            <button onclick="deleteMaterialNode('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-rose-600 tw-border tw-rounded tw-text-[10px]">✖</button>
+                        </div>
+                    </div>
+                    <div class="tw-font-semibold tw-text-xs tw-text-slate-800">${escapeHtml(node.text)}</div>
+                    ${node.notes ? `<div class="tw-text-[10px] tw-text-slate-500 tw-italic">${escapeHtml(node.notes)}</div>` : ''}
+                    ${hasChildren ? `
+                        <button onclick="toggleMaterialExpand('${node.id}')" class="tw-absolute -tw-right-3.5 tw-top-1/2 -tw-translate-y-1/2 tw-w-6 tw-h-6 tw-rounded-full ${isExpanded ? 'tw-bg-emerald-600 text-white' : 'tw-bg-amber-500 text-slate-950'} tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-shadow">
+                            ${isExpanded ? '-' : children.length}
+                        </button>
+                    ` : ''}
+                </div>
+                ${childrenHtml}
+            </div>
+        `;
+    }
+
+    function drawMindMapConnections() {
+        const svg = document.getElementById('mindmap-svg');
+        const canvas = document.getElementById('mindmap-canvas');
+        if (!svg || !canvas) return;
+        svg.innerHTML = '';
+        const canvasRect = canvas.getBoundingClientRect();
+        const scale = materialZoomScale || 1;
+
+        function getRelPos(el) {
+            const r = el.getBoundingClientRect();
+            return { left: (r.left - canvasRect.left) / scale, right: (r.right - canvasRect.left) / scale, midY: ((r.top + r.bottom) / 2 - canvasRect.top) / scale };
+        }
+
+        canvas.querySelectorAll('.tw-relative[id^="mm-node-"]').forEach(nodeEl => {
+            const parentId = nodeEl.getAttribute('data-parent');
+            if (!parentId) return;
+            const parentEl = document.getElementById(parentId);
+            if (!parentEl) return;
+            const pPos = getRelPos(parentEl);
+            const cPos = getRelPos(nodeEl);
+            const d = `M ${pPos.right} ${pPos.midY} C ${pPos.right + 25} ${pPos.midY}, ${cPos.left - 25} ${cPos.midY}, ${cPos.left} ${cPos.midY}`;
+            svg.innerHTML += `<path d="${d}" class="connector-path" stroke="#10b981" stroke-width="2" opacity="0.8" />`;
+        });
+    }
+
+    window.toggleMaterialExpand = function(id) {
+        const item = findMaterialItem(id);
+        if (item) {
+            item.expanded = !item.expanded;
+            autoSaveData(false);
+            renderMaterialView();
+        }
+    };
+
+    function findMaterialItem(id) {
+        function search(nodes) {
+            for (let n of nodes) {
+                if (n.id === id) return n;
+                if (n.children) {
+                    const found = search(n.children);
+                    if (found) return found;
+                }
+            }
+            return null;
+        }
+        return search(workData.materialRoots);
+    }
+
+    window.openMaterialRootModal = function() {
+        document.getElementById('mat-modal-target-id').value = '';
+        document.getElementById('mat-modal-mode').value = 'add-root';
+        document.getElementById('material-modal-title').textContent = '➕ Thêm Chủ Đề Gốc Vật Tư';
+        document.getElementById('mat-node-text').value = '';
+        document.getElementById('mat-node-notes').value = '';
+        materialModal.style.display = 'flex';
+    };
+
+    window.openMaterialChildModal = function(parentId) {
+        document.getElementById('mat-modal-target-id').value = parentId;
+        document.getElementById('mat-modal-mode').value = 'add-child';
+        document.getElementById('material-modal-title').textContent = '➕ Thêm Nhánh Vật Tư Con';
+        document.getElementById('mat-node-text').value = '';
+        document.getElementById('mat-node-notes').value = '';
+        materialModal.style.display = 'flex';
+    };
+
+    window.openMaterialEditModal = function(id) {
+        const item = findMaterialItem(id);
+        if (!item) return;
+        document.getElementById('mat-modal-target-id').value = id;
+        document.getElementById('mat-modal-mode').value = 'edit';
+        document.getElementById('material-modal-title').textContent = '✎ Sửa Nội Dung Vật Tư';
+        document.getElementById('mat-node-text').value = item.text;
+        document.getElementById('mat-node-notes').value = item.notes || '';
+        materialModal.style.display = 'flex';
+    };
+
+    document.getElementById('btn-mat-cancel').onclick = () => materialModal.style.display = 'none';
+
+    document.getElementById('btn-mat-save').onclick = () => {
+        const mode = document.getElementById('mat-modal-mode').value;
+        const targetId = document.getElementById('mat-modal-target-id').value;
+        const text = document.getElementById('mat-node-text').value.trim();
+        const notes = document.getElementById('mat-node-notes').value.trim();
+        if (!text) { alert('Vui lòng nhập tên nội dung!'); return; }
+
+        if (mode === 'add-root') {
+            workData.materialRoots.push({
+                id: 'mroot-' + Date.now(),
+                text, notes, color: 'emerald', expanded: true, children: []
+            });
+        } else if (mode === 'add-child') {
+            const parent = findMaterialItem(targetId);
+            if (parent) {
+                if (!parent.children) parent.children = [];
+                parent.children.push({
+                    id: 'mn-' + Date.now(),
+                    text, notes, color: parent.color || 'emerald', expanded: true, children: []
+                });
+                parent.expanded = true;
+            }
+        } else if (mode === 'edit') {
+            const item = findMaterialItem(targetId);
+            if (item) { item.text = text; item.notes = notes; }
+        }
+
+        autoSaveData(false);
+        materialModal.style.display = 'none';
+        renderMaterialView();
+    };
+
+    window.deleteMaterialNode = function(id) {
+        if (!confirm('Bạn có chắc chắn muốn xóa mục này?')) return;
+        function removeRecursive(nodes) {
+            for (let i = 0; i < nodes.length; i++) {
+                if (nodes[i].id === id) { nodes.splice(i, 1); return true; }
+                if (nodes[i].children && removeRecursive(nodes[i].children)) return true;
+            }
+            return false;
+        }
+        if (!removeRecursive(workData.materialRoots)) {
+            workData.materialRoots = workData.materialRoots.filter(r => r.id !== id);
+        }
+        autoSaveData(false);
+        renderMaterialView();
+    };
+
+    window.expandAllLevels = function() {
+        function exp(nodes) {
+            nodes.forEach(n => { n.expanded = true; if (n.children) exp(n.children); });
+        }
+        exp(workData.materialRoots);
+        renderMaterialView();
+    };
+
+    window.collapseAllLevels = function() {
+        function col(nodes) {
+            nodes.forEach(n => { n.expanded = false; if (n.children) col(n.children); });
+        }
+        col(workData.materialRoots);
+        renderMaterialView();
+    };
+
+    window.zoomMindMap = function(delta) {
+        materialZoomScale = Math.min(1.5, Math.max(0.5, +(materialZoomScale + delta).toFixed(2)));
+        document.getElementById('mindmap-canvas').style.transform = `scale(${materialZoomScale})`;
+        document.getElementById('zoom-level-indicator').textContent = Math.round(materialZoomScale * 100) + '%';
+        drawMindMapConnections();
+    };
+
+    window.resetMindMapZoom = function() {
+        materialZoomScale = 1;
+        document.getElementById('mindmap-canvas').style.transform = `scale(1)`;
+        document.getElementById('zoom-level-indicator').textContent = '100%';
+        drawMindMapConnections();
+    };
+
+    // CALENDAR & WORK LOGIC
     function renderCalendar() {
         calendarEl.innerHTML = '';
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
-        
         monthYearEl.innerHTML = `Tháng ${month + 1} <span>🌿</span> ${year}`;
 
         const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -1512,18 +1894,18 @@
 
         let balanceSummaryHTML = `
             <div class="balance-box">
-                <div class="balance-header">⚖️ Bảng Tổng Kết Tài Chính Tháng ${month + 1}/${year} (Thu Nhập - Chi Tiêu)</div>
+                <div class="balance-header">⚖️ Bảng Tổng Kết Tài Chính Tháng ${month + 1}/${year}</div>
                 <div class="balance-cards">
                     <div class="balance-card" style="border: 1.5px solid #bbdefb;">
-                        <div style="font-size: 13px; color: #1565c0; font-weight: 700;">💰 TỔNG THU NHẬP</div>
+                        <div style="font-size: 13px; color: #1565c0; font-weight: 700;">💰 TỔNG THU</div>
                         <div style="font-size: 21px; font-weight: 700; color: #1565c0; margin-top: 6px;">+${formatCurrency(monthlyIncome)}</div>
                     </div>
                     <div class="balance-card" style="border: 1.5px solid #ffcdd2;">
-                        <div style="font-size: 13px; color: #c62828; font-weight: 700;">💸 TỔNG CHI TIÊU</div>
+                        <div style="font-size: 13px; color: #c62828; font-weight: 700;">💸 TỔNG CHI</div>
                         <div style="font-size: 21px; font-weight: 700; color: #c62828; margin-top: 6px;">-${formatCurrency(monthlyExpense)}</div>
                     </div>
                     <div class="balance-card" style="border: 2px solid ${balanceColor}; background: ${balanceBg};">
-                        <div style="font-size: 13px; color: ${balanceColor}; font-weight: 700;">✨ CÒN LẠI (THU - CHI)</div>
+                        <div style="font-size: 13px; color: ${balanceColor}; font-weight: 700;">✨ CÒN LẠI</div>
                         <div style="font-size: 22px; font-weight: 700; color: ${balanceColor}; margin-top: 6px;">${balanceSign}${formatCurrency(netBalance)}</div>
                     </div>
                 </div>
@@ -1538,17 +1920,16 @@
                 hasWeekInc = true;
             }
         }
-        if(!hasWeekInc) weekIncHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản thu nào</span>`;
+        if(!hasWeekInc) weekIncHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản thu</span>`;
         weekIncHTML += `</ul>`;
 
         let catIncHTML = `<ul class="stat-list">`;
         let hasCatInc = false;
-        const sortedIncCats = Object.entries(categoryIncomes).sort((a, b) => b[1] - a[1]);
-        for (let [cat, amount] of sortedIncCats) {
+        for (let [cat, amount] of Object.entries(categoryIncomes).sort((a,b)=>b[1]-a[1])) {
             catIncHTML += `<li><span>🏷️ ${escapeHtml(cat)}</span> <strong style="color:#1565c0;">+${formatCurrency(amount)}</strong></li>`;
             hasCatInc = true;
         }
-        if(!hasCatInc) catIncHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản thu nào</span>`;
+        if(!hasCatInc) catIncHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản thu</span>`;
         catIncHTML += `</ul>`;
 
         let weekExpHTML = `<ul class="stat-list">`;
@@ -1559,52 +1940,36 @@
                 hasWeekExp = true;
             }
         }
-        if(!hasWeekExp) weekExpHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản chi nào</span>`;
+        if(!hasWeekExp) weekExpHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản chi</span>`;
         weekExpHTML += `</ul>`;
 
         let catExpHTML = `<ul class="stat-list">`;
         let hasCatExp = false;
-        const sortedExpCats = Object.entries(categoryExpenses).sort((a, b) => b[1] - a[1]);
-        for (let [cat, amount] of sortedExpCats) {
+        for (let [cat, amount] of Object.entries(categoryExpenses).sort((a,b)=>b[1]-a[1])) {
             catExpHTML += `<li><span>🏷️ ${escapeHtml(cat)}</span> <strong style="color:#c62828;">-${formatCurrency(amount)}</strong></li>`;
             hasCatExp = true;
         }
-        if(!hasCatExp) catExpHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản chi nào</span>`;
+        if(!hasCatExp) catExpHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản chi</span>`;
         catExpHTML += `</ul>`;
 
         let financeDetailsHTML = `
             <div class="finance-details-grid">
                 <div class="detail-box" style="border-color:#bbdefb; background:#f8fbff;">
                     <div class="detail-box-header" style="color:#1565c0; border-color:#bbdefb;">
-                        <span>💰 CHI TIẾT THU NHẬP</span>
-                        <span style="font-size:18px;">+${formatCurrency(monthlyIncome)}</span>
+                        <span>💰 CHI TIẾT THU NHẬP</span><span>+${formatCurrency(monthlyIncome)}</span>
                     </div>
                     <div class="expense-summary">
-                        <div class="expense-col">
-                            <strong style="color:#1976d2; display:block; margin-bottom:8px; font-size:13.5px;">📅 Theo Tuần:</strong>
-                            ${weekIncHTML}
-                        </div>
-                        <div class="expense-col border-left-income">
-                            <strong style="color:#1976d2; display:block; margin-bottom:8px; font-size:13.5px;">📥 Phân loại Nguồn thu:</strong>
-                            ${catIncHTML}
-                        </div>
+                        <div class="expense-col"><strong>📅 Theo Tuần:</strong>${weekIncHTML}</div>
+                        <div class="expense-col border-left-income"><strong>📥 Nguồn thu:</strong>${catIncHTML}</div>
                     </div>
                 </div>
-
                 <div class="detail-box" style="border-color:#ffcdd2; background:#fffafb;">
                     <div class="detail-box-header" style="color:#c62828; border-color:#ffcdd2;">
-                        <span>💸 CHI TIẾT CHI TIÊU</span>
-                        <span style="font-size:18px;">-${formatCurrency(monthlyExpense)}</span>
+                        <span>💸 CHI TIẾT CHI TIÊU</span><span>-${formatCurrency(monthlyExpense)}</span>
                     </div>
                     <div class="expense-summary">
-                        <div class="expense-col">
-                            <strong style="color:#d32f2f; display:block; margin-bottom:8px; font-size:13.5px;">📅 Theo Tuần:</strong>
-                            ${weekExpHTML}
-                        </div>
-                        <div class="expense-col border-left">
-                            <strong style="color:#d32f2f; display:block; margin-bottom:8px; font-size:13.5px;">🛒 Phân loại Hạng mục chi:</strong>
-                            ${catExpHTML}
-                        </div>
+                        <div class="expense-col"><strong>📅 Theo Tuần:</strong>${weekExpHTML}</div>
+                        <div class="expense-col border-left"><strong>🛒 Hạng mục:</strong>${catExpHTML}</div>
                     </div>
                 </div>
             </div>
@@ -1613,23 +1978,17 @@
         let taskSummaryHTML = `<ul class="stat-list">`;
         if (monthlyTasks.length > 0) {
             monthlyTasks.forEach(item => {
-                taskSummaryHTML += `
-                    <li>
-                        <span style="font-weight:700; color:#2e7d32; white-space:nowrap;">🗓️ Ngày ${item.day}</span>
-                        <span style="flex:1; text-align:right; color:#334155; font-weight:500;">${escapeHtml(item.text)}</span>
-                    </li>
-                `;
+                taskSummaryHTML += `<li><span style="font-weight:700; color:#2e7d32;">🗓️ Ngày ${item.day}</span><span style="flex:1; text-align:right; color:#334155;">${escapeHtml(item.text)}</span></li>`;
             });
         } else {
-            taskSummaryHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có ghi chú công việc nào trong tháng</span>`;
+            taskSummaryHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có ghi chú công việc</span>`;
         }
         taskSummaryHTML += `</ul>`;
 
         let taskBoxHTML = `
             <div class="detail-box" style="border-color:#c8e6c9; background:#f9fef9;">
                 <div class="detail-box-header" style="color:#2e7d32; border-color:#c8e6c9;">
-                    <span>📝 TỔNG HỢP CÔNG VIỆC / GHI CHÚ TRONG THÁNG</span>
-                    <span style="font-size:14px; background:#e8f5e9; padding:3px 10px; border-radius:12px;">${monthlyTasks.length} đầu việc</span>
+                    <span>📝 TỔNG HỢP CÔNG VIỆC TRONG THÁNG</span><span>${monthlyTasks.length} việc</span>
                 </div>
                 ${taskSummaryHTML}
             </div>
@@ -1645,40 +2004,28 @@
         
         document.querySelectorAll('input[name="work_type"]').forEach(r => r.checked = false);
         checkOvertime.checked = false; timeRangeDiv.style.display = 'none';
-        otStartInput.value = '17:00'; otEndInput.value = '19:00';
-        incomeListContainer.innerHTML = '';
-        expenseListContainer.innerHTML = ''; 
-        taskListContainer.innerHTML = '';
-        otSection.style.opacity = '1'; otSection.style.pointerEvents = 'auto';
+        incomeListContainer.innerHTML = ''; expenseListContainer.innerHTML = ''; taskListContainer.innerHTML = '';
 
         const data = workData[dateStr];
         if (data) {
             if(data.type) document.querySelector(`input[value="${data.type}"]`).checked = true;
             else document.querySelector('input[value="none"]').checked = true;
 
-            if (data.type === 'off' || data.type === 'none') {
-                otSection.style.opacity = '0.5'; otSection.style.pointerEvents = 'none';
-            }
             if (data.isOvertime) {
                 checkOvertime.checked = true; timeRangeDiv.style.display = 'flex';
                 if (data.startTime) otStartInput.value = data.startTime;
                 if (data.endTime) otEndInput.value = data.endTime;
             }
-            
-            if (data.incomes && Array.isArray(data.incomes)) data.incomes.forEach(i => createIncomeRow(i.name, i.amount));
+            if (data.incomes) data.incomes.forEach(i => createIncomeRow(i.name, i.amount));
             else createIncomeRow();
-
-            if (data.expenses && Array.isArray(data.expenses)) data.expenses.forEach(e => createExpenseRow(e.name, e.amount));
+            if (data.expenses) data.expenses.forEach(e => createExpenseRow(e.name, e.amount));
             else createExpenseRow();
-
-            const taskList = getTaskList(data);
-            if (taskList.length > 0) taskList.forEach(t => createTaskRow(t));
+            const tasks = getTaskList(data);
+            if (tasks.length > 0) tasks.forEach(t => createTaskRow(t));
             else createTaskRow();
         } else {
             document.querySelector('input[value="full"]').checked = true;
-            createIncomeRow();
-            createExpenseRow();
-            createTaskRow();
+            createIncomeRow(); createExpenseRow(); createTaskRow();
         }
         modal.style.display = 'flex';
     }
@@ -1758,6 +2105,8 @@
         return [];
     }
 
+    checkOvertime.onchange = (e) => { timeRangeDiv.style.display = e.target.checked ? 'flex' : 'none'; };
+
     document.getElementById('btn-prev').onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
     document.getElementById('btn-next').onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
 
@@ -1766,7 +2115,7 @@
         const blob = new Blob([dataStr], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a'); a.href = url;
-        a.download = `nhatky_thu_chi_no_${new Date().toISOString().slice(0,10)}.json`;
+        a.download = `nhatky_thu_chi_vattu_${new Date().toISOString().slice(0,10)}.json`;
         a.click(); URL.revokeObjectURL(url);
     };
 
@@ -1778,6 +2127,7 @@
             try {
                 workData = JSON.parse(event.target.result);
                 if (!workData.debts) workData.debts = [];
+                if (!workData.materialRoots) workData.materialRoots = [];
                 autoSaveData(false);
                 renderCalendar();
                 alert("Tải file dữ liệu thành công! 🎉");
@@ -1812,6 +2162,7 @@
     modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
     ghModal.addEventListener('click', (e) => { if (e.target === ghModal) ghModal.style.display = 'none'; });
     debtModal.addEventListener('click', (e) => { if (e.target === debtModal) debtModal.style.display = 'none'; });
+    materialModal.addEventListener('click', (e) => { if (e.target === materialModal) materialModal.style.display = 'none'; });
 
     renderCalendar();
     loadFromGitHub(false);
