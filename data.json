@@ -600,6 +600,14 @@
           "color": "emerald",
           "expanded": true,
           "children": []
+        },
+        {
+          "id": "mn-1792770491215",
+          "text": "Máy test mạng, dò mạng",
+          "notes": "",
+          "color": "emerald",
+          "expanded": true,
+          "children": []
         }
       ]
     }
