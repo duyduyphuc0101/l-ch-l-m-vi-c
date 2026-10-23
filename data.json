@@ -339,6 +339,16 @@
     ],
     "content": "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
   },
+  "2026-10-18": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
+  },
   "debts": [
     {
       "name": "Mua xe Future 125fi",
@@ -370,6 +380,7 @@
       }
     }
   ],
+  "materialRoots": [],
   "materialsRoots": [
     {
       "id": "mroot-1792768514481",
@@ -409,16 +420,6 @@
       ]
     }
   ],
-  "2026-10-18": {
-    "type": "off",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
-  },
   "2026-10-19": {
     "type": "full",
     "isOvertime": false,
@@ -526,6 +527,5 @@
       "Đi dây mạng pa06"
     ],
     "content": "Đi dây mạng pa06"
-  },
-  "materialRoots": []
+  }
 }
