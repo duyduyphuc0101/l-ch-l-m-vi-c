@@ -583,7 +583,7 @@
       "text": "Bấm đầu dây mạng",
       "notes": "",
       "color": "emerald",
-      "expanded": true,
+      "expanded": false,
       "children": [
         {
           "id": "mn-1792770442967",
