@@ -403,6 +403,14 @@
           "color": "emerald",
           "expanded": true,
           "children": []
+        },
+        {
+          "id": "mn-1792770146737",
+          "text": "Máy khoan",
+          "notes": "",
+          "color": "emerald",
+          "expanded": true,
+          "children": []
         }
       ]
     }
