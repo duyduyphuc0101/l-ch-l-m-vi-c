@@ -462,5 +462,26 @@
       "Đi dây mạng pc06"
     ],
     "content": "Thay cam chợ gạo\nĐi dây mạng pc06"
+  },
+  "2026-10-23": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Cơm trưa",
+        "amount": 66000
+      },
+      {
+        "name": "Cơm chiều",
+        "amount": 44000
+      }
+    ],
+    "tasks": [
+      "Đi dây mạng pa06"
+    ],
+    "content": "Đi dây mạng pa06"
   }
 }
