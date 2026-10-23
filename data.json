@@ -380,6 +380,72 @@
       }
     }
   ],
+  "materialRoots": [
+    {
+      "id": "mroot-1792770017841",
+      "text": "Đi nẹp vào tường để đi dây mạng",
+      "notes": "",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mn-1792770037386",
+          "text": "Máy bắn đinh",
+          "notes": "",
+          "color": "emerald",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mn-1792770045914",
+          "text": "Đinh",
+          "notes": "",
+          "color": "emerald",
+          "expanded": true,
+          "children": []
+        }
+      ]
+    }
+  ],
+  "materialsRoots": [
+    {
+      "id": "mroot-1792768514481",
+      "text": "Đi nẹp vào tường",
+      "notes": "",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mnode-1792768523981",
+          "text": "vít bắn",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768536593",
+          "text": "tắt kê",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768543709",
+          "text": "búa",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768548256",
+          "text": "thang",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        }
+      ]
+    }
+  ],
   "2026-10-19": {
     "type": "full",
     "isOvertime": false,
@@ -487,71 +553,5 @@
       "Đi dây mạng pa06"
     ],
     "content": "Đi dây mạng pa06"
-  },
-  "materialRoots": [
-    {
-      "id": "mroot-1792770017841",
-      "text": "Đi nẹp vào tường để đi dây mạng",
-      "notes": "",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mn-1792770037386",
-          "text": "Máy bắn đinh",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770045914",
-          "text": "Đinh",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        }
-      ]
-    }
-  ],
-  "materialsRoots": [
-    {
-      "id": "mroot-1792768514481",
-      "text": "Đi nẹp vào tường",
-      "notes": "",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mnode-1792768523981",
-          "text": "vít bắn",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768536593",
-          "text": "tắt kê",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768543709",
-          "text": "búa",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768548256",
-          "text": "thang",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        }
-      ]
-    }
-  ]
+  }
 }
