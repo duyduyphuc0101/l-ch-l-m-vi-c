@@ -622,7 +622,7 @@
       "text": "Bấm đầu dây mạng",
       "notes": "",
       "color": "emerald",
-      "expanded": false,
+      "expanded": true,
       "children": [
         {
           "id": "mn-1792770442967",
