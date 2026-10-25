@@ -674,7 +674,12 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
+    "expenses": [
+      {
+        "name": "Tiền mạng",
+        "amount": 120000
+      }
+    ],
     "tasks": [],
     "content": ""
   }
