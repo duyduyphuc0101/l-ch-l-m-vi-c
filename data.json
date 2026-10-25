@@ -667,5 +667,15 @@
       "Cấu hình cam trung an"
     ],
     "content": "Cấu hình cam trung an"
+  },
+  "2026-10-25": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
   }
 }
