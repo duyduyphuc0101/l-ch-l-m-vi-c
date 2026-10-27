@@ -682,5 +682,22 @@
     ],
     "tasks": [],
     "content": ""
+  },
+  "2026-10-26": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Ăn",
+        "amount": 200000
+      }
+    ],
+    "tasks": [
+      "Cam chợ gạo"
+    ],
+    "content": "Cam chợ gạo"
   }
 }
