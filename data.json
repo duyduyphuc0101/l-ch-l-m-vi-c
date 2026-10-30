@@ -720,5 +720,20 @@
       "Cam chợ gạo"
     ],
     "content": "Cam chợ gạo"
+  },
+  "2026-10-28": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Cơm",
+        "amount": 150000
+      }
+    ],
+    "tasks": [],
+    "content": ""
   }
 }
