@@ -735,5 +735,20 @@
     ],
     "tasks": [],
     "content": ""
+  },
+  "2026-10-29": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Cơm",
+        "amount": 150000
+      }
+    ],
+    "tasks": [],
+    "content": ""
   }
 }
