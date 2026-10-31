@@ -339,16 +339,6 @@
     ],
     "content": "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
   },
-  "2026-10-18": {
-    "type": "off",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
-  },
   "debts": [
     {
       "name": "Mua xe Future 125fi",
@@ -380,6 +370,55 @@
       }
     }
   ],
+  "materialsRoots": [
+    {
+      "id": "mroot-1792768514481",
+      "text": "Đi nẹp vào tường",
+      "notes": "",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mnode-1792768523981",
+          "text": "vít bắn",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768536593",
+          "text": "tắt kê",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768543709",
+          "text": "búa",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768548256",
+          "text": "thang",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        }
+      ]
+    }
+  ],
+  "2026-10-18": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
+  },
   "2026-10-19": {
     "type": "full",
     "isOvertime": false,
@@ -612,45 +651,6 @@
       ]
     }
   ],
-  "materialsRoots": [
-    {
-      "id": "mroot-1792768514481",
-      "text": "Đi nẹp vào tường",
-      "notes": "",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mnode-1792768523981",
-          "text": "vít bắn",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768536593",
-          "text": "tắt kê",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768543709",
-          "text": "búa",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768548256",
-          "text": "thang",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        }
-      ]
-    }
-  ],
   "2026-10-24": {
     "type": "full",
     "isOvertime": false,
@@ -760,5 +760,27 @@
     "expenses": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-10-31": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "xăng",
+        "amount": 70000
+      },
+      {
+        "name": "Ăn vặt",
+        "amount": 150000
+      }
+    ],
+    "tasks": [
+      "- Đi ray cho pin mặt trời",
+      "bắn óc pin mặt trời"
+    ],
+    "content": "- Đi ray cho pin mặt trời\nbắn óc pin mặt trời"
   }
 }
