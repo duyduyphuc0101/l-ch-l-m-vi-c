@@ -757,9 +757,17 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
+    "expenses": [
+      {
+        "name": "ăn",
+        "amount": 150000
+      }
+    ],
+    "tasks": [
+      "lắp cam chợ gạo",
+      "Đi nẹp, mạng hộp cho pa06"
+    ],
+    "content": "lắp cam chợ gạo\nĐi nẹp, mạng hộp cho pa06"
   },
   "2026-10-31": {
     "type": "full",
