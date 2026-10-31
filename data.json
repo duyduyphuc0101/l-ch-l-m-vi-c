@@ -320,7 +320,7 @@
     "endTime": "",
     "incomes": [
       {
-        "name": "Lắp máy tính cho anh Công pv01",
+        "name": "Lắp máy tính cho cán bộ pv01",
         "amount": 100000
       }
     ],
@@ -334,461 +334,43 @@
         "amount": 140000
       }
     ],
-    "tasks": [
-      "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
-    ],
     "content": "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
   },
-  "debts": [
+  "debts": [],
+  "materialRoots": [
     {
-      "name": "Mua xe Future 125fi",
-      "total": 40000000,
-      "monthly": 0,
-      "interest": 400000,
-      "paidPrincipal": 7000000,
-      "interestRecords": {
-        "2026-07": {
-          "amount": 400000,
-          "isPaid": true
-        },
-        "2026-08": {
-          "amount": 400000,
-          "isPaid": false
-        },
-        "2026-09": {
-          "amount": 400000,
-          "isPaid": false
-        },
-        "2026-10": {
-          "amount": 400000,
-          "isPaid": false
-        },
-        "2026-11": {
-          "amount": 400000,
-          "isPaid": false
-        }
-      }
-    }
-  ],
-  "materialsRoots": [
-    {
-      "id": "mroot-1792768514481",
-      "text": "Đi nẹp vào tường",
-      "notes": "",
+      "id": "mroot-1",
+      "text": "Công trình Nhà ở - Hạng mục Phần Thô",
+      "notes": "Danh sách vật tư chính",
       "color": "emerald",
       "expanded": true,
       "children": [
         {
-          "id": "mnode-1792768523981",
-          "text": "vít bắn",
-          "notes": "",
+          "id": "mn-1",
+          "text": "Vật tư Sắt Thép",
+          "notes": "Thép Pomina",
+          "color": "emerald",
           "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768536593",
-          "text": "tắt kê",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768543709",
-          "text": "búa",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768548256",
-          "text": "thang",
-          "notes": "",
-          "expanded": true,
-          "children": []
+          "children": [
+            {
+              "id": "mn-1-1",
+              "text": "Sắt phi 16 (50 cây)",
+              "notes": "Dùng cho dầm cột",
+              "color": "emerald",
+              "expanded": true,
+              "children": []
+            },
+            {
+              "id": "mn-1-2",
+              "text": "Sắt phi 10 (100 cây)",
+              "notes": "Dùng làm đai",
+              "color": "emerald",
+              "expanded": true,
+              "children": []
+            }
+          ]
         }
       ]
     }
-  ],
-  "2026-10-18": {
-    "type": "off",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
-  },
-  "2026-10-19": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Nước",
-        "amount": 30000
-      },
-      {
-        "name": "Cơm",
-        "amount": 30000
-      }
-    ],
-    "tasks": [
-      "- cấu hình cam trung an"
-    ],
-    "content": "- cấu hình cam trung an"
-  },
-  "2026-10-20": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Ăn",
-        "amount": 78000
-      },
-      {
-        "name": "Nước",
-        "amount": 50000
-      }
-    ],
-    "tasks": [
-      "- kiểm tra an toàn thông tin",
-      "Khảo sát cap trung an",
-      "Khảo sát pc01"
-    ],
-    "content": "- kiểm tra an toàn thông tin\nKhảo sát cap trung an\nKhảo sát pc01"
-  },
-  "2026-10-21": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Phở",
-        "amount": 45000
-      },
-      {
-        "name": "Chanh muối",
-        "amount": 10000
-      },
-      {
-        "name": "Xăng",
-        "amount": 75000
-      }
-    ],
-    "tasks": [
-      "Lắp cam chợ gạo"
-    ],
-    "content": "Lắp cam chợ gạo"
-  },
-  "2026-10-22": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Ăn",
-        "amount": 138000
-      }
-    ],
-    "tasks": [
-      "Thay cam chợ gạo",
-      "Đi dây mạng pc06"
-    ],
-    "content": "Thay cam chợ gạo\nĐi dây mạng pc06"
-  },
-  "2026-10-23": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Cơm trưa",
-        "amount": 66000
-      },
-      {
-        "name": "Cơm chiều",
-        "amount": 44000
-      }
-    ],
-    "tasks": [
-      "Đi dây mạng pa06"
-    ],
-    "content": "Đi dây mạng pa06"
-  },
-  "materialRoots": [
-    {
-      "id": "mroot-1792770017841",
-      "text": "Đi nẹp vào tường để đi dây mạng",
-      "notes": "",
-      "color": "emerald",
-      "expanded": false,
-      "children": [
-        {
-          "id": "mn-1792770037386",
-          "text": "Máy bắn đinh",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770045914",
-          "text": "Đinh",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770146737",
-          "text": "Máy khoan",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770154938",
-          "text": "Mũi khoan",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770161402",
-          "text": "máy bắn vít",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770175060",
-          "text": "đầu pake",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770195938",
-          "text": "Tắc kê",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770237092",
-          "text": "Ốc bắn tắc kê đầu 3 ke hoặc đầu điếu",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770245446",
-          "text": "đầu điếu",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770266928",
-          "text": "máy hút bụi",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        }
-      ]
-    },
-    {
-      "id": "mroot-1792770424142",
-      "text": "Bấm đầu dây mạng",
-      "notes": "",
-      "color": "emerald",
-      "expanded": false,
-      "children": [
-        {
-          "id": "mn-1792770442967",
-          "text": "Kìm bấm mạng",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770476903",
-          "text": "Hạt mạng",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mn-1792770491215",
-          "text": "Máy test mạng, dò mạng",
-          "notes": "",
-          "color": "emerald",
-          "expanded": true,
-          "children": []
-        }
-      ]
-    }
-  ],
-  "2026-10-24": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Cơm",
-        "amount": 150000
-      }
-    ],
-    "tasks": [
-      "Cấu hình cam trung an"
-    ],
-    "content": "Cấu hình cam trung an"
-  },
-  "2026-10-25": {
-    "type": "off",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Tiền mạng",
-        "amount": 120000
-      }
-    ],
-    "tasks": [],
-    "content": ""
-  },
-  "2026-10-26": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Ăn",
-        "amount": 200000
-      }
-    ],
-    "tasks": [
-      "Cam chợ gạo"
-    ],
-    "content": "Cam chợ gạo"
-  },
-  "2026-10-27": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Màn đt",
-        "amount": 1700000
-      },
-      {
-        "name": "Ăn xăng",
-        "amount": 200000
-      }
-    ],
-    "tasks": [
-      "Cam chợ gạo"
-    ],
-    "content": "Cam chợ gạo"
-  },
-  "2026-10-28": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Cơm",
-        "amount": 150000
-      }
-    ],
-    "tasks": [],
-    "content": ""
-  },
-  "2026-10-29": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Cơm",
-        "amount": 150000
-      }
-    ],
-    "tasks": [],
-    "content": ""
-  },
-  "2026-10-30": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "ăn",
-        "amount": 150000
-      }
-    ],
-    "tasks": [
-      "lắp cam chợ gạo",
-      "Đi nẹp, mạng hộp cho pa06"
-    ],
-    "content": "lắp cam chợ gạo\nĐi nẹp, mạng hộp cho pa06"
-  },
-  "2026-10-31": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "xăng",
-        "amount": 70000
-      },
-      {
-        "name": "Ăn vặt",
-        "amount": 150000
-      }
-    ],
-    "tasks": [
-      "- Đi ray cho pin mặt trời",
-      "bắn óc pin mặt trời"
-    ],
-    "content": "- Đi ray cho pin mặt trời\nbắn óc pin mặt trời"
-  }
+  ]
 }
