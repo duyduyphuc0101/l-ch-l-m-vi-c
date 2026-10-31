@@ -664,6 +664,16 @@
         "amount": 150000
       }
     ],
+    "todos": [
+      {
+        "text": "ádfgh",
+        "done": false
+      },
+      {
+        "text": "dfg",
+        "done": false
+      }
+    ],
     "tasks": [
       "- Đi ray cho pin mặt trời",
       "bắn óc pin mặt trời"
