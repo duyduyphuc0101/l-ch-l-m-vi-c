@@ -667,7 +667,7 @@
     "todos": [
       {
         "text": "ádfgh",
-        "done": false
+        "done": true
       },
       {
         "text": "dfg",
