@@ -680,5 +680,15 @@
     "expenses": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-03": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
   }
 }
