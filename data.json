@@ -688,8 +688,10 @@
     "endTime": "",
     "incomes": [],
     "expenses": [],
-    "tasks": [],
-    "content": ""
+    "tasks": [
+      "Lắp điện mặt trời"
+    ],
+    "content": "Lắp điện mặt trời"
   },
   "2026-11-04": {
     "type": "full",
