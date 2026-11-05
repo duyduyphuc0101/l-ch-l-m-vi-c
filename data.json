@@ -678,8 +678,10 @@
     "endTime": "",
     "incomes": [],
     "expenses": [],
-    "tasks": [],
-    "content": ""
+    "tasks": [
+      "Kéo mạng pa06"
+    ],
+    "content": "Kéo mạng pa06"
   },
   "2026-11-03": {
     "type": "half-pm",
