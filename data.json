@@ -717,8 +717,17 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
+    "expenses": [
+      {
+        "name": "Hủ tiếu",
+        "amount": 22000
+      }
+    ],
+    "tasks": [
+      "Khảo sát pc02",
+      "Báo cáo cam trung an",
+      "Xem thiết bị điện mặt trời"
+    ],
+    "content": "Khảo sát pc02\nBáo cáo cam trung an\nXem thiết bị điện mặt trời"
   }
 }
