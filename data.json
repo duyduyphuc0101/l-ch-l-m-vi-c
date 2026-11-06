@@ -742,7 +742,12 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
+    "expenses": [
+      {
+        "name": "Bánh mì",
+        "amount": 15000
+      }
+    ],
     "tasks": [],
     "content": ""
   }
