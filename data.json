@@ -750,6 +750,10 @@
       {
         "name": "Bánh mì",
         "amount": 15000
+      },
+      {
+        "name": "Nhậu",
+        "amount": 100000
       }
     ],
     "tasks": [],
