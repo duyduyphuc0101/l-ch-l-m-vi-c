@@ -754,9 +754,16 @@
       {
         "name": "Nhậu",
         "amount": 100000
+      },
+      {
+        "name": "Cơm trưa",
+        "amount": 270000
       }
     ],
-    "tasks": [],
-    "content": ""
+    "tasks": [
+      "Lắp điện mặt trời",
+      "Chuyển cáp ph10"
+    ],
+    "content": "Lắp điện mặt trời\nChuyển cáp ph10"
   }
 }
