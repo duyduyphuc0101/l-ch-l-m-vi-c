@@ -350,6 +350,63 @@
       }
     }
   ],
+  "2026-10-19": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Nước",
+        "amount": 30000
+      },
+      {
+        "name": "Cơm",
+        "amount": 30000
+      }
+    ],
+    "tasks": [
+      "- cấu hình cam trung an"
+    ],
+    "content": "- cấu hình cam trung an"
+  },
+  "materialRoots": [
+    {
+      "id": "mroot-1",
+      "text": "Công trình Nhà ở - Hạng mục Phần Thô",
+      "notes": "Danh sách vật tư chính",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mn-1",
+          "text": "Vật tư Sắt Thép",
+          "notes": "Thép Pomina",
+          "color": "emerald",
+          "expanded": true,
+          "children": [
+            {
+              "id": "mn-1-1",
+              "text": "Sắt phi 16 (50 cây)",
+              "notes": "Dùng cho dầm cột",
+              "color": "emerald",
+              "expanded": true,
+              "children": []
+            },
+            {
+              "id": "mn-1-2",
+              "text": "Sắt phi 10 (100 cây)",
+              "notes": "Dùng làm đai",
+              "color": "emerald",
+              "expanded": true,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "materialsRoots": [
     {
       "id": "mroot-1792768514481",
@@ -398,27 +455,6 @@
     "expenses": [],
     "tasks": [],
     "content": ""
-  },
-  "2026-10-19": {
-    "type": "full",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [
-      {
-        "name": "Nước",
-        "amount": 30000
-      },
-      {
-        "name": "Cơm",
-        "amount": 30000
-      }
-    ],
-    "tasks": [
-      "- cấu hình cam trung an"
-    ],
-    "content": "- cấu hình cam trung an"
   },
   "2026-10-20": {
     "type": "full",
@@ -507,42 +543,6 @@
     ],
     "content": "Đi dây mạng pa06"
   },
-  "materialRoots": [
-    {
-      "id": "mroot-1",
-      "text": "Công trình Nhà ở - Hạng mục Phần Thô",
-      "notes": "Danh sách vật tư chính",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mn-1",
-          "text": "Vật tư Sắt Thép",
-          "notes": "Thép Pomina",
-          "color": "emerald",
-          "expanded": true,
-          "children": [
-            {
-              "id": "mn-1-1",
-              "text": "Sắt phi 16 (50 cây)",
-              "notes": "Dùng cho dầm cột",
-              "color": "emerald",
-              "expanded": true,
-              "children": []
-            },
-            {
-              "id": "mn-1-2",
-              "text": "Sắt phi 10 (100 cây)",
-              "notes": "Dùng làm đai",
-              "color": "emerald",
-              "expanded": true,
-              "children": []
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "2026-10-24": {
     "type": "full",
     "isOvertime": false,
@@ -778,5 +778,22 @@
       "Chuyển cáp ph10"
     ],
     "content": "Lắp điện mặt trời\nChuyển cáp ph10"
+  },
+  "2026-11-07": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "loans": [
+      {
+        "name": "cha",
+        "amount": 250000,
+        "isPaid": false
+      }
+    ],
+    "tasks": [],
+    "content": ""
   }
 }
