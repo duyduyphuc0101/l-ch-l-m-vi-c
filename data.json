@@ -791,7 +791,7 @@
       {
         "name": "cha",
         "amount": 250000,
-        "isPaid": false
+        "isPaid": true
       }
     ],
     "tasks": [],
