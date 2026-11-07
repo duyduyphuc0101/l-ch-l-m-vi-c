@@ -347,7 +347,8 @@
           "amount": 400000,
           "isPaid": false
         }
-      }
+      },
+      "deletedMonths": []
     }
   ],
   "2026-10-19": {
@@ -790,7 +791,7 @@
       {
         "name": "cha",
         "amount": 250000,
-        "isPaid": false
+        "isPaid": true
       }
     ],
     "tasks": [],
