@@ -819,5 +819,25 @@
     ],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-09": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Xăng",
+        "amount": 60000
+      },
+      {
+        "name": "Cafe",
+        "amount": 15000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
