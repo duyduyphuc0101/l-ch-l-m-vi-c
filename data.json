@@ -811,7 +811,12 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
+    "expenses": [
+      {
+        "name": "Nước",
+        "amount": 15000
+      }
+    ],
     "tasks": [],
     "content": ""
   }
