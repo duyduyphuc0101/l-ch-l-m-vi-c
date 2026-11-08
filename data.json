@@ -336,6 +336,16 @@
     ],
     "content": "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
   },
+  "2026-10-18": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
+  },
   "debts": [
     {
       "name": "ngân hàng",
@@ -371,91 +381,6 @@
       "- cấu hình cam trung an"
     ],
     "content": "- cấu hình cam trung an"
-  },
-  "materialRoots": [
-    {
-      "id": "mroot-1",
-      "text": "Công trình Nhà ở - Hạng mục Phần Thô",
-      "notes": "Danh sách vật tư chính",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mn-1",
-          "text": "Vật tư Sắt Thép",
-          "notes": "Thép Pomina",
-          "color": "emerald",
-          "expanded": true,
-          "children": [
-            {
-              "id": "mn-1-1",
-              "text": "Sắt phi 16 (50 cây)",
-              "notes": "Dùng cho dầm cột",
-              "color": "emerald",
-              "expanded": true,
-              "children": []
-            },
-            {
-              "id": "mn-1-2",
-              "text": "Sắt phi 10 (100 cây)",
-              "notes": "Dùng làm đai",
-              "color": "emerald",
-              "expanded": true,
-              "children": []
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "materialsRoots": [
-    {
-      "id": "mroot-1792768514481",
-      "text": "Đi nẹp vào tường",
-      "notes": "",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mnode-1792768523981",
-          "text": "vít bắn",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768536593",
-          "text": "tắt kê",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768543709",
-          "text": "búa",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768548256",
-          "text": "thang",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        }
-      ]
-    }
-  ],
-  "2026-10-18": {
-    "type": "off",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
   },
   "2026-10-20": {
     "type": "full",
@@ -544,6 +469,81 @@
     ],
     "content": "Đi dây mạng pa06"
   },
+  "materialRoots": [
+    {
+      "id": "mroot-1",
+      "text": "Công trình Nhà ở - Hạng mục Phần Thô",
+      "notes": "Danh sách vật tư chính",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mn-1",
+          "text": "Vật tư Sắt Thép",
+          "notes": "Thép Pomina",
+          "color": "emerald",
+          "expanded": true,
+          "children": [
+            {
+              "id": "mn-1-1",
+              "text": "Sắt phi 16 (50 cây)",
+              "notes": "Dùng cho dầm cột",
+              "color": "emerald",
+              "expanded": true,
+              "children": []
+            },
+            {
+              "id": "mn-1-2",
+              "text": "Sắt phi 10 (100 cây)",
+              "notes": "Dùng làm đai",
+              "color": "emerald",
+              "expanded": true,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "materialsRoots": [
+    {
+      "id": "mroot-1792768514481",
+      "text": "Đi nẹp vào tường",
+      "notes": "",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mnode-1792768523981",
+          "text": "vít bắn",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768536593",
+          "text": "tắt kê",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768543709",
+          "text": "búa",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768548256",
+          "text": "thang",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        }
+      ]
+    }
+  ],
   "2026-10-24": {
     "type": "full",
     "isOvertime": false,
@@ -794,6 +794,16 @@
         "isPaid": false
       }
     ],
+    "tasks": [],
+    "content": ""
+  },
+  "2026-11-08": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
     "tasks": [],
     "content": ""
   }
