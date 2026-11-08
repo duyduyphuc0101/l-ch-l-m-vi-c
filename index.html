@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🌿 Nhật Ký Công Việc, Thu Chi, Nợ Lãi & Sơ Đồ Vật Tư 🌿</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Hệ Thống Quản Lý Công Việc, Tài Chính, Nợ Lãi & Vật Tư</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,331 +16,554 @@
     </script>
     <style>
         :root {
-            --primary: #2e7d32;
-            --primary-light: #4caf50;
-            --primary-bg: #e8f5e9;
-            --primary-border: #c8e6c9;
-            --income: #1565c0;
-            --income-bg: #e3f2fd;
-            --income-border: #bbdefb;
-            --expense: #c62828;
-            --expense-bg: #ffebee;
-            --expense-border: #ffcdd2;
-            --debt: #e65100;
-            --debt-bg: #fff3e0;
-            --debt-border: #ffe0b2;
-            --github: #24292f;
-            --github-bg: #f6f8fa;
-            --github-border: #d0d7de;
-            --text-main: #1e293b;
+            /* Bảng màu Khoa học - Chuẩn SaaS Tài chính */
+            --bg-app: #f1f5f9;
+            --bg-surface: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border-light: #e2e8f0;
+            --border-mid: #cbd5e1;
+
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
             --text-muted: #64748b;
-            --radius-lg: 24px;
-            --shadow-soft: 0 10px 35px -5px rgba(46, 125, 50, 0.12), 0 4px 15px -3px rgba(0, 0, 0, 0.04);
-            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.03);
+
+            /* Màu ngữ nghĩa (Semantic Colors) */
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-bg: #ecfdf5;
+            --primary-border: #a7f3d0;
+
+            --income: #0284c7;
+            --income-bg: #f0f9ff;
+            --income-border: #bae6fd;
+
+            --expense: #e11d48;
+            --expense-bg: #fff1f2;
+            --expense-border: #fecdd3;
+
+            --debt: #d97706;
+            --debt-bg: #fffbeb;
+            --debt-border: #fde68a;
+
+            --loan: #7c3aed;
+            --loan-bg: #f5f3ff;
+            --loan-border: #ddd6fe;
+
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+            --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.07), 0 1px 2px -1px rgba(15, 23, 42, 0.07);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
         }
 
-        *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        /* Tùy chỉnh thanh cuộn tinh tế */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 6px; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
         body {
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 20px 14px;
-            background: linear-gradient(135deg, #e0f2f1 0%, #e8f5e9 50%, #dcedc8 100%);
-            background-attachment: fixed;
-            color: var(--text-main);
+            padding: 0;
+            background-color: var(--bg-app);
+            color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.5;
-        }
-        
-        .container {
-            max-width: 1440px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.94);
-            padding: 24px 28px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-soft);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* HEADER HIỆN ĐẠI & LINH HOẠT */
-        .header {
+        .num-tabular {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ================= TOP NAVIGATION BAR ================= */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 10px 20px;
+        }
+        .topbar-inner {
+            max-width: 1440px;
+            margin: 0 auto;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 22px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid var(--primary-bg);
+            gap: 16px;
             flex-wrap: wrap;
-            gap: 14px;
         }
-        .header-left {
+        .brand-box {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: #f8fafc;
-            padding: 6px 10px;
-            border-radius: 28px;
-            border: 1px solid #e2e8f0;
+            gap: 12px;
         }
-        .header-left h2 {
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            box-shadow: var(--shadow-xs);
+        }
+        .brand-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
             margin: 0;
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--primary);
-            min-width: 175px;
-            text-align: center;
-            letter-spacing: -0.2px;
+            line-height: 1.2;
         }
-        
-        /* HỆ THỐNG NÚT BẤM (BUTTONS) */
-        .btn {
-            height: 40px;
-            padding: 0 15px;
-            border: 1.5px solid var(--primary-border);
-            background-color: white;
-            border-radius: 14px;
-            cursor: pointer;
-            font-size: 13.5px;
-            font-weight: 700;
+        .brand-subtitle {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Segmented Workspace Switcher */
+        .nav-tabs {
+            display: inline-flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            gap: 4px;
+        }
+        .nav-tab {
+            height: 34px;
+            padding: 0 14px;
+            border-radius: 7px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
             font-family: inherit;
-            color: var(--primary);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+        .nav-tab:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .nav-tab.active {
+            background: var(--bg-surface);
+            color: var(--primary-dark);
+            font-weight: 700;
+            box-shadow: var(--shadow-xs);
+        }
+        .nav-tab.active-debt {
+            background: var(--bg-surface);
+            color: #b45309;
+            font-weight: 700;
+            box-shadow: var(--shadow-xs);
+        }
+
+        /* System Tools Right */
+        .system-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .save-badge {
+            font-size: 12px;
+            color: var(--primary-dark);
+            background: var(--primary-bg);
+            border: 1px solid var(--primary-border);
+            padding: 5px 11px;
+            border-radius: 999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        /* ================= BUTTON SYSTEM ================= */
+        .btn {
+            height: 36px;
+            padding: 0 13px;
+            border: 1px solid var(--border-mid);
+            background: var(--bg-surface);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--text-primary);
+            transition: all 0.15s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             white-space: nowrap;
             text-decoration: none;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-xs);
         }
         .btn:hover {
-            background-color: var(--primary-bg);
-            border-color: #81c784;
-            transform: translateY(-1.5px);
-            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.1);
+            background: var(--bg-subtle);
+            border-color: #94a3b8;
         }
         .btn:active {
-            transform: translateY(0);
-        }
-        .btn-icon-nav {
-            width: 36px;
-            height: 36px;
-            padding: 0;
-            border-radius: 50%;
-            font-size: 14px;
-            border-color: #cbd5e1;
+            transform: translateY(1px);
         }
         .btn-primary {
-            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.22);
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary-dark);
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #43a047 0%, #1b5e20 100%);
-            color: white;
-            box-shadow: 0 6px 16px rgba(46, 125, 50, 0.3);
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            color: #ffffff;
         }
         .btn-github {
-            background-color: var(--github-bg);
-            color: var(--github);
-            border-color: var(--github-border);
+            background: #24292f;
+            color: #ffffff;
+            border-color: #24292f;
         }
         .btn-github:hover {
-            background-color: #eaeef2;
-            border-color: #afb8c1;
-            color: #000;
+            background: #32383f;
+            color: #ffffff;
         }
         .btn-debt {
-            background-color: var(--debt-bg);
-            color: var(--debt);
+            background: var(--debt-bg);
+            color: #b45309;
             border-color: var(--debt-border);
         }
         .btn-debt:hover {
-            background-color: #ffe0b2;
-            border-color: #fb8c00;
-        }
-        .btn-materials {
-            background-color: #f1f8e9;
-            color: #2e7d32;
-            border-color: #a5d6a7;
-        }
-        .btn-materials:hover {
-            background-color: #dcedc8;
-            border-color: #81c784;
+            background: #fef3c7;
+            border-color: #f59e0b;
         }
         .btn-small {
-            height: 32px;
-            padding: 0 11px;
+            height: 28px;
+            padding: 0 10px;
             font-size: 12px;
-            border-radius: 9px;
+            border-radius: 6px;
+        }
+        .btn-icon-nav {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: 6px;
+            font-size: 12px;
+            border: 1px solid var(--border-light);
+            background: var(--bg-surface);
+            color: var(--text-secondary);
+        }
+        .btn-icon-nav:hover {
+            background: var(--bg-subtle);
+            color: var(--text-primary);
+            border-color: var(--border-mid);
         }
         .btn-danger {
-            width: 36px;
-            height: 36px;
+            width: 30px;
+            height: 30px;
             padding: 0;
             flex-shrink: 0;
-            background-color: var(--expense-bg);
+            background: var(--expense-bg);
             color: var(--expense);
             border: 1px solid var(--expense-border);
-            border-radius: 10px;
-            font-size: 13px;
+            border-radius: 6px;
+            font-size: 12px;
         }
         .btn-danger:hover {
-            background-color: var(--expense-border);
-            color: #b71c1c;
-            transform: scale(1.04);
+            background: var(--expense);
+            color: white;
+            border-color: var(--expense);
         }
 
-        .controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .save-badge {
-            font-size: 12.5px;
-            color: var(--primary);
-            background: var(--primary-bg);
-            border: 1px solid var(--primary-border);
-            padding: 7px 14px;
-            border-radius: 14px;
-            font-weight: 700;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        /* ================= MAIN CONTAINER & VIEWS ================= */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        /* CHUYỂN ĐỔI MÀN HÌNH */
-        .app-view { display: none; animation: fadeIn 0.2s ease-out; }
-        .app-view.active { display: block; }
+        .app-view { display: none; }
+        .app-view.active { display: block; animation: fadeIn 0.2s ease-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* LƯỚI LỊCH (CALENDAR GRID) */
+        /* ================= SUB-HEADER: MONTH CONTROL BAR ================= */
+        .workspace-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-surface);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xs);
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .month-navigator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .month-navigator h2 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-primary);
+            min-width: 165px;
+            text-align: center;
+            letter-spacing: -0.3px;
+        }
+        .toolbar-hint {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .legend-dot {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .legend-dot span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* ================= SCIENTIFIC KPI SUMMARY STRIP ================= */
+        .kpi-section-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .kpi-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            box-shadow: var(--shadow-xs);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--border-mid);
+        }
+        .kpi-card.kpi-income::before { background: var(--income); }
+        .kpi-card.kpi-expense::before { background: var(--expense); }
+        .kpi-card.kpi-loan::before { background: var(--loan); }
+        .kpi-card.kpi-net-pos::before { background: var(--primary); }
+        .kpi-card.kpi-net-neg::before { background: var(--expense); }
+
+        .kpi-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .kpi-value {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            font-variant-numeric: tabular-nums;
+            line-height: 1.2;
+        }
+        .kpi-sub {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Compact Attendance Strip */
+        .work-stat-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .work-metric {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-xs);
+        }
+        .work-metric-label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .work-metric-val {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+            background: var(--bg-subtle);
+            padding: 3px 9px;
+            border-radius: 6px;
+            border: 1px solid var(--border-light);
+        }
+
+        /* ================= SCIENTIFIC CALENDAR GRID ================= */
+        .calendar-wrapper {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xs);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, minmax(0, 1fr));
-            gap: 10px;
-            margin-bottom: 26px;
+            background: var(--border-light);
+            gap: 1px;
         }
         .weekday {
             text-align: center;
             padding: 10px 4px;
             font-weight: 700;
-            color: var(--primary);
-            background: var(--primary-bg);
-            border-radius: 12px;
-            font-size: 13px;
+            color: var(--text-secondary);
+            background: #f8fafc;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border: 1px solid var(--primary-border);
         }
-        
+        .weekday:first-child {
+            color: var(--expense);
+            background: #fffafa;
+        }
+
         .day {
-            background-color: white;
+            background: var(--bg-surface);
             min-height: 132px;
             padding: 8px;
             cursor: pointer;
-            border-radius: 16px;
-            box-shadow: var(--shadow-card);
-            transition: all 0.2s ease;
+            transition: background-color 0.12s ease;
             display: flex;
             flex-direction: column;
-            border: 1.5px solid #edf2f7;
-            overflow: hidden;
+            gap: 5px;
             position: relative;
         }
         .day:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.14);
-            border-color: #81c784;
-            z-index: 2;
+            background-color: #f8fafc;
         }
-        
+        .day.other-month {
+            background-color: #f8fafc;
+            opacity: 0.45;
+        }
+        .day.today {
+            background-color: #f0fdf4;
+            box-shadow: inset 0 0 0 2px var(--primary);
+        }
+
         .day-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            gap: 4px;
         }
         .day-number {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            color: var(--text-main);
-            background: #f1f5f9;
-        }
-        .today {
-            border-color: var(--primary-light);
-            background-color: #f9fef9;
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
         }
         .today .day-number {
-            background: linear-gradient(135deg, #66bb6a 0%, #2e7d32 100%);
+            background: var(--primary);
             color: white;
-            box-shadow: 0 2px 6px rgba(46, 125, 50, 0.35);
-        }
-        .other-month {
-            opacity: 0.42;
-            background-color: #f8fafc;
+            font-weight: 800;
         }
 
-        .work-status-container {
-            flex-grow: 1;
-            border-radius: 10px;
-            padding: 5px;
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            overflow: hidden;
-        }
-        
-        .slot-full { background-color: #e8f5e9; color: #1b5e20; border: 1px solid #c8e6c9; }
-        .slot-full.overtime { background-color: #dcedc8; color: #1b5e20; border: 1.5px solid #66bb6a; }
-        .slot-half-am { background: linear-gradient(to bottom, #e8f5e9 50%, #ffffff 50%); border: 1.5px solid #a5d6a7; color: #1b5e20; }
-        .slot-half-pm { background: linear-gradient(to top, #e8f5e9 50%, #ffffff 50%); border: 1.5px solid #a5d6a7; color: #1b5e20; }
-        .slot-off { background-color: #f8fafc; border: 1.5px dashed #cbd5e1; color: #64748b; }
-        .slot-expense-only { background-color: #fff; border: 1.5px solid var(--expense-border); }
-        .slot-income-only { background-color: #fff; border: 1.5px solid var(--income-border); }
-        .slot-both-only { background-color: #fff; border: 1.5px solid #80cbc4; }
-        .slot-task-only { background-color: #f8fafc; border: 1.5px dashed #81c784; color: var(--primary); }
-
-        .status-text {
+        /* Work Shift Pill inside Day Header */
+        .shift-pill {
+            font-size: 10px;
             font-weight: 700;
-            text-align: center;
-            font-size: 11px;
-            padding: 2px 4px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.78);
+            padding: 2px 6px;
+            border-radius: 4px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1.3;
         }
+        .shift-full { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .shift-half { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .shift-off { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+        .work-status-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
+        }
+
         .ot-time-badge {
             font-size: 10px;
             font-weight: 700;
-            text-align: center;
-            color: #1b5e20;
-            background: rgba(76, 175, 80, 0.18);
-            border-radius: 5px;
-            padding: 1px 4px;
+            color: #065f46;
+            background: #d1fae5;
+            border-radius: 4px;
+            padding: 1.5px 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            width: fit-content;
+            font-variant-numeric: tabular-nums;
         }
 
         .badges-wrap {
@@ -348,599 +571,634 @@
             flex-direction: column;
             gap: 3px;
         }
-        .income-badge, .expense-badge {
-            font-size: 10.5px;
+        .fin-pill {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
             font-weight: 700;
-            text-align: center;
-            padding: 2px 5px;
-            border-radius: 6px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-variant-numeric: tabular-nums;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .income-badge {
-            background-color: var(--income-bg);
-            color: var(--income);
-            border: 1px solid var(--income-border);
+            background: var(--income-bg);
+            color: #0369a1;
+            border-left: 2.5px solid var(--income);
         }
         .expense-badge {
-            background-color: var(--expense-bg);
-            color: var(--expense);
-            border: 1px solid var(--expense-border);
+            background: var(--expense-bg);
+            color: #be123c;
+            border-left: 2.5px solid var(--expense);
+        }
+        .loan-badge {
+            background: var(--loan-bg);
+            color: #6d28d9;
+            border-left: 2.5px solid var(--loan);
+        }
+        .loan-badge.repaid {
+            text-decoration: line-through;
+            opacity: 0.55;
         }
 
         .job-content-preview {
-            padding: 4px 6px;
-            font-size: 11px;
-            font-weight: 600;
-            line-height: 1.35;
             margin-top: auto;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 6px;
-            color: var(--text-main);
-            border: 1px solid rgba(0,0,0,0.05);
+            padding-top: 4px;
+            border-top: 1px dashed #e2e8f0;
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.35;
         }
         .job-task-item {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-weight: 500;
         }
 
-        /* BẢNG THỐNG KÊ (STATS PANEL) */
+        /* ================= ANALYTICAL PANEL (2x2 SCIENTIFIC GRID) ================= */
         .stats-panel {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 22px 24px;
-            border: 1.5px solid var(--primary-border);
-            box-shadow: var(--shadow-card);
+            background: transparent;
+            padding: 0;
         }
-        .stats-panel h3 {
-            margin: 0 0 18px 0;
-            color: var(--primary);
-            font-size: 19px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid var(--primary-bg);
-            padding-bottom: 12px;
-        }
-        
-        .work-stat-cards {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            margin-bottom: 20px;
-        }
-        .stat-item {
-            background: #f8fafc;
-            padding: 15px 16px;
-            border-radius: 16px;
-            border: 1.5px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-        .stat-item:hover {
-            transform: translateY(-2px);
-            border-color: #cbd5e1;
-        }
-        .stat-title {
-            font-weight: 700;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-size: 13px;
-        }
-        .stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .balance-box {
-            background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e9 100%);
-            border: 1.5px solid #a5d6a7;
-            border-radius: 18px;
-            padding: 18px 20px;
-            margin-bottom: 20px;
-        }
-        .balance-header {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .balance-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-        .balance-card {
-            background: white;
-            padding: 15px;
-            border-radius: 14px;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-        }
-
-        .finance-details-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            margin-bottom: 20px;
-        }
-        .detail-box {
-            background: white;
-            padding: 18px 20px;
-            border-radius: 16px;
-            border: 1.5px solid #e2e8f0;
-        }
-        .detail-box-header {
-            font-size: 15.5px;
-            font-weight: 700;
-            padding-bottom: 10px;
-            margin-bottom: 12px;
-            border-bottom: 1.5px dashed #e2e8f0;
+        .section-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .section-bar h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
             gap: 8px;
         }
-        .expense-summary {
+
+        .analysis-grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .detail-box {
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xs);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .detail-box-header {
+            font-size: 13.5px;
+            font-weight: 700;
+            padding: 12px 16px;
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .detail-box-header:hover {
+            background: #f1f5f9;
+        }
+        .detail-box.collapsed .detail-box-header {
+            border-bottom-color: transparent;
+        }
+        .detail-box-body {
+            padding: 14px 16px;
+            max-height: 360px;
+            overflow-y: auto;
+        }
+        .detail-box.collapsed .detail-box-body {
+            display: none;
+        }
+        .collapse-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 5px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            font-size: 10px;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease;
+        }
+        .detail-box.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+
+        .split-sub-cols {
             display: grid;
             grid-template-columns: 1fr 1.3fr;
             gap: 16px;
         }
-        .expense-col.border-left {
-            border-left: 1.5px dashed var(--expense-border);
-            padding-left: 16px;
-        }
-        .expense-col.border-left-income {
-            border-left: 1.5px dashed var(--income-border);
-            padding-left: 16px;
+        .sub-col-title {
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .stat-list {
-            font-size: 13.5px;
-            color: var(--text-main);
+            font-size: 13px;
+            color: var(--text-primary);
             padding-left: 0;
             margin: 0;
         }
         .stat-list li {
             list-style-type: none;
             border-bottom: 1px dashed #e2e8f0;
-            padding: 7px 0;
+            padding: 7px 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 10px;
+            font-variant-numeric: tabular-nums;
         }
         .stat-list li:last-child { border-bottom: none; }
+        .stat-list li:hover { background-color: var(--bg-subtle); border-radius: 4px; }
 
-        /* GIAO DIỆN QUẢN LÝ NỢ (DEBT VIEW) */
+        /* ================= VIEW 2: DEBT & INTEREST MANAGEMENT ================= */
         .debt-dashboard {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 22px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
         .debt-card {
-            background: white;
-            padding: 18px;
-            border-radius: 16px;
-            border: 1.5px solid var(--debt-border);
-            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.04);
+            background: var(--bg-surface);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xs);
         }
         .debt-table-wrapper {
-            background: white;
-            border-radius: 16px;
-            padding: 18px;
-            border: 1.5px solid #e2e8f0;
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xs);
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
         .debt-table {
             width: 100%;
-            min-width: 780px;
+            min-width: 820px;
             border-collapse: collapse;
             font-size: 13.5px;
             text-align: left;
         }
         .debt-table th {
-            background: #fff8f0;
-            color: var(--debt);
-            padding: 12px 14px;
+            background: var(--bg-subtle);
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
             font-weight: 700;
-            border-bottom: 2px solid var(--debt-border);
+            border-bottom: 1px solid var(--border-light);
             white-space: nowrap;
         }
         .debt-table td {
-            padding: 12px 14px;
-            border-bottom: 1px dashed #e2e8f0;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-light);
             vertical-align: top;
+            font-variant-numeric: tabular-nums;
         }
-        .debt-table tr:hover { background-color: #fafafa; }
+        .debt-table tr:last-child td { border-bottom: none; }
+        .debt-table tr:hover td { background-color: #fcfcfd; }
 
-        /* HỘP THOẠI (MODAL) */
+        .debt-progress-track {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .debt-progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 999px;
+        }
+
+        /* ================= MODALS ================= */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(4px);
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            padding: 14px;
+            padding: 16px;
         }
         .modal-content {
-            background-color: white;
-            padding: 24px 26px;
-            border-radius: 22px;
+            background: var(--bg-surface);
+            padding: 24px;
+            border-radius: var(--radius-lg);
             width: 100%;
-            max-width: 540px;
-            max-height: 90vh;
+            max-width: 640px;
+            max-height: 92vh;
             overflow-y: auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 2px solid var(--primary-bg);
-            animation: modalPop 0.2s ease-out;
-        }
-        @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.15);
+            border: 1px solid var(--border-light);
         }
         .modal-content h3 {
             margin: 0 0 16px 0;
-            color: var(--primary);
-            text-align: center;
-            font-size: 20px;
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 800;
             padding-bottom: 12px;
-            border-bottom: 2px solid var(--primary-bg);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        
+
+        .modal-section-label {
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
         .radio-group {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
         }
         .radio-group label {
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            padding: 10px 12px;
-            border-radius: 12px;
-            border: 1.5px solid #e2e8f0;
-            transition: all 0.2s;
+            padding: 9px 11px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
             font-weight: 600;
-            font-size: 13.5px;
-            background: #f8fafc;
+            font-size: 13px;
+            background: var(--bg-subtle);
+            transition: all 0.15s ease;
         }
         .radio-group label.full-width {
-            grid-column: 1 / -1;
-            color: var(--text-muted);
+            grid-column: span 2;
+            color: var(--text-secondary);
         }
         .radio-group label:hover {
-            background-color: var(--primary-bg);
-            border-color: #81c784;
-            color: var(--primary);
+            border-color: #94a3b8;
+            background: #f1f5f9;
+        }
+        .radio-group label:has(input:checked) {
+            background: var(--primary-bg);
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            font-weight: 700;
         }
         input[type="radio"], input[type="checkbox"] {
-            accent-color: var(--primary-light);
-            width: 17px;
-            height: 17px;
+            accent-color: var(--primary);
+            width: 16px;
+            height: 16px;
             margin: 0;
             cursor: pointer;
             flex-shrink: 0;
         }
 
         .overtime-section {
-            background: #f8fafc;
-            border: 1.5px solid var(--primary-border);
-            border-radius: 14px;
-            padding: 12px 16px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 10px 14px;
             margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .overtime-section label.main-ot {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
             font-weight: 700;
-            color: var(--primary);
-            font-size: 14px;
+            color: var(--text-primary);
+            font-size: 13.5px;
         }
         .time-range-inputs {
             display: none;
-            margin-top: 12px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--primary-border);
             align-items: center;
-            gap: 10px;
-            font-size: 13.5px;
+            gap: 8px;
+            font-size: 13px;
             font-weight: 600;
-            flex-wrap: wrap;
         }
         .time-range-inputs input[type="time"] {
-            height: 38px;
-            padding: 0 10px;
-            border: 1.5px solid var(--primary-border);
-            border-radius: 8px;
+            height: 32px;
+            padding: 0 8px;
+            border: 1px solid var(--border-mid);
+            border-radius: 6px;
             font-family: inherit;
-            font-weight: 700;
-            color: var(--text-main);
+            font-weight: 600;
+            color: var(--text-primary);
+            background: white;
             outline: none;
-            flex: 1;
-            min-width: 110px;
         }
 
+        /* Modal Form Sections */
         .form-section {
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 14px;
-            border: 1.5px solid transparent;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-light);
+            background: var(--bg-subtle);
         }
         .form-section h4 {
             margin: 0 0 10px 0;
-            font-size: 14px;
+            font-size: 13.5px;
+            font-weight: 700;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 10px;
         }
 
-        .income-section { background: #f8fbff; border-color: var(--income-border); }
-        .income-section h4 { color: var(--income); }
+        .income-section { border-left: 3.5px solid var(--income); }
+        .income-section h4 { color: #0369a1; }
 
-        .expense-section { background: #fffafb; border-color: var(--expense-border); }
-        .expense-section h4 { color: var(--expense); }
+        .expense-section { border-left: 3.5px solid var(--expense); }
+        .expense-section h4 { color: #be123c; }
 
-        .content-section { background: #f9fef9; border-color: var(--primary-border); margin-bottom: 20px; }
-        .content-section h4 { color: var(--primary); }
+        .loan-section { border-left: 3.5px solid var(--loan); }
+        .loan-section h4 { color: #6d28d9; }
 
-        .income-row, .expense-row, .task-row {
+        .content-section { border-left: 3.5px solid var(--primary); margin-bottom: 16px; }
+        .content-section h4 { color: var(--primary-dark); }
+
+        .income-row, .expense-row, .loan-row, .task-row {
             display: flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 8px;
         }
-        .income-row:last-child, .expense-row:last-child, .task-row:last-child {
+        .income-row:last-child, .expense-row:last-child, .loan-row:last-child, .task-row:last-child {
             margin-bottom: 0;
         }
 
-        .income-row input, .expense-row input, .task-row input {
-            height: 38px;
-            padding: 0 12px;
-            border-radius: 10px;
+        .income-row input:not([type="checkbox"]),
+        .expense-row input:not([type="checkbox"]),
+        .loan-row input:not([type="checkbox"]),
+        .task-row input:not([type="checkbox"]) {
+            height: 34px;
+            padding: 0 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-mid);
             font-family: inherit;
-            font-size: 13.5px;
+            font-size: 13px;
             outline: none;
             background: white;
-            transition: border-color 0.2s;
+            color: var(--text-primary);
             min-width: 0;
         }
-        .income-row input[type="text"], .expense-row input[type="text"] { flex: 1.5; }
-        .income-row input[type="number"], .expense-row input[type="number"] { flex: 1; font-weight: 700; }
-        .task-row input[type="text"] { flex: 1; font-weight: 500; }
+        .income-row input:focus, .expense-row input:focus, .loan-row input:focus, .task-row input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.12);
+        }
 
-        .income-row input { border: 1.5px solid var(--income-border); color: var(--income); }
-        .income-row input:focus { border-color: var(--income); }
+        .income-row input[type="text"], .expense-row input[type="text"], .loan-row input[type="text"] { flex: 1.6; }
+        .income-row input[type="number"], .expense-row input[type="number"], .loan-row input[type="number"] { flex: 1; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .task-row input[type="text"] { flex: 1; }
 
-        .expense-row input { border: 1.5px solid var(--expense-border); color: var(--expense); }
-        .expense-row input:focus { border-color: var(--expense); }
-
-        .task-row input { border: 1.5px solid var(--primary-border); color: var(--primary); }
-        .task-row input:focus { border-color: var(--primary-light); }
+        .loan-row.repaid input[type="text"], .loan-row.repaid input[type="number"] {
+            text-decoration: line-through;
+            opacity: 0.55;
+            background-color: #f1f5f9;
+        }
+        .loan-check-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6d28d9;
+            cursor: pointer;
+            white-space: nowrap;
+            padding: 0 9px;
+            border-radius: 6px;
+            background: var(--loan-bg);
+            border: 1px solid var(--loan-border);
+            height: 34px;
+        }
+        .loan-row.repaid .loan-check-label {
+            color: var(--primary-dark);
+            background: var(--primary-bg);
+            border-color: var(--primary-border);
+        }
 
         .modal-actions {
             display: flex;
-            gap: 12px;
-            padding-top: 6px;
+            justify-content: flex-end;
+            gap: 10px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
         }
         .modal-actions .btn {
-            flex: 1;
-            height: 42px;
-            font-size: 14.5px;
+            height: 38px;
+            padding: 0 18px;
+            font-size: 13.5px;
         }
 
-        /* GITHUB MODAL */
-        .gh-field { margin-bottom: 12px; }
-        .gh-field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
-        .gh-input { width: 100%; height: 40px; padding: 0 12px; border: 1.5px solid var(--github-border); border-radius: 10px; font-family: inherit; font-size: 13.5px; outline: none; color: var(--text-main); }
-        .gh-input:focus { border-color: var(--github); }
+        .gh-field { margin-bottom: 14px; }
+        .gh-field label { display: block; font-size: 12.5px; font-weight: 700; color: var(--text-secondary); margin-bottom: 5px; }
+        .gh-input { width: 100%; height: 38px; padding: 0 12px; border: 1px solid var(--border-mid); border-radius: 6px; font-family: inherit; font-size: 13.5px; outline: none; color: var(--text-primary); }
+        .gh-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.12); }
         textarea.gh-input { height: auto; padding: 10px 12px; }
 
-        /* SƠ ĐỒ TƯ DUY VẬT TƯ (MINDMAP STYLES) */
+        /* Mindmap background */
         .mindmap-bg {
             background-color: #f8fafc;
-            background-image: radial-gradient(#cbd5e1 1.3px, transparent 1.3px);
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
             background-size: 20px 20px;
         }
         .tree-children-guide { position: relative; }
         .tree-children-guide::before {
-            content: ''; position: absolute; left: 10px; top: 0; bottom: 10px; width: 2px; background-color: #a7f3d0; border-radius: 2px;
+            content: ''; position: absolute; left: 10px; top: 0; bottom: 10px; width: 2px; background-color: #cbd5e1;
         }
-        .connector-path { fill: none; stroke-linecap: round; transition: d 0.25s ease, stroke 0.25s ease; }
+        .connector-path { fill: none; stroke-linecap: round; transition: d 0.3s ease; }
 
-        @keyframes slideInUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .toast-enter { animation: slideInUp 0.25s ease-out forwards; }
-
-        /* ==========================================================
-           RESPONSIVE CHO LAPTOP NHỎ & MÁY TÍNH BẢNG (<= 1024px)
-           ========================================================== */
+        /* ================= RESPONSIVE BREAKPOINTS ================= */
         @media (max-width: 1024px) {
-            .container { padding: 20px; }
-            .work-stat-cards { grid-template-columns: repeat(2, 1fr); }
-            .debt-dashboard { grid-template-columns: repeat(2, 1fr); }
-            .finance-details-grid { grid-template-columns: 1fr; }
-        }
-
-        /* ==========================================================
-           RESPONSIVE CHO ĐIỆN THOẠI DI ĐỘNG (<= 768px)
-           ========================================================== */
-        @media (max-width: 768px) {
-            body { padding: 10px 6px; }
-            .container { padding: 14px 12px; border-radius: 18px; }
-            
-            .header {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
-                margin-bottom: 16px;
-                padding-bottom: 14px;
-            }
-            .header-left {
-                justify-content: space-between;
-                width: 100%;
-                padding: 4px 8px;
-            }
-            .header-left h2 { font-size: 18px; min-width: auto; }
-
-            /* Chia lưới nút điều khiển gọn đẹp trên điện thoại */
-            .controls {
-                display: grid;
+            .kpi-section-grid, .work-stat-strip, .debt-dashboard {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-                width: 100%;
             }
-            .save-badge {
-                grid-column: 1 / -1;
-                justify-content: center;
-                order: -1;
-                padding: 6px 12px;
-                font-size: 12px;
+            .analysis-grid-2x2 {
+                grid-template-columns: 1fr;
             }
-            #btn-switch-materials {
-                grid-column: 1 / -1;
-            }
-            .controls .btn {
-                width: 100%;
-                font-size: 12.5px;
-                padding: 0 10px;
-                height: 38px;
-            }
-
-            /* Tối ưu hiển thị Lịch trên điện thoại */
-            .calendar { gap: 5px; margin-bottom: 20px; }
-            .weekday { font-size: 11px; padding: 7px 0; border-radius: 8px; }
-            .day { min-height: 92px; padding: 4px; border-radius: 11px; }
-            .day-header { margin-bottom: 3px; }
-            .day-number { width: 22px; height: 22px; font-size: 11px; }
-            
-            .work-status-container { padding: 3px; gap: 2px; border-radius: 7px; }
-            .status-text { font-size: 9.5px; padding: 1px 2px; }
-            .ot-time-badge { font-size: 8.5px; padding: 1px 2px; }
-            .income-badge, .expense-badge { font-size: 9px; padding: 1px 3px; border-radius: 4px; }
-            .job-content-preview { font-size: 9.5px; padding: 2px 4px; line-height: 1.25; }
-
-            /* Thống kê & Tài chính */
-            .stats-panel { padding: 16px 14px; border-radius: 16px; }
-            .stats-panel h3 { font-size: 16.5px; margin-bottom: 14px; }
-            .work-stat-cards { gap: 10px; }
-            .stat-item { padding: 12px; border-radius: 12px; }
-            .stat-title { font-size: 12px; }
-            .stat-val { font-size: 18px; }
-
-            .balance-box { padding: 14px; border-radius: 14px; }
-            .balance-header { font-size: 13.5px; margin-bottom: 10px; }
-            .balance-cards { grid-template-columns: 1fr; gap: 8px; }
-            .balance-card { padding: 12px; display: flex; justify-content: space-between; align-items: center; }
-            .balance-card div:last-child { margin-top: 0 !important; font-size: 17px !important; }
-
-            .detail-box { padding: 14px; }
-            .expense-summary { grid-template-columns: 1fr; gap: 12px; }
-            .expense-col.border-left, .expense-col.border-left-income {
-                border-left: none;
-                padding-left: 0;
-                border-top: 1.5px dashed #e2e8f0;
-                padding-top: 12px;
-            }
-
-            /* Quản lý Nợ */
-            .debt-dashboard { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .debt-card { padding: 14px; border-radius: 14px; }
-            .debt-table-wrapper { padding: 12px; }
-
-            /* Modal trên điện thoại */
-            .modal { padding: 10px; }
-            .modal-content { padding: 18px 14px; border-radius: 18px; }
-            .modal-content h3 { font-size: 18px; }
         }
 
-        /* ==========================================================
-           ĐIỆN THOẠI MÀN HÌNH NHỎ (<= 480px)
-           ========================================================== */
+        @media (max-width: 768px) {
+            .topbar { padding: 10px 12px; }
+            .topbar-inner { flex-direction: column; align-items: stretch; gap: 10px; }
+            .brand-box { justify-content: space-between; }
+            .nav-tabs { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); }
+            .nav-tab { justify-content: center; font-size: 12px; padding: 0 6px; }
+            .system-actions { justify-content: space-between; }
+
+            .container { padding: 12px; }
+            .workspace-toolbar { flex-direction: column; align-items: stretch; }
+            .month-navigator { justify-content: space-between; width: 100%; }
+
+            .day { min-height: 95px; padding: 5px; }
+            .day-number { width: 20px; height: 20px; font-size: 11px; }
+            .shift-pill { font-size: 9px; padding: 1px 4px; }
+            .fin-pill { font-size: 9.5px; padding: 1.5px 4px; }
+            .job-content-preview { font-size: 9.5px; }
+
+            .split-sub-cols { grid-template-columns: 1fr; gap: 12px; }
+            .radio-group { grid-template-columns: 1fr 1fr; }
+            .radio-group label.full-width { grid-column: 1 / -1; }
+        }
+
         @media (max-width: 480px) {
-            .calendar { gap: 3.5px; }
-            .day { min-height: 80px; padding: 3px; border-radius: 9px; }
-            .day-number { width: 20px; height: 20px; font-size: 10.5px; }
-            .radio-group { grid-template-columns: 1fr; gap: 8px; }
-            .debt-dashboard { grid-template-columns: 1fr; }
-            .income-row, .expense-row { flex-wrap: wrap; }
-            .income-row input[type="text"], .expense-row input[type="text"] { flex: 1 1 100%; }
-            .income-row input[type="number"], .expense-row input[type="number"] { flex: 1; }
+            .kpi-section-grid, .work-stat-strip, .debt-dashboard {
+                grid-template-columns: 1fr;
+            }
+            .nav-tab span.tab-text { font-size: 11px; }
+            .income-row, .expense-row, .loan-row { flex-wrap: wrap; }
+            .income-row input[type="text"], .expense-row input[type="text"], .loan-row input[type="text"] { flex: 1 1 100%; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <div class="header-left">
-            <button class="btn btn-icon-nav" id="btn-prev" title="Tháng trước">❮</button>
-            <h2 id="month-year">Tháng 9, 2026</h2>
-            <button class="btn btn-icon-nav" id="btn-next" title="Tháng sau">❯</button>
+<!-- ================= TOP BAR KHOA HỌC ================= -->
+<header class="topbar">
+    <div class="topbar-inner">
+        <!-- Brand & Trạng thái lưu -->
+        <div class="brand-box">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div class="brand-logo"><i class="fa-solid fa-chart-pie"></i></div>
+                <div>
+                    <h1 class="brand-title">Work & Finance Manager</h1>
+                    <div class="brand-subtitle">Nhật ký Công việc • Thu Chi • Công Nợ • Vật Tư</div>
+                </div>
+            </div>
         </div>
-        <div class="controls">
+
+        <!-- Segmented Tabs chuyển đổi 3 Phân hệ rõ ràng -->
+        <nav class="nav-tabs" aria-label="Chuyển đổi phân hệ">
+            <button type="button" class="nav-tab active" id="tab-btn-calendar" onclick="switchView('calendar')">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span class="tab-text">Lịch & Thu Chi</span>
+            </button>
+            <button type="button" class="nav-tab" id="btn-switch-debt" title="Chuyển qua màn hình quản lý tiền nợ">
+                <i class="fa-solid fa-credit-card"></i>
+                <span class="tab-text">Quản Lý Nợ & Lãi</span>
+            </button>
+            <button type="button" class="nav-tab" id="btn-switch-materials" title="Xem danh sách vật tư của mỗi công việc">
+                <i class="fa-solid fa-sitemap"></i>
+                <span class="tab-text">Sơ Đồ Vật Tư</span>
+            </button>
+        </nav>
+
+        <!-- Công cụ đồng bộ & sao lưu -->
+        <div class="system-actions">
             <div class="save-badge" id="auto-save-status">✔️ Đã tự động lưu</div>
-            <button class="btn btn-materials" id="btn-switch-materials" title="Xem danh sách vật tư của mỗi công việc">🌿 Danh sách vật tư của mỗi công việc</button>
-            <button class="btn btn-debt" id="btn-switch-debt" title="Chuyển qua màn hình quản lý tiền nợ">💳 Quản lý Tiền Nợ</button>
-            <button class="btn btn-github" id="btn-gh-config" title="Cài đặt tự động lưu trên GitHub">🐙 GitHub</button>
-            <button class="btn" onclick="document.getElementById('import-file').click()">📂 Tải file</button>
+            <button class="btn btn-github" id="btn-gh-config" title="Cài đặt tự động lưu trên GitHub">
+                <i class="fa-brands fa-github"></i> GitHub
+            </button>
+            <button class="btn" onclick="document.getElementById('import-file').click()" title="Nhập dữ liệu từ file JSON">
+                <i class="fa-solid fa-folder-open"></i> Tải file
+            </button>
             <input type="file" id="import-file" style="display: none;" accept=".json">
-            <button class="btn btn-primary" id="btn-export" title="Tải file dự phòng về máy">💾 Sao lưu</button>
+            <button class="btn btn-primary" id="btn-export" title="Tải file dự phòng về máy">
+                <i class="fa-solid fa-download"></i> Sao lưu
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Thanh điều hướng Tháng/Năm dùng chung cho Lịch & Tính lãi theo tháng -->
+    <div class="workspace-toolbar">
+        <div class="month-navigator">
+            <button class="btn btn-icon-nav" id="btn-prev" title="Tháng trước"><i class="fa-solid fa-chevron-left"></i></button>
+            <h2 id="month-year">Tháng 9, 2026</h2>
+            <button class="btn btn-icon-nav" id="btn-next" title="Tháng sau"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="btn btn-small" onclick="goToToday()" style="margin-left:4px;">Hôm nay</button>
+        </div>
+        <div class="toolbar-hint">
+            <span class="legend-dot"><span style="background:var(--primary)"></span> Chấm công</span>
+            <span class="legend-dot"><span style="background:var(--income)"></span> Thu nhập</span>
+            <span class="legend-dot"><span style="background:var(--expense)"></span> Chi tiêu</span>
+            <span class="legend-dot"><span style="background:var(--loan)"></span> Cho mượn</span>
+            <span style="color:var(--text-muted); font-size:12px;">💡 Nhấp vào ô ngày bất kỳ để ghi chép</span>
         </div>
     </div>
 
-    <!-- MÀN HÌNH 1: LỊCH, CÔNG VIỆC, THU NHẬP & CHI TIÊU -->
+    <!-- ================= MÀN HÌNH 1: LỊCH, CÔNG VIỆC, THU NHẬP & CHI TIÊU ================= -->
     <div id="view-calendar" class="app-view active">
-        <div class="calendar" id="calendar"></div>
+        <!-- Bảng KPI Tổng quan (Được render động ngay trên lịch để nắm bắt tức thì) -->
+        <div id="top-kpi-overview"></div>
+
+        <!-- Lưới lịch 7 cột khoa học -->
+        <div class="calendar-wrapper">
+            <div class="calendar" id="calendar"></div>
+        </div>
+
+        <!-- Khu vực Phân tích Chi tiết 2x2 -->
         <div class="stats-panel">
-            <h3>📊 Tổng kết Công việc & Tài chính (Thu - Chi)</h3>
+            <div class="section-bar">
+                <h3><i class="fa-solid fa-chart-column" style="color:var(--primary)"></i> Báo Cáo Chi Tiết Trong Tháng</h3>
+                <div style="display:flex; gap:6px;">
+                    <button type="button" class="btn btn-small" onclick="toggleAllDetailBoxes(false)">🔽 Mở tất cả</button>
+                    <button type="button" class="btn btn-small" onclick="toggleAllDetailBoxes(true)">▶️ Thu gọn tất cả</button>
+                </div>
+            </div>
             <div id="stats-grid"></div>
         </div>
     </div>
 
-    <!-- MÀN HÌNH 2: QUẢN LÝ TIỀN NỢ & LÃI THEO THÁNG -->
+    <!-- ================= MÀN HÌNH 2: QUẢN LÝ TIỀN NỢ & LÃI THEO THÁNG ================= -->
     <div id="view-debt" class="app-view">
         <div class="stats-panel">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
-                <h3 style="margin:0; border:none; padding:0;">💳 Kiểm Soát Tiền Nợ & Lãi Chi Tiết Từng Tháng</h3>
+            <div class="section-bar">
+                <h3><i class="fa-solid fa-scale-balanced" style="color:var(--debt)"></i> Quản Lý Khoản Vay, Dư Nợ Gốc & Lãi Hàng Tháng</h3>
                 <button class="btn btn-primary" id="btn-open-add-debt">+ Thêm khoản nợ mới</button>
             </div>
             
             <div class="debt-dashboard" id="debt-summary-cards"></div>
 
             <div class="debt-table-wrapper">
-                <h4 style="margin-top:0; color:var(--debt); font-size:15px; margin-bottom:12px;">📋 Chi tiết các kỳ hạn nợ & lãi theo từng tháng (Sắp xếp thời gian tăng dần)</h4>
                 <table class="debt-table">
                     <thead>
                         <tr>
-                            <th>Chủ nợ / Mục đích</th>
-                            <th>Tổng gốc ban đầu</th>
-                            <th>Tiền đã trả (Gốc)</th>
-                            <th>Dư nợ gốc còn lại</th>
-                            <th>Tiền lãi tháng (Có thể chỉnh sửa & Cộng dồn)</th>
-                            <th>Trạng thái lãi</th>
-                            <th>Thao tác</th>
+                            <th style="width: 20%;">Chủ nợ / Mục đích vay</th>
+                            <th style="width: 13%;">Gốc ban đầu</th>
+                            <th style="width: 13%;">Đã trả gốc</th>
+                            <th style="width: 14%;">Dư nợ còn lại</th>
+                            <th style="width: 26%;">Kỳ hạn lãi theo tháng (Tự động cộng dồn)</th>
+                            <th style="width: 14%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody id="debt-table-body"></tbody>
@@ -949,47 +1207,46 @@
         </div>
     </div>
 
-    <!-- MÀN HÌNH 3: DANH SÁCH VẬT TƯ & SƠ ĐỒ TƯ DUY -->
+    <!-- ================= MÀN HÌNH 3: DANH SÁCH VẬT TƯ & SƠ ĐỒ TƯ DUY ================= -->
     <div id="view-materials" class="app-view">
-        <div class="tw-bg-white tw-rounded-2xl tw-p-3 sm:tw-p-4 tw-border tw-border-emerald-200">
-            <div class="tw-bg-emerald-900 tw-text-white tw-p-3.5 sm:tw-p-4 tw-rounded-xl tw-mb-3 tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-3">
+        <div class="tw-bg-white tw-rounded-xl tw-p-4 tw-border tw-border-slate-200 tw-shadow-xs">
+            <div class="tw-bg-slate-900 tw-text-white tw-p-3.5 tw-rounded-lg tw-mb-4 tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-3">
                 <div>
                     <h3 class="tw-text-sm sm:tw-text-base tw-font-bold tw-flex tw-items-center tw-gap-2 tw-m-0">
-                        <i class="fa-solid fa-sitemap tw-text-amber-400"></i> Danh Sách Vật Tư Của Mỗi Công Việc (Đa Chủ Đề Gốc & Đa Cấp)
+                        <i class="fa-solid fa-sitemap tw-text-emerald-400"></i> Sơ Đồ Phân Cấp Vật Tư Công Trình & Hạng Mục
                     </h3>
-                    <p class="tw-text-xs tw-text-emerald-200 tw-mt-0.5 tw-mb-0">Quản lý trực quan vật tư từng công trình/hạng mục • Nhấp trực tiếp vào chữ để sửa</p>
+                    <p class="tw-text-xs tw-text-slate-300 tw-mt-0.5 tw-mb-0">Quản lý trực quan vật tư từng công việc • Nhấp vào tên mục để chỉnh sửa nhanh</p>
                 </div>
-                <div class="tw-flex tw-items-center tw-gap-1.5 tw-flex-wrap">
-                    <button onclick="expandAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-emerald-600 hover:tw-bg-emerald-500 tw-text-white tw-text-xs tw-font-bold tw-rounded-lg tw-border-0 tw-cursor-pointer">Mở tất cả</button>
-                    <button onclick="collapseAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-emerald-800 hover:tw-bg-emerald-700 tw-text-emerald-100 tw-text-xs tw-font-bold tw-rounded-lg tw-border-0 tw-cursor-pointer">Thu gọn</button>
-                    <button onclick="openMaterialRootModal()" class="tw-px-3.5 tw-py-1.5 tw-bg-amber-500 hover:tw-bg-amber-400 tw-text-slate-950 tw-text-xs tw-font-extrabold tw-rounded-lg tw-border-0 tw-cursor-pointer tw-flex tw-items-center tw-gap-1.5">
-                        <i class="fa-solid fa-plus"></i> Thêm Chủ Đề Gốc Mới
+                <div class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
+                    <button onclick="expandAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-slate-700 hover:tw-bg-slate-600 tw-text-white tw-text-xs tw-font-semibold tw-rounded-md tw-border-0 tw-cursor-pointer">Mở tất cả</button>
+                    <button onclick="collapseAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-slate-800 hover:tw-bg-slate-700 tw-text-slate-200 tw-text-xs tw-font-semibold tw-rounded-md tw-border-0 tw-cursor-pointer">Thu gọn</button>
+                    <button onclick="openMaterialRootModal()" class="tw-px-3.5 tw-py-1.5 tw-bg-emerald-600 hover:tw-bg-emerald-500 tw-text-white tw-text-xs tw-font-bold tw-rounded-md tw-border-0 tw-cursor-pointer tw-flex tw-items-center tw-gap-1.5">
+                        <i class="fa-solid fa-plus"></i> Thêm Công Trình / Chủ Đề Gốc
                     </button>
                 </div>
             </div>
 
-            <!-- Bố cục 2 cột sát nhau, tự động xếp chồng trên điện thoại -->
-            <div class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-2">
+            <div class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-4">
                 <!-- Outline Tree View -->
-                <div class="tw-flex-1 tw-bg-slate-50 tw-rounded-xl tw-border tw-border-slate-200 tw-p-3 tw-max-h-[520px] lg:tw-max-h-[700px] tw-overflow-y-auto">
-                    <h4 class="tw-text-xs tw-font-bold tw-text-slate-700 tw-uppercase tw-tracking-wider tw-mt-0 tw-mb-2 tw-flex tw-items-center tw-gap-1.5">
-                        <i class="fa-solid fa-list-tree tw-text-emerald-600"></i> Phân cấp Vật tư công việc
+                <div class="tw-flex-1 tw-bg-slate-50 tw-rounded-lg tw-border tw-border-slate-200 tw-p-3.5 tw-max-h-[540px] lg:tw-max-h-[680px] tw-overflow-y-auto">
+                    <h4 class="tw-text-xs tw-font-bold tw-text-slate-600 tw-uppercase tw-tracking-wider tw-mt-0 tw-mb-3 tw-flex tw-items-center tw-gap-1.5">
+                        <i class="fa-solid fa-list-ul tw-text-emerald-600"></i> Danh mục dạng cây (Outline)
                     </h4>
-                    <div id="material-outline-root" class="tw-space-y-1"></div>
+                    <div id="material-outline-root" class="tw-space-y-1.5"></div>
                 </div>
 
                 <!-- Mind Map View -->
-                <div class="tw-flex-[1.35] tw-bg-slate-50 tw-rounded-xl tw-border tw-border-slate-200 tw-overflow-hidden tw-flex tw-flex-col tw-h-[460px] lg:tw-h-[700px] tw-relative">
+                <div class="tw-flex-[1.4] tw-bg-slate-50 tw-rounded-lg tw-border tw-border-slate-200 tw-overflow-hidden tw-flex tw-flex-col tw-h-[480px] lg:tw-h-[680px] tw-relative">
                     <div class="tw-bg-white tw-px-3.5 tw-py-2 tw-border-b tw-border-slate-200 tw-flex tw-items-center tw-justify-between tw-z-10">
-                        <span class="tw-text-xs tw-font-bold tw-text-slate-700"><i class="fa-solid fa-diagram-project tw-text-emerald-600 tw-mr-1"></i> Sơ đồ tương tác</span>
+                        <span class="tw-text-xs tw-font-bold tw-text-slate-700"><i class="fa-solid fa-diagram-project tw-text-emerald-600 tw-mr-1"></i> Sơ đồ nhánh trực quan</span>
                         <div class="tw-flex tw-items-center tw-gap-1">
                             <button onclick="zoomMindMap(-0.1)" class="tw-w-7 tw-h-7 tw-rounded tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs tw-border-0 tw-cursor-pointer tw-font-bold">-</button>
-                            <span id="zoom-level-indicator" class="tw-text-xs tw-font-bold tw-text-emerald-800 tw-px-2">100%</span>
+                            <span id="zoom-level-indicator" class="tw-text-xs tw-font-bold tw-text-slate-700 tw-px-2 num-tabular">100%</span>
                             <button onclick="zoomMindMap(0.1)" class="tw-w-7 tw-h-7 tw-rounded tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs tw-border-0 tw-cursor-pointer tw-font-bold">+</button>
-                            <button onclick="resetMindMapZoom()" class="tw-px-2.5 tw-py-1 tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs tw-font-bold tw-rounded tw-ml-1 tw-border-0 tw-cursor-pointer">Reset</button>
+                            <button onclick="resetMindMapZoom()" class="tw-px-2.5 tw-py-1 tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs tw-font-semibold tw-rounded tw-ml-1 tw-border-0 tw-cursor-pointer">100%</button>
                         </div>
                     </div>
-                    <div id="mindmap-viewport" class="mindmap-bg tw-flex-1 tw-relative tw-overflow-auto tw-cursor-grab tw-p-4 sm:tw-p-6">
+                    <div id="mindmap-viewport" class="mindmap-bg tw-flex-1 tw-relative tw-overflow-auto tw-cursor-grab tw-p-5">
                         <div id="mindmap-canvas" class="tw-relative tw-transition-transform tw-duration-150 tw-origin-top-left tw-min-w-max">
                             <svg id="mindmap-svg" class="tw-absolute tw-inset-0 tw-pointer-events-none tw-w-full tw-h-full tw-z-0"></svg>
                             <div id="mindmap-nodes-layer" class="tw-relative tw-z-10 tw-flex tw-flex-col tw-gap-6"></div>
@@ -1001,92 +1258,109 @@
     </div>
 </div>
 
-<!-- Hộp thoại Chi tiết Ngày (Lịch) -->
+<!-- ================= MODAL 1: CHI TIẾT NGÀY (CHẤM CÔNG & THU CHI) ================= -->
 <div class="modal" id="work-modal">
     <div class="modal-content">
-        <h3 id="modal-date-title">🌱 Chi tiết Ngày 🌱</h3>
+        <h3>
+            <span id="modal-date-title">Chi tiết Ngày</span>
+            <button type="button" class="btn btn-small" onclick="document.getElementById('work-modal').style.display='none'">✕</button>
+        </h3>
         
+        <span class="modal-section-label">1. Trạng thái chấm công</span>
         <div class="radio-group">
             <label><input type="radio" name="work_type" value="full"> 🌳 Làm cả ngày</label>
-            <label><input type="radio" name="work_type" value="off"> 🏖️ Không đi làm</label>
             <label><input type="radio" name="work_type" value="half-am"> 🌅 Nửa ngày (Sáng)</label>
             <label><input type="radio" name="work_type" value="half-pm"> 🌇 Nửa ngày (Chiều)</label>
-            <label class="full-width"><input type="radio" name="work_type" value="none"> 🗑️ Chỉ ghi chú / Thu chi (Xóa ca làm)</label>
+            <label><input type="radio" name="work_type" value="off"> 🏖️ Nghỉ làm</label>
+            <label class="full-width"><input type="radio" name="work_type" value="none"> 📝 Chỉ ghi Thu Chi / Công việc (Không tính công)</label>
         </div>
 
         <div class="overtime-section" id="ot-section">
-            <label class="main-ot"><input type="checkbox" id="check-overtime"> ⏰ Có làm tăng ca</label>
+            <label class="main-ot"><input type="checkbox" id="check-overtime"> ⏰ Có làm tăng ca (OT)</label>
             <div class="time-range-inputs" id="time-range-div">
                 <span>Từ</span><input type="time" id="ot-start" value="17:00">
                 <span>đến</span><input type="time" id="ot-end" value="19:00">
             </div>
         </div>
 
+        <span class="modal-section-label">2. Giao dịch tài chính & Công việc trong ngày</span>
+
         <div class="form-section income-section">
             <h4>
-                <span>💰 Thu nhập trong ngày</span>
-                <button type="button" class="btn btn-small" id="btn-add-income" style="border-color:#bbdefb; color:#1565c0;">+ Thêm mục</button>
+                <span>💰 Khoản Thu nhập</span>
+                <button type="button" class="btn btn-small" id="btn-add-income" style="color:var(--income); border-color:var(--income-border);">+ Thêm khoản thu</button>
             </h4>
             <div id="income-list-container"></div>
         </div>
 
         <div class="form-section expense-section">
             <h4>
-                <span>💸 Chi tiêu trong ngày</span>
-                <button type="button" class="btn btn-small" id="btn-add-expense" style="border-color:#ffcdd2; color:#c62828;">+ Thêm mục</button>
+                <span>💸 Khoản Chi tiêu</span>
+                <button type="button" class="btn btn-small" id="btn-add-expense" style="color:var(--expense); border-color:var(--expense-border);">+ Thêm khoản chi</button>
             </h4>
             <div id="expense-list-container"></div>
         </div>
 
+        <div class="form-section loan-section">
+            <h4>
+                <span>🤝 Tiền cho mượn / Tạm ứng</span>
+                <button type="button" class="btn btn-small" id="btn-add-loan" style="color:var(--loan); border-color:var(--loan-border);">+ Thêm mục</button>
+            </h4>
+            <div id="loan-list-container"></div>
+        </div>
+
         <div class="form-section content-section">
             <h4>
-                <span>📝 Các mục công việc / Ghi chú</span>
-                <button type="button" class="btn btn-small" id="btn-add-task" style="border-color:#c8e6c9; color:#2e7d32;">+ Thêm công việc</button>
+                <span>📝 Nội dung công việc / Ghi chú</span>
+                <button type="button" class="btn btn-small" id="btn-add-task" style="color:var(--primary-dark); border-color:var(--primary-border);">+ Thêm đầu việc</button>
             </h4>
             <div id="task-list-container"></div>
         </div>
 
         <div class="modal-actions">
             <button class="btn" id="btn-cancel">Hủy bỏ</button>
-            <button class="btn btn-primary" id="btn-save">Lưu lại ✔️</button>
+            <button class="btn btn-primary" id="btn-save"><i class="fa-solid fa-check"></i> Lưu dữ liệu</button>
         </div>
     </div>
 </div>
 
-<!-- Hộp thoại Thêm / Sửa Khoản Nợ -->
+<!-- ================= MODAL 2: THÊM / SỬA KHOẢN NỢ ================= -->
 <div class="modal" id="debt-modal">
-    <div class="modal-content" style="max-width: 460px;">
-        <h3 style="color:var(--debt); border-color:var(--debt-border);">💳 Thêm Khoản Nợ & Lãi</h3>
+    <div class="modal-content" style="max-width: 440px;">
+        <h3>
+            <span>💳 Thông Tin Khoản Nợ & Lãi</span>
+            <button type="button" class="btn btn-small" onclick="document.getElementById('debt-modal').style.display='none'">✕</button>
+        </h3>
         <input type="hidden" id="debt-edit-id">
         
         <div class="gh-field">
             <label>👤 Tên chủ nợ / Mục đích vay:</label>
-            <input type="text" id="debt-name" class="gh-input" placeholder="VD: Vay ngân hàng, Nợ ngoài...">
+            <input type="text" id="debt-name" class="gh-input" placeholder="VD: Vay ngân hàng, Nợ vật tư...">
         </div>
         <div class="gh-field">
-            <label>💰 Tổng số tiền nợ gốc ban đầu:</label>
+            <label>💰 Tổng số tiền nợ gốc ban đầu (VNĐ):</label>
             <input type="number" id="debt-total" class="gh-input" placeholder="VD: 20000000" min="0">
         </div>
         <div class="gh-field">
-            <label>💸 Tiền đã trả (Gốc):</label>
+            <label>💸 Tiền gốc đã trả (VNĐ):</label>
             <input type="number" id="debt-paid" class="gh-input" placeholder="VD: 2000000" min="0" value="0">
         </div>
         <div class="gh-field">
-            <label>📈 Mức tiền lãi ban đầu mỗi tháng:</label>
+            <label>📈 Mức tiền lãi định kỳ mỗi tháng (VNĐ):</label>
             <input type="number" id="debt-interest" class="gh-input" placeholder="VD: 300000" min="0" value="0">
         </div>
 
-        <div class="modal-actions" style="margin-top:16px;">
+        <div class="modal-actions">
             <button class="btn" id="btn-debt-cancel">Hủy</button>
-            <button class="btn btn-primary" id="btn-debt-save" style="background:var(--debt);">Lưu khoản nợ 💳</button>
+            <button class="btn btn-primary" id="btn-debt-save">Lưu khoản nợ</button>
         </div>
     </div>
 </div>
 
-<!-- Hộp thoại Thêm / Sửa Nhánh Vật Tư -->
+<!-- ================= MODAL 3: THÊM / SỬA NHÁNH VẬT TƯ ================= -->
 <div class="modal" id="material-modal">
-    <div class="modal-content" style="max-width: 480px;">
-        <h3 id="material-modal-title" style="color:var(--primary); border-color:var(--primary-border);">🌿 Quản Lý Vật Tư Công Việc</h3>
+    <div class="modal-content" style="max-width: 460px;">
+        <h3 id="material-modal-title">🌿 Quản Lý Vật Tư Công Việc</h3>
         <input type="hidden" id="mat-modal-target-id">
         <input type="hidden" id="mat-modal-mode">
 
@@ -1095,38 +1369,41 @@
             <input type="text" id="mat-node-text" class="gh-input" placeholder="VD: Sắt phi 16, Xi măng Nghi Sơn...">
         </div>
         <div class="gh-field">
-            <label>📌 Ghi chú chi tiết (Số lượng, Đơn giá...):</label>
+            <label>📌 Ghi chú chi tiết (Số lượng, Đơn giá, Nhà cung cấp...):</label>
             <textarea id="mat-node-notes" class="gh-input" rows="3" placeholder="VD: 50 cây, giao ngày mai..."></textarea>
         </div>
 
-        <div class="modal-actions" style="margin-top:16px;">
+        <div class="modal-actions">
             <button class="btn" id="btn-mat-cancel">Hủy</button>
-            <button class="btn btn-primary" id="btn-mat-save">Lưu lại ✔️</button>
+            <button class="btn btn-primary" id="btn-mat-save">Lưu lại</button>
         </div>
     </div>
 </div>
 
-<!-- Hộp thoại Cài đặt GitHub -->
+<!-- ================= MODAL 4: CÀI ĐẶT GITHUB ================= -->
 <div class="modal" id="gh-modal">
-    <div class="modal-content" style="max-width: 480px;">
-        <h3 style="color:#24292f; border-color:#eaeef2;">🐙 Tự động lưu trên GitHub</h3>
+    <div class="modal-content" style="max-width: 460px;">
+        <h3>
+            <span>🐙 Đồng Bộ Đám Mây GitHub</span>
+            <button type="button" class="btn btn-small" onclick="document.getElementById('gh-modal').style.display='none'">✕</button>
+        </h3>
         <div class="gh-field"><label>👤 GitHub Username:</label><input type="text" id="gh-owner" class="gh-input"></div>
         <div class="gh-field"><label>📁 Repository Name:</label><input type="text" id="gh-repo" class="gh-input"></div>
-        <div class="gh-field"><label>📄 Tên file lưu (data.json):</label><input type="text" id="gh-path" class="gh-input" value="data.json"></div>
-        <div class="gh-field"><label>🔑 GitHub Token (quyền repo):</label><input type="password" id="gh-token" class="gh-input" placeholder="ghp_..."></div>
+        <div class="gh-field"><label>📄 Đường dẫn file lưu (data.json):</label><input type="text" id="gh-path" class="gh-input" value="data.json"></div>
+        <div class="gh-field"><label>🔑 Personal Access Token (quyền repo):</label><input type="password" id="gh-token" class="gh-input" placeholder="ghp_..."></div>
         
         <div style="display:flex; gap:8px; margin:16px 0;">
-            <button type="button" class="btn btn-small btn-github" id="btn-pull-gh" style="flex:1; height:36px;">📥 Tải về</button>
-            <button type="button" class="btn btn-small btn-github" id="btn-push-gh" style="flex:1; height:36px;">📤 Lưu lên ngay</button>
+            <button type="button" class="btn btn-small" id="btn-pull-gh" style="flex:1; height:36px;">📥 Tải từ GitHub về</button>
+            <button type="button" class="btn btn-small" id="btn-push-gh" style="flex:1; height:36px;">📤 Đẩy lên GitHub ngay</button>
         </div>
         <div class="modal-actions">
             <button class="btn" id="btn-gh-cancel">Đóng</button>
-            <button class="btn btn-primary" id="btn-gh-save" style="background:#24292f;">Lưu cài đặt</button>
+            <button class="btn btn-github" id="btn-gh-save">Lưu cấu hình</button>
         </div>
     </div>
 </div>
 
-<!-- Toast Container -->
+<!-- Toast thông báo mượt mà (Không dùng alert gây giật) -->
 <div id="toast-container" class="tw-fixed tw-bottom-5 tw-right-5 tw-z-50 tw-flex tw-flex-col tw-gap-2 tw-pointer-events-none"></div>
 
 <script>
@@ -1161,15 +1438,47 @@
     }
 
     let selectedDateStr = '';
-    let currentView = 'calendar'; // 'calendar', 'debt', 'materials'
-    let materialZoomScale = 1;
+    let collapsedSections = JSON.parse(localStorage.getItem('nhatky_collapsed_sections') || '{"inc":false,"exp":false,"loan":false,"task":false}');
 
-    const COLOR_THEMES = [
-        { id: 'emerald', name: 'Xanh Ngọc', bg: 'bg-emerald-50', border: 'border-emerald-500', text: 'text-emerald-950', badge: 'bg-emerald-600', stroke: '#10b981' },
-        { id: 'sky', name: 'Xanh Dương', bg: 'bg-sky-50', border: 'border-sky-500', text: 'text-sky-950', badge: 'bg-sky-600', stroke: '#0ea5e9' },
-        { id: 'amber', name: 'Vàng Cam', bg: 'bg-amber-50', border: 'border-amber-500', text: 'text-amber-950', badge: 'bg-amber-500', stroke: '#f59e0b' },
-        { id: 'violet', name: 'Tím', bg: 'bg-violet-50', border: 'border-violet-500', text: 'text-violet-950', badge: 'bg-violet-600', stroke: '#8b5cf6' }
-    ];
+    function showToast(msg, type = 'success') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const el = document.createElement('div');
+        const bg = type === 'error' ? 'tw-bg-rose-600' : 'tw-bg-slate-900';
+        el.className = `${bg} tw-text-white tw-text-xs tw-font-semibold tw-px-4 tw-py-2.5 tw-rounded-lg tw-shadow-lg tw-pointer-events-auto tw-flex tw-items-center tw-gap-2`;
+        el.innerHTML = `<span>${escapeHtml(msg)}</span>`;
+        container.appendChild(el);
+        setTimeout(() => {
+            el.style.opacity = '0';
+            el.style.transition = 'opacity 0.25s ease';
+            setTimeout(() => el.remove(), 250);
+        }, 2800);
+    }
+
+    window.goToToday = function() {
+        currentDate = new Date();
+        if (currentView === 'calendar') renderCalendar();
+        else if (currentView === 'debt') renderDebtView();
+    };
+
+    window.toggleDetailBox = function(key, headerEl) {
+        const box = headerEl.closest('.detail-box');
+        if (!box) return;
+        box.classList.toggle('collapsed');
+        collapsedSections[key] = box.classList.contains('collapsed');
+        localStorage.setItem('nhatky_collapsed_sections', JSON.stringify(collapsedSections));
+    };
+
+    window.toggleAllDetailBoxes = function(collapse) {
+        ['inc', 'exp', 'loan', 'task'].forEach(k => collapsedSections[k] = collapse);
+        localStorage.setItem('nhatky_collapsed_sections', JSON.stringify(collapsedSections));
+        document.querySelectorAll('#stats-grid .detail-box').forEach(b => {
+            b.classList.toggle('collapsed', collapse);
+        });
+    };
+
+    let currentView = 'calendar';
+    let materialZoomScale = 1;
 
     function getDefaultGitHubConfig() {
         let defaultOwner = 'duyduyphuc0101';
@@ -1201,7 +1510,6 @@
     const materialModal = document.getElementById('material-modal');
     
     const checkOvertime = document.getElementById('check-overtime');
-    const otSection = document.getElementById('ot-section');
     const timeRangeDiv = document.getElementById('time-range-div');
     const otStartInput = document.getElementById('ot-start');
     const otEndInput = document.getElementById('ot-end');
@@ -1210,49 +1518,55 @@
     const btnAddIncome = document.getElementById('btn-add-income');
     const expenseListContainer = document.getElementById('expense-list-container');
     const btnAddExpense = document.getElementById('btn-add-expense');
+    const loanListContainer = document.getElementById('loan-list-container');
+    const btnAddLoan = document.getElementById('btn-add-loan');
     const taskListContainer = document.getElementById('task-list-container');
     const btnAddTask = document.getElementById('btn-add-task');
 
     const statsGrid = document.getElementById('stats-grid');
+    const topKpiOverview = document.getElementById('top-kpi-overview');
     const autoSaveStatus = document.getElementById('auto-save-status');
 
     const formatCurrency = (val) => new Intl.NumberFormat('vi-VN').format(val) + 'đ';
 
-    function setStatusBadge(text, color = '#2e7d32', bg = '#e8f5e9') {
+    function setStatusBadge(text, color = '#047857', bg = '#ecfdf5') {
         autoSaveStatus.textContent = text;
         autoSaveStatus.style.color = color;
         autoSaveStatus.style.backgroundColor = bg;
     }
 
     // VIEW SWITCHERS
+    const tabBtnCalendar = document.getElementById('tab-btn-calendar');
     const btnSwitchMaterials = document.getElementById('btn-switch-materials');
     const btnSwitchDebt = document.getElementById('btn-switch-debt');
     const viewCalendar = document.getElementById('view-calendar');
     const viewDebt = document.getElementById('view-debt');
     const viewMaterials = document.getElementById('view-materials');
 
-    function switchView(target) {
+    window.switchView = function(target) {
         currentView = target;
         viewCalendar.classList.remove('active');
         viewDebt.classList.remove('active');
         viewMaterials.classList.remove('active');
 
-        btnSwitchMaterials.className = 'btn btn-materials';
-        btnSwitchDebt.className = 'btn btn-debt';
+        tabBtnCalendar.className = 'nav-tab';
+        btnSwitchMaterials.className = 'nav-tab';
+        btnSwitchDebt.className = 'nav-tab';
 
         if (target === 'calendar') {
             viewCalendar.classList.add('active');
+            tabBtnCalendar.className = 'nav-tab active';
             renderCalendar();
         } else if (target === 'debt') {
             viewDebt.classList.add('active');
-            btnSwitchDebt.className = 'btn btn-primary';
+            btnSwitchDebt.className = 'nav-tab active-debt';
             renderDebtView();
         } else if (target === 'materials') {
             viewMaterials.classList.add('active');
-            btnSwitchMaterials.className = 'btn btn-primary';
+            btnSwitchMaterials.className = 'nav-tab active';
             renderMaterialView();
         }
-    }
+    };
 
     btnSwitchMaterials.onclick = () => switchView(currentView === 'materials' ? 'calendar' : 'materials');
     btnSwitchDebt.onclick = () => switchView(currentView === 'debt' ? 'calendar' : 'debt');
@@ -1275,11 +1589,11 @@
         localStorage.setItem('nhatky_congviec_data', jsonStr);
 
         if (!ghConfig.token || !ghConfig.owner || !ghConfig.repo) {
-            setStatusBadge('✔️ Đã lưu trên trình duyệt');
+            setStatusBadge('✔️ Đã lưu cục bộ');
             return;
         }
 
-        setStatusBadge('⏳ Đang lưu lên GitHub...', '#1565c0', '#e3f2fd');
+        setStatusBadge('⏳ Đang đồng bộ GitHub...', '#0284c7', '#f0f9ff');
         const apiUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}`;
         const headers = { 'Authorization': `token ${ghConfig.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' };
 
@@ -1293,13 +1607,15 @@
 
             const putRes = await fetch(apiUrl, { method: 'PUT', headers: headers, body: JSON.stringify(bodyData) });
             if (putRes.ok) {
-                setStatusBadge('🐙 Đã lưu trên GitHub', '#2e7d32', '#e8f5e9');
-                if (showNotify) alert('Đã lưu thành công lên GitHub! 🎉');
+                setStatusBadge('🐙 Đã đồng bộ GitHub', '#047857', '#ecfdf5');
+                if (showNotify) showToast('Đã lưu thành công lên GitHub!');
             } else {
-                setStatusBadge('⚠️ Lỗi lưu GitHub', '#c62828', '#ffebee');
-                if (showNotify) alert('Lỗi lưu GitHub. Kiểm tra lại Token!');
+                setStatusBadge('⚠️ Lỗi lưu GitHub', '#e11d48', '#fff1f2');
+                if (showNotify) showToast('Lỗi lưu GitHub. Kiểm tra lại Token!', 'error');
             }
-        } catch (err) { setStatusBadge('⚠️ Lỗi kết nối', '#c62828', '#ffebee'); }
+        } catch (err) {
+            setStatusBadge('⚠️ Lỗi kết nối', '#e11d48', '#fff1f2');
+        }
     }
 
     async function loadFromGitHub(showNotify = false) {
@@ -1315,16 +1631,16 @@
                             if (!workData.materialRoots) workData.materialRoots = [];
                             localStorage.setItem('nhatky_congviec_data', JSON.stringify(workData));
                             renderCalendar();
-                            setStatusBadge('🐙 Đã tải từ GitHub', '#2e7d32', '#e8f5e9');
+                            setStatusBadge('🐙 Đã tải từ GitHub', '#047857', '#ecfdf5');
                         }
                     }
                 } catch (e) {}
             }
-            if (showNotify) alert('Vui lòng cấu hình GitHub Token!');
+            if (showNotify) showToast('Vui lòng cấu hình GitHub Token!', 'error');
             return;
         }
 
-        setStatusBadge('🔄 Đang tải...', '#1565c0', '#e3f2fd');
+        setStatusBadge('🔄 Đang tải...', '#0284c7', '#f0f9ff');
         const apiUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}?t=${Date.now()}`;
         try {
             const res = await fetch(apiUrl, { headers: { 'Authorization': `token ${ghConfig.token}`, 'Accept': 'application/vnd.github.v3+json' } });
@@ -1339,14 +1655,14 @@
                     if (currentView === 'calendar') renderCalendar();
                     else if (currentView === 'debt') renderDebtView();
                     else if (currentView === 'materials') renderMaterialView();
-                    setStatusBadge('🐙 Đã đồng bộ GitHub', '#2e7d32', '#e8f5e9');
-                    if (showNotify) alert('Đã đồng bộ từ GitHub thành công! 🎉');
+                    setStatusBadge('🐙 Đã đồng bộ GitHub', '#047857', '#ecfdf5');
+                    if (showNotify) showToast('Đã đồng bộ từ GitHub thành công!');
                 }
             } else if (res.status === 404) { await autoSaveData(false); }
-        } catch (err) { setStatusBadge('⚠️ Lỗi kết nối', '#c62828', '#ffebee'); }
+        } catch (err) { setStatusBadge('⚠️ Lỗi kết nối', '#e11d48', '#fff1f2'); }
     }
 
-    // DEBT VIEW LOGIC
+    // ================= DEBT VIEW LOGIC =================
     function renderDebtView() {
         const cardsEl = document.getElementById('debt-summary-cards');
         const tableBody = document.getElementById('debt-table-body');
@@ -1361,8 +1677,9 @@
                 const fixedInterest = Number(debt.interest) || 0;
                 
                 if (!debt.interestRecords) debt.interestRecords = {};
+                if (!debt.deletedMonths) debt.deletedMonths = [];
 
-                if (debt.interestRecords[currentMonthKey] === undefined) {
+                if (debt.interestRecords[currentMonthKey] === undefined && !debt.deletedMonths.includes(currentMonthKey)) {
                     let prevInterest = 0;
                     const prevMonths = Object.keys(debt.interestRecords).sort();
                     if (prevMonths.length > 0) {
@@ -1379,6 +1696,7 @@
 
                 const totalPaidPrincipal = Number(debt.paidPrincipal) || 0;
                 const remaining = Math.max(0, original - totalPaidPrincipal);
+                const paidPercent = original > 0 ? Math.min(100, Math.round((totalPaidPrincipal / original) * 100)) : 0;
 
                 totalOriginal += original;
                 totalPaidPrincipalAll += totalPaidPrincipal;
@@ -1392,47 +1710,76 @@
                     if (!record.isPaid) totalAccumulatedInterest += Number(record.amount) || 0;
 
                     monthsHtml += `
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:6px 10px; border-radius:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                            <span style="font-weight:700; color:#0f172a; white-space:nowrap;">Tháng ${mKey}:</span>
-                            <input type="number" value="${record.amount}" min="0" onchange="updateMonthInterest(${index}, '${mKey}', this.value)" style="width:95px; height:28px; padding:2px 6px; border:1.5px solid #cbd5e1; border-radius:6px; font-weight:700; color:#d32f2f; text-align:right;">
-                            <label style="cursor:pointer; display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600; white-space:nowrap;">
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:5px 8px; border-radius:6px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                            <span style="font-weight:700; color:#334155; font-size:12px; white-space:nowrap;">Tháng ${mKey}</span>
+                            <input type="number" value="${record.amount}" min="0" onchange="updateMonthInterest(${index}, '${mKey}', this.value)" style="width:95px; height:26px; padding:2px 6px; border:1px solid #cbd5e1; border-radius:5px; font-weight:700; color:#e11d48; text-align:right; font-size:12.5px;">
+                            <label style="cursor:pointer; display:flex; align-items:center; gap:4px; font-size:11.5px; font-weight:600; white-space:nowrap; color:${record.isPaid ? '#059669' : '#64748b'};">
                                 <input type="checkbox" ${record.isPaid ? 'checked' : ''} onchange="toggleMonthInterest(${index}, '${mKey}')">
-                                ${record.isPaid ? '✅ Đã trả' : '❌ Chưa trả'}
+                                ${record.isPaid ? 'Đã trả' : 'Chưa trả'}
                             </label>
+                            <button type="button" class="btn btn-danger btn-small" style="width:24px; height:24px; padding:0; font-size:10px;" title="Xóa kỳ lãi tháng này" onclick="deleteMonthInterest(${index}, '${mKey}')">✖</button>
                         </div>
                     `;
                 });
+                if (sortedMonths.length === 0) {
+                    monthsHtml = `<div style="text-align:center; color:#94a3b8; font-size:12px; padding:6px;">Chưa có kỳ lãi nào</div>`;
+                }
 
                 tableHtml += `
                     <tr>
-                        <td><strong>${escapeHtml(debt.name)}</strong></td>
-                        <td style="color:var(--expense); font-weight:700;">${formatCurrency(original)}</td>
+                        <td>
+                            <div style="font-weight:700; color:var(--text-primary);">${escapeHtml(debt.name)}</div>
+                            <div style="font-size:11.5px; color:var(--text-muted); margin-top:3px;">Đã trả ${paidPercent}% gốc</div>
+                            <div class="debt-progress-track"><div class="debt-progress-bar" style="width:${paidPercent}%"></div></div>
+                        </td>
+                        <td style="color:var(--text-primary); font-weight:700;">${formatCurrency(original)}</td>
                         <td style="color:var(--primary); font-weight:700;">${formatCurrency(totalPaidPrincipal)}</td>
-                        <td style="color:var(--debt); font-weight:700;">${formatCurrency(remaining)}</td>
-                        <td colspan="2" style="background:#fffaf0; padding:8px;">
-                            <div style="max-height:140px; overflow-y:auto; padding-right:4px; margin-bottom:6px;">${monthsHtml}</div>
-                            <button class="btn btn-small btn-debt" onclick="addNewMonthForDebt(${index})" style="width:100%; font-size:11.5px; height:28px;">➕ Tạo tháng mới</button>
+                        <td style="color:var(--debt); font-weight:800;">${formatCurrency(remaining)}</td>
+                        <td>
+                            <div style="max-height:140px; overflow-y:auto; padding-right:2px; margin-bottom:6px;">${monthsHtml}</div>
+                            <div style="display:flex; gap:6px; align-items:center;">
+                                <input type="month" id="new-month-input-${index}" value="${currentDate.toISOString().slice(0, 7)}" style="height:26px; font-size:11.5px; border:1px solid #cbd5e1; border-radius:5px; padding:0 6px;">
+                                <button class="btn btn-small btn-debt" onclick="addNewMonthForDebt(${index})" style="flex:1; height:26px; font-size:11.5px;">+ Thêm tháng</button>
+                            </div>
                         </td>
                         <td>
-                            <div style="display:flex; gap:6px; align-items:center;">
-                                <button class="btn btn-small btn-primary" onclick="payMonthlyDebtAndInterest(${index})">💸 Trả tháng này</button>
-                                <button class="btn btn-small" onclick="editDebt(${index})">Sửa</button>
-                                <button class="btn btn-danger btn-small" onclick="deleteDebt(${index})">✖</button>
+                            <div style="display:flex; flex-direction:column; gap:6px;">
+                                <button class="btn btn-small btn-primary" onclick="payMonthlyDebtAndInterest(${index})" style="width:100%;">💸 Trả gốc + lãi</button>
+                                <div style="display:flex; gap:6px;">
+                                    <button class="btn btn-small" style="flex:1;" onclick="editDebt(${index})">Sửa</button>
+                                    <button class="btn btn-danger btn-small" onclick="deleteDebt(${index})">✖</button>
+                                </div>
                             </div>
                         </td>
                     </tr>
                 `;
             });
         } else {
-            tableHtml = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; font-style:italic; padding:20px;">Chưa có khoản nợ nào.</td></tr>`;
+            tableHtml = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:28px;">Chưa có khoản nợ nào được ghi nhận.</td></tr>`;
         }
         tableBody.innerHTML = tableHtml;
 
         cardsEl.innerHTML = `
-            <div class="debt-card"><div class="stat-title">📉 Tổng Gốc Ban Đầu</div><div class="stat-val" style="color:var(--expense);">${formatCurrency(totalOriginal)}</div></div>
-            <div class="debt-card"><div class="stat-title">✅ Đã Trả (Gốc)</div><div class="stat-val" style="color:var(--primary);">${formatCurrency(totalPaidPrincipalAll)}</div></div>
-            <div class="debt-card"><div class="stat-title">⚠️ Dư Nợ Gốc Còn Lại</div><div class="stat-val" style="color:var(--debt);">${formatCurrency(totalRemaining)}</div></div>
-            <div class="debt-card"><div class="stat-title">💸 Lãi Chưa Trả (Cộng Dồn)</div><div class="stat-val" style="color:#c62828;">${formatCurrency(totalAccumulatedInterest)}</div></div>
+            <div class="kpi-card" style="border-left:4px solid #64748b;">
+                <div class="kpi-header"><span>Tổng Gốc Ban Đầu</span><i class="fa-solid fa-landmark"></i></div>
+                <div class="kpi-value">${formatCurrency(totalOriginal)}</div>
+                <div class="kpi-sub">${workData.debts.length} khoản vay</div>
+            </div>
+            <div class="kpi-card kpi-net-pos">
+                <div class="kpi-header"><span>Đã Trả (Tiền Gốc)</span><i class="fa-solid fa-circle-check" style="color:var(--primary)"></i></div>
+                <div class="kpi-value" style="color:var(--primary);">${formatCurrency(totalPaidPrincipalAll)}</div>
+                <div class="kpi-sub">Đã tất toán một phần</div>
+            </div>
+            <div class="kpi-card" style="border-left:4px solid var(--debt);">
+                <div class="kpi-header"><span>Dư Nợ Gốc Còn Lại</span><i class="fa-solid fa-triangle-exclamation" style="color:var(--debt)"></i></div>
+                <div class="kpi-value" style="color:var(--debt);">${formatCurrency(totalRemaining)}</div>
+                <div class="kpi-sub">Cần thanh toán</div>
+            </div>
+            <div class="kpi-card kpi-expense">
+                <div class="kpi-header"><span>Lãi Chưa Trả (Cộng Dồn)</span><i class="fa-solid fa-fire-flame-curved" style="color:var(--expense)"></i></div>
+                <div class="kpi-value" style="color:var(--expense);">${formatCurrency(totalAccumulatedInterest)}</div>
+                <div class="kpi-sub">Tổng lãi các tháng chưa đóng</div>
+            </div>
         `;
     }
 
@@ -1449,14 +1796,33 @@
         renderDebtView();
     };
 
+    window.deleteMonthInterest = function(index, monthKey) {
+        const debt = workData.debts[index];
+        if (debt && debt.interestRecords) {
+            delete debt.interestRecords[monthKey];
+            if (!debt.deletedMonths) debt.deletedMonths = [];
+            if (!debt.deletedMonths.includes(monthKey)) debt.deletedMonths.push(monthKey);
+            autoSaveData(false);
+            renderDebtView();
+            showToast(`Đã xóa kỳ lãi tháng ${monthKey}`);
+        }
+    };
+
     window.addNewMonthForDebt = function(index) {
         const debt = workData.debts[index];
-        const nextMonth = prompt(`Nhập tháng mới cho "${debt.name}" (YYYY-MM):`, new Date().toISOString().slice(0, 7));
+        const monthInput = document.getElementById(`new-month-input-${index}`);
+        const nextMonth = monthInput ? monthInput.value : new Date().toISOString().slice(0, 7);
         if (!nextMonth) return;
+        if (debt.deletedMonths) {
+            debt.deletedMonths = debt.deletedMonths.filter(m => m !== nextMonth);
+        }
         if (!debt.interestRecords[nextMonth]) {
             debt.interestRecords[nextMonth] = { amount: Number(debt.interest) || 0, isPaid: false };
             autoSaveData(false);
             renderDebtView();
+            showToast(`Đã thêm kỳ lãi tháng ${nextMonth}`);
+        } else {
+            showToast(`Tháng ${nextMonth} đã tồn tại`, 'error');
         }
     };
 
@@ -1477,7 +1843,7 @@
         const paid = Number(document.getElementById('debt-paid').value) || 0;
         const interest = Number(document.getElementById('debt-interest').value) || 0;
 
-        if (!name || total <= 0) { alert('Vui lòng nhập tên và tổng tiền nợ gốc!'); return; }
+        if (!name || total <= 0) { showToast('Vui lòng nhập tên và tổng tiền nợ gốc!', 'error'); return; }
 
         if (id === '') {
             const currentMonthKey = currentDate.toISOString().slice(0, 7);
@@ -1491,6 +1857,7 @@
         autoSaveData(false);
         debtModal.style.display = 'none';
         renderDebtView();
+        showToast('Đã lưu thông tin khoản nợ!');
     };
 
     window.editDebt = function(index) {
@@ -1504,19 +1871,15 @@
     };
 
     window.deleteDebt = function(index) {
-        if (confirm('Xóa khoản nợ này?')) {
-            workData.debts.splice(index, 1);
-            autoSaveData(false);
-            renderDebtView();
-        }
+        workData.debts.splice(index, 1);
+        autoSaveData(false);
+        renderDebtView();
+        showToast('Đã xóa khoản nợ');
     };
 
     window.payMonthlyDebtAndInterest = function(index) {
         const debt = workData.debts[index];
-        const defaultPay = Math.max(0, Number(debt.total) - Number(debt.paidPrincipal));
-        const payPrincipalInput = prompt(`Nhập số GỐC trả tháng này:`, defaultPay);
-        if (payPrincipalInput === null) return;
-        const payPrincipal = Number(payPrincipalInput) || 0;
+        const remainingPrincipal = Math.max(0, Number(debt.total) - Number(debt.paidPrincipal));
         const currentMonthKey = currentDate.toISOString().slice(0, 7);
         let currentInterest = 0;
         if (debt.interestRecords && debt.interestRecords[currentMonthKey] && !debt.interestRecords[currentMonthKey].isPaid) {
@@ -1528,18 +1891,20 @@
         if (!workData[dateStr]) workData[dateStr] = { type: 'full', incomes: [], expenses: [], tasks: [] };
         if (!workData[dateStr].expenses) workData[dateStr].expenses = [];
 
-        if (payPrincipal > 0) workData[dateStr].expenses.push({ name: `Gốc nợ: ${debt.name}`, amount: payPrincipal });
-        if (currentInterest > 0) workData[dateStr].expenses.push({ name: `Tiền lãi: ${debt.name}`, amount: currentInterest });
-
-        debt.paidPrincipal = (Number(debt.paidPrincipal) || 0) + payPrincipal;
-        if (currentInterest > 0) debt.interestRecords[currentMonthKey].isPaid = true;
+        if (currentInterest > 0) {
+            workData[dateStr].expenses.push({ name: `Tiền lãi (${currentMonthKey}): ${debt.name}`, amount: currentInterest });
+            debt.interestRecords[currentMonthKey].isPaid = true;
+        } else if (remainingPrincipal > 0) {
+            workData[dateStr].expenses.push({ name: `Trả gốc nợ: ${debt.name}`, amount: remainingPrincipal });
+            debt.paidPrincipal = (Number(debt.paidPrincipal) || 0) + remainingPrincipal;
+        }
 
         autoSaveData(false);
         renderDebtView();
-        alert(`Đã ghi nhận thanh toán vào chi tiêu hôm nay! 🎉`);
+        showToast('Đã ghi nhận thanh toán vào chi tiêu hôm nay!');
     };
 
-    // MATERIALS MINDMAP LOGIC
+    // ================= MATERIALS MINDMAP LOGIC =================
     function renderMaterialView() {
         renderMaterialOutline();
         renderMaterialMindMap();
@@ -1565,30 +1930,30 @@
         let childrenHtml = '';
         if (isExpanded && hasChildren) {
             childrenHtml = `
-                <div class="tw-pl-3 tw-pt-1 tw-space-y-1 tree-children-guide">
+                <div class="tw-pl-3.5 tw-pt-1.5 tw-space-y-1.5 tree-children-guide">
                     ${children.map((c, cIdx) => renderMaterialOutlineItem(c, `${numbering}.${cIdx + 1}`, rootId)).join('')}
                 </div>
             `;
         }
 
         return `
-            <div class="tw-bg-white tw-border tw-border-slate-200 tw-rounded-xl tw-p-2 tw-shadow-2xs">
+            <div class="tw-bg-white tw-border tw-border-slate-200 tw-rounded-lg tw-p-2.5 tw-shadow-2xs">
                 <div class="tw-flex tw-items-center tw-justify-between tw-gap-2">
                     <div class="tw-flex tw-items-center tw-gap-1.5 tw-min-w-0">
                         ${hasChildren ? `
-                            <button onclick="toggleMaterialExpand('${node.id}')" class="tw-w-5 tw-h-5 tw-rounded tw-bg-emerald-100 tw-text-emerald-800 tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-border-0 tw-cursor-pointer">
+                            <button onclick="toggleMaterialExpand('${node.id}')" class="tw-w-5 tw-h-5 tw-rounded tw-bg-slate-100 tw-text-slate-700 tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-border-0 tw-cursor-pointer">
                                 <i class="fa-solid fa-chevron-right tw-transition-transform ${isExpanded ? 'tw-rotate-90' : ''}"></i>
                             </button>
-                        ` : ''}
-                        <span onclick="openMaterialEditModal('${node.id}')" class="tw-text-xs tw-font-bold tw-text-slate-900 tw-cursor-pointer hover:tw-text-emerald-700">${escapeHtml(node.text)}</span>
+                        ` : `<span class="tw-text-[10px] tw-font-bold tw-text-slate-400 tw-px-1">${numbering}</span>`}
+                        <span onclick="openMaterialEditModal('${node.id}')" class="tw-text-xs tw-font-bold tw-text-slate-800 tw-cursor-pointer hover:tw-text-emerald-600">${escapeHtml(node.text)}</span>
                     </div>
                     <div class="tw-flex tw-items-center tw-gap-1 tw-shrink-0">
-                        <button onclick="openMaterialChildModal('${node.id}')" class="tw-px-2 tw-py-0.5 tw-bg-emerald-600 hover:tw-bg-emerald-700 tw-text-white tw-rounded tw-text-[11px] tw-border-0 tw-cursor-pointer" title="Thêm ý con">+</button>
+                        <button onclick="openMaterialChildModal('${node.id}')" class="tw-px-2 tw-py-0.5 tw-bg-emerald-600 hover:tw-bg-emerald-700 tw-text-white tw-rounded tw-text-[11px] tw-border-0 tw-cursor-pointer" title="Thêm nhánh con">+</button>
                         <button onclick="openMaterialEditModal('${node.id}')" class="tw-px-2 tw-py-0.5 tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-slate-700 tw-rounded tw-text-[11px] tw-border-0 tw-cursor-pointer">Sửa</button>
                         <button onclick="deleteMaterialNode('${node.id}')" class="tw-px-2 tw-py-0.5 tw-bg-rose-50 hover:tw-bg-rose-100 tw-text-rose-600 tw-rounded tw-text-[11px] tw-border-0 tw-cursor-pointer">✖</button>
                     </div>
                 </div>
-                ${node.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-italic tw-mt-0.5">${escapeHtml(node.notes)}</div>` : ''}
+                ${node.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-mt-1 tw-pl-1">${escapeHtml(node.notes)}</div>` : ''}
                 ${childrenHtml}
             </div>
         `;
@@ -1624,18 +1989,18 @@
         }
 
         return `
-            <div class="tw-flex tw-items-center tw-gap-10 tw-py-3 tw-border-b tw-border-emerald-200/50 last:tw-border-none">
-                <div id="${domId}" data-stroke="#10b981" class="tw-bg-emerald-50 tw-border-2 tw-border-emerald-500 tw-shadow-md tw-w-[240px] tw-p-3 tw-rounded-2xl tw-relative">
-                    <div class="tw-flex tw-items-center tw-justify-between tw-mb-1">
-                        <span class="tw-text-[10px] tw-font-extrabold tw-bg-emerald-600 tw-text-white tw-px-2 tw-py-0.5 tw-rounded">GỐC #${rootNum}</span>
+            <div class="tw-flex tw-items-center tw-gap-10 tw-py-3 tw-border-b tw-border-slate-200 last:tw-border-none">
+                <div id="${domId}" data-stroke="#059669" class="tw-bg-white tw-border-2 tw-border-emerald-600 tw-shadow-sm tw-w-[240px] tw-p-3 tw-rounded-xl tw-relative">
+                    <div class="tw-flex tw-items-center tw-justify-between tw-mb-1.5">
+                        <span class="tw-text-[10px] tw-font-extrabold tw-bg-emerald-600 tw-text-white tw-px-2 tw-py-0.5 tw-rounded">HẠNG MỤC #${rootNum}</span>
                         <div class="tw-flex tw-gap-1">
                             <button onclick="openMaterialChildModal('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-emerald-600 tw-text-white tw-rounded tw-text-[10px] tw-border-0 tw-cursor-pointer">+</button>
-                            <button onclick="openMaterialEditModal('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-slate-700 tw-border tw-border-slate-200 tw-rounded tw-text-[10px] tw-cursor-pointer">✎</button>
-                            <button onclick="deleteMaterialNode('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-rose-600 tw-border tw-border-slate-200 tw-rounded tw-text-[10px] tw-cursor-pointer">✖</button>
+                            <button onclick="openMaterialEditModal('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-slate-100 tw-text-slate-700 tw-border-0 tw-rounded tw-text-[10px] tw-cursor-pointer">✎</button>
+                            <button onclick="deleteMaterialNode('${root.id}')" class="tw-w-5 tw-h-5 tw-bg-rose-50 tw-text-rose-600 tw-border-0 tw-rounded tw-text-[10px] tw-cursor-pointer">✖</button>
                         </div>
                     </div>
-                    <div onclick="openMaterialEditModal('${root.id}')" class="tw-font-extrabold tw-text-xs sm:tw-text-sm tw-text-emerald-950 tw-cursor-pointer">${escapeHtml(root.text)}</div>
-                    ${root.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-italic tw-mt-0.5">${escapeHtml(root.notes)}</div>` : ''}
+                    <div onclick="openMaterialEditModal('${root.id}')" class="tw-font-bold tw-text-xs sm:tw-text-sm tw-text-slate-900 tw-cursor-pointer">${escapeHtml(root.text)}</div>
+                    ${root.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-mt-1">${escapeHtml(root.notes)}</div>` : ''}
                     ${hasChildren ? `
                         <button onclick="toggleMaterialExpand('${root.id}')" class="tw-absolute -tw-right-3 tw-top-1/2 -tw-translate-y-1/2 tw-w-6 tw-h-6 tw-rounded-full ${isExpanded ? 'tw-bg-emerald-600 tw-text-white' : 'tw-bg-amber-500 tw-text-slate-950'} tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-shadow tw-border-0 tw-cursor-pointer">
                             ${isExpanded ? '-' : children.length}
@@ -1664,17 +2029,17 @@
 
         return `
             <div class="tw-flex tw-items-center tw-gap-10 tw-py-0.5">
-                <div id="${domId}" data-parent="${parentDomId}" data-stroke="#10b981" class="tw-bg-white tw-border-l-4 tw-border-emerald-500 tw-border tw-border-slate-200 tw-shadow-xs tw-w-[210px] tw-p-2.5 tw-rounded-xl tw-relative">
+                <div id="${domId}" data-parent="${parentDomId}" data-stroke="#059669" class="tw-bg-white tw-border-l-4 tw-border-emerald-500 tw-border tw-border-slate-200 tw-shadow-2xs tw-w-[210px] tw-p-2.5 tw-rounded-lg tw-relative">
                     <div class="tw-flex tw-items-center tw-justify-between tw-mb-1">
-                        <span class="tw-text-[10px] tw-font-bold tw-bg-emerald-600 tw-text-white tw-px-1.5 tw-rounded">${numbering}</span>
+                        <span class="tw-text-[10px] tw-font-bold tw-bg-slate-100 tw-text-slate-700 tw-px-1.5 tw-rounded">${numbering}</span>
                         <div class="tw-flex tw-gap-1">
                             <button onclick="openMaterialChildModal('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-emerald-600 tw-text-white tw-rounded tw-text-[10px] tw-border-0 tw-cursor-pointer">+</button>
-                            <button onclick="openMaterialEditModal('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-slate-700 tw-border tw-border-slate-200 tw-rounded tw-text-[10px] tw-cursor-pointer">✎</button>
-                            <button onclick="deleteMaterialNode('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-white tw-text-rose-600 tw-border tw-border-slate-200 tw-rounded tw-text-[10px] tw-cursor-pointer">✖</button>
+                            <button onclick="openMaterialEditModal('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-slate-100 tw-text-slate-700 tw-border-0 tw-rounded tw-text-[10px] tw-cursor-pointer">✎</button>
+                            <button onclick="deleteMaterialNode('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-rose-50 tw-text-rose-600 tw-border-0 tw-rounded tw-text-[10px] tw-cursor-pointer">✖</button>
                         </div>
                     </div>
                     <div onclick="openMaterialEditModal('${node.id}')" class="tw-font-semibold tw-text-xs tw-text-slate-800 tw-cursor-pointer">${escapeHtml(node.text)}</div>
-                    ${node.notes ? `<div class="tw-text-[10px] tw-text-slate-500 tw-italic tw-mt-0.5">${escapeHtml(node.notes)}</div>` : ''}
+                    ${node.notes ? `<div class="tw-text-[10px] tw-text-slate-500 tw-mt-0.5">${escapeHtml(node.notes)}</div>` : ''}
                     ${hasChildren ? `
                         <button onclick="toggleMaterialExpand('${node.id}')" class="tw-absolute -tw-right-3 tw-top-1/2 -tw-translate-y-1/2 tw-w-6 tw-h-6 tw-rounded-full ${isExpanded ? 'tw-bg-emerald-600 tw-text-white' : 'tw-bg-amber-500 tw-text-slate-950'} tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-shadow tw-border-0 tw-cursor-pointer">
                             ${isExpanded ? '-' : children.length}
@@ -1707,7 +2072,7 @@
             const pPos = getRelPos(parentEl);
             const cPos = getRelPos(nodeEl);
             const d = `M ${pPos.right} ${pPos.midY} C ${pPos.right + 20} ${pPos.midY}, ${cPos.left - 20} ${cPos.midY}, ${cPos.left} ${cPos.midY}`;
-            svg.innerHTML += `<path d="${d}" class="connector-path" stroke="#10b981" stroke-width="2" opacity="0.85" />`;
+            svg.innerHTML += `<path d="${d}" class="connector-path" stroke="#94a3b8" stroke-width="1.8" />`;
         });
     }
 
@@ -1737,7 +2102,7 @@
     window.openMaterialRootModal = function() {
         document.getElementById('mat-modal-target-id').value = '';
         document.getElementById('mat-modal-mode').value = 'add-root';
-        document.getElementById('material-modal-title').textContent = '➕ Thêm Chủ Đề Gốc Vật Tư';
+        document.getElementById('material-modal-title').textContent = '➕ Thêm Hạng Mục / Công Trình Gốc';
         document.getElementById('mat-node-text').value = '';
         document.getElementById('mat-node-notes').value = '';
         materialModal.style.display = 'flex';
@@ -1757,7 +2122,7 @@
         if (!item) return;
         document.getElementById('mat-modal-target-id').value = id;
         document.getElementById('mat-modal-mode').value = 'edit';
-        document.getElementById('material-modal-title').textContent = '✎ Sửa Nội Dung Vật Tư';
+        document.getElementById('material-modal-title').textContent = '✎ Chỉnh Sửa Vật Tư';
         document.getElementById('mat-node-text').value = item.text;
         document.getElementById('mat-node-notes').value = item.notes || '';
         materialModal.style.display = 'flex';
@@ -1770,7 +2135,7 @@
         const targetId = document.getElementById('mat-modal-target-id').value;
         const text = document.getElementById('mat-node-text').value.trim();
         const notes = document.getElementById('mat-node-notes').value.trim();
-        if (!text) { alert('Vui lòng nhập tên nội dung!'); return; }
+        if (!text) { showToast('Vui lòng nhập tên vật tư / công việc!', 'error'); return; }
 
         if (mode === 'add-root') {
             workData.materialRoots.push({
@@ -1795,10 +2160,10 @@
         autoSaveData(false);
         materialModal.style.display = 'none';
         renderMaterialView();
+        showToast('Đã lưu mục vật tư!');
     };
 
     window.deleteMaterialNode = function(id) {
-        if (!confirm('Bạn có chắc chắn muốn xóa mục này?')) return;
         function removeRecursive(nodes) {
             for (let i = 0; i < nodes.length; i++) {
                 if (nodes[i].id === id) { nodes.splice(i, 1); return true; }
@@ -1811,6 +2176,7 @@
         }
         autoSaveData(false);
         renderMaterialView();
+        showToast('Đã xóa nhánh vật tư');
     };
 
     window.expandAllLevels = function() {
@@ -1843,20 +2209,23 @@
         drawMindMapConnections();
     };
 
-    // CALENDAR & WORK LOGIC
+    // ================= CALENDAR & WORK LOGIC =================
     function renderCalendar() {
         calendarEl.innerHTML = '';
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
-        monthYearEl.innerHTML = `Tháng ${month + 1} <span>🌿</span> ${year}`;
+        monthYearEl.textContent = `Tháng ${month + 1}, ${year}`;
 
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const daysInPrevMonth = new Date(year, month, 0).getDate();
 
-        const weekdays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+        const weekdays = ['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
         weekdays.forEach(day => {
-            const div = document.createElement('div'); div.className = 'weekday'; div.textContent = day; calendarEl.appendChild(div);
+            const div = document.createElement('div');
+            div.className = 'weekday';
+            div.textContent = day;
+            calendarEl.appendChild(div);
         });
 
         for (let i = 0; i < firstDayOfMonth; i++) createDayCell(year, month - 1, daysInPrevMonth - firstDayOfMonth + i + 1, true);
@@ -1887,11 +2256,33 @@
         const dayHeader = document.createElement('div');
         dayHeader.className = 'day-header';
         const dayNum = document.createElement('div');
-        dayNum.className = 'day-number'; dayNum.textContent = actualDate.getDate();
+        dayNum.className = 'day-number';
+        dayNum.textContent = actualDate.getDate();
         dayHeader.appendChild(dayNum);
-        div.appendChild(dayHeader);
 
         const data = workData[dateString];
+
+        // Hiển thị nhãn Ca làm việc ngay trên góc phải của Header ô ngày
+        if (data && data.type && data.type !== 'none') {
+            const shiftBadge = document.createElement('span');
+            if (data.type === 'full') {
+                shiftBadge.className = 'shift-pill shift-full';
+                shiftBadge.textContent = data.isOvertime ? 'Cả ngày +OT' : 'Cả ngày';
+            } else if (data.type === 'half-am') {
+                shiftBadge.className = 'shift-pill shift-half';
+                shiftBadge.textContent = data.isOvertime ? 'Ca Sáng +OT' : 'Ca Sáng';
+            } else if (data.type === 'half-pm') {
+                shiftBadge.className = 'shift-pill shift-half';
+                shiftBadge.textContent = data.isOvertime ? 'Ca Chiều +OT' : 'Ca Chiều';
+            } else if (data.type === 'off') {
+                shiftBadge.className = 'shift-pill shift-off';
+                shiftBadge.textContent = 'Nghỉ';
+            }
+            dayHeader.appendChild(shiftBadge);
+        }
+
+        div.appendChild(dayHeader);
+
         if (data) {
             let dailyIncomeTotal = 0;
             if (data.incomes && Array.isArray(data.incomes)) dailyIncomeTotal = data.incomes.reduce((s, i) => s + Number(i.amount), 0);
@@ -1899,43 +2290,36 @@
             let dailyExpenseTotal = 0;
             if (data.expenses && Array.isArray(data.expenses)) dailyExpenseTotal = data.expenses.reduce((s, i) => s + Number(i.amount), 0);
 
-            const taskList = getTaskList(data);
-
-            let slotClass = '';
-            if (data.type && data.type !== 'none') slotClass = `slot-${data.type}`;
-            else if (dailyIncomeTotal > 0 && dailyExpenseTotal > 0) slotClass = 'slot-both-only';
-            else if (dailyIncomeTotal > 0) slotClass = 'slot-income-only';
-            else if (dailyExpenseTotal > 0) slotClass = 'slot-expense-only';
-            else if (taskList.length > 0) slotClass = 'slot-task-only';
-
-            const slotDiv = document.createElement('div');
-            slotDiv.className = `work-status-container ${slotClass} ${data.isOvertime ? 'overtime' : ''}`;
-            
-            let html = '';
-            if (dailyIncomeTotal > 0 || dailyExpenseTotal > 0) {
-                html += `<div class="badges-wrap">`;
-                if (dailyIncomeTotal > 0) html += `<div class="income-badge">💰 +${formatCurrency(dailyIncomeTotal)}</div>`;
-                if (dailyExpenseTotal > 0) html += `<div class="expense-badge">💸 -${formatCurrency(dailyExpenseTotal)}</div>`;
-                html += `</div>`;
+            let dailyLoanTotal = 0;
+            let allLoansRepaid = true;
+            if (data.loans && Array.isArray(data.loans) && data.loans.length > 0) {
+                dailyLoanTotal = data.loans.reduce((s, i) => s + Number(i.amount), 0);
+                allLoansRepaid = data.loans.every(i => i.isPaid);
             }
 
-            if (data.type && data.type !== 'none') {
-                let labelText = '';
-                if (data.type === 'full') labelText = data.isOvertime ? '🌳 Cả ngày (+OT)' : '🌳 Cả ngày';
-                else if (data.type === 'half-am') labelText = data.isOvertime ? '🌅 Sáng (+OT)' : '🌅 Ca Sáng';
-                else if (data.type === 'half-pm') labelText = data.isOvertime ? '🌇 Chiều (+OT)' : '🌇 Ca Chiều';
-                else if (data.type === 'off') labelText = '🏖️ Nghỉ';
-                html += `<div class="status-text">${labelText}</div>`;
-                
-                if (data.isOvertime && data.startTime && data.endTime && data.type !== 'off') {
-                    html += `<div class="ot-time-badge">⏰ ${data.startTime} - ${data.endTime}</div>`;
-                }
+            const taskList = getTaskList(data);
+
+            const slotDiv = document.createElement('div');
+            slotDiv.className = 'work-status-container';
+            
+            let html = '';
+
+            if (data.isOvertime && data.startTime && data.endTime && data.type !== 'off' && data.type !== 'none') {
+                html += `<div class="ot-time-badge"><i class="fa-regular fa-clock"></i> ${data.startTime}-${data.endTime}</div>`;
+            }
+
+            if (dailyIncomeTotal > 0 || dailyExpenseTotal > 0 || dailyLoanTotal > 0) {
+                html += `<div class="badges-wrap">`;
+                if (dailyIncomeTotal > 0) html += `<div class="fin-pill income-badge"><span>Thu</span><span>+${formatCurrency(dailyIncomeTotal)}</span></div>`;
+                if (dailyExpenseTotal > 0) html += `<div class="fin-pill expense-badge"><span>Chi</span><span>-${formatCurrency(dailyExpenseTotal)}</span></div>`;
+                if (dailyLoanTotal > 0) html += `<div class="fin-pill loan-badge ${allLoansRepaid ? 'repaid' : ''}"><span>Mượn</span><span>${formatCurrency(dailyLoanTotal)}</span></div>`;
+                html += `</div>`;
             }
 
             if (taskList.length > 0) {
                 const maxPreview = 2;
                 let tasksHtml = taskList.slice(0, maxPreview).map(t => `<div class="job-task-item">• ${escapeHtml(t)}</div>`).join('');
-                if (taskList.length > maxPreview) tasksHtml += `<div style="font-size:9.5px; color:#64748b;">+${taskList.length - maxPreview} việc khác...</div>`;
+                if (taskList.length > maxPreview) tasksHtml += `<div style="font-size:10px; color:#64748b; font-weight:600;">+${taskList.length - maxPreview} việc khác</div>`;
                 html += `<div class="job-content-preview">${tasksHtml}</div>`;
             }
 
@@ -1965,6 +2349,7 @@
         let stats = { full: [], halfAm: [], halfPm: [], off: [], totalOtHours: 0 };
         let monthlyIncome = 0, weeklyIncomes = {}, categoryIncomes = {};
         let monthlyExpense = 0, weeklyExpenses = {}, categoryExpenses = {};
+        let monthlyLoans = [], totalLoanUnpaid = 0, totalLoanPaid = 0;
         let monthlyTasks = [];
 
         for (let i = 1; i <= daysInMonth; i++) {
@@ -2009,144 +2394,236 @@
                     });
                 }
 
+                if (data.loans && Array.isArray(data.loans)) {
+                    data.loans.forEach((ln, lnIdx) => {
+                        const amount = Number(ln.amount) || 0;
+                        if (amount > 0) {
+                            if (ln.isPaid) totalLoanPaid += amount;
+                            else totalLoanUnpaid += amount;
+                            monthlyLoans.push({ dateStr, lnIdx, day: `${d}/${m}`, name: ln.name, amount, isPaid: !!ln.isPaid });
+                        }
+                    });
+                }
+
                 getTaskList(data).forEach(taskText => monthlyTasks.push({ day: `${d}/${m}`, text: taskText }));
             }
         }
 
-        const createStatHTML = (icon, title, count, suffix) => `
-            <div class="stat-item">
-                <div class="stat-title">${icon} ${title}</div>
-                <div class="stat-val">${count} <span style="font-size:15px; font-weight:600; color:#64748b;">${suffix}</span></div>
-            </div>
-        `;
-
-        let workCardsHTML = `
-            <div class="work-stat-cards">
-                ${createStatHTML('🌳', 'Làm cả ngày', stats.full.length, 'ngày')}
-                ${createStatHTML('🌅', 'Làm nửa ngày', stats.halfAm.length + stats.halfPm.length, 'ngày')}
-                ${createStatHTML('🏖️', 'Không đi làm', stats.off.length, 'ngày')}
-                ${createStatHTML('⏰', 'Tổng Tăng ca', parseFloat(stats.totalOtHours.toFixed(2)), 'giờ')}
-            </div>
-        `;
-
         const netBalance = monthlyIncome - monthlyExpense;
-        const balanceColor = netBalance >= 0 ? '#2e7d32' : '#c62828';
-        const balanceBg = netBalance >= 0 ? '#f1f8e9' : '#fff5f5';
+        const balanceColor = netBalance >= 0 ? 'var(--primary)' : 'var(--expense)';
         const balanceSign = netBalance > 0 ? '+' : '';
+        const totalWorkUnits = stats.full.length + (stats.halfAm.length + stats.halfPm.length) * 0.5;
 
-        let balanceSummaryHTML = `
-            <div class="balance-box">
-                <div class="balance-header">⚖️ Bảng Tổng Kết Tài Chính Tháng ${month + 1}/${year}</div>
-                <div class="balance-cards">
-                    <div class="balance-card" style="border: 1.5px solid #bbdefb;">
-                        <div style="font-size: 13px; color: #1565c0; font-weight: 700;">💰 TỔNG THU</div>
-                        <div style="font-size: 21px; font-weight: 700; color: #1565c0; margin-top: 6px;">+${formatCurrency(monthlyIncome)}</div>
-                    </div>
-                    <div class="balance-card" style="border: 1.5px solid #ffcdd2;">
-                        <div style="font-size: 13px; color: #c62828; font-weight: 700;">💸 TỔNG CHI</div>
-                        <div style="font-size: 21px; font-weight: 700; color: #c62828; margin-top: 6px;">-${formatCurrency(monthlyExpense)}</div>
-                    </div>
-                    <div class="balance-card" style="border: 2px solid ${balanceColor}; background: ${balanceBg};">
-                        <div style="font-size: 13px; color: ${balanceColor}; font-weight: 700;">✨ CÒN LẠI</div>
-                        <div style="font-size: 22px; font-weight: 700; color: ${balanceColor}; margin-top: 6px;">${balanceSign}${formatCurrency(netBalance)}</div>
-                    </div>
+        // Render Top KPI Strip (Đặt ngay phía trên Lịch để dễ nhìn nhất)
+        topKpiOverview.innerHTML = `
+            <div class="kpi-section-grid">
+                <div class="kpi-card kpi-income">
+                    <div class="kpi-header"><span>💰 Tổng Thu Tháng ${month + 1}</span><i class="fa-solid fa-arrow-trend-up" style="color:var(--income)"></i></div>
+                    <div class="kpi-value" style="color:var(--income);">+${formatCurrency(monthlyIncome)}</div>
+                    <div class="kpi-sub">${Object.keys(categoryIncomes).length} nguồn thu</div>
+                </div>
+                <div class="kpi-card kpi-expense">
+                    <div class="kpi-header"><span>💸 Tổng Chi Tháng ${month + 1}</span><i class="fa-solid fa-arrow-trend-down" style="color:var(--expense)"></i></div>
+                    <div class="kpi-value" style="color:var(--expense);">-${formatCurrency(monthlyExpense)}</div>
+                    <div class="kpi-sub">${Object.keys(categoryExpenses).length} hạng mục chi</div>
+                </div>
+                <div class="kpi-card kpi-loan">
+                    <div class="kpi-header"><span>🤝 Cho Mượn (Chưa Thu)</span><i class="fa-solid fa-hand-holding-dollar" style="color:var(--loan)"></i></div>
+                    <div class="kpi-value" style="color:var(--loan);">${formatCurrency(totalLoanUnpaid)}</div>
+                    <div class="kpi-sub">Đã thu hồi: ${formatCurrency(totalLoanPaid)}</div>
+                </div>
+                <div class="kpi-card ${netBalance >= 0 ? 'kpi-net-pos' : 'kpi-net-neg'}">
+                    <div class="kpi-header"><span>⚖️ Số Dư Thực Tế (Thu - Chi)</span><i class="fa-solid fa-wallet" style="color:${balanceColor}"></i></div>
+                    <div class="kpi-value" style="color:${balanceColor};">${balanceSign}${formatCurrency(netBalance)}</div>
+                    <div class="kpi-sub">Tổng công: <strong>${totalWorkUnits}</strong> ngày công</div>
+                </div>
+            </div>
+
+            <div class="work-stat-strip">
+                <div class="work-metric">
+                    <span class="work-metric-label">🌳 Làm cả ngày</span>
+                    <span class="work-metric-val">${stats.full.length} ngày</span>
+                </div>
+                <div class="work-metric">
+                    <span class="work-metric-label">🌅 Làm nửa ngày</span>
+                    <span class="work-metric-val">${stats.halfAm.length + stats.halfPm.length} buổi</span>
+                </div>
+                <div class="work-metric">
+                    <span class="work-metric-label">🏖️ Ngày nghỉ</span>
+                    <span class="work-metric-val">${stats.off.length} ngày</span>
+                </div>
+                <div class="work-metric">
+                    <span class="work-metric-label">⏰ Tổng giờ Tăng ca</span>
+                    <span class="work-metric-val" style="color:var(--primary-dark); border-color:var(--primary-border); background:var(--primary-bg);">${parseFloat(stats.totalOtHours.toFixed(2))} giờ</span>
                 </div>
             </div>
         `;
 
+        // Danh sách chi tiết Thu nhập
         let weekIncHTML = `<ul class="stat-list">`;
         let hasWeekInc = false;
         for (let week in weeklyIncomes) {
             if (weeklyIncomes[week] > 0) {
-                weekIncHTML += `<li><span>${week}</span> <strong style="color:#1565c0;">+${formatCurrency(weeklyIncomes[week])}</strong></li>`;
+                weekIncHTML += `<li><span>${week}</span> <strong style="color:var(--income);">+${formatCurrency(weeklyIncomes[week])}</strong></li>`;
                 hasWeekInc = true;
             }
         }
-        if(!hasWeekInc) weekIncHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản thu</span>`;
+        if(!hasWeekInc) weekIncHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản thu</span>`;
         weekIncHTML += `</ul>`;
 
         let catIncHTML = `<ul class="stat-list">`;
         let hasCatInc = false;
         for (let [cat, amount] of Object.entries(categoryIncomes).sort((a,b)=>b[1]-a[1])) {
-            catIncHTML += `<li><span>🏷️ ${escapeHtml(cat)}</span> <strong style="color:#1565c0;">+${formatCurrency(amount)}</strong></li>`;
+            catIncHTML += `<li><span>${escapeHtml(cat)}</span> <strong style="color:var(--income);">+${formatCurrency(amount)}</strong></li>`;
             hasCatInc = true;
         }
-        if(!hasCatInc) catIncHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản thu</span>`;
+        if(!hasCatInc) catIncHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản thu</span>`;
         catIncHTML += `</ul>`;
 
+        // Danh sách chi tiết Chi tiêu
         let weekExpHTML = `<ul class="stat-list">`;
         let hasWeekExp = false;
         for (let week in weeklyExpenses) {
             if (weeklyExpenses[week] > 0) {
-                weekExpHTML += `<li><span>${week}</span> <strong style="color:#c62828;">-${formatCurrency(weeklyExpenses[week])}</strong></li>`;
+                weekExpHTML += `<li><span>${week}</span> <strong style="color:var(--expense);">-${formatCurrency(weeklyExpenses[week])}</strong></li>`;
                 hasWeekExp = true;
             }
         }
-        if(!hasWeekExp) weekExpHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản chi</span>`;
+        if(!hasWeekExp) weekExpHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản chi</span>`;
         weekExpHTML += `</ul>`;
 
         let catExpHTML = `<ul class="stat-list">`;
         let hasCatExp = false;
         for (let [cat, amount] of Object.entries(categoryExpenses).sort((a,b)=>b[1]-a[1])) {
-            catExpHTML += `<li><span>🏷️ ${escapeHtml(cat)}</span> <strong style="color:#c62828;">-${formatCurrency(amount)}</strong></li>`;
+            catExpHTML += `<li><span>${escapeHtml(cat)}</span> <strong style="color:var(--expense);">-${formatCurrency(amount)}</strong></li>`;
             hasCatExp = true;
         }
-        if(!hasCatExp) catExpHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có khoản chi</span>`;
+        if(!hasCatExp) catExpHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản chi</span>`;
         catExpHTML += `</ul>`;
 
-        let financeDetailsHTML = `
-            <div class="finance-details-grid">
-                <div class="detail-box" style="border-color:#bbdefb; background:#f8fbff;">
-                    <div class="detail-box-header" style="color:#1565c0; border-color:#bbdefb;">
-                        <span>💰 CHI TIẾT THU NHẬP</span><span>+${formatCurrency(monthlyIncome)}</span>
-                    </div>
-                    <div class="expense-summary">
-                        <div class="expense-col"><strong>📅 Theo Tuần:</strong>${weekIncHTML}</div>
-                        <div class="expense-col border-left-income"><strong>📥 Nguồn thu:</strong>${catIncHTML}</div>
-                    </div>
-                </div>
-                <div class="detail-box" style="border-color:#ffcdd2; background:#fffafb;">
-                    <div class="detail-box-header" style="color:#c62828; border-color:#ffcdd2;">
-                        <span>💸 CHI TIẾT CHI TIÊU</span><span>-${formatCurrency(monthlyExpense)}</span>
-                    </div>
-                    <div class="expense-summary">
-                        <div class="expense-col"><strong>📅 Theo Tuần:</strong>${weekExpHTML}</div>
-                        <div class="expense-col border-left"><strong>🛒 Hạng mục:</strong>${catExpHTML}</div>
-                    </div>
-                </div>
-            </div>
-        `;
+        // Danh sách Tiền cho mượn
+        let loanSummaryHTML = `<ul class="stat-list">`;
+        if (monthlyLoans.length > 0) {
+            monthlyLoans.forEach(item => {
+                const strikeStyle = item.isPaid ? 'text-decoration:line-through; opacity:0.55;' : '';
+                loanSummaryHTML += `
+                    <li>
+                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; ${strikeStyle}">
+                            <input type="checkbox" ${item.isPaid ? 'checked' : ''} onchange="toggleLoanPaidFromStats('${item.dateStr}', ${item.lnIdx})">
+                            <span style="font-weight:700; color:var(--loan); font-size:12px; background:var(--loan-bg); padding:1px 6px; border-radius:4px;">${item.day}</span>
+                            <span style="font-weight:500;">${escapeHtml(item.name)}</span>
+                        </label>
+                        <strong style="color:${item.isPaid ? 'var(--primary)' : 'var(--loan)'}; ${strikeStyle}">${formatCurrency(item.amount)}</strong>
+                    </li>
+                `;
+            });
+        } else {
+            loanSummaryHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản cho mượn nào trong tháng</span>`;
+        }
+        loanSummaryHTML += `</ul>`;
 
+        // Danh sách Công việc
         let taskSummaryHTML = `<ul class="stat-list">`;
         if (monthlyTasks.length > 0) {
             monthlyTasks.forEach(item => {
-                taskSummaryHTML += `<li><span style="font-weight:700; color:#2e7d32;">🗓️ Ngày ${item.day}</span><span style="flex:1; text-align:right; color:#334155;">${escapeHtml(item.text)}</span></li>`;
+                taskSummaryHTML += `
+                    <li>
+                        <span style="font-weight:700; color:var(--primary-dark); font-size:12px; background:var(--primary-bg); padding:2px 7px; border-radius:4px; flex-shrink:0;">${item.day}</span>
+                        <span style="flex:1; text-align:left; color:#1e293b; font-weight:500;">${escapeHtml(item.text)}</span>
+                    </li>
+                `;
             });
         } else {
-            taskSummaryHTML += `<span style="color:#94a3b8; font-style:italic; font-size:13px;">Chưa có ghi chú công việc</span>`;
+            taskSummaryHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có ghi chú công việc trong tháng</span>`;
         }
         taskSummaryHTML += `</ul>`;
 
-        let taskBoxHTML = `
-            <div class="detail-box" style="border-color:#c8e6c9; background:#f9fef9;">
-                <div class="detail-box-header" style="color:#2e7d32; border-color:#c8e6c9;">
-                    <span>📝 TỔNG HỢP CÔNG VIỆC TRONG THÁNG</span><span>${monthlyTasks.length} việc</span>
+        // Render Lưới 2x2 Khoa học
+        statsGrid.innerHTML = `
+            <div class="analysis-grid-2x2">
+                <!-- Ô 1: Chi tiết Thu nhập -->
+                <div class="detail-box ${collapsedSections.inc ? 'collapsed' : ''}">
+                    <div class="detail-box-header" onclick="toggleDetailBox('inc', this)">
+                        <span style="display:inline-flex; align-items:center; gap:8px; color:var(--income);">
+                            <span class="collapse-icon">▼</span> 💰 PHÂN TÍCH THU NHẬP
+                        </span>
+                        <span class="num-tabular" style="color:var(--income); font-weight:800;">+${formatCurrency(monthlyIncome)}</span>
+                    </div>
+                    <div class="detail-box-body">
+                        <div class="split-sub-cols">
+                            <div>
+                                <div class="sub-col-title">Theo Tuần</div>
+                                ${weekIncHTML}
+                            </div>
+                            <div>
+                                <div class="sub-col-title">Theo Nguồn Thu</div>
+                                ${catIncHTML}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                ${taskSummaryHTML}
+
+                <!-- Ô 2: Chi tiết Chi tiêu -->
+                <div class="detail-box ${collapsedSections.exp ? 'collapsed' : ''}">
+                    <div class="detail-box-header" onclick="toggleDetailBox('exp', this)">
+                        <span style="display:inline-flex; align-items:center; gap:8px; color:var(--expense);">
+                            <span class="collapse-icon">▼</span> 💸 PHÂN TÍCH CHI TIÊU
+                        </span>
+                        <span class="num-tabular" style="color:var(--expense); font-weight:800;">-${formatCurrency(monthlyExpense)}</span>
+                    </div>
+                    <div class="detail-box-body">
+                        <div class="split-sub-cols">
+                            <div>
+                                <div class="sub-col-title">Theo Tuần</div>
+                                ${weekExpHTML}
+                            </div>
+                            <div>
+                                <div class="sub-col-title">Theo Hạng Mục</div>
+                                ${catExpHTML}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ô 3: Sổ theo dõi Tiền cho mượn -->
+                <div class="detail-box ${collapsedSections.loan ? 'collapsed' : ''}">
+                    <div class="detail-box-header" onclick="toggleDetailBox('loan', this)">
+                        <span style="display:inline-flex; align-items:center; gap:8px; color:var(--loan);">
+                            <span class="collapse-icon">▼</span> 🤝 SỔ THEO DÕI TIỀN CHO MƯỢN
+                        </span>
+                        <span class="num-tabular" style="font-size:12.5px; color:var(--loan);">
+                            Chưa trả: <strong>${formatCurrency(totalLoanUnpaid)}</strong>
+                        </span>
+                    </div>
+                    <div class="detail-box-body">
+                        ${loanSummaryHTML}
+                    </div>
+                </div>
+
+                <!-- Ô 4: Nhật ký Công việc trong tháng -->
+                <div class="detail-box ${collapsedSections.task ? 'collapsed' : ''}">
+                    <div class="detail-box-header" onclick="toggleDetailBox('task', this)">
+                        <span style="display:inline-flex; align-items:center; gap:8px; color:var(--primary-dark);">
+                            <span class="collapse-icon">▼</span> 📝 NHẬT KÝ CÔNG VIỆC TRONG THÁNG
+                        </span>
+                        <span class="num-tabular" style="color:var(--primary-dark);">${monthlyTasks.length} đầu việc</span>
+                    </div>
+                    <div class="detail-box-body">
+                        ${taskSummaryHTML}
+                    </div>
+                </div>
             </div>
         `;
-
-        statsGrid.innerHTML = workCardsHTML + balanceSummaryHTML + financeDetailsHTML + taskBoxHTML;
     }
 
     function openModal(dateStr) {
         selectedDateStr = dateStr;
         const [y, m, d] = dateStr.split('-');
-        document.getElementById('modal-date-title').innerHTML = `🌱 Chi tiết Ngày ${d}/${m}/${y} 🌱`;
+        document.getElementById('modal-date-title').innerHTML = `📅 Chi tiết Ngày ${d}/${m}/${y}`;
         
         document.querySelectorAll('input[name="work_type"]').forEach(r => r.checked = false);
         checkOvertime.checked = false; timeRangeDiv.style.display = 'none';
-        incomeListContainer.innerHTML = ''; expenseListContainer.innerHTML = ''; taskListContainer.innerHTML = '';
+        incomeListContainer.innerHTML = ''; expenseListContainer.innerHTML = ''; loanListContainer.innerHTML = ''; taskListContainer.innerHTML = '';
 
         const data = workData[dateStr];
         if (data) {
@@ -2162,12 +2639,14 @@
             else createIncomeRow();
             if (data.expenses && data.expenses.length > 0) data.expenses.forEach(e => createExpenseRow(e.name, e.amount));
             else createExpenseRow();
+            if (data.loans && data.loans.length > 0) data.loans.forEach(l => createLoanRow(l.name, l.amount, l.isPaid));
+            else createLoanRow();
             const tasks = getTaskList(data);
             if (tasks.length > 0) tasks.forEach(t => createTaskRow(t));
             else createTaskRow();
         } else {
             document.querySelector('input[value="full"]').checked = true;
-            createIncomeRow(); createExpenseRow(); createTaskRow();
+            createIncomeRow(); createExpenseRow(); createLoanRow(); createTaskRow();
         }
         modal.style.display = 'flex';
     }
@@ -2192,13 +2671,23 @@
             if (amount && Number(amount) > 0) expenses.push({ name: name || 'Chi khác', amount: Number(amount) });
         });
 
+        const loans = [];
+        document.querySelectorAll('.loan-row').forEach(row => {
+            const name = row.querySelector('.loan-name').value.trim();
+            const amount = row.querySelector('.loan-amount').value.trim();
+            const isPaid = row.querySelector('.loan-paid').checked;
+            if ((amount && Number(amount) > 0) || name) {
+                loans.push({ name: name || 'Cho mượn', amount: Number(amount) || 0, isPaid });
+            }
+        });
+
         const tasks = [];
         document.querySelectorAll('.task-row').forEach(row => {
             const t = row.querySelector('.task-name').value.trim();
             if (t) tasks.push(t);
         });
 
-        if (selectedType === 'none' && incomes.length === 0 && expenses.length === 0 && tasks.length === 0) {
+        if (selectedType === 'none' && incomes.length === 0 && expenses.length === 0 && loans.length === 0 && tasks.length === 0) {
             delete workData[selectedDateStr];
         } else {
             const isOff = (selectedType === 'off' || selectedType === 'none');
@@ -2207,18 +2696,19 @@
                 isOvertime: isOff ? false : checkOvertime.checked,
                 startTime: (checkOvertime.checked && !isOff) ? otStartInput.value : '',
                 endTime: (checkOvertime.checked && !isOff) ? otEndInput.value : '',
-                incomes, expenses, tasks, content: tasks.join('\n')
+                incomes, expenses, loans, tasks, content: tasks.join('\n')
             };
         }
         
         autoSaveData(false);
         modal.style.display = 'none';
         renderCalendar();
+        showToast('Đã lưu dữ liệu ngày ' + selectedDateStr);
     };
 
     function createIncomeRow(n = '', a = '') {
         const row = document.createElement('div'); row.className = 'income-row';
-        row.innerHTML = `<input type="text" class="inc-name" placeholder="Tên khoản thu" value="${escapeHtml(n)}"><input type="number" class="inc-amount" placeholder="Số tiền" min="0" value="${a}"><button type="button" class="btn btn-danger btn-remove-inc">✖</button>`;
+        row.innerHTML = `<input type="text" class="inc-name" placeholder="Tên khoản thu (VD: Lương, Thưởng...)" value="${escapeHtml(n)}"><input type="number" class="inc-amount" placeholder="Số tiền (VNĐ)" min="0" value="${a}"><button type="button" class="btn btn-danger btn-remove-inc">✖</button>`;
         row.querySelector('.btn-remove-inc').onclick = () => row.remove();
         incomeListContainer.appendChild(row);
     }
@@ -2226,15 +2716,44 @@
 
     function createExpenseRow(n = '', a = '') {
         const row = document.createElement('div'); row.className = 'expense-row';
-        row.innerHTML = `<input type="text" class="exp-name" placeholder="Tên khoản chi" value="${escapeHtml(n)}"><input type="number" class="exp-amount" placeholder="Số tiền" min="0" value="${a}"><button type="button" class="btn btn-danger btn-remove-exp">✖</button>`;
+        row.innerHTML = `<input type="text" class="exp-name" placeholder="Tên khoản chi (VD: Ăn uống, Xăng...)" value="${escapeHtml(n)}"><input type="number" class="exp-amount" placeholder="Số tiền (VNĐ)" min="0" value="${a}"><button type="button" class="btn btn-danger btn-remove-exp">✖</button>`;
         row.querySelector('.btn-remove-exp').onclick = () => row.remove();
         expenseListContainer.appendChild(row);
     }
     btnAddExpense.onclick = () => createExpenseRow();
 
+    function createLoanRow(n = '', a = '', isPaid = false) {
+        const row = document.createElement('div');
+        row.className = `loan-row ${isPaid ? 'repaid' : ''}`;
+        row.innerHTML = `
+            <input type="text" class="loan-name" placeholder="Người mượn / Lý do" value="${escapeHtml(n)}">
+            <input type="number" class="loan-amount" placeholder="Số tiền (VNĐ)" min="0" value="${a}">
+            <label class="loan-check-label" title="Đánh dấu nếu đã thu hồi">
+                <input type="checkbox" class="loan-paid" ${isPaid ? 'checked' : ''}>
+                <span>Đã trả</span>
+            </label>
+            <button type="button" class="btn btn-danger btn-remove-loan">✖</button>
+        `;
+        const checkbox = row.querySelector('.loan-paid');
+        checkbox.onchange = () => {
+            row.classList.toggle('repaid', checkbox.checked);
+        };
+        row.querySelector('.btn-remove-loan').onclick = () => row.remove();
+        loanListContainer.appendChild(row);
+    }
+    btnAddLoan.onclick = () => createLoanRow();
+
+    window.toggleLoanPaidFromStats = function(dateStr, idx) {
+        if (workData[dateStr] && workData[dateStr].loans && workData[dateStr].loans[idx]) {
+            workData[dateStr].loans[idx].isPaid = !workData[dateStr].loans[idx].isPaid;
+            autoSaveData(false);
+            renderCalendar();
+        }
+    };
+
     function createTaskRow(t = '') {
         const row = document.createElement('div'); row.className = 'task-row';
-        row.innerHTML = `<input type="text" class="task-name" placeholder="Nội dung công việc" value="${escapeHtml(t)}"><button type="button" class="btn btn-danger btn-remove-task">✖</button>`;
+        row.innerHTML = `<input type="text" class="task-name" placeholder="Mô tả công việc đã thực hiện..." value="${escapeHtml(t)}"><button type="button" class="btn btn-danger btn-remove-task">✖</button>`;
         row.querySelector('.btn-remove-task').onclick = () => row.remove();
         taskListContainer.appendChild(row);
     }
@@ -2249,8 +2768,16 @@
 
     checkOvertime.onchange = (e) => { timeRangeDiv.style.display = e.target.checked ? 'flex' : 'none'; };
 
-    document.getElementById('btn-prev').onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
-    document.getElementById('btn-next').onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+    document.getElementById('btn-prev').onclick = () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        if (currentView === 'calendar') renderCalendar();
+        else if (currentView === 'debt') renderDebtView();
+    };
+    document.getElementById('btn-next').onclick = () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        if (currentView === 'calendar') renderCalendar();
+        else if (currentView === 'debt') renderDebtView();
+    };
 
     document.getElementById('btn-export').onclick = () => {
         const dataStr = JSON.stringify(workData, null, 2);
@@ -2259,6 +2786,7 @@
         const a = document.createElement('a'); a.href = url;
         a.download = `nhatky_thu_chi_vattu_${new Date().toISOString().slice(0,10)}.json`;
         a.click(); URL.revokeObjectURL(url);
+        showToast('Đã xuất file sao lưu JSON!');
     };
 
     document.getElementById('import-file').addEventListener('change', (e) => {
@@ -2272,8 +2800,8 @@
                 if (!workData.materialRoots) workData.materialRoots = [];
                 autoSaveData(false);
                 renderCalendar();
-                alert("Tải file dữ liệu thành công! 🎉");
-            } catch (error) { alert("File không hợp lệ!"); }
+                showToast('Tải file dữ liệu thành công!');
+            } catch (error) { showToast('File không hợp lệ!', 'error'); }
         };
         reader.readAsText(file); e.target.value = '';
     });
@@ -2296,6 +2824,7 @@
         localStorage.setItem('nhatky_gh_path', ghConfig.path);
         localStorage.setItem('nhatky_gh_token', ghConfig.token);
         ghModal.style.display = 'none';
+        showToast('Đã lưu cấu hình GitHub!');
         if (ghConfig.token) autoSaveData(true);
     };
     document.getElementById('btn-pull-gh').onclick = () => loadFromGitHub(true);
