@@ -176,6 +176,164 @@
             font-weight: 700;
             box-shadow: var(--shadow-xs);
         }
+        .nav-tab.active-history {
+            background: var(--bg-surface);
+            color: #4f46e5;
+            font-weight: 700;
+            box-shadow: var(--shadow-xs);
+        }
+        .tab-badge {
+            font-size: 10.5px;
+            font-weight: 800;
+            padding: 1px 6px;
+            border-radius: 999px;
+            background: #e0e7ff;
+            color: #4338ca;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ================= VIEW 4: SNAPSHOT HISTORY & DIFF VIEWER (23:59) ================= */
+        .history-banner {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: #ffffff;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+        .countdown-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+        .history-layout {
+            display: grid;
+            grid-template-columns: 390px minmax(0, 1fr);
+            gap: 16px;
+            align-items: start;
+        }
+        .snapshot-list-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xs);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 760px;
+        }
+        .snapshot-list-header {
+            padding: 12px 16px;
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .snapshot-list-body {
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        .snapshot-item {
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 12px;
+            background: var(--bg-surface);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+        .snapshot-item:hover {
+            border-color: #94a3b8;
+            background: #f8fafc;
+        }
+        .snapshot-item.selected {
+            border-color: #4f46e5;
+            background: #eef2ff;
+            box-shadow: inset 3px 0 0 #4f46e5;
+        }
+        .snap-tag {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .snap-tag.auto { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .snap-tag.catchup { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .snap-tag.manual { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
+
+        .snapshot-inspector-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xs);
+            overflow: hidden;
+            min-height: 540px;
+        }
+        .inspector-tabs {
+            display: flex;
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0 16px;
+            gap: 16px;
+            overflow-x: auto;
+        }
+        .inspector-tab {
+            padding: 12px 4px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            border-bottom: 2.5px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .inspector-tab.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        .diff-card {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            background: var(--bg-surface);
+        }
+        .diff-added { border-left: 4px solid #10b981; background: #f0fdf4; }
+        .diff-modified { border-left: 4px solid #f59e0b; background: #fffbeb; }
+        .diff-removed { border-left: 4px solid #ef4444; background: #fef2f2; }
+        .diff-badge {
+            font-size: 10.5px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .diff-badge.added { background: #10b981; color: white; }
+        .diff-badge.modified { background: #f59e0b; color: white; }
+        .diff-badge.removed { background: #ef4444; color: white; }
 
         /* System Tools Right */
         .system-actions {
@@ -1051,7 +1209,7 @@
             .kpi-section-grid, .work-stat-strip, .debt-dashboard {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .analysis-grid-2x2 {
+            .analysis-grid-2x2, .history-layout {
                 grid-template-columns: 1fr;
             }
         }
@@ -1060,7 +1218,7 @@
             .topbar { padding: 10px 12px; }
             .topbar-inner { flex-direction: column; align-items: stretch; gap: 10px; }
             .brand-box { justify-content: space-between; }
-            .nav-tabs { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); }
+            .nav-tabs { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); }
             .nav-tab { justify-content: center; font-size: 12px; padding: 0 6px; }
             .system-actions { justify-content: space-between; }
 
@@ -1097,15 +1255,7 @@
         <!-- Brand & Trạng thái lưu -->
         <div class="brand-box">
             <div style="display:flex; align-items:center; gap:10px;">
-                <div class="brand-logo"><i class="fa-solid fa-chart-pie"></i></div>
-                <div>
-                    <h1 class="brand-title">Work & Finance Manager</h1>
-                    <div class="brand-subtitle">Nhật ký Công việc • Thu Chi • Công Nợ • Vật Tư</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Segmented Tabs chuyển đổi 3 Phân hệ rõ ràng -->
+        <!-- Segmented Tabs chuyển đổi 4 Phân hệ rõ ràng -->
         <nav class="nav-tabs" aria-label="Chuyển đổi phân hệ">
             <button type="button" class="nav-tab active" id="tab-btn-calendar" onclick="switchView('calendar')">
                 <i class="fa-regular fa-calendar-check"></i>
@@ -1119,11 +1269,19 @@
                 <i class="fa-solid fa-sitemap"></i>
                 <span class="tab-text">Sơ Đồ Vật Tư</span>
             </button>
+            <button type="button" class="nav-tab" id="btn-switch-history" title="Danh sách bản lưu tự động lúc 23:59 mỗi ngày & So sánh thay đổi">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span class="tab-text">Lịch Sử Lưu (23:59)</span>
+                <span class="tab-badge" id="snapshot-count-badge">0</span>
+            </button>
         </nav>
 
         <!-- Công cụ đồng bộ & sao lưu -->
         <div class="system-actions">
             <div class="save-badge" id="auto-save-status">✔️ Đã tự động lưu</div>
+            <button class="btn" onclick="createManualSnapshotNow()" title="Chụp & lưu lại trạng thái dữ liệu ngay lập tức">
+                <i class="fa-solid fa-camera"></i> Lưu phiên bản
+            </button>
             <button class="btn btn-github" id="btn-gh-config" title="Cài đặt tự động lưu trên GitHub">
                 <i class="fa-brands fa-github"></i> GitHub
             </button>
@@ -1253,6 +1411,63 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MÀN HÌNH 4: LỊCH SỬ BẢN LƯU 23:59 & SO SÁNH THAY ĐỔI ================= -->
+    <div id="view-history" class="app-view">
+        <div class="history-banner">
+            <div>
+                <h3 style="margin:0; font-size:16px; font-weight:800; display:flex; align-items:center; gap:8px;">
+                    <i class="fa-solid fa-clock-rotate-left" style="color:#a5b4fc;"></i>
+                    Hệ Thống Tự Động Chốt & Lưu Phiên Bản Lúc 23:59 Mỗi Ngày
+                </h3>
+                <p style="margin:4px 0 0 0; font-size:12.5px; color:#e0e7ff;">
+                    Tự động lưu lịch sử dữ liệu vào 23:59 hàng ngày (kể cả lưu bù nếu bạn đóng trình duyệt). Bạn có thể xem lại, đối chiếu thay đổi hoặc tải file về bất kỳ lúc nào.
+                </p>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                <div class="countdown-pill">
+                    <i class="fa-regular fa-clock" style="color:#86efac;"></i>
+                    <span>Đếm ngược tới 23:59 hôm nay: <strong id="countdown-2359">--:--:--</strong></span>
+                </div>
+                <label class="countdown-pill" style="cursor:pointer;" title="Nếu bật, đúng 23:59 trình duyệt sẽ tự động tải về máy 1 file .json dự phòng">
+                    <input type="checkbox" id="toggle-auto-download-2359" onchange="toggleAutoDownload2359(this.checked)">
+                    <span>Tự tải file .json về máy lúc 23:59</span>
+                </label>
+                <button class="btn btn-primary" onclick="createManualSnapshotNow()" style="background:#4f46e5; border-color:#4338ca;">
+                    <i class="fa-solid fa-camera"></i> Chốt bản lưu ngay
+                </button>
+            </div>
+        </div>
+
+        <div class="history-layout">
+            <!-- Cột trái: Danh sách bản lưu -->
+            <div class="snapshot-list-panel">
+                <div class="snapshot-list-header">
+                    <span>📚 Danh sách các bản đã lưu (<span id="snap-total-label">0</span>)</span>
+                    <button class="btn btn-small" onclick="exportAllSnapshotsPack()" title="Tải toàn bộ lịch sử các bản lưu về máy">
+                        <i class="fa-solid fa-box-archive"></i> Xuất tất cả
+                    </button>
+                </div>
+                <div class="snapshot-list-body" id="snapshot-list-container"></div>
+            </div>
+
+            <!-- Cột phải: Bộ kiểm tra nội dung & So sánh sự thay đổi (Diff Inspector) -->
+            <div class="snapshot-inspector-panel">
+                <div class="inspector-tabs">
+                    <button type="button" class="inspector-tab active" id="insp-tab-diff" onclick="switchInspectorTab('diff')">
+                        🔍 So sánh thay đổi (Diff)
+                    </button>
+                    <button type="button" class="inspector-tab" id="insp-tab-preview" onclick="switchInspectorTab('preview')">
+                        📋 Xem chi tiết nội dung đã lưu
+                    </button>
+                    <button type="button" class="inspector-tab" id="insp-tab-raw" onclick="switchInspectorTab('raw')">
+                        { } Dữ liệu JSON gốc
+                    </button>
+                </div>
+                <div id="snapshot-inspector-body" style="padding: 18px;"></div>
             </div>
         </div>
     </div>
@@ -1539,19 +1754,23 @@
     const tabBtnCalendar = document.getElementById('tab-btn-calendar');
     const btnSwitchMaterials = document.getElementById('btn-switch-materials');
     const btnSwitchDebt = document.getElementById('btn-switch-debt');
+    const btnSwitchHistory = document.getElementById('btn-switch-history');
     const viewCalendar = document.getElementById('view-calendar');
     const viewDebt = document.getElementById('view-debt');
     const viewMaterials = document.getElementById('view-materials');
+    const viewHistory = document.getElementById('view-history');
 
     window.switchView = function(target) {
         currentView = target;
         viewCalendar.classList.remove('active');
         viewDebt.classList.remove('active');
         viewMaterials.classList.remove('active');
+        viewHistory.classList.remove('active');
 
         tabBtnCalendar.className = 'nav-tab';
         btnSwitchMaterials.className = 'nav-tab';
         btnSwitchDebt.className = 'nav-tab';
+        btnSwitchHistory.className = 'nav-tab';
 
         if (target === 'calendar') {
             viewCalendar.classList.add('active');
@@ -1565,11 +1784,625 @@
             viewMaterials.classList.add('active');
             btnSwitchMaterials.className = 'nav-tab active';
             renderMaterialView();
+        } else if (target === 'history') {
+            viewHistory.classList.add('active');
+            btnSwitchHistory.className = 'nav-tab active-history';
+            renderHistoryView();
         }
     };
 
     btnSwitchMaterials.onclick = () => switchView(currentView === 'materials' ? 'calendar' : 'materials');
     btnSwitchDebt.onclick = () => switchView(currentView === 'debt' ? 'calendar' : 'debt');
+    btnSwitchHistory.onclick = () => switchView(currentView === 'history' ? 'calendar' : 'history');
+
+    // =========================================================================
+    // HỆ THỐNG LƯU TỰ ĐỘNG 23:59 HÀNG NGÀY & LỊCH SỬ PHIÊN BẢN (SNAPSHOT ENGINE)
+    // =========================================================================
+    const SNAPSHOT_STORAGE_KEY = 'nhatky_daily_snapshots';
+    const MAX_SNAPSHOTS = 60;
+    let snapshots = JSON.parse(localStorage.getItem(SNAPSHOT_STORAGE_KEY) || '[]');
+    let selectedSnapshotId = snapshots.length > 0 ? snapshots[0].id : null;
+    let currentInspectorTab = 'diff'; // 'diff' | 'preview' | 'raw'
+    let diffCompareMode = 'previous'; // 'previous' (so với bản lưu liền trước) | 'current' (so với dữ liệu hiện tại)
+    let autoDownload2359 = localStorage.getItem('nhatky_auto_dl_2359') === 'true';
+
+    // Khởi tạo trạng thái checkbox tự động tải file lúc 23:59
+    const autoDlCheckbox = document.getElementById('toggle-auto-download-2359');
+    if (autoDlCheckbox) autoDlCheckbox.checked = autoDownload2359;
+
+    window.toggleAutoDownload2359 = function(checked) {
+        autoDownload2359 = checked;
+        localStorage.setItem('nhatky_auto_dl_2359', checked ? 'true' : 'false');
+        showToast(checked ? 'Đã bật tự động tải file .json lúc 23:59 mỗi ngày' : 'Đã tắt tự động tải file .json lúc 23:59');
+    };
+
+    function getCleanWorkDataClone(sourceData = workData) {
+        return JSON.parse(JSON.stringify(sourceData));
+    }
+
+    function computeDataMetrics(dataObj) {
+        let dayCount = 0, totalInc = 0, totalExp = 0, totalLoan = 0, taskCount = 0;
+        for (const key of Object.keys(dataObj)) {
+            if (/^\d{4}-\d{2}-\d{2}$/.test(key)) {
+                const d = dataObj[key];
+                if (!d) continue;
+                dayCount++;
+                if (Array.isArray(d.incomes)) totalInc += d.incomes.reduce((s, i) => s + (Number(i.amount) || 0), 0);
+                if (Array.isArray(d.expenses)) totalExp += d.expenses.reduce((s, i) => s + (Number(i.amount) || 0), 0);
+                if (Array.isArray(d.loans)) totalLoan += d.loans.reduce((s, i) => s + (Number(i.amount) || 0), 0);
+                if (Array.isArray(d.tasks)) taskCount += d.tasks.filter(Boolean).length;
+            }
+        }
+        const debtCount = Array.isArray(dataObj.debts) ? dataObj.debts.length : 0;
+        let matCount = 0;
+        function countTree(nodes) {
+            if (!Array.isArray(nodes)) return;
+            nodes.forEach(n => { matCount++; if (n.children) countTree(n.children); });
+        }
+        countTree(dataObj.materialRoots);
+        return { dayCount, totalInc, totalExp, totalLoan, taskCount, debtCount, matCount };
+    }
+
+    function formatDateVN(dateStr) {
+        if (!dateStr || !dateStr.includes('-')) return dateStr;
+        const [y, m, d] = dateStr.split('-');
+        return `${d}/${m}/${y}`;
+    }
+
+    function saveSnapshotsToStorage() {
+        if (snapshots.length > MAX_SNAPSHOTS) {
+            snapshots = snapshots.slice(0, MAX_SNAPSHOTS);
+        }
+        localStorage.setItem(SNAPSHOT_STORAGE_KEY, JSON.stringify(snapshots));
+        updateSnapshotBadgeCount();
+    }
+
+    function updateSnapshotBadgeCount() {
+        const badge = document.getElementById('snapshot-count-badge');
+        if (badge) badge.textContent = snapshots.length;
+        const totalLbl = document.getElementById('snap-total-label');
+        if (totalLbl) totalLbl.textContent = snapshots.length;
+    }
+
+    function createSnapshotRecord({ dateKey, timeLabel, mode = 'auto-2359', note = '', triggerDownload = false }) {
+        const clone = getCleanWorkDataClone(workData);
+        const metrics = computeDataMetrics(clone);
+        const snap = {
+            id: 'snap-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+            dateKey: dateKey, // YYYY-MM-DD
+            timeLabel: timeLabel, // '23:59' hoặc HH:MM:SS
+            createdAt: new Date().toISOString(),
+            mode: mode, // 'auto-2359' | 'catchup-2359' | 'manual'
+            note: note || (mode === 'manual' ? 'Bản lưu thủ công' : `Bản lưu tự động 23:59 ngày ${formatDateVN(dateKey)}`),
+            metrics: metrics,
+            data: clone
+        };
+
+        snapshots.unshift(snap);
+        selectedSnapshotId = snap.id;
+        localStorage.setItem('nhatky_last_snap_date', dateKey);
+        saveSnapshotsToStorage();
+
+        if (triggerDownload) {
+            downloadSnapshotById(snap.id);
+        }
+        if (currentView === 'history') {
+            renderHistoryView();
+        }
+        return snap;
+    }
+
+    window.createManualSnapshotNow = function() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const d = String(now.getDate()).padStart(2, '0');
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const dateKey = `${y}-${m}-${d}`;
+        createSnapshotRecord({
+            dateKey,
+            timeLabel: `${hh}:${mm}`,
+            mode: 'manual',
+            note: `Bản lưu lúc ${hh}:${mm} ngày ${d}/${m}/${y}`
+        });
+        showToast(`📸 Đã tạo bản lưu lúc ${hh}:${mm} (${d}/${m}/${y})`);
+    };
+
+    // Kiểm tra lưu bù nếu ngày hôm trước người dùng đóng tab trước 23:59
+    function checkAndRunDaily2359Catchup() {
+        const now = new Date();
+        const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        const lastActiveDay = localStorage.getItem('nhatky_last_active_day');
+
+        if (lastActiveDay && lastActiveDay < todayKey) {
+            const alreadyHasSnapForLastDay = snapshots.some(s => s.dateKey === lastActiveDay && (s.mode === 'auto-2359' || s.mode === 'catchup-2359'));
+            if (!alreadyHasSnapForLastDay) {
+                createSnapshotRecord({
+                    dateKey: lastActiveDay,
+                    timeLabel: '23:59',
+                    mode: 'catchup-2359',
+                    note: `Bản chốt cuối ngày 23:59 (${formatDateVN(lastActiveDay)})`
+                });
+            }
+        }
+        localStorage.setItem('nhatky_last_active_day', todayKey);
+
+        // Nếu chưa có bất kỳ bản lưu nào trong lịch sử, tạo 1 bản khởi tạo để người dùng dễ đối chiếu
+        if (snapshots.length === 0) {
+            createSnapshotRecord({
+                dateKey: todayKey,
+                timeLabel: '23:59',
+                mode: 'auto-2359',
+                note: `Bản lưu gốc ngày ${formatDateVN(todayKey)}`
+            });
+        } else {
+            updateSnapshotBadgeCount();
+        }
+    }
+
+    // Bộ đếm ngược thời gian thực & Tự động kích hoạt đúng 23:59 mỗi ngày
+    function start2359Scheduler() {
+        function tick() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            const todayKey = `${y}-${m}-${d}`;
+
+            // Tính thời gian còn lại tới 23:59:00 hôm nay
+            const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0);
+            let diffMs = target - now;
+            const cdEl = document.getElementById('countdown-2359');
+
+            if (diffMs > 0) {
+                const hrs = String(Math.floor(diffMs / 3600000)).padStart(2, '0');
+                const mins = String(Math.floor((diffMs % 3600000) / 60000)).padStart(2, '0');
+                const secs = String(Math.floor((diffMs % 60000) / 1000)).padStart(2, '0');
+                if (cdEl) cdEl.textContent = `${hrs}:${mins}:${secs}`;
+            } else {
+                if (cdEl) cdEl.textContent = `Đã chốt 23:59 hôm nay`;
+            }
+
+            // Đúng khung giờ 23:59 -> Tự động lưu bản chốt ngày nếu hôm nay chưa chốt 23:59
+            if (now.getHours() === 23 && now.getMinutes() === 59) {
+                const hasToday2359 = snapshots.some(s => s.dateKey === todayKey && s.mode === 'auto-2359' && s.timeLabel === '23:59');
+                if (!hasToday2359) {
+                    createSnapshotRecord({
+                        dateKey: todayKey,
+                        timeLabel: '23:59',
+                        mode: 'auto-2359',
+                        note: `Bản lưu tự động 23:59 ngày ${d}/${m}/${y}`,
+                        triggerDownload: autoDownload2359
+                    });
+                    autoSaveData(false);
+                    showToast(`🕚 23:59 - Đã tự động chốt & lưu dữ liệu ngày ${d}/${m}/${y}!`);
+                }
+            }
+        }
+        tick();
+        setInterval(tick, 1000);
+    }
+
+    // SO SÁNH SỰ THAY ĐỔI GIỮA 2 BẢN DỮ LIỆU (DIFF ENGINE)
+    function compareWorkData(oldData, newData) {
+        const changes = [];
+        const allDateKeys = new Set([
+            ...Object.keys(oldData || {}).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)),
+            ...Object.keys(newData || {}).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k))
+        ]);
+
+        const sortedDates = Array.from(allDateKeys).sort().reverse();
+        const shiftNames = { 'full': 'Làm cả ngày', 'half-am': 'Ca Sáng', 'half-pm': 'Ca Chiều', 'off': 'Nghỉ làm', 'none': 'Chỉ ghi chú' };
+
+        sortedDates.forEach(dateKey => {
+            const dOld = oldData ? oldData[dateKey] : null;
+            const dNew = newData ? newData[dateKey] : null;
+            if (JSON.stringify(dOld) === JSON.stringify(dNew)) return;
+
+            if (!dOld && dNew) {
+                const inc = (dNew.incomes || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                const exp = (dNew.expenses || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                const tasks = (dNew.tasks || []).join(', ');
+                changes.push({
+                    type: 'added',
+                    scope: `Ngày ${formatDateVN(dateKey)}`,
+                    summary: `Thêm mới dữ liệu ngày (${shiftNames[dNew.type] || 'Chấm công'})`,
+                    details: [
+                        inc > 0 ? `+ Thu nhập: ${formatCurrency(inc)}` : '',
+                        exp > 0 ? `- Chi tiêu: ${formatCurrency(exp)}` : '',
+                        tasks ? `Công việc: ${tasks}` : ''
+                    ].filter(Boolean)
+                });
+            } else if (dOld && !dNew) {
+                changes.push({
+                    type: 'removed',
+                    scope: `Ngày ${formatDateVN(dateKey)}`,
+                    summary: `Đã xóa dữ liệu ngày ${formatDateVN(dateKey)}`,
+                    details: []
+                });
+            } else if (dOld && dNew) {
+                const diffs = [];
+                if (dOld.type !== dNew.type) {
+                    diffs.push(`Ca làm: "${shiftNames[dOld.type] || dOld.type}" ➔ "${shiftNames[dNew.type] || dNew.type}"`);
+                }
+                if (Boolean(dOld.isOvertime) !== Boolean(dNew.isOvertime) || dOld.startTime !== dNew.startTime || dOld.endTime !== dNew.endTime) {
+                    diffs.push(dNew.isOvertime ? `Tăng ca: ${dNew.startTime || ''}-${dNew.endTime || ''}` : `Đã tắt tăng ca`);
+                }
+                const oldInc = (dOld.incomes || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                const newInc = (dNew.incomes || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                if (oldInc !== newInc || JSON.stringify(dOld.incomes) !== JSON.stringify(dNew.incomes)) {
+                    diffs.push(`Thu nhập: ${formatCurrency(oldInc)} ➔ ${formatCurrency(newInc)}`);
+                }
+                const oldExp = (dOld.expenses || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                const newExp = (dNew.expenses || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                if (oldExp !== newExp || JSON.stringify(dOld.expenses) !== JSON.stringify(dNew.expenses)) {
+                    diffs.push(`Chi tiêu: ${formatCurrency(oldExp)} ➔ ${formatCurrency(newExp)}`);
+                }
+                const oldLoan = (dOld.loans || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                const newLoan = (dNew.loans || []).reduce((s, i) => s + Number(i.amount || 0), 0);
+                if (oldLoan !== newLoan || JSON.stringify(dOld.loans) !== JSON.stringify(dNew.loans)) {
+                    diffs.push(`Cho mượn: ${formatCurrency(oldLoan)} ➔ ${formatCurrency(newLoan)}`);
+                }
+                if (JSON.stringify(dOld.tasks) !== JSON.stringify(dNew.tasks)) {
+                    diffs.push(`Cập nhật ghi chú công việc (${(dNew.tasks || []).length} mục)`);
+                }
+                if (diffs.length > 0) {
+                    changes.push({
+                        type: 'modified',
+                        scope: `Ngày ${formatDateVN(dateKey)}`,
+                        summary: `Thay đổi ${diffs.length} mục trong ngày`,
+                        details: diffs
+                    });
+                }
+            }
+        });
+
+        // So sánh danh sách Nợ
+        const oldDebts = (oldData && oldData.debts) || [];
+        const newDebts = (newData && newData.debts) || [];
+        if (JSON.stringify(oldDebts) !== JSON.stringify(newDebts)) {
+            changes.push({
+                type: 'modified',
+                scope: '💳 Quản lý Tiền Nợ & Lãi',
+                summary: `Cập nhật bảng công nợ (${oldDebts.length} khoản ➔ ${newDebts.length} khoản)`,
+                details: newDebts.map(d => `${d.name}: Gốc ${formatCurrency(d.total)} | Đã trả ${formatCurrency(d.paidPrincipal || 0)}`)
+            });
+        }
+
+        // So sánh sơ đồ Vật tư
+        const oldMats = (oldData && oldData.materialRoots) || [];
+        const newMats = (newData && newData.materialRoots) || [];
+        if (JSON.stringify(oldMats) !== JSON.stringify(newMats)) {
+            changes.push({
+                type: 'modified',
+                scope: '🌿 Sơ đồ Vật Tư Công Việc',
+                summary: `Cập nhật cấu trúc cây vật tư (${oldMats.length} chủ đề gốc ➔ ${newMats.length} chủ đề gốc)`,
+                details: newMats.map(r => `${r.text} (${(r.children || []).length} nhánh con)`)
+            });
+        }
+
+        return changes;
+    }
+
+    // RENDER GIAO DIỆN LỊCH SỬ BẢN LƯU (VIEW 4)
+    function renderHistoryView() {
+        updateSnapshotBadgeCount();
+        const listContainer = document.getElementById('snapshot-list-container');
+        if (!listContainer) return;
+
+        if (snapshots.length === 0) {
+            listContainer.innerHTML = `<div style="text-align:center; padding:30px 14px; color:#94a3b8; font-size:13px;">Chưa có bản lưu nào. Nhấn "Chốt bản lưu ngay" để tạo.</div>`;
+            document.getElementById('snapshot-inspector-body').innerHTML = '';
+            return;
+        }
+
+        if (!selectedSnapshotId || !snapshots.some(s => s.id === selectedSnapshotId)) {
+            selectedSnapshotId = snapshots[0].id;
+        }
+
+        listContainer.innerHTML = snapshots.map((snap, idx) => {
+            const isSelected = snap.id === selectedSnapshotId;
+            const prevSnap = snapshots[idx + 1];
+            const diffCount = prevSnap ? compareWorkData(prevSnap.data, snap.data).length : 0;
+
+            let tagHtml = `<span class="snap-tag auto">Tự động 23:59</span>`;
+            if (snap.mode === 'catchup-2359') tagHtml = `<span class="snap-tag catchup">Lưu bù 23:59</span>`;
+            else if (snap.mode === 'manual') tagHtml = `<span class="snap-tag manual">Thủ công ${escapeHtml(snap.timeLabel)}</span>`;
+
+            const m = snap.metrics || computeDataMetrics(snap.data);
+
+            return `
+                <div class="snapshot-item ${isSelected ? 'selected' : ''}" onclick="selectSnapshot('${snap.id}')">
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:6px;">
+                        <strong style="font-size:13.5px; color:var(--text-primary);" class="num-tabular">
+                            📅 ${formatDateVN(snap.dateKey)} • ${escapeHtml(snap.timeLabel)}
+                        </strong>
+                        ${tagHtml}
+                    </div>
+                    <div style="font-size:12px; color:var(--text-secondary); font-weight:600; margin-bottom:8px;">
+                        ${escapeHtml(snap.note)}
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:11px; color:var(--text-muted); margin-bottom:10px;" class="num-tabular">
+                        <span style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">🗓️ ${m.dayCount} ngày</span>
+                        <span style="background:#f0f9ff; color:#0369a1; padding:2px 6px; border-radius:4px;">+${formatCurrency(m.totalInc)}</span>
+                        <span style="background:#fff1f2; color:#be123c; padding:2px 6px; border-radius:4px;">-${formatCurrency(m.totalExp)}</span>
+                        ${prevSnap ? `<span style="background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:4px; font-weight:700;">⚡ ${diffCount} mục đổi</span>` : ''}
+                    </div>
+                    <div style="display:flex; gap:6px;" onclick="event.stopPropagation();">
+                        <button type="button" class="btn btn-small" style="flex:1;" onclick="selectSnapshot('${snap.id}')">
+                            👁️ Xem & So sánh
+                        </button>
+                        <button type="button" class="btn btn-small" onclick="downloadSnapshotById('${snap.id}')" title="Tải bản lưu này về máy (.json)">
+                            📥 Tải về
+                        </button>
+                        <button type="button" class="btn btn-small" style="color:#047857; border-color:#a7f3d0; background:#ecfdf5;" onclick="restoreSnapshotById('${snap.id}')" title="Khôi phục dữ liệu về thời điểm này">
+                            ⏪ Khôi phục
+                        </button>
+                        <button type="button" class="btn btn-danger btn-small" style="width:28px; height:28px;" onclick="deleteSnapshotById('${snap.id}')" title="Xóa bản lưu này">
+                            ✖
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        renderSnapshotInspector();
+    }
+
+    window.selectSnapshot = function(id) {
+        selectedSnapshotId = id;
+        renderHistoryView();
+    };
+
+    window.switchInspectorTab = function(tab) {
+        currentInspectorTab = tab;
+        document.getElementById('insp-tab-diff').classList.toggle('active', tab === 'diff');
+        document.getElementById('insp-tab-preview').classList.toggle('active', tab === 'preview');
+        document.getElementById('insp-tab-raw').classList.toggle('active', tab === 'raw');
+        renderSnapshotInspector();
+    };
+
+    window.setDiffCompareMode = function(mode) {
+        diffCompareMode = mode;
+        renderSnapshotInspector();
+    };
+
+    function renderSnapshotInspector() {
+        const body = document.getElementById('snapshot-inspector-body');
+        if (!body) return;
+        const snapIndex = snapshots.findIndex(s => s.id === selectedSnapshotId);
+        if (snapIndex === -1) {
+            body.innerHTML = `<div style="color:#94a3b8; text-align:center; padding:30px;">Chọn một bản lưu bên trái để xem chi tiết.</div>`;
+            return;
+        }
+
+        const snap = snapshots[snapIndex];
+        const prevSnap = snapshots[snapIndex + 1] || null;
+        const m = snap.metrics || computeDataMetrics(snap.data);
+
+        // Header thông tin bản lưu đang chọn
+        let topBarHtml = `
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; padding-bottom:14px; margin-bottom:16px; border-bottom:1px solid var(--border-light);">
+                <div>
+                    <div style="font-size:16px; font-weight:800; color:var(--text-primary);">
+                        📌 ${escapeHtml(snap.note)}
+                    </div>
+                    <div style="font-size:12px; color:var(--text-muted); margin-top:4px;" class="num-tabular">
+                        Thời điểm chốt: <strong>${escapeHtml(snap.timeLabel)} - Ngày ${formatDateVN(snap.dateKey)}</strong> •
+                        Tổng thu: <strong style="color:var(--income)">+${formatCurrency(m.totalInc)}</strong> •
+                        Tổng chi: <strong style="color:var(--expense)">-${formatCurrency(m.totalExp)}</strong>
+                    </div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn btn-small" onclick="downloadSnapshotById('${snap.id}')">
+                        <i class="fa-solid fa-download"></i> Tải file .json của bản này
+                    </button>
+                    <button class="btn btn-small btn-primary" onclick="restoreSnapshotById('${snap.id}')">
+                        <i class="fa-solid fa-rotate-left"></i> Khôi phục bản lưu này
+                    </button>
+                </div>
+            </div>
+        `;
+
+        if (currentInspectorTab === 'diff') {
+            let baseData = prevSnap ? prevSnap.data : {};
+            let targetData = snap.data;
+            let compareLabel = prevSnap
+                ? `So sánh giữa bản lưu này (${formatDateVN(snap.dateKey)}) với bản lưu liền trước (${formatDateVN(prevSnap.dateKey)})`
+                : `Đây là bản lưu đầu tiên trong danh sách (Hiển thị toàn bộ dữ liệu được ghi nhận)`;
+
+            if (diffCompareMode === 'current') {
+                baseData = snap.data;
+                targetData = workData;
+                compareLabel = `So sánh từ bản lưu (${formatDateVN(snap.dateKey)} ${snap.timeLabel}) đến Dữ liệu hiện tại đang mở`;
+            }
+
+            const changes = compareWorkData(baseData, targetData);
+
+            let diffItemsHtml = '';
+            if (changes.length === 0) {
+                diffItemsHtml = `
+                    <div style="text-align:center; padding:36px 16px; background:#f8fafc; border-radius:10px; border:1px dashed #cbd5e1; color:#64748b;">
+                        ✔️ Không có sự thay đổi dữ liệu nào giữa hai phiên bản này.
+                    </div>
+                `;
+            } else {
+                diffItemsHtml = changes.map(ch => {
+                    const badgeLabel = ch.type === 'added' ? 'Thêm mới' : (ch.type === 'removed' ? 'Đã xóa' : 'Thay đổi');
+                    return `
+                        <div class="diff-card diff-${ch.type}">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                <strong style="font-size:13.5px; color:var(--text-primary);">${escapeHtml(ch.scope)}</strong>
+                                <span class="diff-badge ${ch.type}">${badgeLabel}</span>
+                            </div>
+                            <div style="font-size:13px; font-weight:600; color:var(--text-secondary); margin-bottom:4px;">
+                                ${escapeHtml(ch.summary)}
+                            </div>
+                            ${ch.details.length > 0 ? `
+                                <ul style="margin:6px 0 0 0; padding-left:18px; font-size:12.5px; color:var(--text-primary);">
+                                    ${ch.details.map(d => `<li style="margin-bottom:2px;">${escapeHtml(d)}</li>`).join('')}
+                                </ul>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            body.innerHTML = topBarHtml + `
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; background:#f8fafc; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light);">
+                    <span style="font-size:12.5px; font-weight:600; color:var(--text-secondary);">${compareLabel}</span>
+                    <div style="display:flex; gap:6px;">
+                        <button type="button" class="btn btn-small ${diffCompareMode === 'previous' ? 'btn-primary' : ''}" onclick="setDiffCompareMode('previous')">
+                            So với bản lưu trước
+                        </button>
+                        <button type="button" class="btn btn-small ${diffCompareMode === 'current' ? 'btn-primary' : ''}" onclick="setDiffCompareMode('current')">
+                            So với hiện tại
+                        </button>
+                    </div>
+                </div>
+                <div style="max-height:540px; overflow-y:auto; padding-right:4px;">
+                    ${diffItemsHtml}
+                </div>
+            `;
+        } else if (currentInspectorTab === 'preview') {
+            const dObj = snap.data || {};
+            const dayKeys = Object.keys(dObj).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort().reverse();
+            const shiftMap = { 'full': '🌳 Làm cả ngày', 'half-am': '🌅 Ca Sáng', 'half-pm': '🌇 Ca Chiều', 'off': '🏖️ Nghỉ', 'none': '📝 Ghi chú' };
+
+            let daysRows = dayKeys.map(dk => {
+                const item = dObj[dk];
+                const inc = (item.incomes || []).map(i => `${i.name} (+${formatCurrency(i.amount)})`).join(', ');
+                const exp = (item.expenses || []).map(e => `${e.name} (-${formatCurrency(e.amount)})`).join(', ');
+                const tasks = (item.tasks || []).join(' • ');
+                return `
+                    <tr>
+                        <td style="font-weight:700; white-space:nowrap;">${formatDateVN(dk)}</td>
+                        <td>${shiftMap[item.type] || item.type || ''} ${item.isOvertime ? `(OT ${item.startTime}-${item.endTime})` : ''}</td>
+                        <td style="color:var(--income); font-weight:600;">${escapeHtml(inc) || '-'}</td>
+                        <td style="color:var(--expense); font-weight:600;">${escapeHtml(exp) || '-'}</td>
+                        <td>${escapeHtml(tasks) || '-'}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            if (!daysRows) {
+                daysRows = `<tr><td colspan="5" style="text-align:center; color:#94a3b8; padding:20px;">Không có dữ liệu ngày nào trong bản lưu này.</td></tr>`;
+            }
+
+            body.innerHTML = topBarHtml + `
+                <div style="margin-bottom:14px; display:flex; gap:8px; align-items:center;">
+                    <input type="text" id="snap-note-edit-input" class="gh-input" style="height:32px; font-size:12.5px;" value="${escapeHtml(snap.note)}" placeholder="Đặt tên / ghi chú cho bản lưu này...">
+                    <button class="btn btn-small" onclick="saveSnapshotNote('${snap.id}')">💾 Lưu tên</button>
+                </div>
+                <div class="debt-table-wrapper" style="max-height:500px; overflow-y:auto;">
+                    <table class="debt-table" style="min-width:650px;">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Ca làm việc</th>
+                                <th>Khoản Thu</th>
+                                <th>Khoản Chi</th>
+                                <th>Công việc / Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>${daysRows}</tbody>
+                    </table>
+                </div>
+            `;
+        } else if (currentInspectorTab === 'raw') {
+            const jsonPretty = JSON.stringify(snap.data, null, 2);
+            body.innerHTML = topBarHtml + `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:12px; font-weight:700; color:var(--text-muted);">Nội dung JSON đầy đủ của bản lưu (${formatDateVN(snap.dateKey)}):</span>
+                    <button class="btn btn-small" onclick="copySnapshotJson('${snap.id}')">📋 Sao chép JSON</button>
+                </div>
+                <pre style="background:#0f172a; color:#e2e8f0; padding:14px; border-radius:8px; font-size:12px; max-height:480px; overflow:auto; margin:0;">${escapeHtml(jsonPretty)}</pre>
+            `;
+        }
+    }
+
+    window.saveSnapshotNote = function(id) {
+        const snap = snapshots.find(s => s.id === id);
+        const inp = document.getElementById('snap-note-edit-input');
+        if (snap && inp) {
+            snap.note = inp.value.trim() || snap.note;
+            saveSnapshotsToStorage();
+            renderHistoryView();
+            showToast('Đã cập nhật ghi chú bản lưu!');
+        }
+    };
+
+    window.downloadSnapshotById = function(id) {
+        const snap = snapshots.find(s => s.id === id);
+        if (!snap) return;
+        const dataStr = JSON.stringify(snap.data, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const safeTime = (snap.timeLabel || '2359').replace(':', 'h');
+        a.download = `nhatky_banluu_${snap.dateKey}_${safeTime}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast(`📥 Đã tải file bản lưu ngày ${formatDateVN(snap.dateKey)}!`);
+    };
+
+    window.exportAllSnapshotsPack = function() {
+        const dataStr = JSON.stringify(snapshots, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `lich_su_cac_ban_luu_23h59_${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('📦 Đã tải trọn bộ lịch sử bản lưu!');
+    };
+
+    window.restoreSnapshotById = function(id) {
+        const snap = snapshots.find(s => s.id === id);
+        if (!snap) return;
+        // Tự động tạo 1 bản lưu an toàn của trạng thái hiện tại trước khi khôi phục
+        const now = new Date();
+        const todayKey = now.toISOString().slice(0, 10);
+        const hhmm = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        createSnapshotRecord({
+            dateKey: todayKey,
+            timeLabel: hhmm,
+            mode: 'manual',
+            note: `Bản sao lưu an toàn trước khi khôi phục về ${formatDateVN(snap.dateKey)}`
+        });
+
+        workData = getCleanWorkDataClone(snap.data);
+        if (!workData.debts) workData.debts = [];
+        if (!workData.materialRoots) workData.materialRoots = [];
+        autoSaveData(false);
+        renderHistoryView();
+        showToast(`⏪ Đã khôi phục dữ liệu về bản lưu ${formatDateVN(snap.dateKey)} (${snap.timeLabel})!`);
+    };
+
+    window.deleteSnapshotById = function(id) {
+        snapshots = snapshots.filter(s => s.id !== id);
+        if (selectedSnapshotId === id) {
+            selectedSnapshotId = snapshots.length > 0 ? snapshots[0].id : null;
+        }
+        saveSnapshotsToStorage();
+        renderHistoryView();
+        showToast('🗑️ Đã xóa bản lưu khỏi danh sách');
+    };
+
+    window.copySnapshotJson = function(id) {
+        const snap = snapshots.find(s => s.id === id);
+        if (!snap) return;
+        const textarea = document.createElement('textarea');
+        textarea.value = JSON.stringify(snap.data, null, 2);
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+        showToast('📋 Đã sao chép nội dung JSON vào bộ nhớ tạm!');
+    };
 
     function utf8ToBase64(str) {
         const bytes = new TextEncoder().encode(str);
@@ -2839,6 +3672,8 @@
     debtModal.addEventListener('click', (e) => { if (e.target === debtModal) debtModal.style.display = 'none'; });
     materialModal.addEventListener('click', (e) => { if (e.target === materialModal) materialModal.style.display = 'none'; });
 
+    checkAndRunDaily2359Catchup();
+    start2359Scheduler();
     renderCalendar();
     loadFromGitHub(false);
 </script>
