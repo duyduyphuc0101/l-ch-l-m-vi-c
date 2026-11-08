@@ -786,16 +786,24 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
-    "loans": [
+    "expenses": [
       {
-        "name": "cha",
-        "amount": 250000,
-        "isPaid": false
+        "name": "Cơm",
+        "amount": 25000
+      },
+      {
+        "name": "Xăng",
+        "amount": 70000
+      },
+      {
+        "name": "Bánh mì",
+        "amount": 15000
       }
     ],
-    "tasks": [],
-    "content": ""
+    "tasks": [
+      "Gắn tủ phụ pa06"
+    ],
+    "content": "Gắn tủ phụ pa06"
   },
   "2026-11-08": {
     "type": "off",
