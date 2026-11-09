@@ -336,16 +336,6 @@
     ],
     "content": "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
   },
-  "2026-10-18": {
-    "type": "off",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
-  },
   "debts": [
     {
       "name": "ngân hàng",
@@ -361,6 +351,55 @@
       "deletedMonths": []
     }
   ],
+  "materialsRoots": [
+    {
+      "id": "mroot-1792768514481",
+      "text": "Đi nẹp vào tường",
+      "notes": "",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mnode-1792768523981",
+          "text": "vít bắn",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768536593",
+          "text": "tắt kê",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768543709",
+          "text": "búa",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768548256",
+          "text": "thang",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        }
+      ]
+    }
+  ],
+  "2026-10-18": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
+  },
   "2026-10-19": {
     "type": "full",
     "isOvertime": false,
@@ -501,45 +540,6 @@
               "children": []
             }
           ]
-        }
-      ]
-    }
-  ],
-  "materialsRoots": [
-    {
-      "id": "mroot-1792768514481",
-      "text": "Đi nẹp vào tường",
-      "notes": "",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mnode-1792768523981",
-          "text": "vít bắn",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768536593",
-          "text": "tắt kê",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768543709",
-          "text": "búa",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768548256",
-          "text": "thang",
-          "notes": "",
-          "expanded": true,
-          "children": []
         }
       ]
     }
@@ -858,7 +858,12 @@
     "isOvertime": false,
     "startTime": "",
     "endTime": "",
-    "incomes": [],
+    "incomes": [
+      {
+        "name": "Lương công & OT tháng 11",
+        "amount": 2925000
+      }
+    ],
     "expenses": [
       {
         "name": "Xăng",
@@ -895,5 +900,10 @@
       "Thống kê dữ liệu cam trung an về việc có lên cam hay không"
     ],
     "content": "Kéo cáp pc08\nThống kê dữ liệu cam trung an về việc có lên cam hay không"
+  },
+  "settings": {
+    "dailyWage": 450000,
+    "otHourlyRate": 70000,
+    "monthlyBudgetLimit": 12000000
   }
 }
