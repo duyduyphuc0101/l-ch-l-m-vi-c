@@ -724,6 +724,10 @@
       {
         "name": "Ứng 1tr thay màn",
         "amount": 1000000
+      },
+      {
+        "name": "Chuyển 2tr vào momo",
+        "amount": 2000000
       }
     ],
     "loans": [],
