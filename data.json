@@ -834,6 +834,10 @@
       {
         "name": "Cafe",
         "amount": 15000
+      },
+      {
+        "name": "Bánh mì",
+        "amount": 15000
       }
     ],
     "loans": [],
