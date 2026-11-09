@@ -863,8 +863,9 @@
     ],
     "loans": [],
     "tasks": [
-      "Kéo cáp pc08"
+      "Kéo cáp pc08",
+      "Thống kê dữ liệu cam trung an về việc có lên cam hay không"
     ],
-    "content": "Kéo cáp pc08"
+    "content": "Kéo cáp pc08\nThống kê dữ liệu cam trung an về việc có lên cam hay không"
   }
 }
