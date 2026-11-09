@@ -3,58 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hệ Thống Quản Lý Công Việc, Tài Chính, Nợ Lãi & Vật Tư</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>FinWork Pro — Hệ Thống Quản Trị Công Việc, Tài Chính, Công Nợ & Vật Tư</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             prefix: 'tw-',
             corePlugins: { preflight: false },
-            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } }
+            theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'] } } }
         }
     </script>
     <style>
         :root {
-            /* Bảng màu Khoa học - Chuẩn SaaS Tài chính */
-            --bg-app: #f1f5f9;
-            --bg-surface: #ffffff;
-            --bg-subtle: #f8fafc;
-            --border-light: #e2e8f0;
-            --border-mid: #cbd5e1;
+            /* ================= LIQUID GLASS DESIGN SYSTEM (visionOS / iOS 26) ================= */
+            --bg-app: #e8f0f8;
+            --bg-surface: rgba(255, 255, 255, 0.58);
+            --bg-surface-elevated: rgba(255, 255, 255, 0.74);
+            --bg-subtle: rgba(255, 255, 255, 0.42);
+            --bg-glass: rgba(255, 255, 255, 0.62);
+            --bg-glass-strong: rgba(255, 255, 255, 0.82);
+
+            --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.40) 100%);
+            --glass-gradient-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.54) 100%);
+            --glass-blur: blur(26px) saturate(190%);
+            --glass-blur-sm: blur(16px) saturate(180%);
+
+            --border-light: rgba(255, 255, 255, 0.72);
+            --border-mid: rgba(255, 255, 255, 0.88);
+            --border-rim: rgba(255, 255, 255, 0.92);
+
+            --specular-inset: inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.92), inset 0 -1px 1px 0 rgba(255, 255, 255, 0.38);
+            --specular-pill: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 4px 12px -2px rgba(15, 23, 42, 0.08);
 
             --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #64748b;
+            --text-secondary: #1e293b;
+            --text-muted: #475569;
 
             /* Màu ngữ nghĩa (Semantic Colors) */
             --primary: #059669;
             --primary-dark: #047857;
-            --primary-bg: #ecfdf5;
-            --primary-border: #a7f3d0;
+            --primary-bg: rgba(16, 185, 129, 0.16);
+            --primary-border: rgba(16, 185, 129, 0.42);
 
             --income: #0284c7;
-            --income-bg: #f0f9ff;
-            --income-border: #bae6fd;
+            --income-bg: rgba(14, 165, 233, 0.16);
+            --income-border: rgba(56, 189, 248, 0.45);
 
             --expense: #e11d48;
-            --expense-bg: #fff1f2;
-            --expense-border: #fecdd3;
+            --expense-bg: rgba(244, 63, 94, 0.15);
+            --expense-border: rgba(251, 113, 133, 0.45);
 
             --debt: #d97706;
-            --debt-bg: #fffbeb;
-            --debt-border: #fde68a;
+            --debt-bg: rgba(245, 158, 11, 0.16);
+            --debt-border: rgba(251, 191, 36, 0.48);
 
             --loan: #7c3aed;
-            --loan-bg: #f5f3ff;
-            --loan-border: #ddd6fe;
+            --loan-bg: rgba(139, 92, 246, 0.16);
+            --loan-border: rgba(167, 139, 250, 0.48);
 
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 14px;
-            --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
-            --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.07), 0 1px 2px -1px rgba(15, 23, 42, 0.07);
-            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+            --indigo: #4f46e5;
+            --indigo-bg: rgba(99, 102, 241, 0.16);
+            --indigo-border: rgba(129, 140, 248, 0.48);
+
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --shadow-xs: 0 2px 8px -1px rgba(15, 23, 42, 0.05), var(--specular-inset);
+            --shadow-sm: 0 10px 28px -6px rgba(15, 23, 42, 0.07), 0 2px 8px -2px rgba(15, 23, 42, 0.04), var(--specular-inset);
+            --shadow-md: 0 18px 40px -10px rgba(15, 23, 42, 0.11), 0 6px 16px -4px rgba(15, 23, 42, 0.05), var(--specular-inset);
+            --shadow-lg: 0 28px 60px -12px rgba(15, 23, 42, 0.18), 0 12px 24px -6px rgba(15, 23, 42, 0.08), var(--specular-inset);
         }
 
         *, *::before, *::after {
@@ -62,44 +80,89 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar { width: 7px; height: 7px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.25); border-radius: 999px; }
+        ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.55); border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.6); }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.75); }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-app);
+            background-color: #dfeaf7;
+            background-image:
+                radial-gradient(at 8% 12%, rgba(16, 185, 129, 0.30) 0px, transparent 48%),
+                radial-gradient(at 92% 8%, rgba(14, 165, 233, 0.32) 0px, transparent 50%),
+                radial-gradient(at 82% 86%, rgba(139, 92, 246, 0.26) 0px, transparent 52%),
+                radial-gradient(at 18% 82%, rgba(244, 63, 94, 0.20) 0px, transparent 48%),
+                radial-gradient(at 50% 45%, rgba(255, 255, 255, 0.65) 0px, transparent 60%);
+            background-attachment: fixed;
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.5;
             font-feature-settings: "cv02", "cv03", "cv04", "cv11";
             -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Liquid Orbs Behind Glass */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(75px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.68;
+            animation: floatLiquidOrb 22s ease-in-out infinite alternate;
+        }
+        body::before {
+            width: 520px;
+            height: 520px;
+            top: -120px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.55) 0%, rgba(56, 189, 248, 0.35) 60%, transparent 100%);
+        }
+        body::after {
+            width: 580px;
+            height: 580px;
+            bottom: -160px;
+            right: -120px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.50) 0%, rgba(56, 189, 248, 0.40) 55%, transparent 100%);
+            animation-delay: -11s;
+        }
+
+        @keyframes floatLiquidOrb {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(45px, 30px, 0) scale(1.08); }
+            100% { transform: translate3d(-30px, 50px, 0) scale(0.96); }
         }
 
         .num-tabular {
             font-variant-numeric: tabular-nums;
         }
 
-        /* ================= TOP NAVIGATION BAR ================= */
+        /* ================= TOP NAVIGATION BAR (LIQUID GLASS CAPSULE HEADER) ================= */
         .topbar {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-light);
-            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.44) 100%);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+            padding: 11px 20px;
+            box-shadow: 0 8px 30px -6px rgba(15, 23, 42, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
         }
         .topbar-inner {
-            max-width: 1440px;
+            max-width: 1480px;
             margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 14px;
             flex-wrap: wrap;
         }
         .brand-box {
@@ -108,46 +171,71 @@
             gap: 12px;
         }
         .brand-logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 9px;
-            background: var(--primary);
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.95) 0%, rgba(14, 165, 233, 0.90) 100%);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: 700;
-            box-shadow: var(--shadow-xs);
+            font-size: 18px;
+            font-weight: 800;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            box-shadow: 0 8px 20px -4px rgba(5, 150, 105, 0.42), inset 0 1.5px 2px rgba(255, 255, 255, 0.75);
+            flex-shrink: 0;
         }
         .brand-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 800;
             color: var(--text-primary);
-            letter-spacing: -0.3px;
+            letter-spacing: -0.4px;
             margin: 0;
             line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+        .brand-pro-pill {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(209, 250, 229, 0.75) 100%);
+            color: #047857;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            padding: 2px 8px;
+            border-radius: 999px;
+            letter-spacing: 0.5px;
         }
         .brand-subtitle {
             font-size: 11.5px;
             color: var(--text-muted);
-            font-weight: 500;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 2px;
         }
 
-        /* Segmented Workspace Switcher */
+        /* Segmented Liquid Glass Workspace Switcher */
         .nav-tabs {
             display: inline-flex;
-            background: #f1f5f9;
-            padding: 4px;
-            border-radius: 10px;
-            border: 1px solid var(--border-light);
+            background: rgba(255, 255, 255, 0.38);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
+            padding: 5px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            box-shadow: inset 0 2px 5px rgba(15, 23, 42, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.85), 0 4px 16px rgba(15, 23, 42, 0.04);
             gap: 4px;
         }
         .nav-tab {
-            height: 34px;
-            padding: 0 14px;
-            border-radius: 7px;
-            border: none;
+            height: 36px;
+            padding: 0 16px;
+            border-radius: 999px;
+            border: 1px solid transparent;
             background: transparent;
             color: var(--text-secondary);
             font-family: inherit;
@@ -157,323 +245,198 @@
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            transition: all 0.15s ease;
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
             white-space: nowrap;
         }
         .nav-tab:hover {
             color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.48);
+            border-color: rgba(255, 255, 255, 0.65);
         }
         .nav-tab.active {
-            background: var(--bg-surface);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.68) 100%);
             color: var(--primary-dark);
             font-weight: 700;
-            box-shadow: var(--shadow-xs);
+            border-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 6px 16px -3px rgba(5, 150, 105, 0.18), 0 2px 6px rgba(15, 23, 42, 0.06), inset 0 1.5px 1px rgba(255, 255, 255, 1);
         }
         .nav-tab.active-debt {
-            background: var(--bg-surface);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(254, 243, 199, 0.72) 100%);
             color: #b45309;
             font-weight: 700;
-            box-shadow: var(--shadow-xs);
+            border-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 6px 16px -3px rgba(217, 119, 6, 0.20), 0 2px 6px rgba(15, 23, 42, 0.06), inset 0 1.5px 1px rgba(255, 255, 255, 1);
         }
         .nav-tab.active-history {
-            background: var(--bg-surface);
-            color: #4f46e5;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(224, 231, 255, 0.72) 100%);
+            color: var(--indigo);
             font-weight: 700;
-            box-shadow: var(--shadow-xs);
+            border-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 6px 16px -3px rgba(79, 70, 229, 0.20), 0 2px 6px rgba(15, 23, 42, 0.06), inset 0 1.5px 1px rgba(255, 255, 255, 1);
         }
         .tab-badge {
             font-size: 10.5px;
             font-weight: 800;
-            padding: 1px 6px;
+            padding: 1px 7px;
             border-radius: 999px;
-            background: #e0e7ff;
+            background: rgba(79, 70, 229, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             color: #4338ca;
             font-variant-numeric: tabular-nums;
         }
-
-        /* ================= VIEW 4: SNAPSHOT HISTORY & DIFF VIEWER (23:59) ================= */
-        .history-banner {
-            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-            color: #ffffff;
-            padding: 16px 20px;
-            border-radius: var(--radius-md);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 14px;
-            box-shadow: var(--shadow-sm);
-        }
-        .countdown-pill {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12.5px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-variant-numeric: tabular-nums;
-        }
-        .history-layout {
-            display: grid;
-            grid-template-columns: 390px minmax(0, 1fr);
-            gap: 16px;
-            align-items: start;
-        }
-        .snapshot-list-panel {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-xs);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            max-height: 760px;
-        }
-        .snapshot-list-header {
-            padding: 12px 16px;
-            background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        .snapshot-list-body {
-            padding: 10px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex: 1;
-        }
-        .snapshot-item {
-            border: 1px solid var(--border-light);
-            border-radius: 10px;
-            padding: 12px;
-            background: var(--bg-surface);
-            cursor: pointer;
-            transition: all 0.15s ease;
-            position: relative;
-        }
-        .snapshot-item:hover {
-            border-color: #94a3b8;
-            background: #f8fafc;
-        }
-        .snapshot-item.selected {
-            border-color: #4f46e5;
-            background: #eef2ff;
-            box-shadow: inset 3px 0 0 #4f46e5;
-        }
-        .snap-tag {
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 999px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .snap-tag.auto { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .snap-tag.catchup { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-        .snap-tag.manual { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
-
-        .snapshot-inspector-panel {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-xs);
-            overflow: hidden;
-            min-height: 540px;
-        }
-        .inspector-tabs {
-            display: flex;
-            background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border-light);
-            padding: 0 16px;
-            gap: 16px;
-            overflow-x: auto;
-        }
-        .inspector-tab {
-            padding: 12px 4px;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-muted);
-            background: transparent;
-            border: none;
-            border-bottom: 2.5px solid transparent;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .inspector-tab.active {
-            color: #4f46e5;
-            border-bottom-color: #4f46e5;
-        }
-        .diff-card {
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin-bottom: 10px;
-            background: var(--bg-surface);
-        }
-        .diff-added { border-left: 4px solid #10b981; background: #f0fdf4; }
-        .diff-modified { border-left: 4px solid #f59e0b; background: #fffbeb; }
-        .diff-removed { border-left: 4px solid #ef4444; background: #fef2f2; }
-        .diff-badge {
-            font-size: 10.5px;
-            font-weight: 800;
-            padding: 2px 7px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-        .diff-badge.added { background: #10b981; color: white; }
-        .diff-badge.modified { background: #f59e0b; color: white; }
-        .diff-badge.removed { background: #ef4444; color: white; }
 
         /* System Tools Right */
         .system-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: wrap;
         }
         .save-badge {
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--primary-dark);
-            background: var(--primary-bg);
-            border: 1px solid var(--primary-border);
-            padding: 5px 11px;
+            background: linear-gradient(135deg, rgba(236, 253, 245, 0.82) 0%, rgba(209, 250, 229, 0.58) 100%);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: var(--specular-pill);
+            padding: 6px 13px;
             border-radius: 999px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             white-space: nowrap;
         }
 
-        /* ================= BUTTON SYSTEM ================= */
+        /* ================= LIQUID GLASS BUTTON SYSTEM ================= */
         .btn {
             height: 36px;
-            padding: 0 13px;
-            border: 1px solid var(--border-mid);
-            background: var(--bg-surface);
+            padding: 0 14px;
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.44) 100%);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
             border-radius: var(--radius-sm);
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
             font-family: inherit;
             color: var(--text-primary);
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             white-space: nowrap;
             text-decoration: none;
-            box-shadow: var(--shadow-xs);
+            box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06), inset 0 1.5px 1px rgba(255, 255, 255, 0.95);
         }
         .btn:hover {
-            background: var(--bg-subtle);
-            border-color: #94a3b8;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.62) 100%);
+            border-color: #ffffff;
+            transform: translateY(-1.5px);
+            box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.10), inset 0 1.5px 2px rgba(255, 255, 255, 1);
         }
         .btn:active {
-            transform: translateY(1px);
+            transform: translateY(0);
         }
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.92) 0%, rgba(5, 150, 105, 0.88) 100%);
             color: #ffffff;
-            border-color: var(--primary-dark);
+            border-color: rgba(255, 255, 255, 0.65);
+            box-shadow: 0 8px 20px -4px rgba(5, 150, 105, 0.38), inset 0 1.5px 1.5px rgba(255, 255, 255, 0.65);
         }
         .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.98) 0%, rgba(4, 120, 87, 0.95) 100%);
+            border-color: rgba(255, 255, 255, 0.85);
             color: #ffffff;
+            box-shadow: 0 12px 24px -4px rgba(5, 150, 105, 0.48), inset 0 1.5px 2px rgba(255, 255, 255, 0.8);
         }
         .btn-github {
-            background: #24292f;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.88) 0%, rgba(15, 23, 42, 0.82) 100%);
             color: #ffffff;
-            border-color: #24292f;
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 6px 16px -3px rgba(15, 23, 42, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.45);
         }
         .btn-github:hover {
-            background: #32383f;
+            background: linear-gradient(135deg, rgba(51, 65, 85, 0.94) 0%, rgba(30, 41, 59, 0.90) 100%);
             color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.65);
         }
         .btn-debt {
-            background: var(--debt-bg);
+            background: linear-gradient(135deg, rgba(255, 251, 235, 0.85) 0%, rgba(254, 243, 199, 0.62) 100%);
             color: #b45309;
-            border-color: var(--debt-border);
+            border-color: rgba(255, 255, 255, 0.9);
         }
         .btn-debt:hover {
-            background: #fef3c7;
-            border-color: #f59e0b;
+            background: linear-gradient(135deg, rgba(254, 243, 199, 0.95) 0%, rgba(253, 230, 138, 0.75) 100%);
+            border-color: #ffffff;
         }
         .btn-small {
             height: 28px;
-            padding: 0 10px;
-            font-size: 12px;
-            border-radius: 6px;
+            padding: 0 11px;
+            font-size: 11.5px;
+            border-radius: 9px;
         }
         .btn-icon-nav {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             padding: 0;
-            border-radius: 6px;
+            border-radius: 11px;
             font-size: 12px;
-            border: 1px solid var(--border-light);
-            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.48) 100%);
             color: var(--text-secondary);
         }
         .btn-icon-nav:hover {
-            background: var(--bg-subtle);
-            color: var(--text-primary);
-            border-color: var(--border-mid);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--primary-dark);
+            border-color: #ffffff;
         }
         .btn-danger {
             width: 30px;
             height: 30px;
             padding: 0;
             flex-shrink: 0;
-            background: var(--expense-bg);
+            background: linear-gradient(135deg, rgba(255, 241, 242, 0.85) 0%, rgba(254, 205, 211, 0.55) 100%);
             color: var(--expense);
-            border: 1px solid var(--expense-border);
-            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 9px;
             font-size: 12px;
         }
         .btn-danger:hover {
-            background: var(--expense);
+            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
             color: white;
-            border-color: var(--expense);
+            border-color: rgba(255, 255, 255, 0.8);
         }
 
         /* ================= MAIN CONTAINER & VIEWS ================= */
         .container {
-            max-width: 1440px;
+            max-width: 1480px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 18px 20px 40px 20px;
         }
 
         .app-view { display: none; }
-        .app-view.active { display: block; animation: fadeIn 0.2s ease-out; }
+        .app-view.active { display: block; animation: fadeIn 0.26s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(8px) scale(0.995); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ================= SUB-HEADER: MONTH CONTROL BAR ================= */
+        /* ================= SUB-HEADER: LIQUID GLASS COMMAND & FILTER BAR ================= */
         .workspace-toolbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--bg-surface);
-            padding: 12px 16px;
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 13px 18px;
             border-radius: var(--radius-md);
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-xs);
+            border: 1px solid var(--border-rim);
+            box-shadow: var(--shadow-sm);
             margin-bottom: 16px;
             flex-wrap: wrap;
             gap: 12px;
@@ -485,69 +448,204 @@
         }
         .month-navigator h2 {
             margin: 0;
-            font-size: 17px;
+            font-size: 17.5px;
             font-weight: 800;
             color: var(--text-primary);
-            min-width: 165px;
+            min-width: 160px;
             text-align: center;
-            letter-spacing: -0.3px;
-        }
-        .toolbar-hint {
-            font-size: 12.5px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-        .legend-dot {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        .legend-dot span {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
+            letter-spacing: -0.4px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
-        /* ================= SCIENTIFIC KPI SUMMARY STRIP ================= */
+        /* Smart Search Box */
+        .smart-search-wrap {
+            position: relative;
+            flex: 1;
+            max-width: 350px;
+            min-width: 220px;
+        }
+        .smart-search-input {
+            width: 100%;
+            height: 38px;
+            padding: 0 64px 0 36px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
+            box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            font-family: inherit;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .smart-search-input::placeholder {
+            color: #64748b;
+        }
+        .smart-search-input:focus {
+            background: rgba(255, 255, 255, 0.88);
+            border-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.22), 0 8px 20px -4px rgba(15, 23, 42, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1);
+        }
+        .smart-search-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 12.5px;
+            pointer-events: none;
+        }
+        .smart-search-kbd {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+            padding: 2px 7px;
+            border-radius: 999px;
+            pointer-events: none;
+        }
+        .search-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.84);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+            z-index: 200;
+            max-height: 340px;
+            overflow-y: auto;
+            padding: 8px;
+        }
+        .search-dropdown.open {
+            display: block;
+        }
+        .search-result-item {
+            padding: 9px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 12.5px;
+            transition: all 0.15s ease;
+        }
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+        }
+
+        /* Calendar Filter Pills */
+        .filter-pills-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .filter-pill {
+            height: 32px;
+            padding: 0 13px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.48);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            color: var(--text-secondary);
+            font-size: 11.5px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.18s ease;
+        }
+        .filter-pill:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.78);
+            transform: translateY(-1px);
+        }
+        .filter-pill.active {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.90) 0%, rgba(30, 41, 59, 0.85) 100%);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.55);
+            box-shadow: 0 6px 16px -3px rgba(15, 23, 42, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+            font-weight: 700;
+        }
+        .filter-pill .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 6px currentColor;
+        }
+
+        /* ================= LIQUID GLASS KPI SUMMARY STRIP ================= */
         .kpi-section-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 14px;
+            margin-bottom: 14px;
         }
         .kpi-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-rim);
             border-radius: var(--radius-md);
-            padding: 14px 16px;
-            box-shadow: var(--shadow-xs);
+            padding: 17px 19px;
+            box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             overflow: hidden;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background 0.22s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            background: var(--glass-gradient-hover);
+            box-shadow: var(--shadow-md);
         }
         .kpi-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 5px;
             height: 100%;
             background: var(--border-mid);
         }
-        .kpi-card.kpi-income::before { background: var(--income); }
-        .kpi-card.kpi-expense::before { background: var(--expense); }
-        .kpi-card.kpi-loan::before { background: var(--loan); }
-        .kpi-card.kpi-net-pos::before { background: var(--primary); }
-        .kpi-card.kpi-net-neg::before { background: var(--expense); }
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.65) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .kpi-card.kpi-income::before { background: linear-gradient(180deg, #38bdf8, #0284c7); }
+        .kpi-card.kpi-expense::before { background: linear-gradient(180deg, #fb7185, #e11d48); }
+        .kpi-card.kpi-loan::before { background: linear-gradient(180deg, #a78bfa, #7c3aed); }
+        .kpi-card.kpi-net-pos::before { background: linear-gradient(180deg, #34d399, #059669); }
+        .kpi-card.kpi-net-neg::before { background: linear-gradient(180deg, #fb7185, #e11d48); }
 
         .kpi-header {
             display: flex;
@@ -558,20 +656,77 @@
             text-transform: uppercase;
             letter-spacing: 0.4px;
             color: var(--text-muted);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+        }
+        .kpi-icon-box {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13.5px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 10px rgba(15, 23, 42, 0.05);
         }
         .kpi-value {
-            font-size: 21px;
+            font-size: 22.5px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.6px;
             font-variant-numeric: tabular-nums;
             line-height: 1.2;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
         }
         .kpi-sub {
             font-size: 11.5px;
             color: var(--text-muted);
-            margin-top: 4px;
-            font-weight: 500;
+            margin-top: 7px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+        }
+
+        /* Smart Insights & Cashflow Health Bar */
+        .smart-health-bar {
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-rim);
+            border-radius: var(--radius-md);
+            padding: 13px 18px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .cashflow-progress-wrap {
+            flex: 1;
+            min-width: 240px;
+        }
+        .cashflow-track {
+            height: 9px;
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 999px;
+            overflow: hidden;
+            display: flex;
+            margin-top: 6px;
+            box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.08);
+        }
+        .cashflow-fill-inc {
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            height: 100%;
+            transition: width 0.35s ease;
+        }
+        .cashflow-fill-exp {
+            background: linear-gradient(90deg, #f43f5e, #e11d48);
+            height: 100%;
+            transition: width 0.35s ease;
         }
 
         /* Compact Attendance Strip */
@@ -582,8 +737,10 @@
             margin-bottom: 16px;
         }
         .work-metric {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
+            border: 1px solid var(--border-rim);
             border-radius: var(--radius-md);
             padding: 10px 14px;
             display: flex;
@@ -600,67 +757,89 @@
             gap: 8px;
         }
         .work-metric-val {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             color: var(--text-primary);
             font-variant-numeric: tabular-nums;
-            background: var(--bg-subtle);
-            padding: 3px 9px;
-            border-radius: 6px;
-            border: 1px solid var(--border-light);
+            background: rgba(255, 255, 255, 0.65);
+            padding: 3px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
         }
 
-        /* ================= SCIENTIFIC CALENDAR GRID ================= */
+        /* ================= LIQUID GLASS CALENDAR GRID ================= */
         .calendar-wrapper {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
+            background: rgba(255, 255, 255, 0.38);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-rim);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-xs);
+            box-shadow: var(--shadow-md);
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            padding: 6px;
         }
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, minmax(0, 1fr));
-            background: var(--border-light);
-            gap: 1px;
+            background: transparent;
+            gap: 6px;
         }
         .weekday {
             text-align: center;
-            padding: 10px 4px;
-            font-weight: 700;
+            padding: 11px 4px;
+            font-weight: 800;
             color: var(--text-secondary);
-            background: #f8fafc;
-            font-size: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.45) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            font-size: 11.5px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
         }
         .weekday:first-child {
             color: var(--expense);
-            background: #fffafa;
+            background: linear-gradient(135deg, rgba(255, 241, 242, 0.82) 0%, rgba(255, 228, 230, 0.50) 100%);
         }
 
         .day {
-            background: var(--bg-surface);
-            min-height: 132px;
-            padding: 8px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.38) 100%);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            border-radius: 16px;
+            min-height: 138px;
+            padding: 10px;
             cursor: pointer;
-            transition: background-color 0.12s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             gap: 5px;
             position: relative;
+            box-shadow: 0 4px 14px -4px rgba(15, 23, 42, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.9);
         }
         .day:hover {
-            background-color: #f8fafc;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.64) 100%);
+            border-color: #ffffff;
+            transform: translateY(-2px) scale(1.01);
+            z-index: 3;
+            box-shadow: 0 14px 28px -6px rgba(15, 23, 42, 0.12), inset 0 1.5px 2px rgba(255, 255, 255, 1);
         }
         .day.other-month {
-            background-color: #f8fafc;
+            background: rgba(255, 255, 255, 0.24);
+            border-color: rgba(255, 255, 255, 0.4);
             opacity: 0.45;
+            box-shadow: none;
         }
         .day.today {
-            background-color: #f0fdf4;
-            box-shadow: inset 0 0 0 2px var(--primary);
+            background: linear-gradient(145deg, rgba(236, 253, 245, 0.88) 0%, rgba(209, 250, 229, 0.56) 100%);
+            border: 1.5px solid rgba(16, 185, 129, 0.75);
+            box-shadow: 0 10px 26px -6px rgba(5, 150, 105, 0.22), inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
+        }
+        .day.dimmed-by-filter {
+            opacity: 0.22;
+            filter: grayscale(70%);
         }
 
         .day-header {
@@ -669,38 +848,69 @@
             align-items: center;
             gap: 4px;
         }
+        .day-number-wrap {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
         .day-number {
             font-size: 12.5px;
-            font-weight: 700;
-            width: 24px;
-            height: 24px;
+            font-weight: 800;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
+            border-radius: 9px;
             color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             font-variant-numeric: tabular-nums;
+            transition: all 0.15s ease;
         }
         .today .day-number {
-            background: var(--primary);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+        }
+        .day-quick-add {
+            opacity: 0;
+            width: 21px;
+            height: 21px;
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            color: #0f172a;
+            font-size: 12px;
             font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+        }
+        .day:hover .day-quick-add {
+            opacity: 1;
         }
 
         /* Work Shift Pill inside Day Header */
         .shift-pill {
             font-size: 10px;
             font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 2px 7px;
+            border-radius: 999px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: 1.3;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.8);
         }
-        .shift-full { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .shift-half { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-        .shift-off { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+        .shift-full { background: rgba(220, 252, 231, 0.78); color: #166534; border: 1px solid rgba(134, 239, 172, 0.75); }
+        .shift-half { background: rgba(254, 243, 199, 0.82); color: #92400e; border: 1px solid rgba(253, 230, 138, 0.85); }
+        .shift-off { background: rgba(241, 245, 249, 0.75); color: #475569; border: 1px solid rgba(203, 213, 225, 0.75); }
 
         .work-status-container {
             display: flex;
@@ -714,20 +924,22 @@
             font-size: 10px;
             font-weight: 700;
             color: #065f46;
-            background: #d1fae5;
-            border-radius: 4px;
-            padding: 1.5px 5px;
+            background: rgba(209, 250, 229, 0.78);
+            border: 1px solid rgba(167, 243, 208, 0.85);
+            border-radius: 999px;
+            padding: 2px 7px;
             display: inline-flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             width: fit-content;
             font-variant-numeric: tabular-nums;
+            box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.8);
         }
 
         .badges-wrap {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 3.5px;
         }
         .fin-pill {
             display: flex;
@@ -735,27 +947,31 @@
             justify-content: space-between;
             font-size: 11px;
             font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 3px 7px;
+            border-radius: 8px;
             font-variant-numeric: tabular-nums;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.85);
         }
         .income-badge {
-            background: var(--income-bg);
+            background: linear-gradient(90deg, rgba(224, 242, 254, 0.88) 0%, rgba(240, 249, 255, 0.65) 100%);
             color: #0369a1;
-            border-left: 2.5px solid var(--income);
+            border-left: 3px solid var(--income);
         }
         .expense-badge {
-            background: var(--expense-bg);
+            background: linear-gradient(90deg, rgba(255, 228, 230, 0.88) 0%, rgba(255, 241, 242, 0.65) 100%);
             color: #be123c;
-            border-left: 2.5px solid var(--expense);
+            border-left: 3px solid var(--expense);
         }
         .loan-badge {
-            background: var(--loan-bg);
+            background: linear-gradient(90deg, rgba(237, 233, 254, 0.88) 0%, rgba(245, 243, 255, 0.65) 100%);
             color: #6d28d9;
-            border-left: 2.5px solid var(--loan);
+            border-left: 3px solid var(--loan);
         }
         .loan-badge.repaid {
             text-decoration: line-through;
@@ -764,8 +980,8 @@
 
         .job-content-preview {
             margin-top: auto;
-            padding-top: 4px;
-            border-top: 1px dashed #e2e8f0;
+            padding-top: 5px;
+            border-top: 1px dashed rgba(148, 163, 184, 0.45);
             font-size: 11px;
             color: var(--text-secondary);
             line-height: 1.35;
@@ -774,10 +990,10 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* ================= ANALYTICAL PANEL (2x2 SCIENTIFIC GRID) ================= */
+        /* ================= ANALYTICAL PANEL (2x2 LIQUID GLASS GRID) ================= */
         .stats-panel {
             background: transparent;
             padding: 0;
@@ -789,6 +1005,13 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 14px;
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur-sm);
+            -webkit-backdrop-filter: var(--glass-blur-sm);
+            border: 1px solid var(--border-rim);
+            border-radius: var(--radius-md);
+            padding: 12px 18px;
+            box-shadow: var(--shadow-xs);
         }
         .section-bar h3 {
             margin: 0;
@@ -807,35 +1030,42 @@
         }
 
         .detail-box {
-            background: var(--bg-surface);
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
             border-radius: var(--radius-md);
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-xs);
+            border: 1px solid var(--border-rim);
+            box-shadow: var(--shadow-sm);
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .detail-box:hover {
+            box-shadow: var(--shadow-md);
         }
         .detail-box-header {
-            font-size: 13.5px;
-            font-weight: 700;
-            padding: 12px 16px;
-            background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border-light);
+            font-size: 13px;
+            font-weight: 800;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.45);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.78);
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 10px;
             cursor: pointer;
             user-select: none;
+            transition: background 0.15s ease;
         }
         .detail-box-header:hover {
-            background: #f1f5f9;
+            background: rgba(255, 255, 255, 0.68);
         }
         .detail-box.collapsed .detail-box-header {
             border-bottom-color: transparent;
         }
         .detail-box-body {
-            padding: 14px 16px;
+            padding: 15px 18px;
             max-height: 360px;
             overflow-y: auto;
         }
@@ -846,11 +1076,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 22px;
-            height: 22px;
-            border-radius: 5px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-light);
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 5px rgba(15, 23, 42, 0.05);
             font-size: 10px;
             color: var(--text-secondary);
             transition: transform 0.2s ease;
@@ -861,18 +1092,18 @@
 
         .split-sub-cols {
             display: grid;
-            grid-template-columns: 1fr 1.3fr;
+            grid-template-columns: 1fr 1.35fr;
             gap: 16px;
         }
         .sub-col-title {
-            font-size: 11.5px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.5px;
             color: var(--text-muted);
             margin-bottom: 8px;
             padding-bottom: 6px;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.75);
         }
 
         .stat-list {
@@ -883,117 +1114,350 @@
         }
         .stat-list li {
             list-style-type: none;
-            border-bottom: 1px dashed #e2e8f0;
-            padding: 7px 4px;
+            border-bottom: 1px dashed rgba(148, 163, 184, 0.38);
+            padding: 8px 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 10px;
             font-variant-numeric: tabular-nums;
+            transition: background 0.15s ease;
         }
         .stat-list li:last-child { border-bottom: none; }
-        .stat-list li:hover { background-color: var(--bg-subtle); border-radius: 4px; }
+        .stat-list li:hover {
+            background-color: rgba(255, 255, 255, 0.58);
+            border-radius: 8px;
+        }
 
-        /* ================= VIEW 2: DEBT & INTEREST MANAGEMENT ================= */
+        /* ================= VIEW 2: DEBT & INTEREST MANAGEMENT (LIQUID GLASS) ================= */
         .debt-dashboard {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 14px;
             margin-bottom: 16px;
         }
-        .debt-card {
-            background: var(--bg-surface);
-            padding: 16px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-xs);
-        }
         .debt-table-wrapper {
-            background: var(--bg-surface);
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
             border-radius: var(--radius-md);
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-xs);
+            border: 1px solid var(--border-rim);
+            box-shadow: var(--shadow-sm);
             overflow-x: auto;
         }
         .debt-table {
             width: 100%;
-            min-width: 820px;
+            min-width: 840px;
             border-collapse: collapse;
             font-size: 13.5px;
             text-align: left;
         }
         .debt-table th {
-            background: var(--bg-subtle);
+            background: rgba(255, 255, 255, 0.52);
             color: var(--text-secondary);
-            padding: 12px 16px;
-            font-size: 12px;
+            padding: 14px 16px;
+            font-size: 11.5px;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
-            font-weight: 700;
-            border-bottom: 1px solid var(--border-light);
+            letter-spacing: 0.5px;
+            font-weight: 800;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.85);
             white-space: nowrap;
         }
         .debt-table td {
             padding: 14px 16px;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.65);
             vertical-align: top;
             font-variant-numeric: tabular-nums;
         }
         .debt-table tr:last-child td { border-bottom: none; }
-        .debt-table tr:hover td { background-color: #fcfcfd; }
+        .debt-table tr:hover td { background-color: rgba(255, 255, 255, 0.48); }
 
         .debt-progress-track {
             width: 100%;
-            height: 6px;
-            background: #e2e8f0;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 999px;
             overflow: hidden;
             margin-top: 6px;
         }
         .debt-progress-bar {
             height: 100%;
-            background: var(--primary);
+            background: linear-gradient(90deg, #059669, #34d399);
             border-radius: 999px;
         }
 
-        /* ================= MODALS ================= */
+        /* ================= VIEW 3: MATERIALS MINDMAP LIQUID GLASS OVERRIDES ================= */
+        #view-materials > div {
+            background: var(--glass-gradient) !important;
+            backdrop-filter: var(--glass-blur) !important;
+            -webkit-backdrop-filter: var(--glass-blur) !important;
+            border: 1px solid var(--border-rim) !important;
+            box-shadow: var(--shadow-md) !important;
+            border-radius: var(--radius-lg) !important;
+        }
+        #view-materials .tw-bg-slate-900 {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.84) 0%, rgba(30, 58, 138, 0.78) 55%, rgba(6, 95, 70, 0.82) 100%) !important;
+            backdrop-filter: var(--glass-blur-sm) !important;
+            -webkit-backdrop-filter: var(--glass-blur-sm) !important;
+            border: 1px solid rgba(255, 255, 255, 0.35) !important;
+            box-shadow: 0 12px 28px -8px rgba(15, 23, 42, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+        }
+        #view-materials .tw-bg-slate-50 {
+            background: rgba(255, 255, 255, 0.42) !important;
+            backdrop-filter: var(--glass-blur-sm) !important;
+            -webkit-backdrop-filter: var(--glass-blur-sm) !important;
+            border-color: rgba(255, 255, 255, 0.82) !important;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.85) !important;
+        }
+        #view-materials .tw-bg-white {
+            background: rgba(255, 255, 255, 0.74) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border-color: rgba(255, 255, 255, 0.9) !important;
+        }
+        .mindmap-bg {
+            background-color: rgba(255, 255, 255, 0.25) !important;
+            background-image: radial-gradient(rgba(100, 116, 139, 0.35) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .tree-children-guide { position: relative; }
+        .tree-children-guide::before {
+            content: ''; position: absolute; left: 10px; top: 0; bottom: 10px; width: 2px; background-color: rgba(148, 163, 184, 0.55);
+        }
+        .connector-path { fill: none; stroke-linecap: round; transition: d 0.3s ease; }
+
+        /* ================= VIEW 4: SNAPSHOT HISTORY & DIFF VIEWER (23:59) ================= */
+        .history-banner {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.84) 0%, rgba(49, 46, 129, 0.80) 55%, rgba(67, 56, 202, 0.78) 100%);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            padding: 18px 22px;
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            box-shadow: 0 18px 38px -10px rgba(30, 27, 75, 0.32), inset 0 1.5px 1px rgba(255, 255, 255, 0.4);
+        }
+        .countdown-pill {
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+        .history-layout {
+            display: grid;
+            grid-template-columns: 390px minmax(0, 1fr);
+            gap: 16px;
+            align-items: start;
+        }
+        .snapshot-list-panel {
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-rim);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 760px;
+        }
+        .snapshot-list-header {
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.48);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .snapshot-list-body {
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        .snapshot-item {
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            border-radius: 14px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.56);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            cursor: pointer;
+            transition: all 0.18s ease;
+            position: relative;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+        }
+        .snapshot-item:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.82);
+            transform: translateY(-1px);
+        }
+        .snapshot-item.selected {
+            border-color: rgba(99, 102, 241, 0.7);
+            background: linear-gradient(135deg, rgba(238, 242, 255, 0.90) 0%, rgba(224, 231, 255, 0.65) 100%);
+            box-shadow: inset 3.5px 0 0 #4f46e5, 0 8px 20px -6px rgba(79, 70, 229, 0.18);
+        }
+        .snap-tag {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .snap-tag.auto { background: rgba(220, 252, 231, 0.85); color: #166534; border: 1px solid rgba(187, 247, 208, 0.9); }
+        .snap-tag.catchup { background: rgba(254, 243, 199, 0.85); color: #92400e; border: 1px solid rgba(253, 230, 138, 0.9); }
+        .snap-tag.manual { background: rgba(224, 242, 254, 0.85); color: #075985; border: 1px solid rgba(186, 230, 253, 0.9); }
+
+        .snapshot-inspector-panel {
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-rim);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            min-height: 540px;
+        }
+        .inspector-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.46);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 0 16px;
+            gap: 16px;
+            overflow-x: auto;
+        }
+        .inspector-tab {
+            padding: 13px 4px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            border-bottom: 2.5px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .inspector-tab.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        .diff-card {
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .diff-added { border-left: 4px solid #10b981; background: rgba(240, 253, 244, 0.78); }
+        .diff-modified { border-left: 4px solid #f59e0b; background: rgba(255, 251, 235, 0.78); }
+        .diff-removed { border-left: 4px solid #ef4444; background: rgba(254, 242, 242, 0.78); }
+        .diff-badge {
+            font-size: 10.5px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+        }
+        .diff-badge.added { background: #10b981; color: white; }
+        .diff-badge.modified { background: #f59e0b; color: white; }
+        .diff-badge.removed { background: #ef4444; color: white; }
+
+        /* ================= LIQUID GLASS MODALS & SMART QUICK ENTRY ================= */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(4px);
+            background-color: rgba(15, 23, 42, 0.36);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
             align-items: center;
             justify-content: center;
             z-index: 1000;
             padding: 16px;
         }
         .modal-content {
-            background: var(--bg-surface);
-            padding: 24px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.66) 100%);
+            backdrop-filter: blur(32px) saturate(200%);
+            -webkit-backdrop-filter: blur(32px) saturate(200%);
+            padding: 22px 24px;
             border-radius: var(--radius-lg);
             width: 100%;
-            max-width: 640px;
+            max-width: 680px;
             max-height: 92vh;
             overflow-y: auto;
-            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.15);
-            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.95);
         }
         .modal-content h3 {
-            margin: 0 0 16px 0;
+            margin: 0 0 14px 0;
             color: var(--text-primary);
             font-size: 18px;
             font-weight: 800;
             padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.85);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 10px;
+        }
+
+        /* Live Daily Summary Bar inside Modal */
+        .modal-live-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 4px 12px rgba(15, 23, 42, 0.04);
+            border-radius: 14px;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            font-size: 12px;
+        }
+        .modal-live-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-live-item span {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .modal-live-item strong {
+            font-size: 14px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
         }
 
         .modal-section-label {
-            font-size: 11.5px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--text-muted);
@@ -1012,12 +1476,13 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            padding: 9px 11px;
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
+            padding: 9px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
             font-weight: 600;
-            font-size: 13px;
-            background: var(--bg-subtle);
+            font-size: 12.5px;
+            background: rgba(255, 255, 255, 0.55);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
             transition: all 0.15s ease;
         }
         .radio-group label.full-width {
@@ -1025,14 +1490,15 @@
             color: var(--text-secondary);
         }
         .radio-group label:hover {
-            border-color: #94a3b8;
-            background: #f1f5f9;
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.82);
         }
         .radio-group label:has(input:checked) {
-            background: var(--primary-bg);
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.88) 0%, rgba(167, 243, 208, 0.65) 100%);
             border-color: var(--primary);
             color: var(--primary-dark);
             font-weight: 700;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.9);
         }
         input[type="radio"], input[type="checkbox"] {
             accent-color: var(--primary);
@@ -1044,16 +1510,17 @@
         }
 
         .overtime-section {
-            background: var(--bg-subtle);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.88);
+            border-radius: 12px;
             padding: 10px 14px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
         }
         .overtime-section label.main-ot {
             display: flex;
@@ -1062,55 +1529,81 @@
             cursor: pointer;
             font-weight: 700;
             color: var(--text-primary);
-            font-size: 13.5px;
+            font-size: 13px;
         }
         .time-range-inputs {
             display: none;
             align-items: center;
             gap: 8px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
         }
         .time-range-inputs input[type="time"] {
             height: 32px;
             padding: 0 8px;
-            border: 1px solid var(--border-mid);
-            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
             font-family: inherit;
             font-weight: 600;
             color: var(--text-primary);
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
             outline: none;
         }
 
-        /* Modal Form Sections */
+        /* Modal Form Sections & Quick Chips */
         .form-section {
-            border-radius: 10px;
+            border-radius: 14px;
             padding: 12px 14px;
             margin-bottom: 12px;
-            border: 1px solid var(--border-light);
-            background: var(--bg-subtle);
+            border: 1px solid rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.54);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
         }
         .form-section h4 {
-            margin: 0 0 10px 0;
-            font-size: 13.5px;
-            font-weight: 700;
+            margin: 0 0 8px 0;
+            font-size: 13px;
+            font-weight: 800;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 10px;
         }
+        .quick-preset-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .preset-chip {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.76);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.14s ease;
+            box-shadow: 0 2px 5px rgba(15, 23, 42, 0.04);
+        }
+        .preset-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            background: #ffffff;
+            transform: translateY(-1px);
+        }
 
-        .income-section { border-left: 3.5px solid var(--income); }
+        .income-section { border-left: 4px solid var(--income); }
         .income-section h4 { color: #0369a1; }
 
-        .expense-section { border-left: 3.5px solid var(--expense); }
+        .expense-section { border-left: 4px solid var(--expense); }
         .expense-section h4 { color: #be123c; }
 
-        .loan-section { border-left: 3.5px solid var(--loan); }
+        .loan-section { border-left: 4px solid var(--loan); }
         .loan-section h4 { color: #6d28d9; }
 
-        .content-section { border-left: 3.5px solid var(--primary); margin-bottom: 16px; }
+        .content-section { border-left: 4px solid var(--primary); margin-bottom: 16px; }
         .content-section h4 { color: var(--primary-dark); }
 
         .income-row, .expense-row, .loan-row, .task-row {
@@ -1127,20 +1620,22 @@
         .expense-row input:not([type="checkbox"]),
         .loan-row input:not([type="checkbox"]),
         .task-row input:not([type="checkbox"]) {
-            height: 34px;
-            padding: 0 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-mid);
+            height: 35px;
+            padding: 0 11px;
+            border-radius: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.92);
             font-family: inherit;
             font-size: 13px;
             outline: none;
-            background: white;
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
             color: var(--text-primary);
             min-width: 0;
         }
         .income-row input:focus, .expense-row input:focus, .loan-row input:focus, .task-row input:focus {
+            background: #ffffff;
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.12);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
         }
 
         .income-row input[type="text"], .expense-row input[type="text"], .loan-row input[type="text"] { flex: 1.6; }
@@ -1150,7 +1645,7 @@
         .loan-row.repaid input[type="text"], .loan-row.repaid input[type="number"] {
             text-decoration: line-through;
             opacity: 0.55;
-            background-color: #f1f5f9;
+            background-color: rgba(241, 245, 249, 0.6);
         }
         .loan-check-label {
             display: inline-flex;
@@ -1161,16 +1656,16 @@
             color: #6d28d9;
             cursor: pointer;
             white-space: nowrap;
-            padding: 0 9px;
-            border-radius: 6px;
-            background: var(--loan-bg);
-            border: 1px solid var(--loan-border);
-            height: 34px;
+            padding: 0 10px;
+            border-radius: 9px;
+            background: rgba(237, 233, 254, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            height: 35px;
         }
         .loan-row.repaid .loan-check-label {
             color: var(--primary-dark);
-            background: var(--primary-bg);
-            border-color: var(--primary-border);
+            background: rgba(209, 250, 229, 0.82);
+            border-color: rgba(167, 243, 208, 0.9);
         }
 
         .modal-actions {
@@ -1178,7 +1673,7 @@
             justify-content: flex-end;
             gap: 10px;
             padding-top: 12px;
-            border-top: 1px solid var(--border-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.85);
         }
         .modal-actions .btn {
             height: 38px;
@@ -1188,26 +1683,90 @@
 
         .gh-field { margin-bottom: 14px; }
         .gh-field label { display: block; font-size: 12.5px; font-weight: 700; color: var(--text-secondary); margin-bottom: 5px; }
-        .gh-input { width: 100%; height: 38px; padding: 0 12px; border: 1px solid var(--border-mid); border-radius: 6px; font-family: inherit; font-size: 13.5px; outline: none; color: var(--text-primary); }
-        .gh-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.12); }
+        .gh-input {
+            width: 100%;
+            height: 38px;
+            padding: 0 12px;
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.80);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13.5px;
+            outline: none;
+            color: var(--text-primary);
+            box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+        }
+        .gh-input:focus {
+            background: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
+        }
         textarea.gh-input { height: auto; padding: 10px 12px; }
 
-        /* Mindmap background */
-        .mindmap-bg {
-            background-color: #f8fafc;
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 20px 20px;
+        /* ================= SMART PAYROLL & BUDGET GUARD BAR (LIQUID GLASS) ================= */
+        .payroll-budget-strip {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
         }
-        .tree-children-guide { position: relative; }
-        .tree-children-guide::before {
-            content: ''; position: absolute; left: 10px; top: 0; bottom: 10px; width: 2px; background-color: #cbd5e1;
+        .liquid-subpanel {
+            background: var(--glass-gradient);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-rim);
+            border-radius: var(--radius-md);
+            padding: 13px 18px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
         }
-        .connector-path { fill: none; stroke-linecap: round; transition: d 0.3s ease; }
+        .payroll-info-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .payroll-badge-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(14, 165, 233, 0.22) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            flex-shrink: 0;
+        }
+        .budget-guard-track {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 6px;
+            box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.06);
+        }
+        .budget-guard-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.35s ease;
+        }
 
         /* ================= RESPONSIVE BREAKPOINTS ================= */
         @media (max-width: 1024px) {
-            .kpi-section-grid, .work-stat-strip, .debt-dashboard {
+            .kpi-section-grid, .work-stat-strip, .debt-dashboard, .payroll-budget-strip {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .payroll-budget-strip {
+                grid-template-columns: 1fr;
             }
             .analysis-grid-2x2, .history-layout {
                 grid-template-columns: 1fr;
@@ -1218,16 +1777,18 @@
             .topbar { padding: 10px 12px; }
             .topbar-inner { flex-direction: column; align-items: stretch; gap: 10px; }
             .brand-box { justify-content: space-between; }
-            .nav-tabs { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); }
+            .nav-tabs { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); border-radius: 16px; }
             .nav-tab { justify-content: center; font-size: 12px; padding: 0 6px; }
             .system-actions { justify-content: space-between; }
 
             .container { padding: 12px; }
             .workspace-toolbar { flex-direction: column; align-items: stretch; }
             .month-navigator { justify-content: space-between; width: 100%; }
+            .smart-search-wrap { max-width: 100%; }
 
-            .day { min-height: 95px; padding: 5px; }
-            .day-number { width: 20px; height: 20px; font-size: 11px; }
+            .calendar { gap: 4px; }
+            .day { min-height: 98px; padding: 6px; border-radius: 12px; }
+            .day-number { width: 20px; height: 20px; font-size: 11px; border-radius: 6px; }
             .shift-pill { font-size: 9px; padding: 1px 4px; }
             .fin-pill { font-size: 9.5px; padding: 1.5px 4px; }
             .job-content-preview { font-size: 9.5px; }
@@ -1249,12 +1810,27 @@
 </head>
 <body>
 
-<!-- ================= TOP BAR KHOA HỌC ================= -->
+<!-- ================= TOP BAR EXECUTIVE KHOA HỌC ================= -->
 <header class="topbar">
     <div class="topbar-inner">
-        <!-- Brand & Trạng thái lưu -->
+        <!-- Brand Identity -->
         <div class="brand-box">
-            <div style="display:flex; align-items:center; gap:10px;">
+            <div class="brand-logo">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div>
+                <h1 class="brand-title">
+                    FinWork Manager
+                    <span class="brand-pro-pill">Liquid Glass</span>
+                </h1>
+                <div class="brand-subtitle">
+                    <span id="live-header-clock" class="num-tabular"><i class="fa-regular fa-clock"></i> --:--</span>
+                    <span>•</span>
+                    <span>Quản trị Công việc, Tài chính & Vật tư</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Segmented Tabs chuyển đổi 4 Phân hệ rõ ràng -->
         <nav class="nav-tabs" aria-label="Chuyển đổi phân hệ">
             <button type="button" class="nav-tab active" id="tab-btn-calendar" onclick="switchView('calendar')">
@@ -1280,7 +1856,7 @@
         <div class="system-actions">
             <div class="save-badge" id="auto-save-status">✔️ Đã tự động lưu</div>
             <button class="btn" onclick="createManualSnapshotNow()" title="Chụp & lưu lại trạng thái dữ liệu ngay lập tức">
-                <i class="fa-solid fa-camera"></i> Lưu phiên bản
+                <i class="fa-solid fa-camera"></i> Chốt bản lưu
             </button>
             <button class="btn btn-github" id="btn-gh-config" title="Cài đặt tự động lưu trên GitHub">
                 <i class="fa-brands fa-github"></i> GitHub
@@ -1297,26 +1873,52 @@
 </header>
 
 <div class="container">
-    <!-- Thanh điều hướng Tháng/Năm dùng chung cho Lịch & Tính lãi theo tháng -->
+    <!-- Thanh điều hướng Tháng/Năm + Tìm kiếm thông minh + Bộ lọc nhanh -->
     <div class="workspace-toolbar">
         <div class="month-navigator">
             <button class="btn btn-icon-nav" id="btn-prev" title="Tháng trước"><i class="fa-solid fa-chevron-left"></i></button>
             <h2 id="month-year">Tháng 9, 2026</h2>
             <button class="btn btn-icon-nav" id="btn-next" title="Tháng sau"><i class="fa-solid fa-chevron-right"></i></button>
-            <button class="btn btn-small" onclick="goToToday()" style="margin-left:4px;">Hôm nay</button>
+            <button class="btn btn-small" onclick="goToToday()" style="margin-left:2px;">Hôm nay</button>
         </div>
-        <div class="toolbar-hint">
-            <span class="legend-dot"><span style="background:var(--primary)"></span> Chấm công</span>
-            <span class="legend-dot"><span style="background:var(--income)"></span> Thu nhập</span>
-            <span class="legend-dot"><span style="background:var(--expense)"></span> Chi tiêu</span>
-            <span class="legend-dot"><span style="background:var(--loan)"></span> Cho mượn</span>
-            <span style="color:var(--text-muted); font-size:12px;">💡 Nhấp vào ô ngày bất kỳ để ghi chép</span>
+
+        <!-- Ô tìm kiếm thông minh toàn cục -->
+        <div class="smart-search-wrap" id="smart-search-container">
+            <i class="fa-solid fa-magnifying-glass smart-search-icon"></i>
+            <input type="text" id="global-search-input" class="smart-search-input" placeholder="Tìm nhanh khoản thu, chi, công việc..." autocomplete="off">
+            <span class="smart-search-kbd">Ctrl K</span>
+            <div class="search-dropdown" id="global-search-dropdown"></div>
+        </div>
+
+        <!-- Bộ lọc nhanh trên lịch -->
+        <div class="filter-pills-bar" id="calendar-filter-bar">
+            <button type="button" class="filter-pill active" data-filter="all" onclick="setCalendarFilter('all')">
+                Tất cả ngày
+            </button>
+            <button type="button" class="filter-pill" data-filter="income" onclick="setCalendarFilter('income')">
+                <span class="dot" style="background:var(--income)"></span> Có Thu
+            </button>
+            <button type="button" class="filter-pill" data-filter="expense" onclick="setCalendarFilter('expense')">
+                <span class="dot" style="background:var(--expense)"></span> Có Chi
+            </button>
+            <button type="button" class="filter-pill" data-filter="ot" onclick="setCalendarFilter('ot')">
+                <span class="dot" style="background:var(--primary)"></span> Tăng ca (OT)
+            </button>
+            <button type="button" class="filter-pill" data-filter="loan" onclick="setCalendarFilter('loan')">
+                <span class="dot" style="background:var(--loan)"></span> Cho mượn
+            </button>
+            <button type="button" class="btn btn-small" onclick="openPayrollBudgetModal()" title="Cài đặt đơn giá ngày công, giờ tăng ca & hạn mức chi tiêu tháng">
+                <i class="fa-solid fa-sliders" style="color:var(--primary-dark)"></i> Định mức Lương & Ngân sách
+            </button>
+            <button type="button" class="btn btn-small" onclick="exportMonthlyCSV()" title="Xuất báo cáo tháng này ra file Excel (.CSV)">
+                <i class="fa-solid fa-file-csv" style="color:#0284c7"></i> Xuất Excel (.csv)
+            </button>
         </div>
     </div>
 
     <!-- ================= MÀN HÌNH 1: LỊCH, CÔNG VIỆC, THU NHẬP & CHI TIÊU ================= -->
     <div id="view-calendar" class="app-view active">
-        <!-- Bảng KPI Tổng quan (Được render động ngay trên lịch để nắm bắt tức thì) -->
+        <!-- Bảng KPI Tổng quan & Thanh sức khỏe dòng tiền thông minh -->
         <div id="top-kpi-overview"></div>
 
         <!-- Lưới lịch 7 cột khoa học -->
@@ -1327,7 +1929,7 @@
         <!-- Khu vực Phân tích Chi tiết 2x2 -->
         <div class="stats-panel">
             <div class="section-bar">
-                <h3><i class="fa-solid fa-chart-column" style="color:var(--primary)"></i> Báo Cáo Chi Tiết Trong Tháng</h3>
+                <h3><i class="fa-solid fa-chart-pie" style="color:var(--primary)"></i> Báo Cáo Phân Tích Chi Tiết Trong Tháng</h3>
                 <div style="display:flex; gap:6px;">
                     <button type="button" class="btn btn-small" onclick="toggleAllDetailBoxes(false)">🔽 Mở tất cả</button>
                     <button type="button" class="btn btn-small" onclick="toggleAllDetailBoxes(true)">▶️ Thu gọn tất cả</button>
@@ -1367,18 +1969,21 @@
 
     <!-- ================= MÀN HÌNH 3: DANH SÁCH VẬT TƯ & SƠ ĐỒ TƯ DUY ================= -->
     <div id="view-materials" class="app-view">
-        <div class="tw-bg-white tw-rounded-xl tw-p-4 tw-border tw-border-slate-200 tw-shadow-xs">
-            <div class="tw-bg-slate-900 tw-text-white tw-p-3.5 tw-rounded-lg tw-mb-4 tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-gap-3">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-4 tw-border tw-border-slate-200 tw-shadow-sm">
+            <div class="tw-bg-slate-900 tw-text-white tw-p-4 tw-rounded-xl tw-mb-4 tw-flex tw-flex-wrap tw-items-center justify-between tw-gap-3">
                 <div>
                     <h3 class="tw-text-sm sm:tw-text-base tw-font-bold tw-flex tw-items-center tw-gap-2 tw-m-0">
-                        <i class="fa-solid fa-sitemap tw-text-emerald-400"></i> Sơ Đồ Phân Cấp Vật Tư Công Trình & Hạng Mục
+                        <i class="fa-solid fa-sitemap tw-text-emerald-400"></i> Sơ Đồ Phân Cấp Vật Tư Công Trình & Dự Toán Chi Phí
                     </h3>
-                    <p class="tw-text-xs tw-text-slate-300 tw-mt-0.5 tw-mb-0">Quản lý trực quan vật tư từng công việc • Nhấp vào tên mục để chỉnh sửa nhanh</p>
+                    <p class="tw-text-xs tw-text-slate-300 tw-mt-0.5 tw-mb-0">Quản lý trực quan khối lượng, đơn giá, trạng thái mua sắm • Tự động cộng dồn dự toán vật tư</p>
                 </div>
                 <div class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
-                    <button onclick="expandAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-slate-700 hover:tw-bg-slate-600 tw-text-white tw-text-xs tw-font-semibold tw-rounded-md tw-border-0 tw-cursor-pointer">Mở tất cả</button>
-                    <button onclick="collapseAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-slate-800 hover:tw-bg-slate-700 tw-text-slate-200 tw-text-xs tw-font-semibold tw-rounded-md tw-border-0 tw-cursor-pointer">Thu gọn</button>
-                    <button onclick="openMaterialRootModal()" class="tw-px-3.5 tw-py-1.5 tw-bg-emerald-600 hover:tw-bg-emerald-500 tw-text-white tw-text-xs tw-font-bold tw-rounded-md tw-border-0 tw-cursor-pointer tw-flex tw-items-center tw-gap-1.5">
+                    <span id="material-grand-total-pill" class="tw-px-3 tw-py-1.5 tw-bg-emerald-950/80 tw-border tw-border-emerald-400/40 tw-text-emerald-300 tw-text-xs tw-font-extrabold tw-rounded-lg num-tabular">
+                        Tổng dự toán: 0đ
+                    </span>
+                    <button onclick="expandAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-slate-700 hover:tw-bg-slate-600 tw-text-white tw-text-xs tw-font-semibold tw-rounded-lg tw-border-0 tw-cursor-pointer">Mở tất cả</button>
+                    <button onclick="collapseAllLevels()" class="tw-px-3 tw-py-1.5 tw-bg-slate-800 hover:tw-bg-slate-700 tw-text-slate-200 tw-text-xs tw-font-semibold tw-rounded-lg tw-border-0 tw-cursor-pointer">Thu gọn</button>
+                    <button onclick="openMaterialRootModal()" class="tw-px-3.5 tw-py-1.5 tw-bg-emerald-600 hover:tw-bg-emerald-500 tw-text-white tw-text-xs tw-font-bold tw-rounded-lg tw-border-0 tw-cursor-pointer tw-flex tw-items-center tw-gap-1.5">
                         <i class="fa-solid fa-plus"></i> Thêm Công Trình / Chủ Đề Gốc
                     </button>
                 </div>
@@ -1386,7 +1991,7 @@
 
             <div class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-4">
                 <!-- Outline Tree View -->
-                <div class="tw-flex-1 tw-bg-slate-50 tw-rounded-lg tw-border tw-border-slate-200 tw-p-3.5 tw-max-h-[540px] lg:tw-max-h-[680px] tw-overflow-y-auto">
+                <div class="tw-flex-1 tw-bg-slate-50 tw-rounded-xl tw-border tw-border-slate-200 tw-p-3.5 tw-max-h-[540px] lg:tw-max-h-[680px] tw-overflow-y-auto">
                     <h4 class="tw-text-xs tw-font-bold tw-text-slate-600 tw-uppercase tw-tracking-wider tw-mt-0 tw-mb-3 tw-flex tw-items-center tw-gap-1.5">
                         <i class="fa-solid fa-list-ul tw-text-emerald-600"></i> Danh mục dạng cây (Outline)
                     </h4>
@@ -1394,8 +1999,8 @@
                 </div>
 
                 <!-- Mind Map View -->
-                <div class="tw-flex-[1.4] tw-bg-slate-50 tw-rounded-lg tw-border tw-border-slate-200 tw-overflow-hidden tw-flex tw-flex-col tw-h-[480px] lg:tw-h-[680px] tw-relative">
-                    <div class="tw-bg-white tw-px-3.5 tw-py-2 tw-border-b tw-border-slate-200 tw-flex tw-items-center tw-justify-between tw-z-10">
+                <div class="tw-flex-[1.4] tw-bg-slate-50 tw-rounded-xl tw-border tw-border-slate-200 tw-overflow-hidden tw-flex tw-flex-col tw-h-[480px] lg:tw-h-[680px] tw-relative">
+                    <div class="tw-bg-white tw-px-3.5 tw-py-2.5 tw-border-b tw-border-slate-200 tw-flex tw-items-center tw-justify-between tw-z-10">
                         <span class="tw-text-xs tw-font-bold tw-text-slate-700"><i class="fa-solid fa-diagram-project tw-text-emerald-600 tw-mr-1"></i> Sơ đồ nhánh trực quan</span>
                         <div class="tw-flex tw-items-center tw-gap-1">
                             <button onclick="zoomMindMap(-0.1)" class="tw-w-7 tw-h-7 tw-rounded tw-bg-slate-100 hover:tw-bg-slate-200 tw-text-xs tw-border-0 tw-cursor-pointer tw-font-bold">-</button>
@@ -1473,13 +2078,37 @@
     </div>
 </div>
 
-<!-- ================= MODAL 1: CHI TIẾT NGÀY (CHẤM CÔNG & THU CHI) ================= -->
+<!-- ================= MODAL 1: CHI TIẾT NGÀY (CHẤM CÔNG & THU CHI THÔNG MINH) ================= -->
 <div class="modal" id="work-modal">
     <div class="modal-content">
         <h3>
             <span id="modal-date-title">Chi tiết Ngày</span>
-            <button type="button" class="btn btn-small" onclick="document.getElementById('work-modal').style.display='none'">✕</button>
+            <div style="display:flex; align-items:center; gap:6px;">
+                <button type="button" class="btn btn-small" onclick="copyCurrentDayData()" title="Sao chép ca làm, thu chi, công việc của ngày này">
+                    <i class="fa-regular fa-copy"></i> Sao chép ngày
+                </button>
+                <button type="button" class="btn btn-small" id="btn-paste-day" onclick="pasteDayDataToModal()" title="Dán dữ liệu ngày đã sao chép vào ngày này" style="display:none; color:var(--primary-dark); border-color:var(--primary-border);">
+                    <i class="fa-regular fa-clipboard"></i> Dán ngày
+                </button>
+                <button type="button" class="btn btn-small" onclick="document.getElementById('work-modal').style.display='none'">✕</button>
+            </div>
         </h3>
+
+        <!-- Thanh tổng kết nhanh theo thời gian thực khi gõ trong Modal -->
+        <div class="modal-live-summary">
+            <div class="modal-live-item">
+                <span>Tổng Thu trong ngày</span>
+                <strong id="modal-live-inc" style="color:var(--income);">+0đ</strong>
+            </div>
+            <div class="modal-live-item">
+                <span>Tổng Chi trong ngày</span>
+                <strong id="modal-live-exp" style="color:var(--expense);">-0đ</strong>
+            </div>
+            <div class="modal-live-item">
+                <span>Cân đối trong ngày</span>
+                <strong id="modal-live-net" style="color:var(--primary);">0đ</strong>
+            </div>
+        </div>
         
         <span class="modal-section-label">1. Trạng thái chấm công</span>
         <div class="radio-group">
@@ -1505,6 +2134,13 @@
                 <span>💰 Khoản Thu nhập</span>
                 <button type="button" class="btn btn-small" id="btn-add-income" style="color:var(--income); border-color:var(--income-border);">+ Thêm khoản thu</button>
             </h4>
+            <div class="quick-preset-bar">
+                <span style="font-size:10.5px; color:var(--text-muted); font-weight:700;">Gợi ý nhanh:</span>
+                <button type="button" class="preset-chip" onclick="quickFillRow('income', 'Lương ngày công')">+ Lương công</button>
+                <button type="button" class="preset-chip" onclick="quickFillRow('income', 'Tạm ứng công trình')">+ Tạm ứng</button>
+                <button type="button" class="preset-chip" onclick="quickFillRow('income', 'Thưởng / Phụ cấp')">+ Thưởng</button>
+                <button type="button" class="preset-chip" onclick="quickFillRow('income', 'Khách thanh toán')">+ Khách trả</button>
+            </div>
             <div id="income-list-container"></div>
         </div>
 
@@ -1513,6 +2149,13 @@
                 <span>💸 Khoản Chi tiêu</span>
                 <button type="button" class="btn btn-small" id="btn-add-expense" style="color:var(--expense); border-color:var(--expense-border);">+ Thêm khoản chi</button>
             </h4>
+            <div class="quick-preset-bar">
+                <span style="font-size:10.5px; color:var(--text-muted); font-weight:700;">Gợi ý nhanh:</span>
+                <button type="button" class="preset-chip" onclick="quickFillRow('expense', 'Ăn uống / Cà phê')">+ Ăn uống</button>
+                <button type="button" class="preset-chip" onclick="quickFillRow('expense', 'Đổ xăng / Đi lại')">+ Xăng xe</button>
+                <button type="button" class="preset-chip" onclick="quickFillRow('expense', 'Mua vật tư phụ')">+ Vật tư</button>
+                <button type="button" class="preset-chip" onclick="quickFillRow('expense', 'Sinh hoạt / Hóa đơn')">+ Sinh hoạt</button>
+            </div>
             <div id="expense-list-container"></div>
         </div>
 
@@ -1574,7 +2217,7 @@
 
 <!-- ================= MODAL 3: THÊM / SỬA NHÁNH VẬT TƯ ================= -->
 <div class="modal" id="material-modal">
-    <div class="modal-content" style="max-width: 460px;">
+    <div class="modal-content" style="max-width: 500px;">
         <h3 id="material-modal-title">🌿 Quản Lý Vật Tư Công Việc</h3>
         <input type="hidden" id="mat-modal-target-id">
         <input type="hidden" id="mat-modal-mode">
@@ -1583,14 +2226,65 @@
             <label>📝 Tên công việc / Tên vật tư:</label>
             <input type="text" id="mat-node-text" class="gh-input" placeholder="VD: Sắt phi 16, Xi măng Nghi Sơn...">
         </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1.3fr; gap:10px; margin-bottom:14px;">
+            <div>
+                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-secondary); margin-bottom:5px;">🔢 Số lượng:</label>
+                <input type="number" id="mat-node-qty" class="gh-input" placeholder="VD: 50" min="0" step="any">
+            </div>
+            <div>
+                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-secondary); margin-bottom:5px;">📏 Đơn vị:</label>
+                <input type="text" id="mat-node-unit" class="gh-input" placeholder="cây, bao, m3...">
+            </div>
+            <div>
+                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-secondary); margin-bottom:5px;">🏷️ Đơn giá (VNĐ):</label>
+                <input type="number" id="mat-node-price" class="gh-input" placeholder="VD: 185000" min="0">
+            </div>
+        </div>
         <div class="gh-field">
-            <label>📌 Ghi chú chi tiết (Số lượng, Đơn giá, Nhà cung cấp...):</label>
-            <textarea id="mat-node-notes" class="gh-input" rows="3" placeholder="VD: 50 cây, giao ngày mai..."></textarea>
+            <label>🛒 Trạng thái mua sắm / chuẩn bị:</label>
+            <select id="mat-node-status" class="gh-input">
+                <option value="">-- Hạng mục chung (Không gắn trạng thái) --</option>
+                <option value="pending">⏳ Cần mua / Đang báo giá</option>
+                <option value="bought">✅ Đã mua / Đã tập kết</option>
+            </select>
+        </div>
+        <div class="gh-field">
+            <label>📌 Ghi chú chi tiết (Quy cách, Nhà cung cấp, SĐT...):</label>
+            <textarea id="mat-node-notes" class="gh-input" rows="2" placeholder="VD: Giao tới công trình sáng thứ 2..."></textarea>
         </div>
 
         <div class="modal-actions">
             <button class="btn" id="btn-mat-cancel">Hủy</button>
             <button class="btn btn-primary" id="btn-mat-save">Lưu lại</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL 5: CÀI ĐẶT ĐỊNH MỨC LƯƠNG & HẠN MỨC NGÂN SÁCH ================= -->
+<div class="modal" id="payroll-budget-modal">
+    <div class="modal-content" style="max-width: 460px;">
+        <h3>
+            <span>⚙️ Định Mức Lương Công & Ngân Sách Tháng</span>
+            <button type="button" class="btn btn-small" onclick="document.getElementById('payroll-budget-modal').style.display='none'">✕</button>
+        </h3>
+        <div class="gh-field">
+            <label>💵 Đơn giá 1 ngày công chuẩn (VNĐ / công):</label>
+            <input type="number" id="cfg-daily-wage" class="gh-input" placeholder="VD: 500000" min="0">
+        </div>
+        <div class="gh-field">
+            <label>⏰ Đơn giá 1 giờ tăng ca - OT (VNĐ / giờ):</label>
+            <input type="number" id="cfg-ot-rate" class="gh-input" placeholder="VD: 80000" min="0">
+        </div>
+        <div class="gh-field">
+            <label>🛡️ Hạn mức chi tiêu tối đa mỗi tháng (VNĐ):</label>
+            <input type="number" id="cfg-monthly-budget" class="gh-input" placeholder="VD: 10000000 (Để 0 nếu không giới hạn)" min="0">
+        </div>
+        <div style="font-size:12px; color:var(--text-muted); background:rgba(255,255,255,0.55); padding:10px 12px; border-radius:10px; border:1px solid var(--border-light); margin-bottom:14px;">
+            💡 Hệ thống sẽ tự động nhân <strong>Tổng số ngày công</strong> và <strong>Tổng giờ tăng ca</strong> trong tháng để tính lương tạm tính và cảnh báo nếu chi tiêu vượt hạn mức.
+        </div>
+        <div class="modal-actions">
+            <button class="btn" onclick="document.getElementById('payroll-budget-modal').style.display='none'">Đóng</button>
+            <button class="btn btn-primary" onclick="savePayrollBudgetSettings()">Lưu định mức</button>
         </div>
     </div>
 </div>
@@ -1627,6 +2321,13 @@
     let workData = savedData ? JSON.parse(savedData) : {}; 
     
     if (!workData.debts) workData.debts = [];
+    if (!workData.settings) {
+        workData.settings = {
+            dailyWage: 450000,
+            otHourlyRate: 70000,
+            monthlyBudgetLimit: 12000000
+        };
+    }
     if (!workData.materialRoots) {
         workData.materialRoots = [
             {
@@ -1643,8 +2344,8 @@
                         color: 'emerald',
                         expanded: true,
                         children: [
-                            { id: 'mn-1-1', text: 'Sắt phi 16 (50 cây)', notes: 'Dùng cho dầm cột', color: 'emerald', expanded: true, children: [] },
-                            { id: 'mn-1-2', text: 'Sắt phi 10 (100 cây)', notes: 'Dùng làm đai', color: 'emerald', expanded: true, children: [] }
+                            { id: 'mn-1-1', text: 'Sắt phi 16', qty: 50, unit: 'cây', price: 185000, status: 'bought', notes: 'Dùng cho dầm cột', color: 'emerald', expanded: true, children: [] },
+                            { id: 'mn-1-2', text: 'Sắt phi 10', qty: 100, unit: 'cây', price: 78000, status: 'pending', notes: 'Dùng làm đai', color: 'emerald', expanded: true, children: [] }
                         ]
                     }
                 ]
@@ -1653,7 +2354,22 @@
     }
 
     let selectedDateStr = '';
+    let copiedDayClipboard = null;
+    let activeCalendarFilter = 'all'; // 'all' | 'income' | 'expense' | 'ot' | 'loan'
     let collapsedSections = JSON.parse(localStorage.getItem('nhatky_collapsed_sections') || '{"inc":false,"exp":false,"loan":false,"task":false}');
+
+    // Cập nhật đồng hồ thời gian thực trên thanh Header
+    function updateHeaderClock() {
+        const el = document.getElementById('live-header-clock');
+        if (!el) return;
+        const now = new Date();
+        const days = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+        const dStr = `${days[now.getDay()]}, ${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}`;
+        const tStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+        el.innerHTML = `<i class="fa-regular fa-clock"></i> ${tStr} • ${dStr}`;
+    }
+    updateHeaderClock();
+    setInterval(updateHeaderClock, 15000);
 
     function showToast(msg, type = 'success') {
         const container = document.getElementById('toast-container');
@@ -1674,6 +2390,14 @@
         currentDate = new Date();
         if (currentView === 'calendar') renderCalendar();
         else if (currentView === 'debt') renderDebtView();
+    };
+
+    window.setCalendarFilter = function(filterType) {
+        activeCalendarFilter = filterType;
+        document.querySelectorAll('#calendar-filter-bar .filter-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-filter') === filterType);
+        });
+        renderCalendar();
     };
 
     window.toggleDetailBox = function(key, headerEl) {
@@ -1772,6 +2496,9 @@
         btnSwitchDebt.className = 'nav-tab';
         btnSwitchHistory.className = 'nav-tab';
 
+        const filterBar = document.getElementById('calendar-filter-bar');
+        if (filterBar) filterBar.style.display = target === 'calendar' ? 'flex' : 'none';
+
         if (target === 'calendar') {
             viewCalendar.classList.add('active');
             tabBtnCalendar.className = 'nav-tab active';
@@ -1796,6 +2523,85 @@
     btnSwitchHistory.onclick = () => switchView(currentView === 'history' ? 'calendar' : 'history');
 
     // =========================================================================
+    // TÌM KIẾM THÔNG MINH TOÀN CỤC (SMART GLOBAL SEARCH)
+    // =========================================================================
+    const globalSearchInput = document.getElementById('global-search-input');
+    const globalSearchDropdown = document.getElementById('global-search-dropdown');
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            globalSearchInput.focus();
+        } else if (e.key === 'Escape') {
+            globalSearchDropdown.classList.remove('open');
+        }
+    });
+
+    globalSearchInput.addEventListener('input', () => {
+        const q = globalSearchInput.value.trim().toLowerCase();
+        if (!q) {
+            globalSearchDropdown.classList.remove('open');
+            return;
+        }
+        const results = [];
+        const dateKeys = Object.keys(workData).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort().reverse();
+
+        dateKeys.forEach(dateKey => {
+            const d = workData[dateKey];
+            if (!d) return;
+            (d.incomes || []).forEach(inc => {
+                if ((inc.name || '').toLowerCase().includes(q) || String(inc.amount).includes(q)) {
+                    results.push({ dateKey, type: 'Thu nhập', label: inc.name, amount: `+${formatCurrency(inc.amount)}`, color: 'var(--income)' });
+                }
+            });
+            (d.expenses || []).forEach(exp => {
+                if ((exp.name || '').toLowerCase().includes(q) || String(exp.amount).includes(q)) {
+                    results.push({ dateKey, type: 'Chi tiêu', label: exp.name, amount: `-${formatCurrency(exp.amount)}`, color: 'var(--expense)' });
+                }
+            });
+            (d.loans || []).forEach(ln => {
+                if ((ln.name || '').toLowerCase().includes(q) || String(ln.amount).includes(q)) {
+                    results.push({ dateKey, type: 'Cho mượn', label: ln.name, amount: formatCurrency(ln.amount), color: 'var(--loan)' });
+                }
+            });
+            getTaskList(d).forEach(t => {
+                if (t.toLowerCase().includes(q)) {
+                    results.push({ dateKey, type: 'Công việc', label: t, amount: '📝 Ghi chú', color: 'var(--primary-dark)' });
+                }
+            });
+        });
+
+        if (results.length === 0) {
+            globalSearchDropdown.innerHTML = `<div style="padding:14px; text-align:center; color:#94a3b8; font-size:12px;">Không tìm thấy kết quả phù hợp cho "${escapeHtml(globalSearchInput.value)}"</div>`;
+        } else {
+            globalSearchDropdown.innerHTML = results.slice(0, 12).map(r => `
+                <div class="search-result-item" onclick="jumpToDateFromSearch('${r.dateKey}')">
+                    <div style="min-width:0;">
+                        <div style="font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(r.label)}</div>
+                        <div style="font-size:11px; color:var(--text-muted);">📅 Ngày ${formatDateVN(r.dateKey)} • ${r.type}</div>
+                    </div>
+                    <strong class="num-tabular" style="color:${r.color}; white-space:nowrap;">${r.amount}</strong>
+                </div>
+            `).join('');
+        }
+        globalSearchDropdown.classList.add('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('smart-search-container').contains(e.target)) {
+            globalSearchDropdown.classList.remove('open');
+        }
+    });
+
+    window.jumpToDateFromSearch = function(dateKey) {
+        globalSearchDropdown.classList.remove('open');
+        const [y, m] = dateKey.split('-').map(Number);
+        currentDate = new Date(y, m - 1, 1);
+        switchView('calendar');
+        openModal(dateKey);
+    };
+
+    // =========================================================================
     // HỆ THỐNG LƯU TỰ ĐỘNG 23:59 HÀNG NGÀY & LỊCH SỬ PHIÊN BẢN (SNAPSHOT ENGINE)
     // =========================================================================
     const SNAPSHOT_STORAGE_KEY = 'nhatky_daily_snapshots';
@@ -1803,10 +2609,9 @@
     let snapshots = JSON.parse(localStorage.getItem(SNAPSHOT_STORAGE_KEY) || '[]');
     let selectedSnapshotId = snapshots.length > 0 ? snapshots[0].id : null;
     let currentInspectorTab = 'diff'; // 'diff' | 'preview' | 'raw'
-    let diffCompareMode = 'previous'; // 'previous' (so với bản lưu liền trước) | 'current' (so với dữ liệu hiện tại)
+    let diffCompareMode = 'previous'; // 'previous' | 'current'
     let autoDownload2359 = localStorage.getItem('nhatky_auto_dl_2359') === 'true';
 
-    // Khởi tạo trạng thái checkbox tự động tải file lúc 23:59
     const autoDlCheckbox = document.getElementById('toggle-auto-download-2359');
     if (autoDlCheckbox) autoDlCheckbox.checked = autoDownload2359;
 
@@ -1869,10 +2674,10 @@
         const metrics = computeDataMetrics(clone);
         const snap = {
             id: 'snap-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
-            dateKey: dateKey, // YYYY-MM-DD
-            timeLabel: timeLabel, // '23:59' hoặc HH:MM:SS
+            dateKey: dateKey,
+            timeLabel: timeLabel,
             createdAt: new Date().toISOString(),
-            mode: mode, // 'auto-2359' | 'catchup-2359' | 'manual'
+            mode: mode,
             note: note || (mode === 'manual' ? 'Bản lưu thủ công' : `Bản lưu tự động 23:59 ngày ${formatDateVN(dateKey)}`),
             metrics: metrics,
             data: clone
@@ -1909,7 +2714,6 @@
         showToast(`📸 Đã tạo bản lưu lúc ${hh}:${mm} (${d}/${m}/${y})`);
     };
 
-    // Kiểm tra lưu bù nếu ngày hôm trước người dùng đóng tab trước 23:59
     function checkAndRunDaily2359Catchup() {
         const now = new Date();
         const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -1928,7 +2732,6 @@
         }
         localStorage.setItem('nhatky_last_active_day', todayKey);
 
-        // Nếu chưa có bất kỳ bản lưu nào trong lịch sử, tạo 1 bản khởi tạo để người dùng dễ đối chiếu
         if (snapshots.length === 0) {
             createSnapshotRecord({
                 dateKey: todayKey,
@@ -1941,7 +2744,6 @@
         }
     }
 
-    // Bộ đếm ngược thời gian thực & Tự động kích hoạt đúng 23:59 mỗi ngày
     function start2359Scheduler() {
         function tick() {
             const now = new Date();
@@ -1950,7 +2752,6 @@
             const d = String(now.getDate()).padStart(2, '0');
             const todayKey = `${y}-${m}-${d}`;
 
-            // Tính thời gian còn lại tới 23:59:00 hôm nay
             const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0);
             let diffMs = target - now;
             const cdEl = document.getElementById('countdown-2359');
@@ -1964,7 +2765,6 @@
                 if (cdEl) cdEl.textContent = `Đã chốt 23:59 hôm nay`;
             }
 
-            // Đúng khung giờ 23:59 -> Tự động lưu bản chốt ngày nếu hôm nay chưa chốt 23:59
             if (now.getHours() === 23 && now.getMinutes() === 59) {
                 const hasToday2359 = snapshots.some(s => s.dateKey === todayKey && s.mode === 'auto-2359' && s.timeLabel === '23:59');
                 if (!hasToday2359) {
@@ -1984,7 +2784,6 @@
         setInterval(tick, 1000);
     }
 
-    // SO SÁNH SỰ THAY ĐỔI GIỮA 2 BẢN DỮ LIỆU (DIFF ENGINE)
     function compareWorkData(oldData, newData) {
         const changes = [];
         const allDateKeys = new Set([
@@ -2058,7 +2857,6 @@
             }
         });
 
-        // So sánh danh sách Nợ
         const oldDebts = (oldData && oldData.debts) || [];
         const newDebts = (newData && newData.debts) || [];
         if (JSON.stringify(oldDebts) !== JSON.stringify(newDebts)) {
@@ -2070,7 +2868,6 @@
             });
         }
 
-        // So sánh sơ đồ Vật tư
         const oldMats = (oldData && oldData.materialRoots) || [];
         const newMats = (newData && newData.materialRoots) || [];
         if (JSON.stringify(oldMats) !== JSON.stringify(newMats)) {
@@ -2085,7 +2882,6 @@
         return changes;
     }
 
-    // RENDER GIAO DIỆN LỊCH SỬ BẢN LƯU (VIEW 4)
     function renderHistoryView() {
         updateSnapshotBadgeCount();
         const listContainer = document.getElementById('snapshot-list-container');
@@ -2124,10 +2920,10 @@
                         ${escapeHtml(snap.note)}
                     </div>
                     <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:11px; color:var(--text-muted); margin-bottom:10px;" class="num-tabular">
-                        <span style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">🗓️ ${m.dayCount} ngày</span>
-                        <span style="background:#f0f9ff; color:#0369a1; padding:2px 6px; border-radius:4px;">+${formatCurrency(m.totalInc)}</span>
-                        <span style="background:#fff1f2; color:#be123c; padding:2px 6px; border-radius:4px;">-${formatCurrency(m.totalExp)}</span>
-                        ${prevSnap ? `<span style="background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:4px; font-weight:700;">⚡ ${diffCount} mục đổi</span>` : ''}
+                        <span style="background:rgba(255,255,255,0.65); padding:2px 6px; border-radius:4px;">🗓️ ${m.dayCount} ngày</span>
+                        <span style="background:rgba(224,242,254,0.75); color:#0369a1; padding:2px 6px; border-radius:4px;">+${formatCurrency(m.totalInc)}</span>
+                        <span style="background:rgba(255,228,230,0.75); color:#be123c; padding:2px 6px; border-radius:4px;">-${formatCurrency(m.totalExp)}</span>
+                        ${prevSnap ? `<span style="background:rgba(224,231,255,0.75); color:#4338ca; padding:2px 6px; border-radius:4px; font-weight:700;">⚡ ${diffCount} mục đổi</span>` : ''}
                     </div>
                     <div style="display:flex; gap:6px;" onclick="event.stopPropagation();">
                         <button type="button" class="btn btn-small" style="flex:1;" onclick="selectSnapshot('${snap.id}')">
@@ -2136,7 +2932,7 @@
                         <button type="button" class="btn btn-small" onclick="downloadSnapshotById('${snap.id}')" title="Tải bản lưu này về máy (.json)">
                             📥 Tải về
                         </button>
-                        <button type="button" class="btn btn-small" style="color:#047857; border-color:#a7f3d0; background:#ecfdf5;" onclick="restoreSnapshotById('${snap.id}')" title="Khôi phục dữ liệu về thời điểm này">
+                        <button type="button" class="btn btn-small" style="color:#047857; border-color:#a7f3d0; background:rgba(236,253,245,0.8);" onclick="restoreSnapshotById('${snap.id}')" title="Khôi phục dữ liệu về thời điểm này">
                             ⏪ Khôi phục
                         </button>
                         <button type="button" class="btn btn-danger btn-small" style="width:28px; height:28px;" onclick="deleteSnapshotById('${snap.id}')" title="Xóa bản lưu này">
@@ -2181,7 +2977,6 @@
         const prevSnap = snapshots[snapIndex + 1] || null;
         const m = snap.metrics || computeDataMetrics(snap.data);
 
-        // Header thông tin bản lưu đang chọn
         let topBarHtml = `
             <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; padding-bottom:14px; margin-bottom:16px; border-bottom:1px solid var(--border-light);">
                 <div>
@@ -2223,7 +3018,7 @@
             let diffItemsHtml = '';
             if (changes.length === 0) {
                 diffItemsHtml = `
-                    <div style="text-align:center; padding:36px 16px; background:#f8fafc; border-radius:10px; border:1px dashed #cbd5e1; color:#64748b;">
+                    <div style="text-align:center; padding:36px 16px; background:rgba(255,255,255,0.45); border-radius:12px; border:1px dashed rgba(148,163,184,0.6); color:#64748b;">
                         ✔️ Không có sự thay đổi dữ liệu nào giữa hai phiên bản này.
                     </div>
                 `;
@@ -2250,7 +3045,7 @@
             }
 
             body.innerHTML = topBarHtml + `
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; background:#f8fafc; padding:10px 12px; border-radius:8px; border:1px solid var(--border-light);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; background:rgba(255,255,255,0.52); padding:10px 12px; border-radius:12px; border:1px solid var(--border-light);">
                     <span style="font-size:12.5px; font-weight:600; color:var(--text-secondary);">${compareLabel}</span>
                     <div style="display:flex; gap:6px;">
                         <button type="button" class="btn btn-small ${diffCompareMode === 'previous' ? 'btn-primary' : ''}" onclick="setDiffCompareMode('previous')">
@@ -2317,7 +3112,7 @@
                     <span style="font-size:12px; font-weight:700; color:var(--text-muted);">Nội dung JSON đầy đủ của bản lưu (${formatDateVN(snap.dateKey)}):</span>
                     <button class="btn btn-small" onclick="copySnapshotJson('${snap.id}')">📋 Sao chép JSON</button>
                 </div>
-                <pre style="background:#0f172a; color:#e2e8f0; padding:14px; border-radius:8px; font-size:12px; max-height:480px; overflow:auto; margin:0;">${escapeHtml(jsonPretty)}</pre>
+                <pre style="background:rgba(15,23,42,0.88); color:#e2e8f0; padding:14px; border-radius:12px; font-size:12px; max-height:480px; overflow:auto; margin:0;">${escapeHtml(jsonPretty)}</pre>
             `;
         }
     }
@@ -2363,7 +3158,6 @@
     window.restoreSnapshotById = function(id) {
         const snap = snapshots.find(s => s.id === id);
         if (!snap) return;
-        // Tự động tạo 1 bản lưu an toàn của trạng thái hiện tại trước khi khôi phục
         const now = new Date();
         const todayKey = now.toISOString().slice(0, 10);
         const hhmm = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
@@ -2543,9 +3337,9 @@
                     if (!record.isPaid) totalAccumulatedInterest += Number(record.amount) || 0;
 
                     monthsHtml += `
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:5px 8px; border-radius:6px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                        <div style="background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.88); padding:5px 8px; border-radius:8px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
                             <span style="font-weight:700; color:#334155; font-size:12px; white-space:nowrap;">Tháng ${mKey}</span>
-                            <input type="number" value="${record.amount}" min="0" onchange="updateMonthInterest(${index}, '${mKey}', this.value)" style="width:95px; height:26px; padding:2px 6px; border:1px solid #cbd5e1; border-radius:5px; font-weight:700; color:#e11d48; text-align:right; font-size:12.5px;">
+                            <input type="number" value="${record.amount}" min="0" onchange="updateMonthInterest(${index}, '${mKey}', this.value)" style="width:95px; height:26px; padding:2px 6px; border:1px solid rgba(255,255,255,0.9); background:rgba(255,255,255,0.85); border-radius:6px; font-weight:700; color:#e11d48; text-align:right; font-size:12.5px;">
                             <label style="cursor:pointer; display:flex; align-items:center; gap:4px; font-size:11.5px; font-weight:600; white-space:nowrap; color:${record.isPaid ? '#059669' : '#64748b'};">
                                 <input type="checkbox" ${record.isPaid ? 'checked' : ''} onchange="toggleMonthInterest(${index}, '${mKey}')">
                                 ${record.isPaid ? 'Đã trả' : 'Chưa trả'}
@@ -2571,7 +3365,7 @@
                         <td>
                             <div style="max-height:140px; overflow-y:auto; padding-right:2px; margin-bottom:6px;">${monthsHtml}</div>
                             <div style="display:flex; gap:6px; align-items:center;">
-                                <input type="month" id="new-month-input-${index}" value="${currentDate.toISOString().slice(0, 7)}" style="height:26px; font-size:11.5px; border:1px solid #cbd5e1; border-radius:5px; padding:0 6px;">
+                                <input type="month" id="new-month-input-${index}" value="${currentDate.toISOString().slice(0, 7)}" style="height:26px; font-size:11.5px; border:1px solid rgba(255,255,255,0.9); background:rgba(255,255,255,0.8); border-radius:6px; padding:0 6px;">
                                 <button class="btn btn-small btn-debt" onclick="addNewMonthForDebt(${index})" style="flex:1; height:26px; font-size:11.5px;">+ Thêm tháng</button>
                             </div>
                         </td>
@@ -2596,22 +3390,22 @@
             <div class="kpi-card" style="border-left:4px solid #64748b;">
                 <div class="kpi-header"><span>Tổng Gốc Ban Đầu</span><i class="fa-solid fa-landmark"></i></div>
                 <div class="kpi-value">${formatCurrency(totalOriginal)}</div>
-                <div class="kpi-sub">${workData.debts.length} khoản vay</div>
+                <div class="kpi-sub"><span>${workData.debts.length} khoản vay</span></div>
             </div>
             <div class="kpi-card kpi-net-pos">
                 <div class="kpi-header"><span>Đã Trả (Tiền Gốc)</span><i class="fa-solid fa-circle-check" style="color:var(--primary)"></i></div>
                 <div class="kpi-value" style="color:var(--primary);">${formatCurrency(totalPaidPrincipalAll)}</div>
-                <div class="kpi-sub">Đã tất toán một phần</div>
+                <div class="kpi-sub"><span>Đã tất toán một phần</span></div>
             </div>
             <div class="kpi-card" style="border-left:4px solid var(--debt);">
                 <div class="kpi-header"><span>Dư Nợ Gốc Còn Lại</span><i class="fa-solid fa-triangle-exclamation" style="color:var(--debt)"></i></div>
                 <div class="kpi-value" style="color:var(--debt);">${formatCurrency(totalRemaining)}</div>
-                <div class="kpi-sub">Cần thanh toán</div>
+                <div class="kpi-sub"><span>Cần thanh toán</span></div>
             </div>
             <div class="kpi-card kpi-expense">
                 <div class="kpi-header"><span>Lãi Chưa Trả (Cộng Dồn)</span><i class="fa-solid fa-fire-flame-curved" style="color:var(--expense)"></i></div>
                 <div class="kpi-value" style="color:var(--expense);">${formatCurrency(totalAccumulatedInterest)}</div>
-                <div class="kpi-sub">Tổng lãi các tháng chưa đóng</div>
+                <div class="kpi-sub"><span>Tổng lãi các tháng chưa đóng</span></div>
             </div>
         `;
     }
@@ -2738,7 +3532,19 @@
     };
 
     // ================= MATERIALS MINDMAP LOGIC =================
+    function calculateMaterialNodeCost(node) {
+        const ownQty = Number(node.qty) || 0;
+        const ownPrice = Number(node.price) || 0;
+        const ownCost = ownQty * ownPrice;
+        const children = node.children || [];
+        const childrenCost = children.reduce((sum, c) => sum + calculateMaterialNodeCost(c), 0);
+        return ownCost + childrenCost;
+    }
+
     function renderMaterialView() {
+        const grandTotal = (workData.materialRoots || []).reduce((sum, r) => sum + calculateMaterialNodeCost(r), 0);
+        const totalPill = document.getElementById('material-grand-total-pill');
+        if (totalPill) totalPill.textContent = `Tổng dự toán: ${formatCurrency(grandTotal)}`;
         renderMaterialOutline();
         renderMaterialMindMap();
     }
@@ -2759,6 +3565,25 @@
         const children = node.children || [];
         const hasChildren = children.length > 0;
         const isExpanded = node.expanded;
+        const subTotal = calculateMaterialNodeCost(node);
+        const qty = Number(node.qty) || 0;
+        const price = Number(node.price) || 0;
+
+        let statusBadge = '';
+        if (node.status === 'bought') {
+            statusBadge = `<span class="tw-text-[10px] tw-font-bold tw-px-1.5 tw-py-0.5 tw-rounded tw-bg-emerald-100 tw-text-emerald-800">✅ Đã mua</span>`;
+        } else if (node.status === 'pending') {
+            statusBadge = `<span class="tw-text-[10px] tw-font-bold tw-px-1.5 tw-py-0.5 tw-rounded tw-bg-amber-100 tw-text-amber-800">⏳ Cần mua</span>`;
+        }
+
+        let metaSpec = '';
+        if (qty > 0 || price > 0) {
+            metaSpec = `<div class="tw-text-[11px] tw-text-slate-600 tw-font-semibold tw-mt-1 tw-pl-1 num-tabular">
+                SL: <strong>${qty} ${escapeHtml(node.unit || '')}</strong> × ${formatCurrency(price)} = <strong class="tw-text-emerald-700">${formatCurrency(qty * price)}</strong>
+            </div>`;
+        } else if (subTotal > 0 && hasChildren) {
+            metaSpec = `<div class="tw-text-[11px] tw-text-emerald-700 tw-font-bold tw-mt-1 tw-pl-1 num-tabular">Tổng nhánh: ${formatCurrency(subTotal)}</div>`;
+        }
 
         let childrenHtml = '';
         if (isExpanded && hasChildren) {
@@ -2772,13 +3597,14 @@
         return `
             <div class="tw-bg-white tw-border tw-border-slate-200 tw-rounded-lg tw-p-2.5 tw-shadow-2xs">
                 <div class="tw-flex tw-items-center tw-justify-between tw-gap-2">
-                    <div class="tw-flex tw-items-center tw-gap-1.5 tw-min-w-0">
+                    <div class="tw-flex tw-items-center tw-gap-1.5 tw-min-w-0 tw-flex-wrap">
                         ${hasChildren ? `
                             <button onclick="toggleMaterialExpand('${node.id}')" class="tw-w-5 tw-h-5 tw-rounded tw-bg-slate-100 tw-text-slate-700 tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-border-0 tw-cursor-pointer">
                                 <i class="fa-solid fa-chevron-right tw-transition-transform ${isExpanded ? 'tw-rotate-90' : ''}"></i>
                             </button>
                         ` : `<span class="tw-text-[10px] tw-font-bold tw-text-slate-400 tw-px-1">${numbering}</span>`}
                         <span onclick="openMaterialEditModal('${node.id}')" class="tw-text-xs tw-font-bold tw-text-slate-800 tw-cursor-pointer hover:tw-text-emerald-600">${escapeHtml(node.text)}</span>
+                        ${statusBadge}
                     </div>
                     <div class="tw-flex tw-items-center tw-gap-1 tw-shrink-0">
                         <button onclick="openMaterialChildModal('${node.id}')" class="tw-px-2 tw-py-0.5 tw-bg-emerald-600 hover:tw-bg-emerald-700 tw-text-white tw-rounded tw-text-[11px] tw-border-0 tw-cursor-pointer" title="Thêm nhánh con">+</button>
@@ -2786,6 +3612,7 @@
                         <button onclick="deleteMaterialNode('${node.id}')" class="tw-px-2 tw-py-0.5 tw-bg-rose-50 hover:tw-bg-rose-100 tw-text-rose-600 tw-rounded tw-text-[11px] tw-border-0 tw-cursor-pointer">✖</button>
                     </div>
                 </div>
+                ${metaSpec}
                 ${node.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-mt-1 tw-pl-1">${escapeHtml(node.notes)}</div>` : ''}
                 ${childrenHtml}
             </div>
@@ -2811,6 +3638,7 @@
         const hasChildren = children.length > 0;
         const isExpanded = root.expanded;
         const domId = `mm-root-${root.id}`;
+        const rootCost = calculateMaterialNodeCost(root);
 
         let childrenHtml = '';
         if (isExpanded && hasChildren) {
@@ -2823,7 +3651,7 @@
 
         return `
             <div class="tw-flex tw-items-center tw-gap-10 tw-py-3 tw-border-b tw-border-slate-200 last:tw-border-none">
-                <div id="${domId}" data-stroke="#059669" class="tw-bg-white tw-border-2 tw-border-emerald-600 tw-shadow-sm tw-w-[240px] tw-p-3 tw-rounded-xl tw-relative">
+                <div id="${domId}" data-stroke="#059669" class="tw-bg-white tw-border-2 tw-border-emerald-600 tw-shadow-sm tw-w-[245px] tw-p-3 tw-rounded-xl tw-relative">
                     <div class="tw-flex tw-items-center tw-justify-between tw-mb-1.5">
                         <span class="tw-text-[10px] tw-font-extrabold tw-bg-emerald-600 tw-text-white tw-px-2 tw-py-0.5 tw-rounded">HẠNG MỤC #${rootNum}</span>
                         <div class="tw-flex tw-gap-1">
@@ -2833,6 +3661,7 @@
                         </div>
                     </div>
                     <div onclick="openMaterialEditModal('${root.id}')" class="tw-font-bold tw-text-xs sm:tw-text-sm tw-text-slate-900 tw-cursor-pointer">${escapeHtml(root.text)}</div>
+                    ${rootCost > 0 ? `<div class="tw-text-[11px] tw-font-extrabold tw-text-emerald-700 tw-mt-1 num-tabular">💰 Dự toán: ${formatCurrency(rootCost)}</div>` : ''}
                     ${root.notes ? `<div class="tw-text-[11px] tw-text-slate-500 tw-mt-1">${escapeHtml(root.notes)}</div>` : ''}
                     ${hasChildren ? `
                         <button onclick="toggleMaterialExpand('${root.id}')" class="tw-absolute -tw-right-3 tw-top-1/2 -tw-translate-y-1/2 tw-w-6 tw-h-6 tw-rounded-full ${isExpanded ? 'tw-bg-emerald-600 tw-text-white' : 'tw-bg-amber-500 tw-text-slate-950'} tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-shadow tw-border-0 tw-cursor-pointer">
@@ -2850,6 +3679,12 @@
         const hasChildren = children.length > 0;
         const isExpanded = node.expanded;
         const domId = `mm-node-${node.id}`;
+        const nodeCost = calculateMaterialNodeCost(node);
+        const qty = Number(node.qty) || 0;
+
+        let statusDot = '';
+        if (node.status === 'bought') statusDot = `<span class="tw-text-[10px] tw-font-bold tw-text-emerald-700">✅ Đã mua</span>`;
+        else if (node.status === 'pending') statusDot = `<span class="tw-text-[10px] tw-font-bold tw-text-amber-700">⏳ Cần mua</span>`;
 
         let childrenHtml = '';
         if (isExpanded && hasChildren) {
@@ -2862,9 +3697,10 @@
 
         return `
             <div class="tw-flex tw-items-center tw-gap-10 tw-py-0.5">
-                <div id="${domId}" data-parent="${parentDomId}" data-stroke="#059669" class="tw-bg-white tw-border-l-4 tw-border-emerald-500 tw-border tw-border-slate-200 tw-shadow-2xs tw-w-[210px] tw-p-2.5 tw-rounded-lg tw-relative">
+                <div id="${domId}" data-parent="${parentDomId}" data-stroke="#059669" class="tw-bg-white tw-border-l-4 tw-border-emerald-500 tw-border tw-border-slate-200 tw-shadow-2xs tw-w-[220px] tw-p-2.5 tw-rounded-lg tw-relative">
                     <div class="tw-flex tw-items-center tw-justify-between tw-mb-1">
                         <span class="tw-text-[10px] tw-font-bold tw-bg-slate-100 tw-text-slate-700 tw-px-1.5 tw-rounded">${numbering}</span>
+                        ${statusDot}
                         <div class="tw-flex tw-gap-1">
                             <button onclick="openMaterialChildModal('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-emerald-600 tw-text-white tw-rounded tw-text-[10px] tw-border-0 tw-cursor-pointer">+</button>
                             <button onclick="openMaterialEditModal('${node.id}')" class="tw-w-5 tw-h-5 tw-bg-slate-100 tw-text-slate-700 tw-border-0 tw-rounded tw-text-[10px] tw-cursor-pointer">✎</button>
@@ -2872,6 +3708,8 @@
                         </div>
                     </div>
                     <div onclick="openMaterialEditModal('${node.id}')" class="tw-font-semibold tw-text-xs tw-text-slate-800 tw-cursor-pointer">${escapeHtml(node.text)}</div>
+                    ${qty > 0 ? `<div class="tw-text-[10.5px] tw-text-slate-600 tw-mt-0.5 num-tabular">SL: <strong>${qty} ${escapeHtml(node.unit || '')}</strong></div>` : ''}
+                    ${nodeCost > 0 ? `<div class="tw-text-[10.5px] tw-font-bold tw-text-emerald-700 tw-mt-0.5 num-tabular">${formatCurrency(nodeCost)}</div>` : ''}
                     ${node.notes ? `<div class="tw-text-[10px] tw-text-slate-500 tw-mt-0.5">${escapeHtml(node.notes)}</div>` : ''}
                     ${hasChildren ? `
                         <button onclick="toggleMaterialExpand('${node.id}')" class="tw-absolute -tw-right-3 tw-top-1/2 -tw-translate-y-1/2 tw-w-6 tw-h-6 tw-rounded-full ${isExpanded ? 'tw-bg-emerald-600 tw-text-white' : 'tw-bg-amber-500 tw-text-slate-950'} tw-flex tw-items-center tw-justify-center tw-text-[10px] tw-font-bold tw-shadow tw-border-0 tw-cursor-pointer">
@@ -2937,6 +3775,10 @@
         document.getElementById('mat-modal-mode').value = 'add-root';
         document.getElementById('material-modal-title').textContent = '➕ Thêm Hạng Mục / Công Trình Gốc';
         document.getElementById('mat-node-text').value = '';
+        document.getElementById('mat-node-qty').value = '';
+        document.getElementById('mat-node-unit').value = '';
+        document.getElementById('mat-node-price').value = '';
+        document.getElementById('mat-node-status').value = '';
         document.getElementById('mat-node-notes').value = '';
         materialModal.style.display = 'flex';
     };
@@ -2946,6 +3788,10 @@
         document.getElementById('mat-modal-mode').value = 'add-child';
         document.getElementById('material-modal-title').textContent = '➕ Thêm Nhánh Vật Tư Con';
         document.getElementById('mat-node-text').value = '';
+        document.getElementById('mat-node-qty').value = '';
+        document.getElementById('mat-node-unit').value = '';
+        document.getElementById('mat-node-price').value = '';
+        document.getElementById('mat-node-status').value = 'pending';
         document.getElementById('mat-node-notes').value = '';
         materialModal.style.display = 'flex';
     };
@@ -2957,6 +3803,10 @@
         document.getElementById('mat-modal-mode').value = 'edit';
         document.getElementById('material-modal-title').textContent = '✎ Chỉnh Sửa Vật Tư';
         document.getElementById('mat-node-text').value = item.text;
+        document.getElementById('mat-node-qty').value = item.qty || '';
+        document.getElementById('mat-node-unit').value = item.unit || '';
+        document.getElementById('mat-node-price').value = item.price || '';
+        document.getElementById('mat-node-status').value = item.status || '';
         document.getElementById('mat-node-notes').value = item.notes || '';
         materialModal.style.display = 'flex';
     };
@@ -2967,13 +3817,17 @@
         const mode = document.getElementById('mat-modal-mode').value;
         const targetId = document.getElementById('mat-modal-target-id').value;
         const text = document.getElementById('mat-node-text').value.trim();
+        const qty = Number(document.getElementById('mat-node-qty').value) || 0;
+        const unit = document.getElementById('mat-node-unit').value.trim();
+        const price = Number(document.getElementById('mat-node-price').value) || 0;
+        const status = document.getElementById('mat-node-status').value;
         const notes = document.getElementById('mat-node-notes').value.trim();
         if (!text) { showToast('Vui lòng nhập tên vật tư / công việc!', 'error'); return; }
 
         if (mode === 'add-root') {
             workData.materialRoots.push({
                 id: 'mroot-' + Date.now(),
-                text, notes, color: 'emerald', expanded: true, children: []
+                text, qty, unit, price, status, notes, color: 'emerald', expanded: true, children: []
             });
         } else if (mode === 'add-child') {
             const parent = findMaterialItem(targetId);
@@ -2981,13 +3835,20 @@
                 if (!parent.children) parent.children = [];
                 parent.children.push({
                     id: 'mn-' + Date.now(),
-                    text, notes, color: parent.color || 'emerald', expanded: true, children: []
+                    text, qty, unit, price, status, notes, color: parent.color || 'emerald', expanded: true, children: []
                 });
                 parent.expanded = true;
             }
         } else if (mode === 'edit') {
             const item = findMaterialItem(targetId);
-            if (item) { item.text = text; item.notes = notes; }
+            if (item) {
+                item.text = text;
+                item.qty = qty;
+                item.unit = unit;
+                item.price = price;
+                item.status = status;
+                item.notes = notes;
+            }
         }
 
         autoSaveData(false);
@@ -3083,19 +3944,50 @@
         const d = String(actualDate.getDate()).padStart(2, '0');
         const dateString = `${y}-${m}-${d}`;
 
+        const data = workData[dateString];
+        let dailyIncomeTotal = 0;
+        if (data && data.incomes && Array.isArray(data.incomes)) dailyIncomeTotal = data.incomes.reduce((s, i) => s + Number(i.amount), 0);
+
+        let dailyExpenseTotal = 0;
+        if (data && data.expenses && Array.isArray(data.expenses)) dailyExpenseTotal = data.expenses.reduce((s, i) => s + Number(i.amount), 0);
+
+        let dailyLoanTotal = 0;
+        let allLoansRepaid = true;
+        if (data && data.loans && Array.isArray(data.loans) && data.loans.length > 0) {
+            dailyLoanTotal = data.loans.reduce((s, i) => s + Number(i.amount), 0);
+            allLoansRepaid = data.loans.every(i => i.isPaid);
+        }
+
+        // Kiểm tra bộ lọc thông minh trên lịch
+        let matchesFilter = true;
+        if (!isOtherMonth && activeCalendarFilter !== 'all') {
+            if (activeCalendarFilter === 'income') matchesFilter = dailyIncomeTotal > 0;
+            else if (activeCalendarFilter === 'expense') matchesFilter = dailyExpenseTotal > 0;
+            else if (activeCalendarFilter === 'ot') matchesFilter = Boolean(data && data.isOvertime && data.type !== 'off' && data.type !== 'none');
+            else if (activeCalendarFilter === 'loan') matchesFilter = dailyLoanTotal > 0 && !allLoansRepaid;
+        }
+
         const div = document.createElement('div');
-        div.className = `day ${isOtherMonth ? 'other-month' : ''} ${isToday ? 'today' : ''}`;
+        div.className = `day ${isOtherMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${!matchesFilter ? 'dimmed-by-filter' : ''}`;
         
         const dayHeader = document.createElement('div');
         dayHeader.className = 'day-header';
+
+        const numWrap = document.createElement('div');
+        numWrap.className = 'day-number-wrap';
         const dayNum = document.createElement('div');
         dayNum.className = 'day-number';
         dayNum.textContent = actualDate.getDate();
-        dayHeader.appendChild(dayNum);
+        numWrap.appendChild(dayNum);
 
-        const data = workData[dateString];
+        const quickAddIcon = document.createElement('span');
+        quickAddIcon.className = 'day-quick-add';
+        quickAddIcon.textContent = '+';
+        quickAddIcon.title = 'Ghi chép ngày này';
+        numWrap.appendChild(quickAddIcon);
 
-        // Hiển thị nhãn Ca làm việc ngay trên góc phải của Header ô ngày
+        dayHeader.appendChild(numWrap);
+
         if (data && data.type && data.type !== 'none') {
             const shiftBadge = document.createElement('span');
             if (data.type === 'full') {
@@ -3117,21 +4009,7 @@
         div.appendChild(dayHeader);
 
         if (data) {
-            let dailyIncomeTotal = 0;
-            if (data.incomes && Array.isArray(data.incomes)) dailyIncomeTotal = data.incomes.reduce((s, i) => s + Number(i.amount), 0);
-
-            let dailyExpenseTotal = 0;
-            if (data.expenses && Array.isArray(data.expenses)) dailyExpenseTotal = data.expenses.reduce((s, i) => s + Number(i.amount), 0);
-
-            let dailyLoanTotal = 0;
-            let allLoansRepaid = true;
-            if (data.loans && Array.isArray(data.loans) && data.loans.length > 0) {
-                dailyLoanTotal = data.loans.reduce((s, i) => s + Number(i.amount), 0);
-                allLoansRepaid = data.loans.every(i => i.isPaid);
-            }
-
             const taskList = getTaskList(data);
-
             const slotDiv = document.createElement('div');
             slotDiv.className = 'work-status-container';
             
@@ -3152,7 +4030,7 @@
             if (taskList.length > 0) {
                 const maxPreview = 2;
                 let tasksHtml = taskList.slice(0, maxPreview).map(t => `<div class="job-task-item">• ${escapeHtml(t)}</div>`).join('');
-                if (taskList.length > maxPreview) tasksHtml += `<div style="font-size:10px; color:#64748b; font-weight:600;">+${taskList.length - maxPreview} việc khác</div>`;
+                if (taskList.length > maxPreview) tasksHtml += `<div style="font-size:10px; color:#64748b; font-weight:700;">+${taskList.length - maxPreview} việc khác</div>`;
                 html += `<div class="job-content-preview">${tasksHtml}</div>`;
             }
 
@@ -3184,6 +4062,7 @@
         let monthlyExpense = 0, weeklyExpenses = {}, categoryExpenses = {};
         let monthlyLoans = [], totalLoanUnpaid = 0, totalLoanPaid = 0;
         let monthlyTasks = [];
+        let activeFinDays = 0;
 
         for (let i = 1; i <= daysInMonth; i++) {
             const m = String(month + 1).padStart(2, '0');
@@ -3205,6 +4084,7 @@
                     stats.totalOtHours += calculateHours(data.startTime, data.endTime);
                 }
 
+                let hasDayFin = false;
                 if (data.incomes && Array.isArray(data.incomes)) {
                     data.incomes.forEach(inc => {
                         const amount = Number(inc.amount) || 0;
@@ -3212,6 +4092,7 @@
                             monthlyIncome += amount;
                             weeklyIncomes[`Tuần ${weekNum}`] += amount;
                             categoryIncomes[inc.name] = (categoryIncomes[inc.name] || 0) + amount;
+                            hasDayFin = true;
                         }
                     });
                 }
@@ -3223,9 +4104,11 @@
                             monthlyExpense += amount;
                             weeklyExpenses[`Tuần ${weekNum}`] += amount;
                             categoryExpenses[exp.name] = (categoryExpenses[exp.name] || 0) + amount;
+                            hasDayFin = true;
                         }
                     });
                 }
+                if (hasDayFin) activeFinDays++;
 
                 if (data.loans && Array.isArray(data.loans)) {
                     data.loans.forEach((ln, lnIdx) => {
@@ -3247,47 +4130,141 @@
         const balanceSign = netBalance > 0 ? '+' : '';
         const totalWorkUnits = stats.full.length + (stats.halfAm.length + stats.halfPm.length) * 0.5;
 
-        // Render Top KPI Strip (Đặt ngay phía trên Lịch để dễ nhìn nhất)
+        // Tỷ lệ Thu vs Chi thông minh
+        const totalFlow = monthlyIncome + monthlyExpense;
+        const incPercent = totalFlow > 0 ? Math.round((monthlyIncome / totalFlow) * 100) : 50;
+        const expPercent = totalFlow > 0 ? (100 - incPercent) : 50;
+        const savingRate = monthlyIncome > 0 ? Math.round(((monthlyIncome - monthlyExpense) / monthlyIncome) * 100) : 0;
+
+        // Tính lương dự kiến theo ngày công & giờ tăng ca (Smart Payroll)
+        const cfg = workData.settings || { dailyWage: 450000, otHourlyRate: 70000, monthlyBudgetLimit: 12000000 };
+        const dailyWage = Number(cfg.dailyWage) || 0;
+        const otRate = Number(cfg.otHourlyRate) || 0;
+        const budgetLimit = Number(cfg.monthlyBudgetLimit) || 0;
+        const estWorkSalary = Math.round(totalWorkUnits * dailyWage);
+        const estOtSalary = Math.round(stats.totalOtHours * otRate);
+        const estTotalPayroll = estWorkSalary + estOtSalary;
+
+        const budgetUsedPercent = budgetLimit > 0 ? Math.min(100, Math.round((monthlyExpense / budgetLimit) * 100)) : 0;
+        const budgetBarColor = budgetUsedPercent >= 100 ? 'linear-gradient(90deg, #e11d48, #be123c)' : (budgetUsedPercent >= 80 ? 'linear-gradient(90deg, #f59e0b, #d97706)' : 'linear-gradient(90deg, #10b981, #059669)');
+        const budgetStatusText = budgetLimit > 0
+            ? (monthlyExpense > budgetLimit
+                ? `⚠️ Vượt hạn mức ${formatCurrency(monthlyExpense - budgetLimit)}`
+                : `Còn dư hạn mức ${formatCurrency(budgetLimit - monthlyExpense)} (${budgetUsedPercent}%)`)
+            : 'Chưa đặt hạn mức chi tiêu';
+
         topKpiOverview.innerHTML = `
             <div class="kpi-section-grid">
                 <div class="kpi-card kpi-income">
-                    <div class="kpi-header"><span>💰 Tổng Thu Tháng ${month + 1}</span><i class="fa-solid fa-arrow-trend-up" style="color:var(--income)"></i></div>
+                    <div class="kpi-header">
+                        <span>Tổng Thu Tháng ${month + 1}</span>
+                        <div class="kpi-icon-box" style="background:var(--income-bg); color:var(--income);"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    </div>
                     <div class="kpi-value" style="color:var(--income);">+${formatCurrency(monthlyIncome)}</div>
-                    <div class="kpi-sub">${Object.keys(categoryIncomes).length} nguồn thu</div>
+                    <div class="kpi-sub">
+                        <span>${Object.keys(categoryIncomes).length} nguồn thu</span>
+                        <span>TB/công: ${totalWorkUnits > 0 ? formatCurrency(Math.round(monthlyIncome / totalWorkUnits)) : '0đ'}</span>
+                    </div>
                 </div>
                 <div class="kpi-card kpi-expense">
-                    <div class="kpi-header"><span>💸 Tổng Chi Tháng ${month + 1}</span><i class="fa-solid fa-arrow-trend-down" style="color:var(--expense)"></i></div>
+                    <div class="kpi-header">
+                        <span>Tổng Chi Tháng ${month + 1}</span>
+                        <div class="kpi-icon-box" style="background:var(--expense-bg); color:var(--expense);"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                    </div>
                     <div class="kpi-value" style="color:var(--expense);">-${formatCurrency(monthlyExpense)}</div>
-                    <div class="kpi-sub">${Object.keys(categoryExpenses).length} hạng mục chi</div>
+                    <div class="kpi-sub">
+                        <span>${Object.keys(categoryExpenses).length} hạng mục chi</span>
+                        <span>TB/ngày: ${formatCurrency(Math.round(monthlyExpense / daysInMonth))}</span>
+                    </div>
                 </div>
                 <div class="kpi-card kpi-loan">
-                    <div class="kpi-header"><span>🤝 Cho Mượn (Chưa Thu)</span><i class="fa-solid fa-hand-holding-dollar" style="color:var(--loan)"></i></div>
+                    <div class="kpi-header">
+                        <span>Cho Mượn (Chưa Thu)</span>
+                        <div class="kpi-icon-box" style="background:var(--loan-bg); color:var(--loan);"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    </div>
                     <div class="kpi-value" style="color:var(--loan);">${formatCurrency(totalLoanUnpaid)}</div>
-                    <div class="kpi-sub">Đã thu hồi: ${formatCurrency(totalLoanPaid)}</div>
+                    <div class="kpi-sub">
+                        <span>Đã thu hồi: ${formatCurrency(totalLoanPaid)}</span>
+                        <span>${monthlyLoans.length} khoản</span>
+                    </div>
                 </div>
                 <div class="kpi-card ${netBalance >= 0 ? 'kpi-net-pos' : 'kpi-net-neg'}">
-                    <div class="kpi-header"><span>⚖️ Số Dư Thực Tế (Thu - Chi)</span><i class="fa-solid fa-wallet" style="color:${balanceColor}"></i></div>
+                    <div class="kpi-header">
+                        <span>Số Dư Thực Tế (Thu - Chi)</span>
+                        <div class="kpi-icon-box" style="background:${netBalance >= 0 ? 'var(--primary-bg)' : 'var(--expense-bg)'}; color:${balanceColor};"><i class="fa-solid fa-wallet"></i></div>
+                    </div>
                     <div class="kpi-value" style="color:${balanceColor};">${balanceSign}${formatCurrency(netBalance)}</div>
-                    <div class="kpi-sub">Tổng công: <strong>${totalWorkUnits}</strong> ngày công</div>
+                    <div class="kpi-sub">
+                        <span>Tổng công: <strong>${totalWorkUnits}</strong> công</span>
+                        <span style="color:${savingRate >= 0 ? 'var(--primary-dark)' : 'var(--expense)'}; font-weight:700;">${monthlyIncome > 0 ? `Tích lũy ${savingRate}%` : ''}</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="work-stat-strip">
-                <div class="work-metric">
-                    <span class="work-metric-label">🌳 Làm cả ngày</span>
-                    <span class="work-metric-val">${stats.full.length} ngày</span>
+            <!-- Thanh Tính Lương Tự Động & Cảnh Báo Hạn Mức Ngân Sách -->
+            <div class="payroll-budget-strip">
+                <div class="liquid-subpanel">
+                    <div class="payroll-info-group">
+                        <div class="payroll-badge-icon"><i class="fa-solid fa-calculator"></i></div>
+                        <div>
+                            <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.4px;">
+                                Lương Tạm Tính Tháng ${month + 1} (${totalWorkUnits} công + ${parseFloat(stats.totalOtHours.toFixed(1))}h OT)
+                            </div>
+                            <div style="font-size:17px; font-weight:800; color:var(--primary-dark);" class="num-tabular">
+                                ${formatCurrency(estTotalPayroll)}
+                                <span style="font-size:11.5px; font-weight:600; color:var(--text-muted); margin-left:6px;">
+                                    (Công: ${formatCurrency(estWorkSalary)} • OT: ${formatCurrency(estOtSalary)})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:6px; align-items:center;">
+                        <button type="button" class="btn btn-small" onclick="openPayrollBudgetModal()" title="Chỉnh đơn giá công & giờ tăng ca">
+                            <i class="fa-solid fa-gear"></i> Đơn giá
+                        </button>
+                        <button type="button" class="btn btn-small btn-primary" onclick="recordEstimatedPayrollToToday(${estTotalPayroll}, ${month + 1})" title="Ghi nhận khoản lương tạm tính này vào Thu nhập">
+                            + Ghi vào Thu nhập
+                        </button>
+                    </div>
                 </div>
-                <div class="work-metric">
-                    <span class="work-metric-label">🌅 Làm nửa ngày</span>
-                    <span class="work-metric-val">${stats.halfAm.length + stats.halfPm.length} buổi</span>
+
+                <div class="liquid-subpanel" style="flex-direction:column; align-items:stretch; justify-content:center; gap:4px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:700;">
+                        <span style="color:var(--text-secondary);"><i class="fa-solid fa-shield-halved" style="color:var(--primary)"></i> Kiểm soát Hạn mức Chi tiêu</span>
+                        <span class="num-tabular" style="color:${budgetUsedPercent >= 100 ? 'var(--expense)' : 'var(--text-primary)'};">${budgetStatusText}</span>
+                    </div>
+                    <div class="budget-guard-track">
+                        <div class="budget-guard-fill" style="width:${budgetUsedPercent}%; background:${budgetBarColor};"></div>
+                    </div>
                 </div>
-                <div class="work-metric">
-                    <span class="work-metric-label">🏖️ Ngày nghỉ</span>
-                    <span class="work-metric-val">${stats.off.length} ngày</span>
+            </div>
+
+            <!-- Thanh phân tích sức khỏe dòng tiền thông minh -->
+            <div class="smart-health-bar">
+                <div class="cashflow-progress-wrap">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700;">
+                        <span style="color:var(--income);"><i class="fa-solid fa-circle-dot"></i> Tỷ trọng Thu (${incPercent}%)</span>
+                        <span style="color:var(--text-secondary);">Biểu đồ Cân đối Thu — Chi tháng ${month + 1}</span>
+                        <span style="color:var(--expense);">Tỷ trọng Chi (${expPercent}%) <i class="fa-solid fa-circle-dot"></i></span>
+                    </div>
+                    <div class="cashflow-track">
+                        <div class="cashflow-fill-inc" style="width:${incPercent}%"></div>
+                        <div class="cashflow-fill-exp" style="width:${expPercent}%"></div>
+                    </div>
                 </div>
-                <div class="work-metric">
-                    <span class="work-metric-label">⏰ Tổng giờ Tăng ca</span>
-                    <span class="work-metric-val" style="color:var(--primary-dark); border-color:var(--primary-border); background:var(--primary-bg);">${parseFloat(stats.totalOtHours.toFixed(2))} giờ</span>
+                <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12px; font-weight:600; color:var(--text-secondary);">
+                    <span style="background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); padding:4px 11px; border-radius:999px;">
+                        🌳 Cả ngày: <strong class="num-tabular">${stats.full.length}</strong>
+                    </span>
+                    <span style="background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); padding:4px 11px; border-radius:999px;">
+                        🌅 Nửa buổi: <strong class="num-tabular">${stats.halfAm.length + stats.halfPm.length}</strong>
+                    </span>
+                    <span style="background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); padding:4px 11px; border-radius:999px;">
+                        🏖️ Nghỉ: <strong class="num-tabular">${stats.off.length}</strong>
+                    </span>
+                    <span style="background:rgba(209,250,229,0.78); border:1px solid rgba(167,243,208,0.9); color:var(--primary-dark); padding:4px 11px; border-radius:999px;">
+                        ⏰ Tăng ca: <strong class="num-tabular">${parseFloat(stats.totalOtHours.toFixed(2))} giờ</strong>
+                    </span>
                 </div>
             </div>
         `;
@@ -3301,7 +4278,7 @@
                 hasWeekInc = true;
             }
         }
-        if(!hasWeekInc) weekIncHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản thu</span>`;
+        if(!hasWeekInc) weekIncHTML += `<span style="color:#64748b; font-size:12.5px;">Chưa có khoản thu</span>`;
         weekIncHTML += `</ul>`;
 
         let catIncHTML = `<ul class="stat-list">`;
@@ -3310,7 +4287,7 @@
             catIncHTML += `<li><span>${escapeHtml(cat)}</span> <strong style="color:var(--income);">+${formatCurrency(amount)}</strong></li>`;
             hasCatInc = true;
         }
-        if(!hasCatInc) catIncHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản thu</span>`;
+        if(!hasCatInc) catIncHTML += `<span style="color:#64748b; font-size:12.5px;">Chưa có khoản thu</span>`;
         catIncHTML += `</ul>`;
 
         // Danh sách chi tiết Chi tiêu
@@ -3322,7 +4299,7 @@
                 hasWeekExp = true;
             }
         }
-        if(!hasWeekExp) weekExpHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản chi</span>`;
+        if(!hasWeekExp) weekExpHTML += `<span style="color:#64748b; font-size:12.5px;">Chưa có khoản chi</span>`;
         weekExpHTML += `</ul>`;
 
         let catExpHTML = `<ul class="stat-list">`;
@@ -3331,7 +4308,7 @@
             catExpHTML += `<li><span>${escapeHtml(cat)}</span> <strong style="color:var(--expense);">-${formatCurrency(amount)}</strong></li>`;
             hasCatExp = true;
         }
-        if(!hasCatExp) catExpHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản chi</span>`;
+        if(!hasCatExp) catExpHTML += `<span style="color:#64748b; font-size:12.5px;">Chưa có khoản chi</span>`;
         catExpHTML += `</ul>`;
 
         // Danh sách Tiền cho mượn
@@ -3351,7 +4328,7 @@
                 `;
             });
         } else {
-            loanSummaryHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có khoản cho mượn nào trong tháng</span>`;
+            loanSummaryHTML += `<span style="color:#64748b; font-size:12.5px;">Chưa có khoản cho mượn nào trong tháng</span>`;
         }
         loanSummaryHTML += `</ul>`;
 
@@ -3367,11 +4344,10 @@
                 `;
             });
         } else {
-            taskSummaryHTML += `<span style="color:#94a3b8; font-size:12.5px;">Chưa có ghi chú công việc trong tháng</span>`;
+            taskSummaryHTML += `<span style="color:#64748b; font-size:12.5px;">Chưa có ghi chú công việc trong tháng</span>`;
         }
         taskSummaryHTML += `</ul>`;
 
-        // Render Lưới 2x2 Khoa học
         statsGrid.innerHTML = `
             <div class="analysis-grid-2x2">
                 <!-- Ô 1: Chi tiết Thu nhập -->
@@ -3449,6 +4425,57 @@
         `;
     }
 
+    // Tính tổng trực tiếp khi người dùng đang gõ trong Modal
+    function updateModalLiveTotals() {
+        let inc = 0, exp = 0;
+        document.querySelectorAll('.income-row .inc-amount').forEach(inp => inc += Number(inp.value) || 0);
+        document.querySelectorAll('.expense-row .exp-amount').forEach(inp => exp += Number(inp.value) || 0);
+        const net = inc - exp;
+
+        const incEl = document.getElementById('modal-live-inc');
+        const expEl = document.getElementById('modal-live-exp');
+        const netEl = document.getElementById('modal-live-net');
+        if (incEl) incEl.textContent = `+${formatCurrency(inc)}`;
+        if (expEl) expEl.textContent = `-${formatCurrency(exp)}`;
+        if (netEl) {
+            netEl.textContent = `${net > 0 ? '+' : ''}${formatCurrency(net)}`;
+            netEl.style.color = net >= 0 ? 'var(--primary)' : 'var(--expense)';
+        }
+    }
+
+    // Nút điền nhanh tên khoản thu / chi thông minh
+    window.quickFillRow = function(type, presetName) {
+        if (type === 'income') {
+            const rows = incomeListContainer.querySelectorAll('.income-row');
+            for (const r of rows) {
+                const nameInp = r.querySelector('.inc-name');
+                const amtInp = r.querySelector('.inc-amount');
+                if (!nameInp.value.trim()) {
+                    nameInp.value = presetName;
+                    amtInp.focus();
+                    return;
+                }
+            }
+            createIncomeRow(presetName, '');
+            const lastAmt = incomeListContainer.querySelector('.income-row:last-child .inc-amount');
+            if (lastAmt) lastAmt.focus();
+        } else if (type === 'expense') {
+            const rows = expenseListContainer.querySelectorAll('.expense-row');
+            for (const r of rows) {
+                const nameInp = r.querySelector('.exp-name');
+                const amtInp = r.querySelector('.exp-amount');
+                if (!nameInp.value.trim()) {
+                    nameInp.value = presetName;
+                    amtInp.focus();
+                    return;
+                }
+            }
+            createExpenseRow(presetName, '');
+            const lastAmt = expenseListContainer.querySelector('.expense-row:last-child .exp-amount');
+            if (lastAmt) lastAmt.focus();
+        }
+    };
+
     function openModal(dateStr) {
         selectedDateStr = dateStr;
         const [y, m, d] = dateStr.split('-');
@@ -3481,8 +4508,162 @@
             document.querySelector('input[value="full"]').checked = true;
             createIncomeRow(); createExpenseRow(); createLoanRow(); createTaskRow();
         }
+        const pasteBtn = document.getElementById('btn-paste-day');
+        if (pasteBtn) pasteBtn.style.display = copiedDayClipboard ? 'inline-flex' : 'none';
+        updateModalLiveTotals();
         modal.style.display = 'flex';
     }
+
+    // ================= TÍNH NĂNG MỚI: CÀI ĐẶT LƯƠNG, SAO CHÉP NGÀY & XUẤT EXCEL CSV =================
+    const payrollBudgetModal = document.getElementById('payroll-budget-modal');
+
+    window.openPayrollBudgetModal = function() {
+        const cfg = workData.settings || { dailyWage: 450000, otHourlyRate: 70000, monthlyBudgetLimit: 12000000 };
+        document.getElementById('cfg-daily-wage').value = cfg.dailyWage || 0;
+        document.getElementById('cfg-ot-rate').value = cfg.otHourlyRate || 0;
+        document.getElementById('cfg-monthly-budget').value = cfg.monthlyBudgetLimit || 0;
+        payrollBudgetModal.style.display = 'flex';
+    };
+
+    window.savePayrollBudgetSettings = function() {
+        workData.settings = {
+            dailyWage: Number(document.getElementById('cfg-daily-wage').value) || 0,
+            otHourlyRate: Number(document.getElementById('cfg-ot-rate').value) || 0,
+            monthlyBudgetLimit: Number(document.getElementById('cfg-monthly-budget').value) || 0
+        };
+        autoSaveData(false);
+        payrollBudgetModal.style.display = 'none';
+        renderCalendar();
+        showToast('⚙️ Đã cập nhật định mức lương & ngân sách tháng!');
+    };
+
+    window.recordEstimatedPayrollToToday = function(amount, monthNum) {
+        if (!amount || amount <= 0) {
+            showToast('Chưa có số công hoặc đơn giá lương để ghi nhận!', 'error');
+            return;
+        }
+        const todayStr = new Date().toISOString().slice(0, 10);
+        if (!workData[todayStr]) workData[todayStr] = { type: 'full', incomes: [], expenses: [], loans: [], tasks: [] };
+        if (!workData[todayStr].incomes) workData[todayStr].incomes = [];
+        workData[todayStr].incomes.push({
+            name: `Lương công & OT tháng ${monthNum}`,
+            amount: amount
+        });
+        autoSaveData(false);
+        renderCalendar();
+        showToast(`💰 Đã ghi nhận +${formatCurrency(amount)} vào thu nhập hôm nay!`);
+    };
+
+    window.copyCurrentDayData = function() {
+        const typeRadio = document.querySelector('input[name="work_type"]:checked');
+        const selectedType = typeRadio ? typeRadio.value : 'none';
+        const incomes = [];
+        document.querySelectorAll('.income-row').forEach(r => {
+            const name = r.querySelector('.inc-name').value.trim();
+            const amount = Number(r.querySelector('.inc-amount').value) || 0;
+            if (name || amount > 0) incomes.push({ name, amount });
+        });
+        const expenses = [];
+        document.querySelectorAll('.expense-row').forEach(r => {
+            const name = r.querySelector('.exp-name').value.trim();
+            const amount = Number(r.querySelector('.exp-amount').value) || 0;
+            if (name || amount > 0) expenses.push({ name, amount });
+        });
+        const tasks = [];
+        document.querySelectorAll('.task-row').forEach(r => {
+            const t = r.querySelector('.task-name').value.trim();
+            if (t) tasks.push(t);
+        });
+        copiedDayClipboard = {
+            type: selectedType,
+            isOvertime: checkOvertime.checked,
+            startTime: otStartInput.value,
+            endTime: otEndInput.value,
+            incomes,
+            expenses,
+            tasks
+        };
+        const pasteBtn = document.getElementById('btn-paste-day');
+        if (pasteBtn) pasteBtn.style.display = 'inline-flex';
+        showToast(`📋 Đã sao chép dữ liệu ngày ${formatDateVN(selectedDateStr)}!`);
+    };
+
+    window.pasteDayDataToModal = function() {
+        if (!copiedDayClipboard) return;
+        const targetRadio = document.querySelector(`input[name="work_type"][value="${copiedDayClipboard.type}"]`);
+        if (targetRadio) targetRadio.checked = true;
+        checkOvertime.checked = !!copiedDayClipboard.isOvertime;
+        timeRangeDiv.style.display = copiedDayClipboard.isOvertime ? 'flex' : 'none';
+        if (copiedDayClipboard.startTime) otStartInput.value = copiedDayClipboard.startTime;
+        if (copiedDayClipboard.endTime) otEndInput.value = copiedDayClipboard.endTime;
+
+        incomeListContainer.innerHTML = '';
+        if (copiedDayClipboard.incomes && copiedDayClipboard.incomes.length > 0) {
+            copiedDayClipboard.incomes.forEach(i => createIncomeRow(i.name, i.amount));
+        } else createIncomeRow();
+
+        expenseListContainer.innerHTML = '';
+        if (copiedDayClipboard.expenses && copiedDayClipboard.expenses.length > 0) {
+            copiedDayClipboard.expenses.forEach(e => createExpenseRow(e.name, e.amount));
+        } else createExpenseRow();
+
+        taskListContainer.innerHTML = '';
+        if (copiedDayClipboard.tasks && copiedDayClipboard.tasks.length > 0) {
+            copiedDayClipboard.tasks.forEach(t => createTaskRow(t));
+        } else createTaskRow();
+
+        updateModalLiveTotals();
+        showToast('📋 Đã dán dữ liệu vào biểu mẫu! Nhấn "Lưu dữ liệu" để hoàn tất.');
+    };
+
+    window.exportMonthlyCSV = function() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const mStr = String(month + 1).padStart(2, '0');
+        const shiftNames = { 'full': 'Làm cả ngày (1.0)', 'half-am': 'Nửa ngày Sáng (0.5)', 'half-pm': 'Nửa ngày Chiều (0.5)', 'off': 'Nghỉ làm (0)', 'none': 'Chỉ ghi chú' };
+
+        const rows = [
+            ['Ngày', 'Ca làm việc', 'Giờ tăng ca (OT)', 'Tổng Thu (VNĐ)', 'Chi tiết Thu', 'Tổng Chi (VNĐ)', 'Chi tiết Chi', 'Cho mượn (VNĐ)', 'Nội dung công việc']
+        ];
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const dStr = String(i).padStart(2, '0');
+            const dateKey = `${year}-${mStr}-${dStr}`;
+            const d = workData[dateKey];
+            if (!d) continue;
+
+            const otHours = (d.isOvertime && d.type !== 'off' && d.type !== 'none') ? calculateHours(d.startTime, d.endTime) : 0;
+            const incTotal = (d.incomes || []).reduce((s, x) => s + (Number(x.amount) || 0), 0);
+            const incDetail = (d.incomes || []).map(x => `${x.name}: ${x.amount}`).join('; ');
+            const expTotal = (d.expenses || []).reduce((s, x) => s + (Number(x.amount) || 0), 0);
+            const expDetail = (d.expenses || []).map(x => `${x.name}: ${x.amount}`).join('; ');
+            const loanTotal = (d.loans || []).reduce((s, x) => s + (Number(x.amount) || 0), 0);
+            const tasks = getTaskList(d).join('; ');
+
+            rows.push([
+                `${dStr}/${mStr}/${year}`,
+                shiftNames[d.type] || d.type || '',
+                otHours > 0 ? `${parseFloat(otHours.toFixed(2))}h (${d.startTime}-${d.endTime})` : '0',
+                incTotal,
+                incDetail,
+                expTotal,
+                expDetail,
+                loanTotal,
+                tasks
+            ]);
+        }
+
+        const csvContent = '\uFEFF' + rows.map(r => r.map(field => `"${String(field ?? '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Bao_Cao_FinWork_Thang_${mStr}_${year}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast(`📊 Đã xuất báo cáo Excel (.csv) Tháng ${month + 1}/${year}!`);
+    };
 
     document.getElementById('btn-cancel').onclick = () => { modal.style.display = 'none'; };
     
@@ -3536,13 +4717,14 @@
         autoSaveData(false);
         modal.style.display = 'none';
         renderCalendar();
-        showToast('Đã lưu dữ liệu ngày ' + selectedDateStr);
+        showToast('Đã lưu dữ liệu ngày ' + formatDateVN(selectedDateStr));
     };
 
     function createIncomeRow(n = '', a = '') {
         const row = document.createElement('div'); row.className = 'income-row';
         row.innerHTML = `<input type="text" class="inc-name" placeholder="Tên khoản thu (VD: Lương, Thưởng...)" value="${escapeHtml(n)}"><input type="number" class="inc-amount" placeholder="Số tiền (VNĐ)" min="0" value="${a}"><button type="button" class="btn btn-danger btn-remove-inc">✖</button>`;
-        row.querySelector('.btn-remove-inc').onclick = () => row.remove();
+        row.querySelector('.inc-amount').addEventListener('input', updateModalLiveTotals);
+        row.querySelector('.btn-remove-inc').onclick = () => { row.remove(); updateModalLiveTotals(); };
         incomeListContainer.appendChild(row);
     }
     btnAddIncome.onclick = () => createIncomeRow();
@@ -3550,7 +4732,8 @@
     function createExpenseRow(n = '', a = '') {
         const row = document.createElement('div'); row.className = 'expense-row';
         row.innerHTML = `<input type="text" class="exp-name" placeholder="Tên khoản chi (VD: Ăn uống, Xăng...)" value="${escapeHtml(n)}"><input type="number" class="exp-amount" placeholder="Số tiền (VNĐ)" min="0" value="${a}"><button type="button" class="btn btn-danger btn-remove-exp">✖</button>`;
-        row.querySelector('.btn-remove-exp').onclick = () => row.remove();
+        row.querySelector('.exp-amount').addEventListener('input', updateModalLiveTotals);
+        row.querySelector('.btn-remove-exp').onclick = () => { row.remove(); updateModalLiveTotals(); };
         expenseListContainer.appendChild(row);
     }
     btnAddExpense.onclick = () => createExpenseRow();
@@ -3671,6 +4854,7 @@
     ghModal.addEventListener('click', (e) => { if (e.target === ghModal) ghModal.style.display = 'none'; });
     debtModal.addEventListener('click', (e) => { if (e.target === debtModal) debtModal.style.display = 'none'; });
     materialModal.addEventListener('click', (e) => { if (e.target === materialModal) materialModal.style.display = 'none'; });
+    payrollBudgetModal.addEventListener('click', (e) => { if (e.target === payrollBudgetModal) payrollBudgetModal.style.display = 'none'; });
 
     checkAndRunDaily2359Catchup();
     start2359Scheduler();
