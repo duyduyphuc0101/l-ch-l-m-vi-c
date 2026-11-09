@@ -897,8 +897,8 @@
     "content": "Kéo cáp pc08\nThống kê dữ liệu cam trung an về việc có lên cam hay không"
   },
   "settings": {
-    "dailyWage": 450000,
-    "otHourlyRate": 70000,
-    "monthlyBudgetLimit": 12000000
+    "dailyWage": 0,
+    "otHourlyRate": 0,
+    "monthlyBudgetLimit": 0
   }
 }
