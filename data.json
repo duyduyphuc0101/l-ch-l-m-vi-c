@@ -834,7 +834,12 @@
     "isOvertime": false,
     "startTime": "",
     "endTime": "",
-    "incomes": [],
+    "incomes": [
+      {
+        "name": "Cơm",
+        "amount": 100000
+      }
+    ],
     "expenses": [
       {
         "name": "Xăng",
