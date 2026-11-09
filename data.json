@@ -850,7 +850,9 @@
       }
     ],
     "loans": [],
-    "tasks": [],
-    "content": ""
+    "tasks": [
+      "Kéo cáp pc08"
+    ],
+    "content": "Kéo cáp pc08"
   }
 }
