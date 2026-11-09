@@ -814,9 +814,18 @@
     "expenses": [
       {
         "name": "Nước",
-        "amount": 15000
+        "amount": 30000
+      },
+      {
+        "name": "Nước",
+        "amount": 10000
+      },
+      {
+        "name": "Cơm",
+        "amount": 60000
       }
     ],
+    "loans": [],
     "tasks": [],
     "content": ""
   },
