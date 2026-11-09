@@ -883,6 +883,10 @@
       {
         "name": "Nước ngọt",
         "amount": 25000
+      },
+      {
+        "name": "Hủ tiếu",
+        "amount": 22000
       }
     ],
     "loans": [],
