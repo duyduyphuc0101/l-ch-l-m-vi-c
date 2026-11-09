@@ -858,16 +858,7 @@
     "isOvertime": false,
     "startTime": "",
     "endTime": "",
-    "incomes": [
-      {
-        "name": "Lương công & OT tháng 11",
-        "amount": 2925000
-      },
-      {
-        "name": "Lương công & OT tháng 11",
-        "amount": 2925000
-      }
-    ],
+    "incomes": [],
     "expenses": [
       {
         "name": "Xăng",
