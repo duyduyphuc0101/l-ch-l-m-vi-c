@@ -714,8 +714,19 @@
     "isOvertime": false,
     "startTime": "",
     "endTime": "",
-    "incomes": [],
-    "expenses": [],
+    "incomes": [
+      {
+        "name": "Lương tháng 10",
+        "amount": 8000000
+      }
+    ],
+    "expenses": [
+      {
+        "name": "Ứng 1tr thay màn",
+        "amount": 1000000
+      }
+    ],
+    "loans": [],
     "tasks": [
       "Lắp điện mặt trời"
     ],
