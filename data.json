@@ -336,16 +336,6 @@
     ],
     "content": "- chỉnh cam trung an, cài máy tính nhà anh cao, khiên đồ pv01"
   },
-  "2026-10-18": {
-    "type": "off",
-    "isOvertime": false,
-    "startTime": "",
-    "endTime": "",
-    "incomes": [],
-    "expenses": [],
-    "tasks": [],
-    "content": ""
-  },
   "debts": [
     {
       "name": "ngân hàng",
@@ -361,6 +351,55 @@
       "deletedMonths": []
     }
   ],
+  "materialsRoots": [
+    {
+      "id": "mroot-1792768514481",
+      "text": "Đi nẹp vào tường",
+      "notes": "",
+      "color": "emerald",
+      "expanded": true,
+      "children": [
+        {
+          "id": "mnode-1792768523981",
+          "text": "vít bắn",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768536593",
+          "text": "tắt kê",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768543709",
+          "text": "búa",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        },
+        {
+          "id": "mnode-1792768548256",
+          "text": "thang",
+          "notes": "",
+          "expanded": true,
+          "children": []
+        }
+      ]
+    }
+  ],
+  "2026-10-18": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "tasks": [],
+    "content": ""
+  },
   "2026-10-19": {
     "type": "full",
     "isOvertime": false,
@@ -501,45 +540,6 @@
               "children": []
             }
           ]
-        }
-      ]
-    }
-  ],
-  "materialsRoots": [
-    {
-      "id": "mroot-1792768514481",
-      "text": "Đi nẹp vào tường",
-      "notes": "",
-      "color": "emerald",
-      "expanded": true,
-      "children": [
-        {
-          "id": "mnode-1792768523981",
-          "text": "vít bắn",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768536593",
-          "text": "tắt kê",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768543709",
-          "text": "búa",
-          "notes": "",
-          "expanded": true,
-          "children": []
-        },
-        {
-          "id": "mnode-1792768548256",
-          "text": "thang",
-          "notes": "",
-          "expanded": true,
-          "children": []
         }
       ]
     }
@@ -908,11 +908,22 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
+    "expenses": [
+      {
+        "name": "cơm trưa",
+        "amount": 30000
+      },
+      {
+        "name": "Nước đậu nành 3ly",
+        "amount": 30000
+      }
+    ],
     "loans": [],
     "tasks": [
-      "Khảo sát camera Trung An tại UBND phường Trung An"
+      "Khảo sát camera Trung An tại UBND phường Trung An",
+      "Kéo cáp công an tỉnh",
+      "làm báo cáo khảo sát camera trung an"
     ],
-    "content": "Khảo sát camera Trung An tại UBND phường Trung An"
+    "content": "Khảo sát camera Trung An tại UBND phường Trung An\nKéo cáp công an tỉnh\nlàm báo cáo khảo sát camera trung an"
   }
 }
