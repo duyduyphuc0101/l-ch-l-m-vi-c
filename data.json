@@ -909,7 +909,9 @@
     "incomes": [],
     "expenses": [],
     "loans": [],
-    "tasks": [],
-    "content": ""
+    "tasks": [
+      "Khảo sát camera Trung An tại UBND phường Trung An"
+    ],
+    "content": "Khảo sát camera Trung An tại UBND phường Trung An"
   }
 }
