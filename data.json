@@ -948,5 +948,21 @@
       "Phụ A. NAM  hàn cáp quang cầu rạch miễu"
     ],
     "content": "Kéo cáp quang cat\nPhụ A. NAM  hàn cáp quang cầu rạch miễu"
+  },
+  "2026-11-12": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Hồ sơ + ảnh",
+        "amount": 65000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
