@@ -932,7 +932,12 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
+    "expenses": [
+      {
+        "name": "Cơm",
+        "amount": 56000
+      }
+    ],
     "loans": [],
     "tasks": [
       "Kéo cáp quang cat",
