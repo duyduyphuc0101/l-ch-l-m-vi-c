@@ -959,6 +959,10 @@
       {
         "name": "Hồ sơ + ảnh",
         "amount": 65000
+      },
+      {
+        "name": "Ăn uống / Cà phê",
+        "amount": 10000
       }
     ],
     "loans": [],
