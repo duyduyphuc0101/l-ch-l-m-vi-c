@@ -936,6 +936,10 @@
       {
         "name": "Cơm",
         "amount": 56000
+      },
+      {
+        "name": "Đổ xăng / Đi lại",
+        "amount": 70000
       }
     ],
     "loans": [],
