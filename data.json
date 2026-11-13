@@ -968,5 +968,21 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-13": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Khám sức khỏe",
+        "amount": 3872000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
