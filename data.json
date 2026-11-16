@@ -984,5 +984,21 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-15": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Đổ xăng / Đi lại",
+        "amount": 60000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
