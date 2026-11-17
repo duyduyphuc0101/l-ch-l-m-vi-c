@@ -1020,5 +1020,16 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-16": {
+    "type": "off",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
