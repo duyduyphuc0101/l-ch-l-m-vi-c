@@ -1036,5 +1036,21 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-17": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Ăn uống / Cà phê",
+        "amount": 50000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
