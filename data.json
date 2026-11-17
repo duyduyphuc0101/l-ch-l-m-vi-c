@@ -1027,7 +1027,12 @@
     "startTime": "",
     "endTime": "",
     "incomes": [],
-    "expenses": [],
+    "expenses": [
+      {
+        "name": "Đổ xăng / Đi lại",
+        "amount": 60000
+      }
+    ],
     "loans": [],
     "tasks": [],
     "content": ""
