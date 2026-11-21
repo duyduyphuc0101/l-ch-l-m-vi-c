@@ -1072,5 +1072,29 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-20": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Thuốc sưng chân răng",
+        "amount": 21000
+      },
+      {
+        "name": "Vá bánh xe",
+        "amount": 20000
+      },
+      {
+        "name": "Đưa mẹ",
+        "amount": 20000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
