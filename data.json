@@ -1096,5 +1096,29 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-22": {
+    "type": "full",
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Thuốc",
+        "amount": 24000
+      },
+      {
+        "name": "Chè",
+        "amount": 24000
+      },
+      {
+        "name": "Sữa chua",
+        "amount": 84000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
