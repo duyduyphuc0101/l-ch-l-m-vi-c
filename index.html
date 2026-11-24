@@ -1760,6 +1760,48 @@
             transition: width 0.35s ease;
         }
 
+        /* Khung chọn giờ chấm công chính */
+        .work-time-box {
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+        }
+        .work-time-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .work-time-row input[type="time"],
+        .work-time-row input[type="number"] {
+            height: 34px;
+            padding: 0 8px;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            font-family: inherit;
+            font-weight: 700;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.88);
+            outline: none;
+        }
+        .work-time-summary {
+            margin-left: auto;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            background: var(--primary-bg);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-variant-numeric: tabular-nums;
+        }
+
         /* ================= RESPONSIVE BREAKPOINTS ================= */
         @media (max-width: 1024px) {
             .kpi-section-grid, .work-stat-strip, .debt-dashboard, .payroll-budget-strip {
@@ -2110,13 +2152,30 @@
             </div>
         </div>
         
-        <span class="modal-section-label">1. Trạng thái chấm công</span>
+        <span class="modal-section-label">1. Trạng thái chấm công (Chọn giờ làm việc)</span>
         <div class="radio-group">
-            <label><input type="radio" name="work_type" value="full"> 🌳 Làm cả ngày</label>
-            <label><input type="radio" name="work_type" value="half-am"> 🌅 Nửa ngày (Sáng)</label>
-            <label><input type="radio" name="work_type" value="half-pm"> 🌇 Nửa ngày (Chiều)</label>
+            <label><input type="radio" name="work_type" value="working" checked> ⏱️ Đi làm (Chọn giờ)</label>
             <label><input type="radio" name="work_type" value="off"> 🏖️ Nghỉ làm</label>
-            <label class="full-width"><input type="radio" name="work_type" value="none"> 📝 Chỉ ghi Thu Chi / Công việc (Không tính công)</label>
+            <label><input type="radio" name="work_type" value="none"> 📝 Không tính công</label>
+        </div>
+
+        <div class="work-time-box" id="work-time-box">
+            <div class="work-time-row">
+                <span>Từ</span>
+                <input type="time" id="work-start" value="08:00">
+                <span>đến</span>
+                <input type="time" id="work-end" value="17:00">
+                <span>Nghỉ trưa (giờ):</span>
+                <input type="number" id="work-break" value="1" min="0" max="6" step="0.5" style="width:62px;">
+                <span class="work-time-summary" id="work-hours-preview">8 giờ (1 công)</span>
+            </div>
+            <div class="quick-preset-bar" style="margin-top:8px; margin-bottom:0;">
+                <span style="font-size:10.5px; color:var(--text-muted); font-weight:700;">Chọn nhanh:</span>
+                <button type="button" class="preset-chip" onclick="setQuickWorkTime('07:30','17:00',1.5)">Cả ngày (07:30-17:00)</button>
+                <button type="button" class="preset-chip" onclick="setQuickWorkTime('08:00','17:00',1)">Hành chính (08:00-17:00)</button>
+                <button type="button" class="preset-chip" onclick="setQuickWorkTime('07:30','11:30',0)">Ca Sáng (4h)</button>
+                <button type="button" class="preset-chip" onclick="setQuickWorkTime('13:00','17:00',0)">Ca Chiều (4h)</button>
+            </div>
         </div>
 
         <div class="overtime-section" id="ot-section">
@@ -2792,7 +2851,7 @@
         ]);
 
         const sortedDates = Array.from(allDateKeys).sort().reverse();
-        const shiftNames = { 'full': 'Làm cả ngày', 'half-am': 'Ca Sáng', 'half-pm': 'Ca Chiều', 'off': 'Nghỉ làm', 'none': 'Chỉ ghi chú' };
+        const shiftNames = { 'working': 'Đi làm (Theo giờ)', 'full': 'Làm cả ngày', 'half-am': 'Ca Sáng', 'half-pm': 'Ca Chiều', 'off': 'Nghỉ làm', 'none': 'Chỉ ghi chú' };
 
         sortedDates.forEach(dateKey => {
             const dOld = oldData ? oldData[dateKey] : null;
@@ -2822,8 +2881,10 @@
                 });
             } else if (dOld && dNew) {
                 const diffs = [];
-                if (dOld.type !== dNew.type) {
-                    diffs.push(`Ca làm: "${shiftNames[dOld.type] || dOld.type}" ➔ "${shiftNames[dNew.type] || dNew.type}"`);
+                if (dOld.type !== dNew.type || dOld.workStart !== dNew.workStart || dOld.workEnd !== dNew.workEnd || dOld.breakHours !== dNew.breakHours) {
+                    const oldLabel = dOld.type === 'working' ? `${dOld.workStart || ''}-${dOld.workEnd || ''} (${getWorkHoursOfDay(dOld)}h)` : (shiftNames[dOld.type] || dOld.type);
+                    const newLabel = dNew.type === 'working' ? `${dNew.workStart || ''}-${dNew.workEnd || ''} (${getWorkHoursOfDay(dNew)}h)` : (shiftNames[dNew.type] || dNew.type);
+                    diffs.push(`Giờ làm: "${oldLabel}" ➔ "${newLabel}"`);
                 }
                 if (Boolean(dOld.isOvertime) !== Boolean(dNew.isOvertime) || dOld.startTime !== dNew.startTime || dOld.endTime !== dNew.endTime) {
                     diffs.push(dNew.isOvertime ? `Tăng ca: ${dNew.startTime || ''}-${dNew.endTime || ''}` : `Đã tắt tăng ca`);
@@ -3063,17 +3124,20 @@
         } else if (currentInspectorTab === 'preview') {
             const dObj = snap.data || {};
             const dayKeys = Object.keys(dObj).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort().reverse();
-            const shiftMap = { 'full': '🌳 Làm cả ngày', 'half-am': '🌅 Ca Sáng', 'half-pm': '🌇 Ca Chiều', 'off': '🏖️ Nghỉ', 'none': '📝 Ghi chú' };
+            const shiftMap = { 'working': '⏱️ Đi làm', 'full': '🌳 Làm cả ngày', 'half-am': '🌅 Ca Sáng', 'half-pm': '🌇 Ca Chiều', 'off': '🏖️ Nghỉ', 'none': '📝 Ghi chú' };
 
             let daysRows = dayKeys.map(dk => {
                 const item = dObj[dk];
                 const inc = (item.incomes || []).map(i => `${i.name} (+${formatCurrency(i.amount)})`).join(', ');
                 const exp = (item.expenses || []).map(e => `${e.name} (-${formatCurrency(e.amount)})`).join(', ');
                 const tasks = (item.tasks || []).join(' • ');
+                const shiftDisplay = item.type === 'working'
+                    ? `⏱️ ${item.workStart || ''}-${item.workEnd || ''} (${getWorkHoursOfDay(item)}h)`
+                    : (shiftMap[item.type] || item.type || '');
                 return `
                     <tr>
                         <td style="font-weight:700; white-space:nowrap;">${formatDateVN(dk)}</td>
-                        <td>${shiftMap[item.type] || item.type || ''} ${item.isOvertime ? `(OT ${item.startTime}-${item.endTime})` : ''}</td>
+                        <td>${shiftDisplay} ${item.isOvertime ? `(OT ${item.startTime}-${item.endTime})` : ''}</td>
                         <td style="color:var(--income); font-weight:600;">${escapeHtml(inc) || '-'}</td>
                         <td style="color:var(--expense); font-weight:600;">${escapeHtml(exp) || '-'}</td>
                         <td>${escapeHtml(tasks) || '-'}</td>
@@ -3990,7 +4054,11 @@
 
         if (data && data.type && data.type !== 'none') {
             const shiftBadge = document.createElement('span');
-            if (data.type === 'full') {
+            const wHrs = getWorkHoursOfDay(data);
+            if (data.type === 'working') {
+                shiftBadge.className = wHrs >= 7 ? 'shift-pill shift-full' : 'shift-pill shift-half';
+                shiftBadge.textContent = `${data.workStart}-${data.workEnd} (${wHrs}h)`;
+            } else if (data.type === 'full') {
                 shiftBadge.className = 'shift-pill shift-full';
                 shiftBadge.textContent = data.isOvertime ? 'Cả ngày +OT' : 'Cả ngày';
             } else if (data.type === 'half-am') {
@@ -4056,8 +4124,62 @@
         return diff;
     }
 
+    const workTimeBox = document.getElementById('work-time-box');
+    const workStartInput = document.getElementById('work-start');
+    const workEndInput = document.getElementById('work-end');
+    const workBreakInput = document.getElementById('work-break');
+    const workHoursPreview = document.getElementById('work-hours-preview');
+
+    function calculateWorkHours(start, end, breakHours = 0) {
+        if (!start || !end) return 0;
+        const diff = calculateHours(start, end) - (Number(breakHours) || 0);
+        return Math.max(0, parseFloat(diff.toFixed(2)));
+    }
+
+    function getWorkHoursOfDay(data) {
+        if (!data || data.type === 'off' || data.type === 'none') return 0;
+        if (data.type === 'working') {
+            if (typeof data.workHours === 'number') return data.workHours;
+            return calculateWorkHours(data.workStart, data.workEnd, data.breakHours || 0);
+        }
+        // Tương thích dữ liệu cũ
+        if (data.type === 'full') return 8;
+        if (data.type === 'half-am' || data.type === 'half-pm') return 4;
+        return 0;
+    }
+
+    function updateWorkHoursPreview() {
+        const hrs = calculateWorkHours(workStartInput.value, workEndInput.value, workBreakInput.value);
+        const units = parseFloat((hrs / 8).toFixed(2));
+        if (workHoursPreview) workHoursPreview.textContent = `${hrs} giờ (${units} công)`;
+    }
+
+    window.setQuickWorkTime = function(start, end, brk) {
+        document.querySelector('input[name="work_type"][value="working"]').checked = true;
+        workStartInput.value = start;
+        workEndInput.value = end;
+        workBreakInput.value = brk;
+        syncWorkTypeUI();
+        updateWorkHoursPreview();
+    };
+
+    function syncWorkTypeUI() {
+        const typeRadio = document.querySelector('input[name="work_type"]:checked');
+        const isWorking = typeRadio && typeRadio.value === 'working';
+        if (workTimeBox) workTimeBox.style.display = isWorking ? 'block' : 'none';
+        const otSection = document.getElementById('ot-section');
+        if (otSection) otSection.style.display = isWorking ? 'flex' : 'none';
+    }
+
+    document.querySelectorAll('input[name="work_type"]').forEach(r => {
+        r.addEventListener('change', syncWorkTypeUI);
+    });
+    [workStartInput, workEndInput, workBreakInput].forEach(el => {
+        if (el) el.addEventListener('input', updateWorkHoursPreview);
+    });
+
     function updateStatistics(year, month, daysInMonth, firstDayOfMonth) {
-        let stats = { full: [], halfAm: [], halfPm: [], off: [], totalOtHours: 0 };
+        let stats = { workingDays: 0, totalWorkHours: 0, off: [], totalOtHours: 0 };
         let monthlyIncome = 0, weeklyIncomes = {}, categoryIncomes = {};
         let monthlyExpense = 0, weeklyExpenses = {}, categoryExpenses = {};
         let monthlyLoans = [], totalLoanUnpaid = 0, totalLoanPaid = 0;
@@ -4075,10 +4197,13 @@
 
             const data = workData[dateStr];
             if (data) {
-                if (data.type === 'full') stats.full.push(i);
-                else if (data.type === 'half-am') stats.halfAm.push(i);
-                else if (data.type === 'half-pm') stats.halfPm.push(i);
-                else if (data.type === 'off') stats.off.push(i);
+                const dayWorkHrs = getWorkHoursOfDay(data);
+                if (dayWorkHrs > 0) {
+                    stats.workingDays++;
+                    stats.totalWorkHours += dayWorkHrs;
+                } else if (data.type === 'off') {
+                    stats.off.push(i);
+                }
 
                 if (data.isOvertime && data.type !== 'off' && data.type !== 'none') {
                     stats.totalOtHours += calculateHours(data.startTime, data.endTime);
@@ -4128,7 +4253,7 @@
         const netBalance = monthlyIncome - monthlyExpense;
         const balanceColor = netBalance >= 0 ? 'var(--primary)' : 'var(--expense)';
         const balanceSign = netBalance > 0 ? '+' : '';
-        const totalWorkUnits = stats.full.length + (stats.halfAm.length + stats.halfPm.length) * 0.5;
+        const totalWorkUnits = parseFloat((stats.totalWorkHours / 8).toFixed(2));
 
         // Tỷ lệ Thu vs Chi thông minh
         const totalFlow = monthlyIncome + monthlyExpense;
@@ -4254,10 +4379,10 @@
                 </div>
                 <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:12px; font-weight:600; color:var(--text-secondary);">
                     <span style="background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); padding:4px 11px; border-radius:999px;">
-                        🌳 Cả ngày: <strong class="num-tabular">${stats.full.length}</strong>
+                        📅 Đi làm: <strong class="num-tabular">${stats.workingDays} ngày</strong>
                     </span>
                     <span style="background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); padding:4px 11px; border-radius:999px;">
-                        🌅 Nửa buổi: <strong class="num-tabular">${stats.halfAm.length + stats.halfPm.length}</strong>
+                        ⏱️ Giờ làm: <strong class="num-tabular">${parseFloat(stats.totalWorkHours.toFixed(2))} giờ</strong>
                     </span>
                     <span style="background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); padding:4px 11px; border-radius:999px;">
                         🏖️ Nghỉ: <strong class="num-tabular">${stats.off.length}</strong>
@@ -4487,8 +4612,24 @@
 
         const data = workData[dateStr];
         if (data) {
-            if(data.type) document.querySelector(`input[value="${data.type}"]`).checked = true;
-            else document.querySelector('input[value="none"]').checked = true;
+            if (data.type === 'working' || data.type === 'full' || data.type === 'half-am' || data.type === 'half-pm') {
+                document.querySelector('input[name="work_type"][value="working"]').checked = true;
+                if (data.type === 'working') {
+                    workStartInput.value = data.workStart || '08:00';
+                    workEndInput.value = data.workEnd || '17:00';
+                    workBreakInput.value = data.breakHours ?? 1;
+                } else if (data.type === 'full') {
+                    workStartInput.value = '08:00'; workEndInput.value = '17:00'; workBreakInput.value = 1;
+                } else if (data.type === 'half-am') {
+                    workStartInput.value = '08:00'; workEndInput.value = '12:00'; workBreakInput.value = 0;
+                } else if (data.type === 'half-pm') {
+                    workStartInput.value = '13:00'; workEndInput.value = '17:00'; workBreakInput.value = 0;
+                }
+            } else if (data.type === 'off') {
+                document.querySelector('input[name="work_type"][value="off"]').checked = true;
+            } else {
+                document.querySelector('input[name="work_type"][value="none"]').checked = true;
+            }
 
             if (data.isOvertime) {
                 checkOvertime.checked = true; timeRangeDiv.style.display = 'flex';
@@ -4505,9 +4646,14 @@
             if (tasks.length > 0) tasks.forEach(t => createTaskRow(t));
             else createTaskRow();
         } else {
-            document.querySelector('input[value="full"]').checked = true;
+            document.querySelector('input[name="work_type"][value="working"]').checked = true;
+            workStartInput.value = '08:00';
+            workEndInput.value = '17:00';
+            workBreakInput.value = 1;
             createIncomeRow(); createExpenseRow(); createLoanRow(); createTaskRow();
         }
+        syncWorkTypeUI();
+        updateWorkHoursPreview();
         const pasteBtn = document.getElementById('btn-paste-day');
         if (pasteBtn) pasteBtn.style.display = copiedDayClipboard ? 'inline-flex' : 'none';
         updateModalLiveTotals();
@@ -4576,6 +4722,9 @@
         });
         copiedDayClipboard = {
             type: selectedType,
+            workStart: workStartInput.value,
+            workEnd: workEndInput.value,
+            breakHours: Number(workBreakInput.value) || 0,
             isOvertime: checkOvertime.checked,
             startTime: otStartInput.value,
             endTime: otEndInput.value,
@@ -4592,6 +4741,11 @@
         if (!copiedDayClipboard) return;
         const targetRadio = document.querySelector(`input[name="work_type"][value="${copiedDayClipboard.type}"]`);
         if (targetRadio) targetRadio.checked = true;
+        if (copiedDayClipboard.workStart) workStartInput.value = copiedDayClipboard.workStart;
+        if (copiedDayClipboard.workEnd) workEndInput.value = copiedDayClipboard.workEnd;
+        if (copiedDayClipboard.breakHours !== undefined) workBreakInput.value = copiedDayClipboard.breakHours;
+        syncWorkTypeUI();
+        updateWorkHoursPreview();
         checkOvertime.checked = !!copiedDayClipboard.isOvertime;
         timeRangeDiv.style.display = copiedDayClipboard.isOvertime ? 'flex' : 'none';
         if (copiedDayClipboard.startTime) otStartInput.value = copiedDayClipboard.startTime;
@@ -4621,10 +4775,10 @@
         const month = currentDate.getMonth();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const mStr = String(month + 1).padStart(2, '0');
-        const shiftNames = { 'full': 'Làm cả ngày (1.0)', 'half-am': 'Nửa ngày Sáng (0.5)', 'half-pm': 'Nửa ngày Chiều (0.5)', 'off': 'Nghỉ làm (0)', 'none': 'Chỉ ghi chú' };
+        const shiftNames = { 'working': 'Đi làm theo giờ', 'full': 'Làm cả ngày (8h)', 'half-am': 'Nửa ngày Sáng (4h)', 'half-pm': 'Nửa ngày Chiều (4h)', 'off': 'Nghỉ làm (0h)', 'none': 'Chỉ ghi chú' };
 
         const rows = [
-            ['Ngày', 'Ca làm việc', 'Giờ tăng ca (OT)', 'Tổng Thu (VNĐ)', 'Chi tiết Thu', 'Tổng Chi (VNĐ)', 'Chi tiết Chi', 'Cho mượn (VNĐ)', 'Nội dung công việc']
+            ['Ngày', 'Giờ làm việc', 'Số giờ / Công', 'Giờ tăng ca (OT)', 'Tổng Thu (VNĐ)', 'Chi tiết Thu', 'Tổng Chi (VNĐ)', 'Chi tiết Chi', 'Cho mượn (VNĐ)', 'Nội dung công việc']
         ];
 
         for (let i = 1; i <= daysInMonth; i++) {
@@ -4633,6 +4787,11 @@
             const d = workData[dateKey];
             if (!d) continue;
 
+            const wHrs = getWorkHoursOfDay(d);
+            const wUnits = parseFloat((wHrs / 8).toFixed(2));
+            const workLabel = d.type === 'working'
+                ? `${d.workStart || ''}-${d.workEnd || ''} (Nghỉ ${d.breakHours || 0}h)`
+                : (shiftNames[d.type] || d.type || '');
             const otHours = (d.isOvertime && d.type !== 'off' && d.type !== 'none') ? calculateHours(d.startTime, d.endTime) : 0;
             const incTotal = (d.incomes || []).reduce((s, x) => s + (Number(x.amount) || 0), 0);
             const incDetail = (d.incomes || []).map(x => `${x.name}: ${x.amount}`).join('; ');
@@ -4643,7 +4802,8 @@
 
             rows.push([
                 `${dStr}/${mStr}/${year}`,
-                shiftNames[d.type] || d.type || '',
+                workLabel,
+                wHrs > 0 ? `${wHrs}h (${wUnits} công)` : '0',
                 otHours > 0 ? `${parseFloat(otHours.toFixed(2))}h (${d.startTime}-${d.endTime})` : '0',
                 incTotal,
                 incDetail,
@@ -4705,8 +4865,13 @@
             delete workData[selectedDateStr];
         } else {
             const isOff = (selectedType === 'off' || selectedType === 'none');
+            const workHours = isOff ? 0 : calculateWorkHours(workStartInput.value, workEndInput.value, workBreakInput.value);
             workData[selectedDateStr] = { 
                 type: selectedType,
+                workStart: isOff ? '' : workStartInput.value,
+                workEnd: isOff ? '' : workEndInput.value,
+                breakHours: isOff ? 0 : (Number(workBreakInput.value) || 0),
+                workHours: workHours,
                 isOvertime: isOff ? false : checkOvertime.checked,
                 startTime: (checkOvertime.checked && !isOff) ? otStartInput.value : '',
                 endTime: (checkOvertime.checked && !isOff) ? otEndInput.value : '',
