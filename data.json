@@ -1189,13 +1189,13 @@
     "isOvertime": false,
     "startTime": "",
     "endTime": "",
-    "incomes": [
+    "incomes": [],
+    "expenses": [
       {
         "name": "Bánh mì",
         "amount": 12000
       }
     ],
-    "expenses": [],
     "loans": [],
     "tasks": [],
     "content": ""
