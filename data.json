@@ -1199,5 +1199,25 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-27": {
+    "type": "working",
+    "workStart": "18:45",
+    "workEnd": "03:00",
+    "breakHours": 1,
+    "workHours": 7.25,
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Xăng",
+        "amount": 50000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
