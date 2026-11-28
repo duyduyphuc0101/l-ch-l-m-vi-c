@@ -1238,6 +1238,10 @@
       {
         "name": "Ăn",
         "amount": 20000
+      },
+      {
+        "name": "Xăng",
+        "amount": 60000
       }
     ],
     "loans": [],
