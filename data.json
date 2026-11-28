@@ -1223,5 +1223,25 @@
     "loans": [],
     "tasks": [],
     "content": ""
+  },
+  "2026-11-28": {
+    "type": "working",
+    "workStart": "18:45",
+    "workEnd": "23:00",
+    "breakHours": 1,
+    "workHours": 3.25,
+    "isOvertime": false,
+    "startTime": "",
+    "endTime": "",
+    "incomes": [],
+    "expenses": [
+      {
+        "name": "Ăn",
+        "amount": 20000
+      }
+    ],
+    "loans": [],
+    "tasks": [],
+    "content": ""
   }
 }
