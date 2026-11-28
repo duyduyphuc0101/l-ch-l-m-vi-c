@@ -1242,6 +1242,10 @@
       {
         "name": "Xăng",
         "amount": 60000
+      },
+      {
+        "name": "Điện",
+        "amount": 500000
       }
     ],
     "loans": [],
